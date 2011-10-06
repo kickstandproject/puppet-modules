@@ -1,5 +1,6 @@
 class ntp::service {
-	service { $ntp::params::servicename:
+	service { 'ntp':
+		name		=> $ntp::params::servicename,
 		enable		=> true,
 		ensure		=> running,
 		hasrestart	=> true,
