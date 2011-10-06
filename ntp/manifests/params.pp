@@ -1,9 +1,37 @@
 class ntp::params {
-	case $operatingsystem {
-		Ubuntu: {
-			$ntp_package_name = 'ntp'
-			$ntp_config_name = '/etc/ntp.conf'
-			$ntp_service_name = 'ntp'
-		}
+	$packagename = $operatingsystem ? {
+		default	=> 'ntp',
+	}
+
+	$servicename = $operatingsystem ? {
+		default	=> 'ntp',
+	}
+
+	$processname = $operatingsystem ? {
+		default => 'ntp',
+	}
+
+	$hasstatus = $operatingsystem ? {
+		default => true,
+	}
+
+	$configfile = $operatingsystem ? {
+		default => '/etc/ntp.conf',
+	}
+
+	$configfile_mode = $operatingsystem ? {
+		default => '644',
+	}
+
+	$configfile_owner = $operatingsystem ? {
+		default => 'root',
+	}
+
+	$configfile_group = $operatingsystem ? {
+		default => 'root',
+	}
+
+	$configdir = $operatingsystem ? {
+		default => '/etc/ntp',
 	}
 }

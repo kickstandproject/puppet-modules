@@ -1,11 +1,10 @@
 class ntp::config {
-	file { $ntp::params::ntp_config_name:
-		ensure => present,
-		owner => root,
-		group => root,
-		mode => 0644,
-		source => "puppet:///modules/ntp/etc/ntp.conf",
+	file { $ntp::params::configfile:
+		mode	=> $ntp::params::configfile_mode,
+		owner	=> $ntp::params::configfile_owner,
+		group	=> $ntp::params::configfile_group,
+		ensure	=> present,
 		require => Class["ntp::install"],
-		notify => Class["ntp::service"],
+		notify	=> Class["ntp::service"],
 	}
 }
