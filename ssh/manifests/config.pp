@@ -1,11 +1,11 @@
 class ssh::config {
-	file { $ssh::params::ssh_config_name:
-		ensure => present,
-		owner => 'root',
-		group => 'root',
-		mode => 0600,
-		source => "puppet:///modules/ssh/etc/sshd_config",
+	file { 'sshd_config':
+		name	=> $ssh::params::configfile,
+		mode	=> $ssh::params::configfile_mode,
+		owner	=> $ssh::params::configfile_owner,
+		group	=> $ssh::params::configfile_group,
+		ensure	=> present,
 		require => Class["ssh::install"],
-		notify => Class["ssh::service"],
+		notify	=> Class["ssh::service"],
 	}
 }

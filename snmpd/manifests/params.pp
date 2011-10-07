@@ -1,14 +1,14 @@
-class ssh::params {
+class snmpd::params {
 	$packagename = $operatingsystem ? {
-		default => 'openssh-server',
+		default => 'snmpd',
 	}
 
 	$servicename = $operatingsystem ? {
-		default => 'ssh',
+		default => 'snmpd',
 	}
 
 	$processname = $operatingsystem ? {
-		default => 'sshd',
+		default => 'snmpd',
 	}
 
 	$hasstatus = $operatingsystem ? {
@@ -16,11 +16,11 @@ class ssh::params {
 	}
 
 	$configfile = $operatingsystem ? {
-		default => '/etc/ssh/sshd_config',
+		default => '/etc/snmp/snmpd.conf',
 	}
 
 	$configfile_mode = $operatingsystem ? {
-		default => '600',
+		default => '644',
 	}
 
 	$configfile_owner = $operatingsystem ? {
@@ -32,6 +32,6 @@ class ssh::params {
 	}
 
 	$configdir = $operatingsystem ? {
-		default => '/etc/ssh',
+		default => '/etc/snmp',
 	}
 }
