@@ -1,4 +1,27 @@
 Puppet Modules
 ==============
 
-Welcome to my Puppet modules, feel free to use them.
+What is it?
+-----------
+
+Documentation
+-------------
+
+Downloading
+-----------
+
+Installation
+------------
+
+Please see the file called INSTALL.
+
+Development
+-----------
+
+Bug Reporting
+-------------
+
+Licensing
+---------
+
+Please see the file called LICENSE.
