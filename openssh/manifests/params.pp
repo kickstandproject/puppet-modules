@@ -1,4 +1,4 @@
-class ssh::params {
+class openssh::params {
 	$packagename = $operatingsystem ? {
 		default => 'openssh-server',
 	}
