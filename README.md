@@ -21,6 +21,8 @@ Development
 Bug Reporting
 -------------
 
+Please see the file called BUGS.
+
 Licensing
 ---------
 
