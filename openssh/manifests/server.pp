@@ -1,6 +1,6 @@
-class openssh::server {
+class openssh::server inherits openssh::classes::common {
 	include openssh::params
-	include openssh::install
-	include openssh::config
-	include openssh::service
+	include openssh::classes::install
+	include openssh::classes::config
+	include openssh::classes::service
 }

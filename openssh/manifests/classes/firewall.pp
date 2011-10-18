@@ -1,0 +1,3 @@
+class openssh::classes::firewall {
+
+}
