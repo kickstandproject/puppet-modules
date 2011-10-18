@@ -1,4 +1,4 @@
-class ntp::config {
+class ntp::classes::config {
 	file { 'ntp.conf':
 		path	=> $ntp::params::configfile,
 		mode	=> $ntp::params::configfile_mode,
@@ -6,7 +6,7 @@ class ntp::config {
 		group	=> $ntp::params::configfile_group,
 		ensure	=> present,
 		source	=> "puppet:///modules/ntp/ntp.conf",
-		require => Class["ntp::install"],
-		notify	=> Class["ntp::service"],
+		require => Class['ntp::classes::install'],
+		notify	=> Class['ntp::classes::service'],
 	}
 }
