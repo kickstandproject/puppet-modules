@@ -5,7 +5,7 @@ class nagios::classes::config {
 		owner	=> $nagios::params::configfile_owner,
 		group	=> $nagios::params::configfile_group,
 		ensure	=> present,
-#		source	=> 'puppet:///modules/openssh/sshd_config',
+		content	=> template('nagios/nagios.cfg.erb'),
 		require => Class['nagios::classes::install'],
 		notify	=> Class['nagios::classes::service'],
 	}
