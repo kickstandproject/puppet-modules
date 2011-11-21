@@ -5,7 +5,7 @@ class openssh::classes::config {
 		owner	=> $openssh::params::configfile_owner,
 		group	=> $openssh::params::configfile_group,
 		ensure	=> present,
-		source	=> 'puppet:///modules/openssh/sshd_config',
+		content	=> template('openssh/sshd_config.erb'),
 		require => Class['openssh::classes::install'],
 		notify	=> Class['openssh::classes::service'],
 	}
