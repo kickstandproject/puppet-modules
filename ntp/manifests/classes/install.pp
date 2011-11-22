@@ -1,5 +1,6 @@
 class ntp::classes::install {
-	package { $ntp::params::packagename:
+	package { 'ntp':
+		name	=> $ntp::params::packagename,
 		ensure => present,
 	}
 }

@@ -5,7 +5,7 @@ class ntp::classes::config {
 		owner	=> $ntp::params::configfile_owner,
 		group	=> $ntp::params::configfile_group,
 		ensure	=> present,
-		source	=> "puppet:///modules/ntp/ntp.conf",
+		content	=> template('ntp/ntp.conf.erb'),
 		require => Class['ntp::classes::install'],
 		notify	=> Class['ntp::classes::service'],
 	}
