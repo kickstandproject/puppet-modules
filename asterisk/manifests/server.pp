@@ -6,4 +6,8 @@ class asterisk::server {
 	if $firewall == 'yes' {
 		include asterisk::classes::firewall
 	}
+
+	if ($rsyslog_server) {
+		include asterisk::classes::rsyslog
+	}
 }
