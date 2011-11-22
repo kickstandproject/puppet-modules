@@ -1,9 +1,4 @@
-class rsyslog::server {
-	include rsyslog::params
-	include rsyslog::classes::install
-	include rsyslog::classes::config
-	include rsyslog::classes::service
-
+class rsyslog::server inherits rsyslog::classes::common {
 	if $firewall == 'yes' {
 		include rsyslog::classes::firewall
 	}
