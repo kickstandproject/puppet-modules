@@ -38,6 +38,7 @@ class rsyslog::params {
 	$configdir = $operatingsystem ? {
 		default => '/etc/rsyslog.d',
 	}
+<<<<<<< HEAD
 
 	$db = $rsyslog_db ? {
 		mysql	=> 'mysql',
@@ -63,4 +64,6 @@ class rsyslog::params {
 		''	=> 'root',
 		default	=> "$rsyslog_db_user",
 	}
+=======
+>>>>>>> 5654cda... Add me because I'm kind of a big deal.
 }
