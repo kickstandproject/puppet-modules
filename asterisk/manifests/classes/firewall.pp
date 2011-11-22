@@ -1,0 +1,3 @@
+class asterisk::classes::firewall {
+
+}
