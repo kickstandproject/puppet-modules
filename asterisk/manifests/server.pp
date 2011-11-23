@@ -1,8 +1,7 @@
 class asterisk::server {
-	class { 'asterisk::classes::ppa': stage => pre-main }
-	class { 'asterisk::params': stage => main }
-	class { 'asterisk::classes::install': stage => main }
-	class { 'asterisk::classes::service': stage => main }
+	include asterisk::params
+	include asterisk::classes::install
+	include asterisk::classes::service
 
 	if $firewall == 'yes' {
 		include asterisk::classes::firewall
