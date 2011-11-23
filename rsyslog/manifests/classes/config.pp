@@ -5,8 +5,17 @@ class rsyslog::classes::config {
 		owner	=> $rsyslog::params::configfile_owner,
 		group	=> $rsyslog::params::configfile_group,
 		ensure	=> present,
-		content	=> template('rsyslog/server/rsyslog.conf.erb'),
 		require => Class['rsyslog::classes::install'],
 		notify	=> Class['rsyslog::classes::service'],
+	}
+
+	if defined(Class['rsyslog::client']) {
+		file['rsyslog.conf'] {
+			content	=> template("rsyslog/client/rsyslog.conf.erb"),
+		}
+	} else {
+		file['rsyslog.conf'] {
+			content	=> template("rsyslog/server/rsyslog.conf.erb"),
+		}
 	}
 }
