@@ -3,6 +3,10 @@ class rsyslog::params {
 		default => 'rsyslog',
 	}
 
+	$packagename_mysql = $operatingsystem ? {
+		default => 'rsyslog-mysql',
+	}
+
 	$servicename = $operatingsystem ? {
 		default => 'rsyslog',
 	}
@@ -33,5 +37,30 @@ class rsyslog::params {
 
 	$configdir = $operatingsystem ? {
 		default => '/etc/rsyslog.d',
+	}
+
+	$db = $rsyslog_db ? {
+		mysql	=> 'mysql',
+		default	=> '',
+	}
+
+	$db_name = $rsyslog_db_name ? {
+		''	=> 'Syslog',
+		default	=> "$rsyslog_db_name",
+	}
+
+	$db_password = $rsyslog_db_password ? {
+		''	=> '',
+		default	=> "$rsyslog_db_password",
+	}
+
+	$db_server = $rsyslog_db_server ? {
+		''	=> 'localhost',
+		default	=> "$ryslog_db_server",
+	}
+
+	$db_user = $rsyslog_db_user ? {
+		''	=> 'root',
+		default	=> "$rsyslog_db_user",
 	}
 }
