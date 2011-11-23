@@ -17,8 +17,8 @@ $ModLoad imklog   # provides kernel logging support (previously done by rklogd)
 $KLogPath /proc/kmsg
 
 # provides UDP syslog reception
-#$ModLoad imudp
-#$UDPServerRun 514
+$ModLoad imudp
+$UDPServerRun 514
 
 # provides TCP syslog reception
 #$ModLoad imtcp
