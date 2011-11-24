@@ -3,9 +3,9 @@ define mysql::grant (
 	$mysql_user,
 	$mysql_password,
 	$mysql_privileges = 'ALL',
-	$mysql_host = 'localhost',
+	$mysql_host = 'localhost'
 	) {
-	require mysql
+	require mysql::server
 
 	file { 'mysql_grant_file':
 		mode	=> 600,
@@ -17,9 +17,9 @@ define mysql::grant (
 	}
 
 	exec { 'bobobo':
-		command		=> '/usr/bin mysql --default-file=/root/.mycnf -uroot < /root/blah.sql',
-		require		=> Class['mysql::service'],
-		subscribe	=> File['/tmp/blah.sql'],
+		command		=> '/usr/bin/mysql --defaults-file=/root/.my.cnf -uroot < /root/blah.sql',
+		require		=> Class['mysql::classes::service'],
+		subscribe	=> File['/root/blah.sql'],
 		refreshonly	=> true,
 	}
 }
