@@ -39,8 +39,14 @@ class mysql::params {
 		default => '/etc/mysql/conf.d',
 	}
 
+	$db_user = $mysql_db_user ? {
+		''	=> 'root',
+		default	=> "$mysql_db_user",
+	}
+
 	$db_password = $mysql_db_password ? {
 		''	=> '',
 		default	=> "$mysql_db_password",
 	}
+
 }

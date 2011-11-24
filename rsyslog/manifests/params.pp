@@ -50,7 +50,7 @@ class rsyslog::params {
 	}
 
 	$db_password = $rsyslog_db_password ? {
-		''	=> '',
+		''	=> 'bob',
 		default	=> "$rsyslog_db_password",
 	}
 
@@ -60,7 +60,7 @@ class rsyslog::params {
 	}
 
 	$db_user = $rsyslog_db_user ? {
-		''	=> 'root',
+		''	=> 'rsyslog',
 		default	=> "$rsyslog_db_user",
 	}
 }
