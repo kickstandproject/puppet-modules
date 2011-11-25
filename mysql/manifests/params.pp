@@ -54,4 +54,8 @@ class mysql::params {
 		default	=> "$mysql_db_password",
 	}
 
+	$port = $mysql_port ? {
+		''	=> '3306',
+		default	=> "$mysql_port",
+	}
 }
