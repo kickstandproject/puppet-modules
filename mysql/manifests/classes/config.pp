@@ -5,7 +5,7 @@ class mysql::classes::config {
 		owner	=> $mysql::params::configfile_owner,
 		group	=> $mysql::params::configfile_group,
 		ensure	=> present,
-#		content	=> template('mysql/server/mysql.conf.erb'),
+		content	=> template('mysql/server/my.cnf.erb'),
 		require => Class['mysql::classes::install'],
 		notify	=> Class['mysql::classes::service'],
 	}

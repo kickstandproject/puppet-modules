@@ -39,6 +39,11 @@ class mysql::params {
 		default => '/etc/mysql/conf.d',
 	}
 
+	$bindaddr = $mysql_bindaddr ? {
+		''	=> '127.0.0.1',
+		default	=> "$mysql_bindaddr",
+	}
+
 	$db_user = $mysql_db_user ? {
 		''	=> 'root',
 		default	=> "$mysql_db_user",
