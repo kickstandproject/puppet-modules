@@ -1,4 +1,8 @@
 rsyslog-mysql rsyslog-mysql/internal/skip-preseed boolean true
+rsyslog-mysql rsyslog-mysql/mysql/method select tcp/ip
+rsyslog-mysql rsyslog-mysql/database-type select mysql
+rsyslog-mysql rsyslog-mysql/remote/host select <%= scope.lookupvar('rsyslog::params::db_server') %>
+rsyslog-mysql rsyslog-mysql/remote/port	string <%= scope.lookupvar('mysql::params::port') %>
 rsyslog-mysql rsyslog-mysql/mysql/admin-user string <%= scope.lookupvar('mysql::params::db_user') %>
 rsyslog-mysql rsyslog-mysql/mysql/admin-pass password <%= scope.lookupvar('mysql::params::db_password') %>
 rsyslog-mysql rsyslog-mysql/db/app-user string <%= scope.lookupvar('rsyslog::params::db_user') %>

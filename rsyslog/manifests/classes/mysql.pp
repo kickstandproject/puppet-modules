@@ -1,5 +1,8 @@
 class rsyslog::classes::mysql {
-	include mysql::server
+	require mysql::params
+	if ($rsyslog::params::db_server == 'localhost') {
+		include mysql::server
+	}
 
 	package { 'rsyslog-mysql':
 		name		=> $rsyslog::params::packagename_mysql,
