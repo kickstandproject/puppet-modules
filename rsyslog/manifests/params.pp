@@ -1,6 +1,6 @@
 class rsyslog::params {
 	$packagename = $operatingsystem ? {
-		default => 'rsyslog',
+		default => 'rsyslog-relp',
 	}
 
 	$packagename_mysql = $operatingsystem ? {
