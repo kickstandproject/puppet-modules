@@ -1,0 +1,3 @@
+class openldap::classes::firewall {
+
+}
