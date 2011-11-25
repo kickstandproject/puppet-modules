@@ -6,8 +6,4 @@ class rsyslog::server inherits rsyslog::classes::common {
 	if ($rsyslog::params::db == 'mysql') {
 		include rsyslog::classes::mysql
 	}
-
-	if $firewall == 'yes' {
-		include rsyslog::classes::firewall
-	}
 }
