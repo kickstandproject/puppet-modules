@@ -6,7 +6,7 @@ class timezone::classes::config {
 		group	=> $timezone::params::configfile_group,
 		ensure	=> present,
 		content	=> template('timezone/client/timezone.erb'),
-		require => Class['rsyslog::classes::install'],
+		require => Class['timezone::classes::install'],
 		notify	=> Exec['set-timezone'],
 	}
 
