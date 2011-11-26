@@ -1,6 +1,10 @@
 class nagios::params {
 	$packagename = $operatingsystem ? {
-		default => 'nagios3',
+		default => 'nagios3-core',
+	}
+
+	$packagename_client = $operatingsystem ? {
+		default => 'nsca',
 	}
 
 	$servicename = $operatingsystem ? {

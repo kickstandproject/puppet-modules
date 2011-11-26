@@ -1,6 +1,5 @@
-class nagios::server {
-        include nagios::params
-        include nagios::classes::install
-        include nagios::classes::config
-        include nagios::classes::service
+class nagios::server inherits nagios::classes::common {
+	if ($firewall == 'yes') {
+		include nagios::classes::firewall
+	}
 }
