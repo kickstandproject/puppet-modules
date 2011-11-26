@@ -12,8 +12,6 @@ class timezone::classes::config {
 
 	exec { 'set-timezone':
 		command		=> '/usr/sbin/dpkg-reconfigure -f noninteractive tzdata',
-		require		=> File['timezone'],
-		subscribe	=> File['timezone'],
 		refreshonly	=> true,
 	}
 }
