@@ -12,7 +12,7 @@ class nagios::params {
 	}
 
 	$processname = $operatingsystem ? {
-		default => 'nagios3',
+		default => 'nagios',
 	}
 
 	$hasstatus = $operatingsystem ? {
@@ -37,5 +37,9 @@ class nagios::params {
 
 	$configdir = $operatingsystem ? {
 		default => '/etc/nagios3',
+	}
+
+	$customconfigdir = $operatingsystem ? {
+		default => "$configdir/puppet.d",
 	}
 }
