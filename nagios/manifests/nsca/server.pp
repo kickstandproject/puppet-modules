@@ -1,2 +1,2 @@
-class nagios::nsca::server {
+class nagios::nsca::server inherits nagios::nsca::common::init {
 }

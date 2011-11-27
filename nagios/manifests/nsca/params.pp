@@ -8,7 +8,7 @@ class nagios::nsca::params {
 	}
 
 	$hasstatus = $operatingsystem ? {
-		default => true,
+		default => false,
 	}
 
 	$configfile = $operatingsystem ? {
