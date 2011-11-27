@@ -1,2 +1,3 @@
-class nagios::client inherits nagios::classes::common {
+class nagios::client inherits nagios::common::init {
+	include nagios::nsca::client
 }

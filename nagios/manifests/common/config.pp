@@ -1,4 +1,4 @@
-class nagios::classes::config {
+class nagios::common::config {
 	file { 'nagios.cfg':
 		name	=> $nagios::params::configfile,
 		mode	=> $nagios::params::configfile_mode,
@@ -6,8 +6,8 @@ class nagios::classes::config {
 		group	=> $nagios::params::configfile_group,
 		ensure	=> present,
 		content	=> template('nagios/client/nagios.cfg.erb'),
-		require => Class['nagios::classes::install'],
-		notify	=> Class['nagios::classes::service'],
+		require => Class['nagios::common::install'],
+		notify	=> Class['nagios::common::service'],
 	}
 
 	file { 'nagios_configdir':
@@ -16,7 +16,7 @@ class nagios::classes::config {
 		owner	=> $nagios::params::configfile_owner,
 		group	=> $nagios::params::configfile_group,
 		ensure	=> directory,
-		require => Class['nagios::classes::install'],
+		require => Class['nagios::common::install'],
 		recurse	=> true,
 		purge	=> true,
 		force	=> true,
@@ -58,7 +58,7 @@ class nagios::classes::config {
 		force	=> true,
 	}
 
-	file { 'generic-service.cfg':
+	file { 'nagios_configdir_services_generic-service.cfg':
 		name	=> "$nagios::params::customconfigdir/services/generic-service.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
@@ -68,7 +68,7 @@ class nagios::classes::config {
 		require => File['nagios_configdir_services'],
 	}
 
-	file { 'generic-host.cfg':
+	file { 'nagios_configdir_hosts_generic-host.cfg':
 		name	=> "$nagios::params::customconfigdir/hosts/generic-host.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
@@ -78,7 +78,7 @@ class nagios::classes::config {
 		require => File['nagios_configdir_hosts'],
 	}
 
-	file { 'timeperiods.cfg':
+	file { 'nagios_configdir_timeperiods.cfg':
 		name	=> "$nagios::params::customconfigdir/timeperiods.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
@@ -88,7 +88,7 @@ class nagios::classes::config {
 		require => File['nagios_configdir'],
 	}
 
-	file { 'contacts.cfg':
+	file { 'nagios_configdir_contacts.cfg':
 		name	=> "$nagios::params::customconfigdir/contacts.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
@@ -98,7 +98,7 @@ class nagios::classes::config {
 		require => File['nagios_configdir'],
 	}
 
-	file { 'commands-general.cfg':
+	file { 'nagios_configdir_commands_general.cfg':
 		name	=> "$nagios::params::customconfigdir/commands/general.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
@@ -108,7 +108,7 @@ class nagios::classes::config {
 		require => File['nagios_configdir_commands'],
 	}
 
-	file { 'nagios-hosts-localhost.cfg':
+	file { 'nagios_configdir_hosts_localhost.cfg':
 		name	=> "$nagios::params::customconfigdir/hosts/localhost.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
@@ -118,7 +118,7 @@ class nagios::classes::config {
 		require => File['nagios_configdir_hosts'],
 	}
 
-	file { 'nagios-services-general.cfg':
+	file { 'nagios_configdir_services_general.cfg':
 		name	=> "$nagios::params::customconfigdir/services/general.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,

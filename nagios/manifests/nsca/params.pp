@@ -1,14 +1,10 @@
-class nagios::params {
+class nagios::nsca::params {
 	$packagename = $operatingsystem ? {
-		default => 'nagios3-core',
+		default => 'nsca',
 	}
 
 	$servicename = $operatingsystem ? {
-		default => 'nagios3',
-	}
-
-	$processname = $operatingsystem ? {
-		default => 'nagios',
+		default => 'nsca',
 	}
 
 	$hasstatus = $operatingsystem ? {
@@ -16,7 +12,7 @@ class nagios::params {
 	}
 
 	$configfile = $operatingsystem ? {
-		default => '/etc/nagios3/nagios.cfg',
+		default => '/etc/nsca.cfg',
 	}
 
 	$configfile_mode = $operatingsystem ? {
@@ -29,13 +25,5 @@ class nagios::params {
 
 	$configfile_group = $operatingsystem ? {
 		default => 'root',
-	}
-
-	$configdir = $operatingsystem ? {
-		default => '/etc/nagios3',
-	}
-
-	$customconfigdir = $operatingsystem ? {
-		default => "$configdir/puppet.d",
 	}
 }

@@ -1,5 +1,5 @@
-class nagios::server inherits nagios::classes::common {
+class nagios::server inherits nagios::common::init {
 	if ($firewall == 'yes') {
-		include nagios::classes::firewall
+		include nagios::common::firewall
 	}
 }
