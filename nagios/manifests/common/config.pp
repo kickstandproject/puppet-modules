@@ -18,7 +18,6 @@ class nagios::common::config {
 		ensure	=> directory,
 		require => Class['nagios::common::install'],
 		recurse	=> true,
-		purge	=> true,
 		force	=> true,
 	}
 
@@ -30,7 +29,6 @@ class nagios::common::config {
 		ensure	=> directory,
 		require => File['nagios_configdir'],
 		recurse	=> true,
-		purge	=> true,
 		force	=> true,
 	}
 
@@ -42,7 +40,6 @@ class nagios::common::config {
 		ensure	=> directory,
 		require => File['nagios_configdir'],
 		recurse	=> true,
-		purge	=> true,
 		force	=> true,
 	}
 
@@ -54,7 +51,6 @@ class nagios::common::config {
 		ensure	=> directory,
 		require => File['nagios_configdir'],
 		recurse	=> true,
-		purge	=> true,
 		force	=> true,
 	}
 
@@ -106,25 +102,5 @@ class nagios::common::config {
 		ensure	=> present,
 		content	=> template('nagios/client/commands/general.cfg.erb'),
 		require => File['nagios_configdir_commands'],
-	}
-
-	file { 'nagios_configdir_hosts_localhost.cfg':
-		name	=> "$nagios::params::customconfigdir/hosts/localhost.cfg",
-		mode	=> 644,
-		owner	=> $nagios::params::configfile_owner,
-		group	=> $nagios::params::configfile_group,
-		ensure	=> present,
-		content	=> template('nagios/client/hosts/localhost.cfg.erb'),
-		require => File['nagios_configdir_hosts'],
-	}
-
-	file { 'nagios_configdir_services_general.cfg':
-		name	=> "$nagios::params::customconfigdir/services/general.cfg",
-		mode	=> 644,
-		owner	=> $nagios::params::configfile_owner,
-		group	=> $nagios::params::configfile_group,
-		ensure	=> present,
-		content	=> template('nagios/client/services/general.cfg.erb'),
-		require => File['nagios_configdir_services'],
 	}
 }
