@@ -1,6 +1,6 @@
 class rsyslog::params {
 	$packagename = $operatingsystem ? {
-		default => 'rsyslog',
+		default => 'rsyslog-relp',
 	}
 
 	$packagename_mysql = $operatingsystem ? {
@@ -56,7 +56,7 @@ class rsyslog::params {
 
 	$db_server = $rsyslog_db_server ? {
 		''	=> 'localhost',
-		default	=> "$ryslog_db_server",
+		default	=> "$rsyslog_db_server",
 	}
 
 	$db_user = $rsyslog_db_user ? {
