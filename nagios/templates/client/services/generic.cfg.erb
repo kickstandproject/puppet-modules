@@ -1,7 +1,7 @@
 define service {
 	name				generic-service
-	active_checks_enabled		1
-	passive_checks_enabled		1
+	active_checks_enabled		0
+	passive_checks_enabled		0
 	parallelize_check		1
 	obsess_over_service		1
 	check_freshness			0
@@ -22,4 +22,19 @@ define service {
 	notification_options		w,u,c,r
 	contact_groups			admins
 	register			0
+}
+
+define service {
+	name			generic-service-active
+	use			generic-service
+	active_checks_enabled	1
+}
+
+define service {
+	name			generic-service-passive
+	use			generic-service
+	passive_checks_enabled	1
+	check_freshness		1
+	freshness_threshold	600
+	check_command		service-is-stale
 }

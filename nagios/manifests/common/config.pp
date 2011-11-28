@@ -58,23 +58,23 @@ class nagios::common::config {
 		force	=> true,
 	}
 
-	file { 'nagios_configdir_services_generic-service.cfg':
-		name	=> "$nagios::params::customconfigdir/services/generic-service.cfg",
+	file { 'nagios_configdir_services_generic.cfg':
+		name	=> "$nagios::params::customconfigdir/services/generic.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
 		group	=> $nagios::params::configfile_group,
 		ensure	=> present,
-		content	=> template('nagios/client/services/generic-service.cfg.erb'),
+		content	=> template('nagios/client/services/generic.cfg.erb'),
 		require => File['nagios_configdir_services'],
 	}
 
-	file { 'nagios_configdir_hosts_generic-host.cfg':
-		name	=> "$nagios::params::customconfigdir/hosts/generic-host.cfg",
+	file { 'nagios_configdir_hosts_generic.cfg':
+		name	=> "$nagios::params::customconfigdir/hosts/generic.cfg",
 		mode	=> 644,
 		owner	=> $nagios::params::configfile_owner,
 		group	=> $nagios::params::configfile_group,
 		ensure	=> present,
-		content	=> template('nagios/client/hosts/generic-host.cfg.erb'),
+		content	=> template('nagios/client/hosts/generic.cfg.erb'),
 		require => File['nagios_configdir_hosts'],
 	}
 

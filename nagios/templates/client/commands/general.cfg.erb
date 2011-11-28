@@ -9,3 +9,15 @@ define command {
 	command_name	notify-service-by-email
 	command_line	/usr/bin/printf "%b" "***** Nagios *****\n\nNotification Type: $NOTIFICATIONTYPE$\n\nService: $SERVICEDESC$\nHost: $HOSTALIAS$\nAddress: $HOSTADDRESS$\nState: $SERVICESTATE$\n\nDate/Time: $LONGDATETIME$\n\nAdditional Info:\n\n$SERVICEOUTPUT$" | /usr/bin/mail -s "** $NOTIFICATIONTYPE$ Service Alert: $HOSTALIAS$/$SERVICEDESC$ is $SERVICESTATE$ **" $CONTACTEMAIL$
 }
+
+define command {
+	name		service-is-stale
+	command_name	service-is-stale
+	command_line	$USER1$/check_dummy 3 "Service results are stale!"
+}
+
+define command {
+	name		host-is-stale
+	command_name	host-is-stale
+	command_line	$USER1$/check_dummy 3 "Host results are stale!"
+}

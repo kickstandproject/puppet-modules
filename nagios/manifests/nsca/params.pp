@@ -15,6 +15,10 @@ class nagios::nsca::params {
 		default => '/etc/nsca.cfg',
 	}
 
+	$configfile_client = $operatingsystem ? {
+		default => '/etc/send_nsca.cfg',
+	}
+
 	$configfile_mode = $operatingsystem ? {
 		default => '644',
 	}
