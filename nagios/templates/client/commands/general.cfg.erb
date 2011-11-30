@@ -13,11 +13,11 @@ define command {
 define command {
 	name		service-is-stale
 	command_name	service-is-stale
-	command_line	$USER1$/check_dummy 3 "Service results are stale!"
+	command_line	check_dummy 3 "Service results are stale!"
 }
 
 define command {
 	name		host-is-stale
 	command_name	host-is-stale
-	command_line	$USER1$/check_dummy 3 "Host results are stale!"
+	command_line	check_dummy 3 "Host results are stale!"
 }

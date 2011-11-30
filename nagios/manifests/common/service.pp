@@ -1,6 +1,5 @@
 class nagios::common::service {
-	service { 'nagios':
-		name		=> $nagios::params::servicename,
+	service { "$nagios::params::servicename":
 		enable		=> true,
 		ensure		=> running,
 		hasrestart	=> true,

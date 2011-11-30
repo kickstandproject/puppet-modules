@@ -2,7 +2,7 @@ define nagios::service::local (
 	$check_command = false,
 	$description,
 	$ensure = present,
-	$host_name = false,
+	$hostgroup_name = 'all',
 	$use = 'generic-service-active'
 	) {
 
@@ -10,14 +10,11 @@ define nagios::service::local (
 
 	nagios_service { $name:
 		check_command		=> $check_command ? {
-			false	=> $fname,
+			false	=> $name,
 			default	=> $check_command,
 		},
 		ensure			=> $ensure,
-		host_name		=> $host_name ? {
-			false	=> $hostname,
-			default	=> $host_name,
-		},
+		hostgroup_name		=> $hostgroup_name,
 		notify			=> Class['nagios::common::service'],
 		service_description	=> $description,
 		target			=> "$nagios::params::customconfigdir/services/$fname.cfg",

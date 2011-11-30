@@ -1,22 +1,14 @@
 class nagios::params {
-	$packagename = $operatingsystem ? {
-		default => 'nagios3-core',
-	}
-
-	$servicename = $operatingsystem ? {
-		default => 'nagios3',
-	}
-
-	$processname = $operatingsystem ? {
-		default => 'nagios',
-	}
-
-	$hasstatus = $operatingsystem ? {
-		default => true,
+	$configdir = $operatingsystem ? {
+		default => '/etc/nagios3',
 	}
 
 	$configfile = $operatingsystem ? {
 		default => '/etc/nagios3/nagios.cfg',
+	}
+
+	$configfile_group = $operatingsystem ? {
+		default => 'root',
 	}
 
 	$configfile_mode = $operatingsystem ? {
@@ -27,15 +19,32 @@ class nagios::params {
 		default => 'root',
 	}
 
-	$configfile_group = $operatingsystem ? {
-		default => 'root',
-	}
-
-	$configdir = $operatingsystem ? {
-		default => '/etc/nagios3',
-	}
-
 	$customconfigdir = $operatingsystem ? {
 		default => "$configdir/puppet.d",
 	}
+
+	$hasstatus = $operatingsystem ? {
+		default => true,
+	}
+
+	$hostgroups = $nagios_hostgroups ? {
+		''	=> 'all',
+		default	=> $nagios_hostgroup,
+	}
+
+	$packagename = $operatingsystem ? {
+		default => 'nagios3-core',
+	}
+
+	$processname = $operatingsystem ? {
+		default => 'nagios',
+	}
+
+	$servicename = $operatingsystem ? {
+		default => 'nagios3',
+	}
+
+	$plugindir = $operatingsystem ? {
+		default => '/usr/lib/nagios/plugins',
+        }
 }

@@ -1,22 +1,14 @@
 class nagios::nsca::params {
-	$packagename = $operatingsystem ? {
-		default => 'nsca',
-	}
-
-	$servicename = $operatingsystem ? {
-		default => 'nsca',
-	}
-
-	$hasstatus = $operatingsystem ? {
-		default => false,
-	}
-
 	$configfile = $operatingsystem ? {
 		default => '/etc/nsca.cfg',
 	}
 
 	$configfile_client = $operatingsystem ? {
 		default => '/etc/send_nsca.cfg',
+	}
+
+	$configfile_group = $operatingsystem ? {
+		default => 'root',
 	}
 
 	$configfile_mode = $operatingsystem ? {
@@ -27,7 +19,20 @@ class nagios::nsca::params {
 		default => 'root',
 	}
 
-	$configfile_group = $operatingsystem ? {
-		default => 'root',
+	$hasstatus = $operatingsystem ? {
+		default => false,
+	}
+
+	$packagename = $operatingsystem ? {
+		default => 'nsca',
+	}
+
+	$server = $nagios_nsca_server ? {
+		''	=> 'localhost',
+		default	=> $nagios_nsca_server,
+	}
+
+	$servicename = $operatingsystem ? {
+		default => 'nsca',
 	}
 }

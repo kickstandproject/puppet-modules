@@ -73,7 +73,7 @@ nagios_group=nagios
 # cautious side.  If you want to be able to use the CGI command interface
 # you will have to enable this.
 # Values: 0 = disable commands, 1 = enable commands
-check_external_commands=0
+check_external_commands=1
 
 # EXTERNAL COMMAND CHECK INTERVAL
 # This is the interval at which Nagios should check for external commands.
@@ -559,7 +559,7 @@ accept_passive_service_checks=1
 # you're implementing redundant hosts or have a special need for
 # disabling the execution of host checks, leave this enabled!
 # Values: 1 = enable checks, 0 = disable checks
-execute_host_checks=1
+execute_host_checks=0
 
 # PASSIVE HOST CHECK ACCEPTANCE OPTION
 # This determines whether or not Nagios will accept passive
@@ -571,7 +571,7 @@ accept_passive_host_checks=1
 # This determines whether or not Nagios will sent out any host or
 # service notifications when it is initially (re)started.
 # Values: 1 = enable notifications, 0 = disable notifications
-enable_notifications=0
+enable_notifications=1
 
 # EVENT HANDLER USE OPTION
 # This determines whether or not Nagios will run any host or
@@ -649,7 +649,7 @@ process_performance_data=0
 # this option.  Read the HTML docs for more information on
 # implementing distributed monitoring.
 # Values: 1 = obsess over services, 0 = do not obsess (default)
-obsess_over_services=1
+obsess_over_services=0
 
 # OBSESSIVE COMPULSIVE SERVICE PROCESSOR COMMAND
 # This is the command that is run for every service check that is
@@ -658,7 +658,7 @@ obsess_over_services=1
 # argument is the short name of a command definition that you
 # define in your host configuration file. Read the HTML docs for
 # more information on implementing distributed monitoring.
-ocsp_command=submit_ocsp
+#ocsp_command=somecommand
 
 # OBSESS OVER HOST CHECKS OPTION
 # This determines whether or not Nagios will obsess over host
@@ -667,7 +667,7 @@ ocsp_command=submit_ocsp
 # this option.  Read the HTML docs for more information on
 # implementing distributed monitoring.
 # Values: 1 = obsess over hosts, 0 = do not obsess (default)
-obsess_over_hosts=1
+obsess_over_hosts=0
 
 # OBSESSIVE COMPULSIVE HOST PROCESSOR COMMAND
 # This is the command that is run for every host check that is
@@ -676,7 +676,7 @@ obsess_over_hosts=1
 # argument is the short name of a command definition that you
 # define in your host configuration file. Read the HTML docs for
 # more information on implementing distributed monitoring.
-ochp_command=submit_ochp
+#ochp_command=somecommand
 
 # TRANSLATE PASSIVE HOST CHECKS OPTION
 # This determines whether or not Nagios will translate
