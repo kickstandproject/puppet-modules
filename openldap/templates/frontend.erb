@@ -1,0 +1,24 @@
+# Create top-level object in domain
+dn: <%= openldap_domain %>
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: <%= openldap_organization %>
+dc: <%= openldap_dc %>
+description: <%= openldap_description %>
+
+# Admin user.
+dn: cn=<%= openldap_rootdn %>,<%= openldap_domain %>
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: <%= openldap_rootdn %>
+description: <%= openldap_admin_description %>
+userPassword: <%= openldap_admin_passwd %>
+
+dn: ou=people,<%= openldap_domain %>
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,<%= openldap_domain %>
+objectClass: organizationalUnit
+ou: groups
