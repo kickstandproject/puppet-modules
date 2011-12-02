@@ -3,20 +3,20 @@
 # directory containing the cn=config data; otherwise set it to the location    
 # of your slapd.conf file.  If empty, use the compiled-in default              
 # (/etc/ldap/slapd.d). 
-SLAPD_CONF=/etc/ldap/slapd.conf
+SLAPD_CONF=<%= slapd_config %>
 
 # System account to run the slapd server under. If empty the server
 # will run as root.
-SLAPD_USER="openldap"
+SLAPD_USER="<%= slapd_user %>"
 
 # System group to run the slapd server under. If empty the server will
 # run in the primary group of its user.
-SLAPD_GROUP="openldap"
+SLAPD_GROUP="<%= slapd_group %>"
 
 # Path to the pid file of the slapd server. If not set the init.d script
 # will try to figure it out from $SLAPD_CONF (/etc/ldap/slapd.d by
 # default)
-SLAPD_PIDFILE=
+SLAPD_PIDFILE=<%= slapd_pidfile %>
 
 # slapd normally serves ldap only on all TCP-ports 389. slapd can also
 # service requests on TCP-port 636 (ldaps) and requests via unix
@@ -36,7 +36,7 @@ SLAPD_SERVICES="ldap:/// ldapi:///"
 # work).  Use this for temporarily disabling startup of slapd (when doing
 # maintenance, for example, or through a configuration management system)
 # when you don't want to edit a configuration file.
-SLAPD_SENTINEL_FILE=/etc/ldap/noslapd
+SLAPD_SENTINEL_FILE=<%= slapd_sentinel_file %>
 
 # For Kerberos authentication (via SASL), slapd by default uses the system
 # keytab file (/etc/krb5.keytab).  To use a different keytab file,

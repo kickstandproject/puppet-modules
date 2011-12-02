@@ -1,6 +1,5 @@
 class openldap::classes::service {
-	service { 'slapd':
-		name		=> $openldap::params::servicename,
+	service { '$openldap::params::servicename':
 		enable		=> true,
 		ensure		=> running,
 		hasrestart	=> true,

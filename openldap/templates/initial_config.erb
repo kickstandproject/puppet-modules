@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "Starting script..."
+
+echo "Recieved $# parameters."
+
+ldap_rootdn=$1
+ldap_domain=$2
+ldap_plain_passwd=$3
+ldap_frontend_ldif=$4
+
+echo "Adding schemas"
+
+ldapadd -Y EXTERNAL -H ldapi:/// -f <%= openldap_schema_path %>/cosine.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f <%= openldap_schema_path %>/nis.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f <%= openldap_schema_path %>/inetorgperson.ldif
+
+echo "Importing frontend.ldif"
+
+ldapadd -x -D cn=$ldap_rootdn,$ldap_domain -w $ldap_plain_passwd -f $ldap_frontend_ldif
+
+echo "Script done!"
+exit
