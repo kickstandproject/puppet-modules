@@ -19,13 +19,13 @@ define nagios::service::nsca (
 	@@nagios_service { "@@$name on $hostname":
 		service_description	=> $description,
 		ensure			=> $ensure,
-		hostgroup_name		=> 'all',
-		target			=> "$nagios::params::customconfigdir/services/passive/$fname.cfg",
+		host_name		=> "$fqdn",
+		target			=> "$nagios::params::customconfigdir/services/passive/$fname.on.$hostname.cfg",
 		tag			=> $server,
 		use			=> $use_passive,
 	}
 
-	@@file { "$nagios::params::customconfigdir/services/passive/$fname.cfg":
+	@@file { "$nagios::params::customconfigdir/services/passive/$fname.on.$hostname.cfg":
 		ensure	=> $ensure,
 		group	=> $nagios::params::configfile_group,
 		mode	=> $nagios::params::configfile_mode,

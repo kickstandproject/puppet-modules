@@ -38,4 +38,8 @@ class puppet::params {
 	$configdir = $operatingsystem ? {
 		default => '/etc/puppet',
 	}
+
+	$defaultsfile = $operatingsystem ? {
+		default => '/etc/default/puppet',
+	}
 }

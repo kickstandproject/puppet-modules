@@ -16,4 +16,14 @@ class puppet::common::config {
 		owner	=> $puppet::params::configfile_owner,
 		require => Class['puppet::common::install'],
 	}
+
+	file { "$puppet::params::defaultsfile":
+		content	=> template("puppet/$content/puppet.erb"),
+		ensure	=> present,
+		group	=> $puppet::params::configfile_group,
+		mode	=> $puppet::params::configfile_mode,
+		notify	=> Class['puppet::common::service'],
+		owner	=> $puppet::params::configfile_owner,
+		require => Class['puppet::common::install'],
+	}
 }

@@ -36,6 +36,10 @@ class nagios::params {
 		default => 'nagios3-core',
 	}
 
+	$packagename_plugins = $operatingsystem ? {
+		default => 'nagios-plugins-extra'
+	}
+
 	$processname = $operatingsystem ? {
 		default => 'nagios',
 	}
