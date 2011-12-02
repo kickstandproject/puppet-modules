@@ -80,43 +80,43 @@ class openldap::params {
 		default => '/etc/puppet/modules/openldap/.ldap_rootpw',
 	}
 
-        # Domain for the server. Replace .example_domain.lan as dc=example_domain,dc=lan
-        $openldap_domain = $operatingsystem ? {
+	# Domain for the server. Replace .example_domain.lan as dc=example_domain,dc=lan
+	$openldap_domain = $operatingsystem ? {
 		default => 'dc=example_domain,dc=lan',
 	}
 
-        # Left-most top level domain
-        $openldap_dc = $operatingsystem ? {
+	# Left-most top level domain
+	$openldap_dc = $operatingsystem ? {
 		default => 'example_domain',
 	}
 
-        # Root Admin Username
-        $openldap_rootdn = $operatingsystem ? {
+	# Root Admin Username
+	$openldap_rootdn = $operatingsystem ? {
 		default => 'admin',
 	}
 
-        # Root Admin Password Created With 'slappasswd'
-        $openldap_rootpw = $operatingsystem ? {
+	# Root Admin Password Created With 'slappasswd'
+	$openldap_rootpw = $operatingsystem ? {
 		default => '{SSHA}JK+xflJwRZY7mOh8XHLGsBoiLBGpUJPA',
 	}
 
-        # Root Admin Password In Plaintext (Required for now for ldapadd)
-        $openldap_plain_passwd = $operatingsystem ? {
+	# Root Admin Password In Plaintext (Required for now for ldapadd)
+	$openldap_plain_passwd = $operatingsystem ? {
 		default => 'welcome',
 	}
 
-        # Organization Name
-        $openldap_organization = $operatingsystem ? {
+	# Organization Name
+	$openldap_organization = $operatingsystem ? {
 		default => 'Example Industries Ltd',
 	}
 
-        # Server Description
-        $openldap_description = $operatingsystem ? {
+	# Server Description
+	$openldap_description = $operatingsystem ? {
 		default => 'EI Ltd LDAP Server',
 	}
 
-        # Administration User Description
-        $openldap_admin_description = $operatingsystem ? {
+	# Administration User Description
+	$openldap_admin_description = $operatingsystem ? {
 		default => 'LDAP Administrator',
 	}
 
