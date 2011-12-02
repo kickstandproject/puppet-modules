@@ -1,0 +1,3 @@
+class puppet::common::firewall {
+
+}
