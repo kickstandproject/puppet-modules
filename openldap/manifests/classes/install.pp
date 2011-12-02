@@ -1,7 +1,7 @@
 class openldap::classes::install {
 
 	if defined(Class['openldap::server']) {
-		package { 'slapd':
+		package { "$openldap::params::packagename":
 			name	=> $openldap::params::packagename,
 			ensure	=> present,
 		}
