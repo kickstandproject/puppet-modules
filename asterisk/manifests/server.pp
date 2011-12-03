@@ -3,7 +3,11 @@ class asterisk::server {
 	include asterisk::classes::install
 	include asterisk::classes::service
 
-	if $firewall == 'yes' {
+	if ($monitor == 'yes') {
+		include asterisk::classes::monitor
+	}
+
+	if ($firewall == 'yes') {
 		include asterisk::classes::firewall
 	}
 

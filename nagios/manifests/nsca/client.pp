@@ -10,7 +10,8 @@ class nagios::nsca::client inherits nagios::nsca::common::init {
 		ensure		=> present,
 		command_line	=> "$nagios::params::plugindir/submit_ocsp \$HOSTNAME\$ '\$SERVICEDESC\$' \$SERVICESTATEID\$ '\$SERVICEOUTPUT\$'",
 		target		=> "$nagios::params::customconfigdir/commands/submit_ocsp.cfg",
-		notify		=> Class['nagios::common::service']
+		notify		=> Class['nagios::common::service'],
+		require		=> Class['nagios::common::install'],
 	}
 
 	file { "$nagios::params::customconfigdir/commands/submit_ocsp.cfg":
@@ -22,7 +23,8 @@ class nagios::nsca::client inherits nagios::nsca::common::init {
 		ensure		=> present,
 		command_line	=> "$nagios::params::plugindir/submit_ochp \$HOSTNAME\$ \$HOSTSTATE\$ '\$HOSTOUTPUT\$'",
 		target		=> "$nagios::params::customconfigdir/commands/submit_ochp.cfg",
-		notify		=> Class['nagios::common::service']
+		notify		=> Class['nagios::common::service'],
+		require		=> Class['nagios::common::install'],
 	}
 
 	file { "$nagios::params::customconfigdir/commands/submit_ochp.cfg":

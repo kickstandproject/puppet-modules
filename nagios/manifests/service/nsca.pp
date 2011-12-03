@@ -1,4 +1,5 @@
 define nagios::service::nsca (
+	check_command = false,
 	$description,
 	$ensure = present,
 	$server,
@@ -10,6 +11,7 @@ define nagios::service::nsca (
 	$fname = regsubst($name, "\W", "_", "G")
 
 	nagios::service::local { $name:
+		check_command	=> $check_command,
 		description	=> $description,
 		ensure		=> $ensure,
 		hostgroup_name	=> 'all',
