@@ -1,9 +1,9 @@
-class rsyslog::server inherits rsyslog::classes::common {
+class rsyslog::server inherits rsyslog::common::init {
 	if ($firewall == 'yes') {
-		include rsyslog::classes::firewall
+		include rsyslog::common::firewall
 	}
 
 	if ($rsyslog::params::db == 'mysql') {
-		include rsyslog::classes::mysql
+		include rsyslog::common::mysql
 	}
 }

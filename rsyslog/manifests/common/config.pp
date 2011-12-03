@@ -1,12 +1,11 @@
-class rsyslog::classes::config {
-	file { 'rsyslog.conf':
-		name	=> $rsyslog::params::configfile,
-		mode	=> $rsyslog::params::configfile_mode,
-		owner	=> $rsyslog::params::configfile_owner,
-		group	=> $rsyslog::params::configfile_group,
+class rsyslog::common::config {
+	file { "$rsyslog::params::configfile":
 		ensure	=> present,
-		require => Class['rsyslog::classes::install'],
-		notify	=> Class['rsyslog::classes::service'],
+		group	=> $rsyslog::params::configfile_group,
+		mode	=> $rsyslog::params::configfile_mode,
+		notify	=> Class['rsyslog::common::service'],
+		owner	=> $rsyslog::params::configfile_owner,
+		require => Class['rsyslog::common::install'],
 	}
 
 	if defined(Class['rsyslog::client']) {

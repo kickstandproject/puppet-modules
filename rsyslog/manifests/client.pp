@@ -1,2 +1,2 @@
-class rsyslog::client inherits rsyslog::classes::common {
+class rsyslog::client inherits rsyslog::common::init {
 }
