@@ -1,3 +1,3 @@
-class git::client inherits git::classes::common {
+class git::client inherits git::common::init {
 
 }
