@@ -1,6 +1,5 @@
-class asterisk::classes::service {
-	service { 'asterisk':
-		name		=> $asterisk::params::servicename,
+class asterisk::common::service {
+	service { "$asterisk::params::servicename":
 		enable		=> true,
 		ensure		=> running,
 		hasrestart	=> true,
