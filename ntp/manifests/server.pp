@@ -1,10 +1,9 @@
-class ntp::server {
-	include ntp::params
-	include ntp::classes::install
-	include ntp::classes::config
-	include ntp::classes::service
+class ntp::server inherits ntp::common::init {
+	if ($firewall == 'yes') {
+		include ntp::common::firewall
+	}
 
-	if $firewall == 'yes' {
-		include ntp::classes::firewall
+	if ($monitor == 'yes') {
+		include ntp::common::monitor
 	}
 }

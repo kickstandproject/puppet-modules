@@ -8,7 +8,7 @@ class ntp::params {
 	}
 
 	$processname = $operatingsystem ? {
-		default => 'ntp',
+		default => 'ntpd',
 	}
 
 	$hasstatus = $operatingsystem ? {
