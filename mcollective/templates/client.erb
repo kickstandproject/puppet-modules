@@ -1,0 +1,21 @@
+topicprefix = /topic/
+main_collective = mcollective
+collectives = mcollective
+libdir = <%= scope.lookupvar('mcollective::params::libdir') %>
+logfile = <%= scope.lookupvar('mcollective::params::logfile') %>
+loglevel = info
+daemonize = 1
+
+# Plugins
+securityprovider = psk
+plugin.psk = <%= scope.lookupvar('mcollective::params::psk_security_code') %>
+#
+connector = stomp
+plugin.stomp.host = <%= scope.lookupvar('mcollective::params::stomp_host') %>
+plugin.stomp.port = <%= scope.lookupvar('mcollective::params::stomp_port') %>
+plugin.stomp.user = <%= scope.lookupvar('mcollective::params::stomp_user') %>
+plugin.stomp.password = <%= scope.lookupvar('mcollective::params::stomp_password') %>
+#
+# # Facts
+factsource = yaml
+plugin.yaml = /etc/mcollective/facts.yaml
