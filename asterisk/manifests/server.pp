@@ -1,17 +1,13 @@
-class asterisk::server {
-	include asterisk::params
-	include asterisk::classes::install
-	include asterisk::classes::service
-
+class asterisk::server inherits asterisk::common::init {
 	if ($monitor == 'yes') {
-		include asterisk::classes::monitor
+		include asterisk::common::monitor
 	}
 
 	if ($firewall == 'yes') {
-		include asterisk::classes::firewall
+		include asterisk::common::firewall
 	}
 
 	if ($rsyslog_server) {
-		include asterisk::classes::rsyslog
+		include asterisk::common::rsyslog
 	}
 }
