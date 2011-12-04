@@ -22,6 +22,7 @@ define nagios::service::nsca (
 		service_description	=> $description,
 		ensure			=> $ensure,
 		host_name		=> "$fqdn",
+		notify			=> Class['nagios::common::service'],
 		target			=> "$nagios::params::customconfigdir/services/passive/$fname.on.$hostname.cfg",
 		tag			=> $server,
 		use			=> $use_passive,

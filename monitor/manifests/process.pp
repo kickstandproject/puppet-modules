@@ -2,10 +2,13 @@ define monitor::process(
 	$ensure	= present,
 	$process
 	) {
-	nagios::service::nsca { "check_procs_$process":
-		description	=> "Check Process $process",
-		ensure		=> $ensure,
-		server		=> "nagios_nsca_server",
+
+	if ($fqdn != $nagios_nsca_server) {
+		nagios::service::nsca { "check_procs_$process":
+			description	=> "Check Process $process",
+			ensure		=> $ensure,
+			server		=> "$nagios_nsca_server",
+		}
 	}
 
 	nagios::command { "check_procs_$process":
