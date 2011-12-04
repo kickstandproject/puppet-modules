@@ -12,7 +12,7 @@ class mysql::params {
 	}
 
 	$processname = $operatingsystem ? {
-		default => 'mysql',
+		default => 'mysqld',
 	}
 
 	$hasstatus = $operatingsystem ? {
