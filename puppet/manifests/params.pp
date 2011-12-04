@@ -42,4 +42,9 @@ class puppet::params {
 	$defaultsfile = $operatingsystem ? {
 		default => '/etc/default/puppet',
 	}
+
+	$server	= $puppet_server ? {
+		''	=> 'puppet',
+		default	=> $puppet_server,
+	}
 }
