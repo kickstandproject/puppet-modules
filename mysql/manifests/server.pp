@@ -1,14 +1,9 @@
-class mysql::server {
-	include mysql::params
-	include mysql::classes::install
-	include mysql::classes::config
-	include mysql::classes::service
-
+class mysql::server inherits mysql::common::init {
 	if ($firewall == 'yes') {
-		include mysql::classes::firewall
+		include mysql::common::firewall
 	}
 
 	if ($mysql::params::db_password != '') {
-		include mysql::classes::password
+		include mysql::common::password
 	}
 }
