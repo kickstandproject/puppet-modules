@@ -4,3 +4,6 @@
 [submodule "apt"]
 	path = apt
 	url = https://github.com/evolvingweb/puppet-apt
+[submodule "mcollective-plugins"]
+	path = mcollective-plugins
+	url = git://github.com/puppetlabs/mcollective-plugins.git
