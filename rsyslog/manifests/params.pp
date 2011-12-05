@@ -12,7 +12,7 @@ class rsyslog::params {
 	}
 
 	$processname = $operatingsystem ? {
-		default => 'syslog',
+		default => 'rsyslogd',
 	}
 
 	$hasstatus = $operatingsystem ? {
