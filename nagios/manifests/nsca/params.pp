@@ -28,7 +28,7 @@ class nagios::nsca::params {
 	}
 
 	$server = $nagios_nsca_server ? {
-		''	=> 'localhost',
+		''	=> 'nagios',
 		default	=> $nagios_nsca_server,
 	}
 
