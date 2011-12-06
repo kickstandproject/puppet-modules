@@ -11,3 +11,4 @@ postrun_command = /etc/puppet/etckeeper-commit-post
 [agent]
 pluginsync = true
 server = <%= scope.lookupvar('puppet::params::server') %>
+runinterval = <%= scope.lookupvar('puppet::params::runinterval') %>

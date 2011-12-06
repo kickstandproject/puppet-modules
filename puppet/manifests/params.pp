@@ -47,4 +47,10 @@ class puppet::params {
 		''	=> 'puppet',
 		default	=> $puppet_server,
 	}
+
+	$runinterval = $puppet_runinterval ? {
+		''	=> '1800',
+		default	=> $puppet_runinterval,
+	}
+
 }
