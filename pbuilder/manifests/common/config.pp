@@ -39,15 +39,17 @@ class pbuilder::common::config {
 		require => File["$pbuilder::params::cachedir"],
 	}
 
-        exec { 'pbuilder-create-amd64':
-                command         => "$pbuilder::params::localbindir/__pbuilder.sh create lucid amd64",
-                refreshonly     => true,
+	exec { 'pbuilder-create-amd64':
+		command		=> "$pbuilder::params::localbindir/__pbuilder.sh create lucid amd64",
+		refreshonly	=> true,
 		require		=> File["$pbuilder::params::localbindir/__pbuilder.sh"],
-        }
+		timeout		=> 1800,
+	}
 
-        exec { 'pbuilder-create-i386':
-                command         => "$pbuilder::params::localbindir/__pbuilder.sh create lucid i386",
-                refreshonly     => true,
+	exec { 'pbuilder-create-i386':
+		command		=> "$pbuilder::params::localbindir/__pbuilder.sh create lucid i386",
+		refreshonly	=> true,
 		require		=> File["$pbuilder::params::localbindir/__pbuilder.sh"],
-        }
+		timeout		=> 1800,
+	}
 }
