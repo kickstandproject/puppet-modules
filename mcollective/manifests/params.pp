@@ -7,18 +7,6 @@ class mcollective::params {
 		default => 'mcollective-common',
 	}
 
-	$mcollective_common_file = $operatingsystem ? {
-		default => 'mcollective-common_1.2.1-1_all.deb',
-	}
-
-	$mcollective_file = $operatingsystem ? {
-		default => 'mcollective_1.2.1-1_all.deb',
-	}
-
-	$provider = $operatingsystem ? {
-		default => 'dpkg',
-	}
-
 	$servicename = $operatingsystem ? {
 		default => 'mcollective',
 	}
@@ -74,6 +62,6 @@ class mcollective::params {
 
 	$registerinterval = $mcollective_registerinterval ? {
 		'' => '300',
-		default => $mcollective_registerinternal,
+		default => $mcollective_registerinterval,
 	}
 }
