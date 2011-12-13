@@ -1,0 +1,3 @@
+class rabbitmq::common::firewall {
+
+}

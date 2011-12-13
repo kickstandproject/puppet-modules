@@ -1,0 +1,2 @@
+class rabbitmq::common::config {
+}
