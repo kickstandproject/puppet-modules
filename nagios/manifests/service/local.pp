@@ -5,6 +5,7 @@ define nagios::service::local (
 	$hostgroup_name = 'all',
 	$use = 'generic-service-active'
 	) {
+	require nagios::client
 
 	$fname = regsubst($name, "\W", "_", "G")
 
