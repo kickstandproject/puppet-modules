@@ -50,12 +50,12 @@ database config
 database        hdb
 
 # The base of your directory in database #1
-suffix          "<%= ldap_domain %>"
+suffix          "<%= scope.lookupvar('openldap::params::domain') %>"
 
 # rootdn directive for specifying a superuser on the database. This is needed
 # for syncrepl.
-rootdn          "cn=<%= ldap_rootdn %>,<%= ldap_domain %>"
-rootpw		<%= ldap_rootpw %>
+rootdn          "cn=<%= scope.lookupvar('openldap::params::rootdn') %>,<%= scope.lookupvar('openldap::params::domain') %>"
+rootpw		<%= scope.lookupvar('openldap::params::rootpw') %>
 
 # Where the database file are physically stored for database #1
 directory       "/var/lib/ldap"
@@ -101,13 +101,13 @@ checkpoint      512 30
 # acl specific for phamm
 
 access to attrs=userPassword,shadowLastChange
-        by dn="cn=<%= ldap_rootdn %>,<%= ldap_domain %>" write
+        by dn="cn=<%= scope.lookupvar('openldap::params::rootdn') %>,<%= scope.lookupvar('openldap::params::domain') %>" write
         by anonymous auth
         by self write
         by * none
 
 access to *
-        by dn="cn=<%= ldap_rootdn %>,<%= ldap_domain %>" write
+        by dn="cn=<%= scope.lookupvar('openldap::params::rootdn') %>,<%= scope.lookupvar('openldap::params::domain') %>" write
         by * read
 
 access to dn.base="" by * read

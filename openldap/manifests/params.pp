@@ -31,97 +31,113 @@ class openldap::params {
 		default => 0644,
 	}
 
-	$slapd_config = $operatingsystem ? {
-		default => '/etc/ldap/slapd.conf',
+	$configfile = $openldap_configfile ? {
+		''	=> '/etc/ldap/slapd.conf',
+		default => $openldap_configfile,
 	}
 
-	$slapd_user = $operatingsystem ? {
-		default => 'openldap',
+	$slapd_user = $openldap_slapd_user ? {
+		''	=> 'openldap',
+		default	=> $openldap_slapd_user,
 	}
 
-	$slapd_group = $operatingsystem ? {
-		default => 'openldap',
+	$slapd_group = $openldap_slapd_group ? {
+		''	=> 'openldap',
+		default	=> $openldap_slapd_group,
 	}
 
-	$slapd_sentinel_file = $operatingsystem ? {
-		default => '/etc/ldap/noslapd',
+	$slapd_sentinel_file = $openldap_slapd_sentinal_file ? {
+		''	=> '/etc/ldap/noslapd',
+		default	=> $openldap_slapd_sentinal_file,
 	}
 
-	$slapd_pidfile = $operatingsystem ? {
-		default => '/var/run/slapd.pid',
+	$slapd_pidfile = $openldap_slapd_pidfile ? {
+		''	=> '/var/run/slapd.pid',
+		default	=> $openldap_slapd_pidfile,
 	}
 
-	$openldap_staging_path = $operatingsystem ? {
-		default => '/etc/puppet/modules/openldap/',
+	$staging_path = $openldap_staging_path ? {
+		''	=> '/etc/puppet/modules/openldap/',
+		default	=> $openldap_staging_path,
 	}
 
-	$openldap_schema_path = $operatingsystem ? {
-		default => '/etc/ldap/schema/',
+	$schema_path = $openldap_schema_path ? {
+		''	=> '/etc/ldap/schema/',
+		default	=> $openldap_schema_path,
 	}
 
-	$openldap_operatingsystem_slapd_config = $operatingsystem ? {
+	$operatingsystem_slapd_config = $openldap_operatingsystem_slapd_config ? {
 		# TODO: this needs to be abstracted out for Ubuntu/Debian specifically
-		default => '/etc/default/slapd',
+		''	=> '/etc/default/slapd',
+		default	=> $openldap_operatingsystem_slapd_config,
 	}
 
-	$openldap_slapd_conf = $operatingsystem ? {
-		default => '/etc/ldap/slapd.conf',
+	$frontend_ldif = $openldap_frontend_ldif ? {
+		''	=> '/etc/puppet/modules/openldap/frontend.ldif',
+		default	=> $openldap_frontend_ldif,
 	}
 
-	$openldap_frontend_ldif = $operatingsystem ? {
-		default => '/etc/puppet/modules/openldap/frontend.ldif',
+	$initial_config_script = $openldap_initial_config_script ? {
+		''	=> '/etc/puppet/modules/openldap/initial_config.sh',
+		default	=> $openldap_initial_config_script,
 	}
 
-	$openldap_initial_config_script = $operatingsystem ? {
-		default => '/etc/puppet/modules/openldap/initial_config.sh',
-	}
-
-	$openldap_rootpw_file = $operatingsystem ? {
-		default => '/etc/puppet/modules/openldap/.ldap_rootpw',
+	$rootpw_file = $openldap_rootpw_file ? {
+		''	=> '/etc/puppet/modules/openldap/.ldap_rootpw',
+		default	=> $openldap_rootpw_file,
 	}
 
 	# Domain for the server. Replace .example_domain.lan as dc=example_domain,dc=lan
-	$openldap_domain = $operatingsystem ? {
-		default => 'dc=example_domain,dc=lan',
+	$domain = $openldap_domain ? {
+		''	=> 'dc=example_domain,dc=lan',
+		default	=> $openldap_domain,
 	}
 
 	# Left-most top level domain
-	$openldap_dc = $operatingsystem ? {
-		default => 'example_domain',
+	$dc = $openldap_dc ? {
+		''	=> 'example_domain',
+		default	=> $openldap_dc,
 	}
 
 	# Root Admin Username
-	$openldap_rootdn = $operatingsystem ? {
-		default => 'admin',
+	$rootdn = $openldap_rootdn ? {
+		''	=> 'admin',
+		default	=> $openldap_rootdn,
 	}
 
 	# Root Admin Password Created With 'slappasswd'
-	$openldap_rootpw = $operatingsystem ? {
-		default => '{SSHA}JK+xflJwRZY7mOh8XHLGsBoiLBGpUJPA',
+	$rootpw = $openldap_rootpw ? {
+		''	=> '{SSHA}JK+xflJwRZY7mOh8XHLGsBoiLBGpUJPA',
+		default	=> $openldap_rootpw,
 	}
 
 	# Root Admin Password In Plaintext (Required for now for ldapadd)
-	$openldap_plain_passwd = $operatingsystem ? {
-		default => 'welcome',
+	$plain_passwd = $openldap_plain_passwd ? {
+		''	=> 'welcome',
+		default	=> $openldap_plain_passwd,
 	}
 
 	# Organization Name
-	$openldap_organization = $operatingsystem ? {
-		default => 'Example Industries Ltd',
+	$organization = $openldap_organization ? {
+		''	=> 'Example Industries Ltd',
+		default	=> $openldap_organization,
 	}
 
 	# Server Description
-	$openldap_description = $operatingsystem ? {
-		default => 'EI Ltd LDAP Server',
+	$description = $openldap_description ? {
+		''	=> 'EI Ltd LDAP Server',
+		default	=> $openldap_description,
 	}
 
 	# Administration User Description
-	$openldap_admin_description = $operatingsystem ? {
-		default => 'LDAP Administrator',
+	$admin_description = $openldap_admin_description ? {
+		''	=> 'LDAP Administrator',
+		default	=> $openldap_admin_description,
 	}
 
         # Administration Password (only used for initial schema import)
-        $openldap_admin_passwd = $operatingsystem ? {
-		default => 'welcome',
+        $admin_passwd = $openldap_admin_passwd ? {
+		''	=> 'welcome',
+		default	=> $openldap_admin_passwd,
 	}
 }

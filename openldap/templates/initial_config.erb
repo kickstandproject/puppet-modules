@@ -11,9 +11,9 @@ ldap_frontend_ldif=$4
 
 echo "Adding schemas"
 
-ldapadd -Y EXTERNAL -H ldapi:/// -f <%= openldap_schema_path %>/cosine.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -f <%= openldap_schema_path %>/nis.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -f <%= openldap_schema_path %>/inetorgperson.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f <%= scope.lookupvar('openldap::params::schema_path') %>/cosine.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f <%= scope.lookupvar('openldap::params::schema_path') %>/nis.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f <%= scope.lookupvar('openldap::params::schema_path') %>/inetorgperson.ldif
 
 echo "Importing frontend.ldif"
 
