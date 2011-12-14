@@ -40,7 +40,7 @@ class mysql::params {
 	}
 
 	$bindaddr = $mysql_bindaddr ? {
-		''	=> '127.0.0.1',
+		''	=> '0.0.0.0',
 		default	=> "$mysql_bindaddr",
 	}
 
