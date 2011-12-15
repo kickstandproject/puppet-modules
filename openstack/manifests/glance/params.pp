@@ -4,19 +4,19 @@ class openstack::glance::params {
 	}
 
 	$servicename = $operatingsystem ? {
-		default => 'glance-api',
+		default => 'glance-registry',
 	}
 
 	$processname = $operatingsystem ? {
-		default => 'glance-api',
+		default => 'glance-registry',
 	}
 
 	$hasstatus = $operatingsystem ? {
 		default => true,
 	}
 
-	$configfile = $operatingsystem ? {
-		default => '/etc/glance/glance-api.conf',
+	$configfile_registry = $operatingsystem ? {
+		default => '/etc/glance/glance-registry.conf',
 	}
 
 	$configfile_mode = $operatingsystem ? {
@@ -24,14 +24,19 @@ class openstack::glance::params {
 	}
 
 	$configfile_owner = $operatingsystem ? {
-		default => 'root',
+		default => 'glance',
 	}
 
 	$configfile_group = $operatingsystem ? {
-		default => 'root',
+		default => 'glance',
 	}
 
 	$configdir = $operatingsystem ? {
 		default => '/etc/glance',
 	}
+
+	$db = $openstack_glance_db ? {
+		'' => 'sqlite',
+		default => "$openstack_glance_db"
+        }
 }
