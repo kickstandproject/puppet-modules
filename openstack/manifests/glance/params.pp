@@ -24,11 +24,11 @@ class openstack::glance::params {
 	}
 
 	$configfile_owner = $operatingsystem ? {
-		default => 'glance',
+		default => 'root',
 	}
 
 	$configfile_group = $operatingsystem ? {
-		default => 'glance',
+		default => 'root',
 	}
 
 	$configdir = $operatingsystem ? {
@@ -36,7 +36,31 @@ class openstack::glance::params {
 	}
 
 	$db = $openstack_glance_db ? {
-		'' => 'sqlite',
+		''	=> 'sqlite',
 		default => "$openstack_glance_db"
         }
+
+	$db_name = $openstack_glance_db_name ? {
+		''	=> 'glance',
+		default	=> "$openstack_glance_db_name",
+	}
+
+	$db_password = $openstack_glance_db_password ? {
+		''	=> 'bob',
+		default	=> "$openstack_glance_db_password",
+	}
+
+	$db_server = $openstack_glance_db_server ? {
+		''	=> 'localhost',
+		default	=> "$openstack_glance_db_server",
+	}
+
+	$db_user = $openstack_glance_db_user ? {
+		''	=> 'glancedbadmin',
+		default	=> "$openstack_glance_db_user",
+	}
+
+	$python_mysqldb = $operatingsystem ? {
+		default	=> "python-mysqldb",
+	}
 }
