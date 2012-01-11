@@ -17,4 +17,10 @@ class rebuildd::common::config {
 	file { "$rebuildd::params::defaultsfile":
 		content	=> template("rebuildd/server/rebuildd.erb"),
 	}
+
+	exec { 'rebuildd-create-database':
+		command => '/usr/sbin/rebuildd init',
+		creates => '/var/lib/rebuildd/rebuildd.db',
+		require => Class['rebuildd::common::install'],
+	}
 }
