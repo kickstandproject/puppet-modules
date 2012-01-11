@@ -1,26 +1,14 @@
-export CCACHE_DIR="/var/cache/pbuilder/ccache"
+export CCACHE_DIR="<%= scope.lookupvar('pbuilder::params::cachedir') %>/ccache"
 export PATH=”/usr/lib/ccache:${PATH}”
+HOOKDIR="<%= scope.lookupvar('pbuilder::params::cachedir') %>/hook.d"
 EXTRAPACKAGES="ccache"
 BINDMOUNTS="${CCACHE_DIR}"
  
-# Codenames for Debian suites according to their alias. Update these when
-# needed.
-UNSTABLE_CODENAME="sid"
-TESTING_CODENAME="wheezy"
-STABLE_CODENAME="squeeze"
-OLDSTABLE_CODENAME="lenny"
-STABLE_BACKPORTS_SUITE="$STABLE_CODENAME-backports"
-  
-# List of Debian suites.
-DEBIAN_SUITES=($UNSTABLE_CODENAME $TESTING_CODENAME $STABLE_CODENAME $OLDSTABLE_CODENAME
-    "unstable" "testing" "stable" "oldstable")
-  
 # List of Ubuntu suites. Update these when needed.
-UBUNTU_SUITES=("oneiric" "natty" "maverick" "lucid")
+UBUNTU_SUITES=("precise" "oneiric" "natty" "maverick" "lucid")
   
 # Mirrors to use. Update these to your preferred mirror.
-DEBIAN_MIRROR="ftp.us.debian.org"
-UBUNTU_MIRROR="mirror.csclub.uwaterloo.ca"
+UBUNTU_MIRROR="<%= scope.lookupvar('pbuilder::params::mirror') %>"
   
 # Optionally use the changelog of a package to determine the suite to use if
 # none set.
@@ -67,20 +55,17 @@ if [ "${ARCH}" == "i386" ]; then
     DEBBUILDOPTS="-B"
 fi
  
-BASETGZ="/var/cache/pbuilder/$NAME-base.tgz"
-# Optionally, set BASEPATH (and not BASETGZ) if using cowbuilder
-# BASEPATH="/var/cache/pbuilder/$NAME/base.cow/"
+BASETGZ="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME-base.tgz"
 DISTRIBUTION="$DIST"
-BUILDRESULT="/var/cache/pbuilder/$NAME/result/"
-APTCACHE="/var/cache/pbuilder/$NAME/aptcache/"
-BUILDPLACE="/var/cache/pbuilder/build/"
+BUILDRESULT="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME/result/"
+APTCACHE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME/aptcache/"
+BUILDPLACE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/build/"
   
 if $(echo ${UBUNTU_SUITES[@]} | grep -q $DIST); then
     # Ubuntu configuration
     MIRRORSITE="http://$UBUNTU_MIRROR/ubuntu/"
-    COMPONENTS="main restricted universe multiverse"
+    COMPONENTS="<%= scope.lookupvar('pbuilder::params::components') %>"
     DEBOOTSTRAPOPTS=("${DEBOOTSTRAPOPTS[@]}" "--keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg")
-    OTHERMIRROR="$OTHERMIRROR|deb ${MIRRORSITE} ${DISTRIBUTION}-updates ${COMPONENTS}|deb ${MIRRORSITE} ${DISTRIBUTION}-security ${COMPONENTS}"
 else
     echo "Unknown distribution: $DIST"
     exit 1

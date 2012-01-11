@@ -3,6 +3,11 @@ class pbuilder::params {
 		default => '/var/cache/pbuilder',
 	}
 
+	$components = $pbuilder_components ? {
+		''	=> 'main restricted universe',
+		default	=> "$pbuilder_componets",
+	}
+
 	$configdir = $operatingsystem ? {
 		default => '/etc/pbuilder',
 	}
@@ -27,7 +32,17 @@ class pbuilder::params {
 		default	=> '/usr/local/bin',
 	}
 
+	$mirror = $pbuilder_mirror ? {
+		''	=> 'archive.ubuntu.com',
+		default => "$pbuilder_mirror",
+	}
+
 	$packagename = $operatingsystem ? {
 		default => 'pbuilder',
+	}
+
+	$releases = $pbuilder_releases ? {
+		''	=> 'precise',
+		default	=> "$pbuilder_releases",
 	}
 }

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+apt-get install -y python-software-properties
+add-apt-repository "deb http://<%= scope.lookupvar('pbuilder::params::mirror') %>/ubuntu `lsb_release -cs`-updates <%= scope.lookupvar('pbuilder::params::components') %>"
+add-apt-repository "deb http://<%= scope.lookupvar('pbuilder::params::mirror') %>/ubuntu `lsb_release -cs`-security <%= scope.lookupvar('pbuilder::params::components') %>"
+apt-get update
+apt-get -y dist-upgrade
