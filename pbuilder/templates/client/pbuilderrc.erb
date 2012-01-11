@@ -24,22 +24,6 @@ fi
 # your own default (i.e. ${DIST:="unstable"}).
 : ${DIST:="$(lsb_release --short --codename)"}
   
-# Optionally change Debian release states in $DIST to their names.
-case "$DIST" in
-    unstable)
-        DIST="$UNSTABLE_CODENAME"
-        ;;
-    testing)
-        DIST="$TESTING_CODENAME"
-        ;;
-    stable)
-        DIST="$STABLE_CODENAME"
-        ;;
-    oldstable)
-        DIST="$OLDSTABLE_CODENAME"
-        ;;
-esac
-  
 # Optionally set the architecture to the host architecture if none set. Note
 # that you can set your own default (i.e. ${ARCH:="i386"}).
 : ${ARCH:="$(dpkg --print-architecture)"}
@@ -62,7 +46,7 @@ APTCACHE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME/aptcache/"
 BUILDPLACE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/build/"
   
 if $(echo ${UBUNTU_SUITES[@]} | grep -q $DIST); then
-    # Ubuntu configuration
+    # Ubuntu configuration.
     MIRRORSITE="http://$UBUNTU_MIRROR/ubuntu/"
     COMPONENTS="<%= scope.lookupvar('pbuilder::params::components') %>"
     DEBOOTSTRAPOPTS=("${DEBOOTSTRAPOPTS[@]}" "--keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg")

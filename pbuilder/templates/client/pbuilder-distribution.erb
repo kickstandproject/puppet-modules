@@ -13,7 +13,7 @@ case $OPERATION in
 esac
 if ( $PROCEED == true ) then
    shift 
-   DIST=$DISTRIBUTION ARCH=$ARCHITECTURE /usr/sbin/pbuilder $OPERATION
+   DIST=$DISTRIBUTION ARCH=$ARCHITECTURE /usr/sbin/pbuilder $OPERATION $@
 else
    echo "Invalid command..."
    echo "Valid commands are:"

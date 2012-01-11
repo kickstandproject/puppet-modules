@@ -5,7 +5,7 @@ class pbuilder::params {
 
 	$components = $pbuilder_components ? {
 		''	=> 'main restricted universe',
-		default	=> "$pbuilder_componets",
+		default	=> "$pbuilder_components",
 	}
 
 	$configdir = $operatingsystem ? {
