@@ -23,4 +23,7 @@ class rebuildd::common::config {
 		creates => '/var/lib/rebuildd/rebuildd.db',
 		require => Class['rebuildd::common::install'],
 	}
+
+	apache::function::virtualhost { 'packages':
+	}
 }

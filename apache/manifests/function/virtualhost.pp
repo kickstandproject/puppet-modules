@@ -45,4 +45,11 @@ define apache::function::virtualhost() {
 		owner	=> root,
 		require	=> File["$apache::params::logdir/$name"],
 	}
+
+	exec { "apache_a2ensite_$name":
+		command	=> "/usr/sbin/a2ensite $name",
+		creates	=> "$apache::params::configdir/sites-enabled/$name",
+		notify	=> Class['apache::common::service'],
+		require	=> Class['apache::common::install'],
+	}
 }
