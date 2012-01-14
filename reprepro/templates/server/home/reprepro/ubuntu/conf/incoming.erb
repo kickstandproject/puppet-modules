@@ -1,0 +1,6 @@
+Name: incoming
+IncomingDir: incoming
+Allow:<% scope.lookupvar('reprepro::params::distributions').each do |dist| -%> <%= dist %><% end -%>
+
+Cleanup: on_deny on_error
+TempDir: tmp

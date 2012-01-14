@@ -1,0 +1,7 @@
+<% scope.lookupvar('reprepro::params::distributions').each do |dist| -%>
+Codename: <%= dist %>
+Architectures: i386 amd64 source
+Components: main
+Log: logfile
+
+<% end -%>

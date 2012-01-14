@@ -1,0 +1,2 @@
+class reprepro::common::firewall {
+}
