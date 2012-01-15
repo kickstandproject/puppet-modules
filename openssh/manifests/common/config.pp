@@ -1,11 +1,14 @@
 class openssh::common::config {
-	file { "$openssh::params::configfile":
-		content	=> template('openssh/sshd_config.erb'),
+	File {
 		ensure	=> present,
 		group	=> $openssh::params::configfile_group,
 		mode	=> $openssh::params::configfile_mode,
-		notify	=> Class['openssh::common::service'],
 		owner	=> $openssh::params::configfile_owner,
+	}
+
+	file { "$openssh::params::configfile":
+		content	=> template('openssh/server/etc/ssh/sshd_config.erb'),
+		notify	=> Class['openssh::common::service'],
 		require => Class['openssh::common::install'],
 	}
 }

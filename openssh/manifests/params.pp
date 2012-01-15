@@ -34,4 +34,9 @@ class openssh::params {
 	$configdir = $operatingsystem ? {
 		default => '/etc/ssh',
 	}
+
+	$port = $openssh_port ? {
+		''	=> '22',
+		default	=> "$openssh_port",
+	}
 }
