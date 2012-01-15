@@ -21,6 +21,5 @@ class rebuildd::common::config {
 	exec { 'rebuildd-create-database':
 		command => '/usr/sbin/rebuildd init',
 		creates => '/var/lib/rebuildd/rebuildd.db',
-		require => Class['rebuildd::common::install'],
 	}
 }

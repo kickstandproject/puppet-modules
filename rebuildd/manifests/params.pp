@@ -27,6 +27,15 @@ class rebuildd::params {
 		default => '/etc/default/rebuildd',
 	}
 
+	$distributions = $rebuildd_distributions ? {
+		''	=> 'precise',
+		defaule	=> "$rebuildd_distributions",
+	}
+
+	$hasrestart = $operatingsystem ? {
+		default => false,
+	}
+
 	$hasstatus = $operatingsystem ? {
 		default => false,
 	}

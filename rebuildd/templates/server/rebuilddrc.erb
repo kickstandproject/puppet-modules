@@ -12,16 +12,17 @@ templates_dir = /usr/share/rebuildd/templates
 port = 9998
 
 [build]
-max_jobs = 5
+max_jobs = 1
 max_threads = 2
 check_every = 300
-more_archs = any
+more_archs = amd64 i386
 kill_timeout = 90
 source_cmd = apt-get -q --download-only -t ${d} source ${p}=${v}
 work_dir = /var/cache/rebuildd/build
 post_build_cmd = 
-dists = etch lenny sid
-build_cmd = pbuilder build --basetgz /var/cache/pbuilder/${d}-${a}.tgz ${p}_${v}.dsc
+dists =<% scope.lookupvar('rebuildd::params::distributions').each do |dist| -%> <%= dist %><% end -%>
+
+build_cmd = pbuilder-${d}-${a} ${p}_${v}.dsc
 database_uri = sqlite:///var/lib/rebuildd/rebuildd.db
 build_more_recent = 1
 

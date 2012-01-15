@@ -3,5 +3,6 @@ Codename: <%= dist %>
 Architectures: i386 amd64 source
 Components: main
 Log: logfile
+  --changes /home/<% scope.lookupvar('reprepro::params::user') -%>/ubuntu/bin/build_sources
 
 <% end -%>

@@ -25,7 +25,8 @@ class reprepro::common::config {
 		require	=> File["/home/$reprepro::params::user"],
 	}
 
-	file { ["/home/$reprepro::params::user/ubuntu/db",
+	file { ["/home/$reprepro::params::user/ubuntu/bin",
+		"/home/$reprepro::params::user/ubuntu/db",
 		"/home/$reprepro::params::user/ubuntu/conf",
 		"/home/$reprepro::params::user/ubuntu/incoming",
 		"/home/$reprepro::params::user/ubuntu/logs",
@@ -35,12 +36,18 @@ class reprepro::common::config {
 		require	=> File["/home/$reprepro::params::user"],
 	}
 
+	file { "/home/$reprepro::params::user/ubuntu/bin/build_sources":
+		content	=> template('reprepro/server/home/reprepro/ubuntu/bin/build_sources.erb'),
+		mode	=> 755,
+		require => File["/home/$reprepro::params::user/ubuntu/bin"],
+	}
+	
+
 	file { ["/home/$reprepro::params::user/ubuntu/db/checksums.db",
 		"/home/$reprepro::params::user/ubuntu/db/contents.cache.db",
 		"/home/$reprepro::params::user/ubuntu/db/packages.db",
 		"/home/$reprepro::params::user/ubuntu/db/references.db",
 		"/home/$reprepro::params::user/ubuntu/db/version"]:
-		ensure	=> present,
 		require => File["/home/$reprepro::params::user/ubuntu/db"],
 		subscribe => Exec['reprepro clearvanished'],
 	}
