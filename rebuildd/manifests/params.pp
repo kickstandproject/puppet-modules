@@ -28,7 +28,9 @@ class rebuildd::params {
 	}
 
 	$distributions = $rebuildd_distributions ? {
-		''	=> 'precise',
+		''	=> [
+			'precise', 'precise-proposed',
+			],
 		default	=> "$rebuildd_distributions",
 	}
 

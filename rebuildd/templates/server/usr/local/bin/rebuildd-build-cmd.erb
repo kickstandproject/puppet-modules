@@ -1,0 +1,9 @@
+#!/bin/bash
+
+d=$1
+d=$(echo $d|sed 's/-proposed//g')
+a=$2
+p=$3
+v=$4
+
+/usr/local/bin/pbuilder-${d}-${a} build ${p}_${v}.dsc

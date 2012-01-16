@@ -20,13 +20,18 @@ class rebuildd::common::config {
 		content	=> template("rebuildd/server/rebuildd.erb"),
 	}
 
-	file { '/usr/local/bin/rebuildd-source-cmd':
-		content	=> template('rebuildd/server/usr/local/bin/rebuildd-source-cmd.erb'),
+	file { '/usr/local/bin/rebuildd-build-cmd':
+		content	=> template('rebuildd/server/usr/local/bin/rebuildd-build-cmd.erb'),
 		mode	=> 755,
 	}
 
 	file { '/usr/local/bin/rebuildd-post-build-cmd':
 		content	=> template('rebuildd/server/usr/local/bin/rebuildd-post-build-cmd.erb'),
+		mode	=> 755,
+	}
+
+	file { '/usr/local/bin/rebuildd-source-cmd':
+		content	=> template('rebuildd/server/usr/local/bin/rebuildd-source-cmd.erb'),
 		mode	=> 755,
 	}
 
