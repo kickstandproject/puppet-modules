@@ -1,0 +1,8 @@
+#!/bin/bash
+
+d=$1
+p=$2
+v=$3
+
+apt-get update >/dev/null
+apt-get -q --download-only -t ${d} source ${p}=${v}

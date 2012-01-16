@@ -17,12 +17,12 @@ max_threads = 2
 check_every = 300
 more_archs = amd64 i386
 kill_timeout = 90
-source_cmd = apt-get -q --download-only -t ${d} source ${p}=${v}
+source_cmd = /usr/local/bin/rebuildd-source-cmd ${d} ${p} ${v}
 work_dir = /var/cache/rebuildd/build
 post_build_cmd = 
 dists =<% scope.lookupvar('rebuildd::params::distributions').each do |dist| -%> <%= dist %><% end -%>
 
-build_cmd = pbuilder-${d}-${a} ${p}_${v}.dsc
+build_cmd = /usr/local/bin/pbuilder-${d}-${a} build ${p}_${v}.dsc
 database_uri = sqlite:///var/lib/rebuildd/rebuildd.db
 build_more_recent = 1
 

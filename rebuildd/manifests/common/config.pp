@@ -18,6 +18,11 @@ class rebuildd::common::config {
 		content	=> template("rebuildd/server/rebuildd.erb"),
 	}
 
+	file { '/usr/local/bin/rebuildd-source-cmd':
+		content	=> template('rebuildd/server/usr/local/bin/rebuildd-source-cmd.erb'),
+		mode	=> 755,
+	}
+
 	exec { 'rebuildd-create-database':
 		command => '/usr/sbin/rebuildd init',
 		creates => '/var/lib/rebuildd/rebuildd.db',
