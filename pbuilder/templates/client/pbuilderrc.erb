@@ -5,7 +5,7 @@ EXTRAPACKAGES="ccache"
 BINDMOUNTS="${CCACHE_DIR}"
  
 # List of Ubuntu suites. Update these when needed.
-UBUNTU_SUITES=("precise" "oneiric" "natty" "maverick" "lucid")
+UBUNTU_SUITES=(<% scope.lookupvar('pbuilder::params::releases').each do |dist| -%>"<%= dist %>" <% end -%>)
   
 # Mirrors to use. Update these to your preferred mirror.
 UBUNTU_MIRROR="<%= scope.lookupvar('pbuilder::params::mirror') %>"

@@ -29,7 +29,12 @@ class rebuildd::params {
 
 	$distributions = $rebuildd_distributions ? {
 		''	=> 'precise',
-		defaule	=> "$rebuildd_distributions",
+		default	=> "$rebuildd_distributions",
+	}
+
+	$email = $rebuildd_email ? {
+		''	=> 'rebuildd@localhost',
+		default	=> "$rebuildd_email",
 	}
 
 	$hasrestart = $operatingsystem ? {

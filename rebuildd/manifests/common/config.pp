@@ -1,4 +1,6 @@
 class rebuildd::common::config {
+	require reprepro::server
+	require pbuilder::client
 	require rebuildd::params
 
 	File {
@@ -20,6 +22,11 @@ class rebuildd::common::config {
 
 	file { '/usr/local/bin/rebuildd-source-cmd':
 		content	=> template('rebuildd/server/usr/local/bin/rebuildd-source-cmd.erb'),
+		mode	=> 755,
+	}
+
+	file { '/usr/local/bin/rebuildd-post-build-cmd':
+		content	=> template('rebuildd/server/usr/local/bin/rebuildd-post-build-cmd.erb'),
 		mode	=> 755,
 	}
 

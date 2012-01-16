@@ -1,5 +1,5 @@
 [mail]
-mailto = rebuildd@localhost
+mailto = <%= scope.lookupvar('rebuildd::params::email') %>
 from = rebuildd@localhost
 subject_prefix = [rebuildd]
 
@@ -19,7 +19,7 @@ more_archs = amd64 i386
 kill_timeout = 90
 source_cmd = /usr/local/bin/rebuildd-source-cmd ${d} ${p} ${v}
 work_dir = /var/cache/rebuildd/build
-post_build_cmd = 
+post_build_cmd = /usr/local/bin/rebuildd-post-build-cmd ${d} ${p} ${v} ${a}
 dists =<% scope.lookupvar('rebuildd::params::distributions').each do |dist| -%> <%= dist %><% end -%>
 
 build_cmd = /usr/local/bin/pbuilder-${d}-${a} build ${p}_${v}.dsc

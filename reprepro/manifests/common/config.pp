@@ -80,7 +80,7 @@ class reprepro::common::config {
 
 	cron { 'reprepro processincoming':
 		command	=> "/usr/bin/reprepro -V --keepunreferencedfiles -b /home/$reprepro::params::user/ubuntu processincoming incoming",
-		minute	=> '*/15',
+		minute	=> '*/5',
 		require	=> User["$reprepro::params::user"],
 		user	=> $reprepro::params::user,
 	}
