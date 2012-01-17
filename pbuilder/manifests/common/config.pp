@@ -104,7 +104,7 @@ class pbuilder::common::config {
 			subscribe	=> File[$pbuilder::params::configfile],
 		}
 	}
-	$releases = split($pbuilder::params::releases, ' ')
-	pbuilder-distribution { $releases:
+	$dists = split($pbuilder::params::distributions, ' ')
+	pbuilder-distribution { $dists:
 	}
 }

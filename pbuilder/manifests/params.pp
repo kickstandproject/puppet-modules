@@ -28,6 +28,12 @@ class pbuilder::params {
 		default => 'root',
 	}
 
+	$distributions = $pbuilder_distributions ? {
+		''	=> 'precise',
+		default	=> "$pbuilder_distributions",
+	}
+
+	/* XXX TODO common module? */
 	$localbindir = $operatingsystem ? {
 		default	=> '/usr/local/bin',
 	}
@@ -37,12 +43,12 @@ class pbuilder::params {
 		default => "$pbuilder_mirror",
 	}
 
-	$packagename = $operatingsystem ? {
-		default => 'pbuilder',
+	$mirror_protocol = $pbuilder_mirror_protocol ? {
+		''	=> 'http://',
+		default => "$pbuilder_mirror_protocol",
 	}
 
-	$releases = $pbuilder_releases ? {
-		''	=> 'precise',
-		default	=> "$pbuilder_releases",
+	$packagename = $operatingsystem ? {
+		default => 'pbuilder',
 	}
 }

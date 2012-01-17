@@ -5,11 +5,11 @@ EXTRAPACKAGES="ccache"
 BINDMOUNTS="${CCACHE_DIR}"
  
 # List of Ubuntu suites. Update these when needed.
-UBUNTU_SUITES=(<% scope.lookupvar('pbuilder::params::releases').each do |dist| -%>"<%= dist %>" <% end -%>)
+UBUNTU_SUITES=(<% scope.lookupvar('pbuilder::params::distributions').each do |dist| -%>"<%= dist %>" <% end -%>)
   
 # Mirrors to use. Update these to your preferred mirror.
-UBUNTU_MIRROR="<%= scope.lookupvar('pbuilder::params::mirror') %>"
-  
+UBUNTU_MIRROR="<%= scope.lookupvar('pbuilder::params::mirror_protocol') %><%= scope.lookupvar('pbuilder::params::mirror') %>"
+
 # Optionally use the changelog of a package to determine the suite to use if
 # none set.
 if [ -z "${DIST}" ] && [ -r "debian/changelog" ]; then
@@ -47,7 +47,7 @@ BUILDPLACE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/build/"
   
 if $(echo ${UBUNTU_SUITES[@]} | grep -q $DIST); then
     # Ubuntu configuration.
-    MIRRORSITE="http://$UBUNTU_MIRROR/ubuntu/"
+    MIRRORSITE="$UBUNTU_MIRROR/ubuntu/"
     COMPONENTS="<%= scope.lookupvar('pbuilder::params::components') %>"
     DEBOOTSTRAPOPTS=("${DEBOOTSTRAPOPTS[@]}" "--keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg")
 else
