@@ -39,4 +39,14 @@ class openssh::params {
         ''      => '22',
         default => $openssh_port,
     }
+
+    $password_auth = $openssh_password_auth ? {
+        ''      => 'no',
+        default => $openssh_password_auth,
+    }
+
+    $permit_root = $openssh_permit_root ? {
+        ''      => 'no',
+        default => $openssh_permit_root,
+    }
 }
