@@ -1,5 +1,5 @@
 class apache::common::install {
-	package { $apache::params::packagename:
-		ensure	=> present,
-	}
+    package { $apache::params::packagename:
+        ensure  => present,
+    }
 }
