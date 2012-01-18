@@ -18,17 +18,17 @@ class pbuilder::common::config {
         require => File[$pbuilder::params::configfile],
     }
 
-    file { "${pbuilder::params::cachedir}/ccache:
+    file { "${pbuilder::params::cachedir}/ccache":
         ensure  => directory,
         require => File[$pbuilder::params::cachedir],
     }
 
-    file { "${pbuilder::params::cachedir}/hook.d:
+    file { "${pbuilder::params::cachedir}/hook.d":
         ensure  => directory,
         require => File[$pbuilder::params::cachedir],
     }
 
-    file { "${pbuilder::params::cachedir}/hook.d/D10aptupdate:
+    file { "${pbuilder::params::cachedir}/hook.d/D10aptupdate":
         content => template('pbuilder/client/hook.d/D10aptupdate.erb'),
         ensure  => present,
         mode    => '0755',
