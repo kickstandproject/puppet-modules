@@ -1,3 +1,2 @@
 class rebuildd::common::firewall {
-
 }
