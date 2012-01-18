@@ -1,3 +1,2 @@
 class rsyslog::common::firewall {
-
 }
