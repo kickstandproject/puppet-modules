@@ -1,3 +1,2 @@
-class timezone::client inherits timezone::classes::common {
-
+class timezone::client inherits timezone::common::init {
 }

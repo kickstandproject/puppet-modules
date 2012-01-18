@@ -1,4 +1,4 @@
-class timezone::classes::config {
+class timezone::common::config {
 	file { 'timezone':
 		name	=> $timezone::params::configfile,
 		mode	=> $timezone::params::configfile_mode,
@@ -6,7 +6,7 @@ class timezone::classes::config {
 		group	=> $timezone::params::configfile_group,
 		ensure	=> present,
 		content	=> template('timezone/client/timezone.erb'),
-		require => Class['timezone::classes::install'],
+		require => Class['timezone::common::install'],
 		notify	=> Exec['set-timezone'],
 	}
 
