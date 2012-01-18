@@ -1,3 +1,2 @@
 class ntp::common::firewall {
-
 }
