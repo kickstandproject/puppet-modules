@@ -1,5 +1,5 @@
 class asterisk::common::install {
-	package { "$asterisk::params::packagename":
-		ensure	=> present,
-	}
+    package { $asterisk::params::packagename:
+        ensure  => present,
+    }
 }
