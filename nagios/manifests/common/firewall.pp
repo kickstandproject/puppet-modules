@@ -1,3 +1,2 @@
 class nagios::common::firewall {
-
 }

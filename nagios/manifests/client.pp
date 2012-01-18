@@ -1,4 +1,4 @@
 class nagios::client inherits nagios::common::init {
-	include snmp::server
-	include nagios::nsca::client
+    include snmp::server
+    include nagios::nsca::client
 }

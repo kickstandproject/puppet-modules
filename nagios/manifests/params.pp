@@ -1,54 +1,54 @@
 class nagios::params {
-	$configdir = $operatingsystem ? {
-		default => '/etc/nagios3',
-	}
+    $configdir = $operatingsystem ? {
+        default => '/etc/nagios3',
+    }
 
-	$configfile = $operatingsystem ? {
-		default => '/etc/nagios3/nagios.cfg',
-	}
+    $configfile = $operatingsystem ? {
+        default => '/etc/nagios3/nagios.cfg',
+    }
 
-	$configfile_group = $operatingsystem ? {
-		default => 'root',
-	}
+    $configfile_group = $operatingsystem ? {
+        default => 'root',
+    }
 
-	$configfile_mode = $operatingsystem ? {
-		default => '644',
-	}
+    $configfile_mode = $operatingsystem ? {
+        default => '0644',
+    }
 
-	$configfile_owner = $operatingsystem ? {
-		default => 'root',
-	}
+    $configfile_owner = $operatingsystem ? {
+        default => 'root',
+    }
 
-	$customconfigdir = $operatingsystem ? {
-		default => "$configdir/puppet.d",
-	}
+    $customconfigdir = $operatingsystem ? {
+        default => "${configdir}/puppet.d",
+    }
 
-	$hasstatus = $operatingsystem ? {
-		default => true,
-	}
+    $hasstatus = $operatingsystem ? {
+        default => true,
+    }
 
-	$hostgroups = $nagios_hostgroups ? {
-		''	=> 'all',
-		default	=> $nagios_hostgroup,
-	}
+    $hostgroups = $nagios_hostgroups ? {
+        ''      => 'all',
+        default => $nagios_hostgroup,
+    }
 
-	$packagename = $operatingsystem ? {
-		default => 'nagios3-core',
-	}
+    $packagename = $operatingsystem ? {
+        default => 'nagios3-core',
+    }
 
-	$packagename_plugins = $operatingsystem ? {
-		default => 'nagios-plugins-extra'
-	}
+    $packagename_plugins = $operatingsystem ? {
+        default => 'nagios-plugins-extra'
+    }
 
-	$processname = $operatingsystem ? {
-		default => 'nagios',
-	}
+    $processname = $operatingsystem ? {
+        default => 'nagios',
+    }
 
-	$servicename = $operatingsystem ? {
-		default => 'nagios3',
-	}
+    $servicename = $operatingsystem ? {
+        default => 'nagios3',
+    }
 
-	$plugindir = $operatingsystem ? {
-		default => '/usr/lib/nagios/plugins',
-        }
+    $plugindir = $operatingsystem ? {
+        default => '/usr/lib/nagios/plugins',
+    }
 }
