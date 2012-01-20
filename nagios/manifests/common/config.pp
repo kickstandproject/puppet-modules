@@ -64,7 +64,7 @@ class nagios::common::config {
     file { "${nagios::params::customconfigdir}/hostgroups/all.cfg":
         content => template('nagios/client/hostgroups/all.cfg.erb'),
         ensure  => present,
-        require => File[$nagios::params::customconfigdir/hostgroups],
+        require => File["${nagios::params::customconfigdir}/hostgroups"],
     }
 
     file { "${nagios::params::customconfigdir}/services":
@@ -92,5 +92,10 @@ class nagios::common::config {
         content => template('nagios/client/timeperiods.cfg.erb'),
         ensure  => present,
         require => File[$nagios::params::customconfigdir],
+    }
+
+    file { $nagios::params::plugindir:
+        ensure  => present,
+        require => Class['nagios::common::install'],
     }
 }
