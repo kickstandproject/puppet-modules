@@ -5,6 +5,7 @@ release=$2
 package=$3
 version=$4
 changes_file=$5
+repo=<%= name %>
 
 # Only care about packages being added
 if [ "$action" != "accepted" ]; then
@@ -18,5 +19,5 @@ if [ $? = 1 ]; then
 fi
 
 # Kick off the job
-echo "$package $version 1 $release amd64" | sudo /usr/sbin/rebuildd-job add
-echo "$package $version 5 $release i386" | sudo /usr/sbin/rebuildd-job add
+echo "$package $version 1 $release amd64 None $repo" | sudo /usr/sbin/rebuildd-job add
+echo "$package $version 5 $release i386 None $repo" | sudo /usr/sbin/rebuildd-job add

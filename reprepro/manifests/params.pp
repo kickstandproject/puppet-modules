@@ -6,6 +6,10 @@ class reprepro::params {
         default => $reprepro_distributions,
     }
 
+    $homedir = $operatingsystem ? {
+        default => '/var/lib/reprepro',
+    }
+
     $packagename = $operatingsystem ? {
         default => 'reprepro',
     }

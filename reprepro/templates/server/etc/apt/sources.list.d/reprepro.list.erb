@@ -1,3 +1,4 @@
 <% scope.lookupvar('reprepro::params::distributions').each do |dist| -%>
-deb-src file:/home/<%= scope.lookupvar('reprepro::params::user') %>/ubuntu <%= dist %> main
+deb file:<%= scope.lookupvar('reprepro::params::homedir') %>/<%= name %> <%= dist %> main
+deb-src file:<%= scope.lookupvar('reprepro::params::homedir') %>/<%= name %> <%= dist %> main
 <% end -%>

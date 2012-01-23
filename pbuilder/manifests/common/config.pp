@@ -75,14 +75,14 @@ class pbuilder::common::config {
         }
 
         exec { "pbuilder-create-${name}-amd64":
-            command => "${pbuilder::params::localbindir}/pbuilder-${name}-amd64 create",
+            command => "${pbuilder::params::localbindir}/pbuilder-${name}-amd64 create --debootstrapopts --variant=buildd",
             creates => "${pbuilder::params::cachedir}/${name}-amd64-base.tgz",
             require => File["${pbuilder::params::localbindir}/pbuilder-${name}-amd64"],
             timeout => 1800,
         }
 
         exec { "pbuilder-create-${name}-i386":
-            command => "${pbuilder::params::localbindir}/pbuilder-${name}-i386 create",
+            command => "${pbuilder::params::localbindir}/pbuilder-${name}-i386 create --debootstrapopts --variant=buildd",
             creates => "${pbuilder::params::cachedir}/${name}-i386-base.tgz",
             require => File["${pbuilder::params::localbindir}/pbuilder-${name}-i386"],
             timeout => 1800,

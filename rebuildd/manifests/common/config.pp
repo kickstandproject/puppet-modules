@@ -1,5 +1,4 @@
 class rebuildd::common::config {
-    require reprepro::server
     require pbuilder::client
     require rebuildd::params
 

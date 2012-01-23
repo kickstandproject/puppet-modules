@@ -19,10 +19,10 @@ more_archs = amd64 i386
 kill_timeout = 90
 source_cmd = /usr/local/bin/rebuildd-source-cmd ${d} ${p} ${v}
 work_dir = /var/cache/rebuildd/build
-post_build_cmd = /usr/local/bin/rebuildd-post-build-cmd ${d} ${p} ${v} ${a}
+post_build_cmd = /usr/local/bin/rebuildd-post-build-cmd ${d} ${p} ${v} ${a} ${r}
 dists =<% scope.lookupvar('rebuildd::params::distributions').each do |dist| -%> <%= dist %><% end -%>
 
-build_cmd = /usr/local/bin/rebuildd-build-cmd ${d} ${a} ${p} ${v}
+build_cmd = /usr/local/bin/rebuildd-build-cmd ${d} ${a} ${p} ${v} ${r}
 database_uri = sqlite:///var/lib/rebuildd/rebuildd.db
 build_more_recent = 1
 
