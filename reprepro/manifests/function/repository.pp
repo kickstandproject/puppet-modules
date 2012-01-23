@@ -1,4 +1,6 @@
-define reprepro::function::repository() {
+define reprepro::function::repository(
+    $ostype = 'ubuntu'
+) {
     require reprepro::server
     require reprepro::params
 
@@ -11,36 +13,41 @@ define reprepro::function::repository() {
     file { "${reprepro::params::homedir}/${name}":
         ensure  => directory,
         require => File[$reprepro::params::homedir],
+    }
+
+    file { "${reprepro::params::homedir}/${name}/${ostype}":
+        ensure  => directory,
+        require => File["$reprepro::params::homedir/${name}"],
         recurse => true,
     }
 
     file { [
-        "${reprepro::params::homedir}/${name}/bin",
-        "${reprepro::params::homedir}/${name}/db",
-        "${reprepro::params::homedir}/${name}/dists",
-        "${reprepro::params::homedir}/${name}/conf",
-        "${reprepro::params::homedir}/${name}/incoming",
-        "${reprepro::params::homedir}/${name}/logs",
-        "${reprepro::params::homedir}/${name}/tmp"
+        "${reprepro::params::homedir}/${name}/${ostype}/bin",
+        "${reprepro::params::homedir}/${name}/${ostype}/db",
+        "${reprepro::params::homedir}/${name}/${ostype}/dists",
+        "${reprepro::params::homedir}/${name}/${ostype}/conf",
+        "${reprepro::params::homedir}/${name}/${ostype}/incoming",
+        "${reprepro::params::homedir}/${name}/${ostype}/logs",
+        "${reprepro::params::homedir}/${name}/${ostype}/tmp"
     ]:
         ensure  => directory,
-        require => File["${reprepro::params::homedir}/${name}"],
+        require => File["${reprepro::params::homedir}/${name}/${ostype}"],
     }
 
-    file { "${reprepro::params::homedir}/${name}/bin/build_sources":
+    file { "${reprepro::params::homedir}/${name}/${ostype}/bin/build_sources":
         content => template('reprepro/server/var/lib/reprepro/bin/build_sources.erb'),
         mode    => '0755',
-        require => File["${reprepro::params::homedir}/${name}/bin"],
+        require => File["${reprepro::params::homedir}/${name}/${ostype}/bin"],
     }
 
-    file { "${reprepro::params::homedir}/${name}/conf/distributions":
+    file { "${reprepro::params::homedir}/${name}/${ostype}/conf/distributions":
         content => template('reprepro/server/var/lib/reprepro/conf/distributions.erb'),
-        require => File["${reprepro::params::homedir}/${name}/conf"],
+        require => File["${reprepro::params::homedir}/${name}/${ostype}/conf"],
     }
 
-    file { "${reprepro::params::homedir}/${name}/conf/incoming":
+    file { "${reprepro::params::homedir}/${name}/${ostype}/conf/incoming":
         content => template('reprepro/server/var/lib/reprepro/conf/incoming.erb'),
-        require => File["${reprepro::params::homedir}/${name}/conf"],
+        require => File["${reprepro::params::homedir}/${name}/${ostype}/conf"],
     }
 
     /* XXX APT module? */
@@ -51,25 +58,25 @@ define reprepro::function::repository() {
     }
 
     exec { "reprepro ${name} clearvanished":
-        command     => "/usr/bin/reprepro -V -b ${reprepro::params::homedir}/${name} clearvanished",
+        command     => "/usr/bin/reprepro -V -b ${reprepro::params::homedir}/${name}/${ostype} clearvanished",
         group       => $reprepro::params::user,
         refreshonly => true,
-        require     => File["${reprepro::params::homedir}/${name}/db"],
-        subscribe   => File["${reprepro::params::homedir}/${name}/conf/distributions"],
+        require     => File["${reprepro::params::homedir}/${name}/${ostype}/db"],
+        subscribe   => File["${reprepro::params::homedir}/${name}/${ostype}/conf/distributions"],
         user        => $reprepro::params::user,
     }
 
     exec { "reprepro ${name} export":
-        command     => "/usr/bin/reprepro -V -b ${reprepro::params::homedir}/${name} export",
+        command     => "/usr/bin/reprepro -V -b ${reprepro::params::homedir}/${name}/${ostype} export",
         group       => $reprepro::params::user,
         refreshonly => true,
-        require     => File["${reprepro::params::homedir}/${name}/dists"],
+        require     => File["${reprepro::params::homedir}/${name}/${ostype}/dists"],
         subscribe   => Exec["reprepro ${name} clearvanished"],
         user        => $reprepro::params::user,
     }
 
     cron { "reprepro ${name} processincoming":
-        command => "/usr/bin/reprepro -V --keepunreferencedfiles -b ${reprepro::params::homedir}/${name} processincoming incoming",
+        command => "/usr/bin/reprepro -V --keepunreferencedfiles -b ${reprepro::params::homedir}/${name}/${ostype} processincoming incoming",
         minute  => '*/5',
         require => User[$reprepro::params::user],
         user    => $reprepro::params::user,

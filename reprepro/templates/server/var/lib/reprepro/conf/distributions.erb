@@ -3,6 +3,6 @@ Codename: <%= dist %>
 Architectures: i386 amd64 source
 Components: main
 Log: logfile
-  --changes <%= scope.lookupvar('reprepro::params::homedir') %>/<%= name %>/bin/build_sources
+  --changes <%= scope.lookupvar('reprepro::params::homedir') %>/<%= name %>/<%= ostype %>/bin/build_sources
 
 <% end -%>
