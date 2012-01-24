@@ -9,4 +9,4 @@ r=$5
 
 dist=$(echo $d|sed 's/-proposed//g')
 
-su -l -c "/usr/bin/reprepro -V --keepunreferencedfiles -b <%= scope.lookupvar('reprepro::params::homedir') %>/${r} include ${d} /var/cache/pbuilder/${dist}-${a}/result/${p}_${v}_${a}.changes" <%= scope.lookupvar('reprepro::params::user') %> 
+su -l -c "/usr/bin/reprepro -V --keepunreferencedfiles -b <%= scope.lookupvar('reprepro::params::homedir') %>/repos/${r} include ${d} /var/cache/pbuilder/${dist}-${a}/result/${p}_${v}_${a}.changes" <%= scope.lookupvar('reprepro::params::user') %> 
