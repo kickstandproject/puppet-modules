@@ -17,6 +17,11 @@ class reprepro::common::config {
         ensure  => directory,
     }
 
+    file { "${reprepro::params::homedir}/repos":
+        ensure  => directory,
+        require => File[$reprepro::params::homedir],
+    }
+
     file { '/etc/sudoers.d/reprepro':
         ensure  => present,
         content => template('reprepro/server/etc/sudoers.d/reprepro.erb'),
