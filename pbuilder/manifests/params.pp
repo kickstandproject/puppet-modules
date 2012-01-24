@@ -4,7 +4,7 @@ class pbuilder::params {
     }
 
     $components = $pbuilder_components ? {
-        ''      => 'main restricted universe',
+        ''      => 'main universe',
         default => $pbuilder_components,
     }
 
