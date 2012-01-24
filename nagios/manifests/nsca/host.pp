@@ -1,7 +1,7 @@
 define nagios::nsca::host(
     $address = false,
     $ensure = present,
-    $server,
+    $server = 'nagios',
     $use_active = 'generic-host-active',
     $use_passive = 'generic-host-passive'
     ) {

@@ -1,7 +1,7 @@
 class reprepro::params {
     $distributions = $reprepro_distributions ? {
         ''      => [
-            'precise', 'precise-proposed'
+            'precise'
         ],
         default => $reprepro_distributions,
     }
