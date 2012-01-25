@@ -2,6 +2,7 @@
 	ServerName <%= name %>
 
 	DocumentRoot <%= scope.lookupvar('apache::params::rootdir') %>/<%= name %>/html
+	Include <%= scope.lookupvar('apache::params::rootdir') %>/<%= name %>/conf/*.conf
 
 	ErrorLog <%= scope.lookupvar('apache::params::logdir') %>/<%= name %>/error.log
 	CustomLog <%= scope.lookupvar('apache::params::logdir') %>/<%= name %>/access.log combined

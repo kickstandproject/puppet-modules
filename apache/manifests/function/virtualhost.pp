@@ -1,30 +1,32 @@
-define apache::function::virtualhost() {
-    require apache::params
+define apache::function::virtualhost(
+    template = ''
+) {
+    require apache::server
+
+    File {
+        group   => $apache::params::configfile_group,
+        mode    => $apache::params::configfile_mode,
+        owner   => $apache::params::configfile_owner,
+    }
 
     file { "${apache::params::virtualhostdir}/${name}":
         content => template('apache/server/etc/apache2/sites-available/virtualhost.erb'),
         ensure  => present,
-        group   => root,
-        mode    => '0644',
         notify  => Class['apache::common::service'],
-        owner   => root,
     }
 
     file { "${apache::params::rootdir}/${name}":
         ensure  => directory,
-        group   => root,
-        mode    => '0755',
         notify  => Class['apache::common::service'],
-        owner   => root,
         require => File[$apache::params::rootdir],
     }
 
-    file { "${apache::params::rootdir}/${name}/html":
+    file { [
+        "${apache::params::rootdir}/${name}/conf",
+        "${apache::params::rootdir}/${name}/html"
+    ]:
         ensure  => directory,
-        group   => root,
-        mode    => '0755',
         notify  => Class['apache::common::service'],
-        owner   => root,
         require => File["${apache::params::rootdir}/${name}"],
     }
 
@@ -51,5 +53,14 @@ define apache::function::virtualhost() {
         creates => "${apache::params::configdir}/sites-enabled/${name}",
         notify  => Class['apache::common::service'],
         require => Class['apache::common::install'],
+    }
+
+    if ($template != '') {
+        file { "${apache::params::rootdir}/${name}/conf/foo.conf":
+            ensure  => present,
+            content => template($template),
+            notify  => Class['apache::common::service'],
+            require => File["${apache::params::rootdir}/${name}"],
+        }
     }
 }
