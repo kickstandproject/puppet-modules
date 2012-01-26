@@ -1,7 +1,8 @@
 <% scope.lookupvar('reprepro::params::distributions').each do |dist| -%>
 Codename: <%= dist %>
 Architectures: i386 amd64 source
-Components: main
+Components: main<% if gpgkey != '' %>
+SignWith: <%= gpgkey %><% end %>
 Log: logfile
   --changes <%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/<%= name %>/<%= ostype %>/bin/build_sources
 

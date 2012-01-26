@@ -1,6 +1,7 @@
 define reprepro::function::repository(
     $buildoptions = '',
     $ostype = 'ubuntu',
+    $gpgkey = '',
     $project = 'default'
 ) {
     require reprepro::server
