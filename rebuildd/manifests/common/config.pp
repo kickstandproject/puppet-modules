@@ -12,26 +12,11 @@ class rebuildd::common::config {
     }
 
     file { $rebuildd::params::configfile:
-        content => template("rebuildd/server/rebuilddrc.erb"),
+        content => template("rebuildd/server/etc/rebuildd/rebuilddrc.erb"),
     }
 
     file { $rebuildd::params::defaultsfile:
-        content => template("rebuildd/server/rebuildd.erb"),
-    }
-
-    file { '/usr/local/bin/rebuildd-build-cmd':
-        content => template('rebuildd/server/usr/local/bin/rebuildd-build-cmd.erb'),
-        mode    => '0755',
-    }
-
-    file { '/usr/local/bin/rebuildd-post-build-cmd':
-        content => template('rebuildd/server/usr/local/bin/rebuildd-post-build-cmd.erb'),
-        mode    => '0755',
-    }
-
-    file { '/usr/local/bin/rebuildd-source-cmd':
-        content => template('rebuildd/server/usr/local/bin/rebuildd-source-cmd.erb'),
-        mode    => '0755',
+        content => template("rebuildd/server/etc/default/rebuildd.erb"),
     }
 
     exec { 'rebuildd-create-database':

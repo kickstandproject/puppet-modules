@@ -1,9 +1,9 @@
 define reprepro::function::repository(
+    $buildoptions = '',
     $ostype = 'ubuntu',
     $project = 'default'
 ) {
     require reprepro::server
-    require reprepro::params
 
     File {
         group   => $reprepro::params::user,
@@ -44,6 +44,24 @@ define reprepro::function::repository(
 
     file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/build_sources":
         content => template('reprepro/server/var/lib/reprepro/bin/build_sources.erb'),
+        mode    => '0755',
+        require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin"],
+    }
+
+    file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/rebuildd-build-cmd":
+        content => template('rebuildd/server/usr/local/bin/rebuildd-build-cmd.erb'),
+        mode    => '0755',
+        require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin"],
+    }
+
+    file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/rebuildd-post-build-cmd":
+        content => template('rebuildd/server/usr/local/bin/rebuildd-post-build-cmd.erb'),
+        mode    => '0755',
+        require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin"],
+    }
+
+    file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/rebuildd-source-cmd":
+        content => template('rebuildd/server/usr/local/bin/rebuildd-source-cmd.erb'),
         mode    => '0755',
         require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin"],
     }
