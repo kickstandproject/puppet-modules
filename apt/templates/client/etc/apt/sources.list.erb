@@ -1,0 +1,8 @@
+deb <%= scope.lookupvar('apt::params::mirror_protocol') %><%= scope.lookupvar('apt::params::mirror') %>/ubuntu/ <%= lsbdistcodename %> <%= scope.lookupvar('apt::params::components') %>
+deb-src <%= scope.lookupvar('apt::params::mirror_protocol') %><%= scope.lookupvar('apt::params::mirror') %>/ubuntu/ <%= lsbdistcodename %> <%= scope.lookupvar('apt::params::components') %>
+
+deb <%= scope.lookupvar('apt::params::mirror_protocol') %><%= scope.lookupvar('apt::params::mirror') %>/ubuntu/ <%= lsbdistcodename %>-updates <%= scope.lookupvar('apt::params::components') %>
+deb-src <%= scope.lookupvar('apt::params::mirror_protocol') %><%= scope.lookupvar('apt::params::mirror') %>/ubuntu/ <%= lsbdistcodename %>-updates <%= scope.lookupvar('apt::params::components') %>
+
+deb http://security.ubuntu.com/ubuntu <%= lsbdistcodename %>-security <%= scope.lookupvar('apt::params::components') %>
+deb-src http://security.ubuntu.com/ubuntu <%= lsbdistcodename %>-security <%= scope.lookupvar('apt::params::components') %>
