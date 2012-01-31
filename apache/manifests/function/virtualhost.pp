@@ -1,66 +1,16 @@
 define apache::function::virtualhost(
     template = ''
 ) {
-    require apache::server
+    require apache::params
 
-    File {
-        group   => $apache::params::configfile_group,
-        mode    => $apache::params::configfile_mode,
-        owner   => $apache::params::configfile_owner,
+    apache::function::virtualhost::common { $name:
+	template    => $template,
     }
 
-    file { "${apache::params::virtualhostdir}/${name}":
-        content => template('apache/server/etc/apache2/sites-available/virtualhost.erb'),
+    file { "${apache::params::rootdir}/${name}/conf/default.conf":
+        content => template('apache/server/etc/apache2/sites-available/virtualhost-default.conf.erb'),
         ensure  => present,
         notify  => Class['apache::common::service'],
-    }
-
-    file { "${apache::params::rootdir}/${name}":
-        ensure  => directory,
-        notify  => Class['apache::common::service'],
-        require => File[$apache::params::rootdir],
-    }
-
-    file { [
-        "${apache::params::rootdir}/${name}/conf",
-        "${apache::params::rootdir}/${name}/html"
-    ]:
-        ensure  => directory,
-        notify  => Class['apache::common::service'],
-        require => File["${apache::params::rootdir}/${name}"],
-    }
-
-    file { "${apache::params::logdir}/${name}":
-        ensure  => directory,
-        group   => root,
-        mode    => '0750',
-        notify  => Class['apache::common::service'],
-        owner   => root,
-    }
-
-    file { ["${apache::params::logdir}/${name}/access.log",
-        "${apache::params::logdir}/${name}/error.log"]:
-        ensure  => present,
-        group   => adm,
-        mode    => '0640',
-        notify  => Class['apache::common::service'],
-        owner   => root,
-        require => File["${apache::params::logdir}/${name}"],
-    }
-
-    exec { "apache_a2ensite_${name}":
-        command => "/usr/sbin/a2ensite ${name}",
-        creates => "${apache::params::configdir}/sites-enabled/${name}",
-        notify  => Class['apache::common::service'],
-        require => Class['apache::common::install'],
-    }
-
-    if ($template != '') {
-        file { "${apache::params::rootdir}/${name}/conf/foo.conf":
-            ensure  => present,
-            content => template($template),
-            notify  => Class['apache::common::service'],
-            require => File["${apache::params::rootdir}/${name}"],
-        }
+        require => File["${apache::params::rootdir}/${name}/conf"],
     }
 }

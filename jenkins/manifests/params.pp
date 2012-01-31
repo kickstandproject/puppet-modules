@@ -20,7 +20,7 @@ class jenkins::params {
     }
 
     $configfile_mode = $operatingsystem ? {
-        default => '0600',
+        default => '0644',
     }
 
     $configfile_owner = $operatingsystem ? {
@@ -33,5 +33,9 @@ class jenkins::params {
 
     $configdir = $operatingsystem ? {
         default => '/var/lib/jenkins',
+    }
+
+    $defaultfile = $operatingsystem ? {
+        default => '/etc/default/jenkins',
     }
 }
