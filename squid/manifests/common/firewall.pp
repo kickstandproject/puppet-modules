@@ -1,0 +1,2 @@
+class squid::common::firewall {
+}
