@@ -38,4 +38,9 @@ class jenkins::params {
     $defaultfile = $operatingsystem ? {
         default => '/etc/default/jenkins',
     }
+
+    $port = $jenkins_port ? {
+        ''      => '8080',
+        default => $jenkins_port,
+    }
 }
