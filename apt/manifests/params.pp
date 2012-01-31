@@ -1,6 +1,6 @@
 class apt::params {
     $packagename = $operatingsystem ? {
-        default => 'debconf-utils',
+        default => 'python-software-properties',
     }
 
     $servicename = $operatingsystem ? {
