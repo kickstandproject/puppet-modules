@@ -1,0 +1,2 @@
+class openvpn::common::firewall {
+}
