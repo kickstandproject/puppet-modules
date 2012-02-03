@@ -39,7 +39,7 @@ class pbuilder::params {
     }
 
     $mirror = $pbuilder_mirror ? {
-        ''      => 'archive.ubuntu.com',
+        ''      => 'ca.archive.ubuntu.com',
         default => $pbuilder_mirror,
     }
 

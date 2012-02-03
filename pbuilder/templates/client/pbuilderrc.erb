@@ -1,5 +1,8 @@
 export CCACHE_DIR="<%= scope.lookupvar('pbuilder::params::cachedir') %>/ccache"
 export PATH=”/usr/lib/ccache:${PATH}”
+<% if has_variable?('squid_server') then %>
+export http_proxy="http://<%= squid_server %>:<%= scope.lookupvar('squid::params::port') %>"
+<% end %>
 HOOKDIR="<%= scope.lookupvar('pbuilder::params::cachedir') %>/hook.d"
 EXTRAPACKAGES="ccache"
 BINDMOUNTS="${CCACHE_DIR}"
