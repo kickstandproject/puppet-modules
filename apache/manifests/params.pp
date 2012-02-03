@@ -8,15 +8,15 @@ class apache::params {
     }
 
     $configfile_group = $operatingsystem ? {
-        default => 'root',
+        default => 'www-data',
     }
 
     $configfile_mode = $operatingsystem ? {
-        default => '0644',
+        default => '0664',
     }
 
     $configfile_owner = $operatingsystem ? {
-        default => 'root',
+        default => 'www-data',
     }
 
     $customconfigdir = $operatingsystem ? {
