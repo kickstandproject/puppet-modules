@@ -2,7 +2,9 @@ define reprepro::function::repository(
     $buildoptions = '',
     $ostype = 'ubuntu',
     $gpgkey = '',
-    $project = 'default'
+    $project = 'default',
+    $rsynchostname = '',
+    $rsyncuser = '',
 ) {
     require reprepro::server
 
@@ -107,5 +109,13 @@ define reprepro::function::repository(
         minute  => '*/5',
         require => User[$reprepro::params::user],
         user    => $reprepro::params::user,
+    }
+
+    if ($rsynchostname != '') {
+        file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/rsync":
+            content => template('reprepro/server/var/lib/reprepro/bin/rsync.erb'),
+            mode    => '0755',
+            require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin"],
+        }
     }
 }

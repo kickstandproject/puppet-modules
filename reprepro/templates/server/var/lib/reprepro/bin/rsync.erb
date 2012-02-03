@@ -1,0 +1,6 @@
+#!/bin/sh
+
+EXCLUDE="--exclude=/*/* --exclude=<%= project %>/<%= name %>/*/bin/ --exclude=<%= project %>/<%= name %>/*/db/ --exclude=<%= project %>/<%= name %>/*/conf/ --exclude=<%= project %>/<%= name %>/*/incoming/ --exclude=<%= project %>/<%= name %>/*/tmp/"
+INCLUDE="--include=<%= project %>/<%= name %>"
+
+rsync -avz ${INCLUDE} ${EXCLUDE} /var/lib/reprepro/repos/ <%= rsynchostname %>:/var/www/<%= rsynchostname %>/html/
