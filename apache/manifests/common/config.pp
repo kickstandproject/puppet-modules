@@ -8,6 +8,9 @@ class apache::common::config {
 
     file { $apache::params::defaultfile:
         content => template('apache/server/etc/default/apache2.erb'),
+        group   => 'root',
+        mode    => '0644',
+        owner   => 'root',
         ensure  => present,
     }
 
