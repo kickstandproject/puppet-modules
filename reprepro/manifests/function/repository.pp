@@ -79,6 +79,11 @@ define reprepro::function::repository(
         require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/conf"],
     }
 
+    file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/conf/options":
+        content => template('reprepro/server/var/lib/reprepro/conf/options.erb'),
+        require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/conf"],
+    }
+
     /* XXX APT module? */
     file { "/etc/apt/sources.list.d/reprepro-${project}-${name}-${ostype}.list":
         content => template('reprepro/server/etc/apt/sources.list.d/reprepro.list.erb'),
@@ -87,7 +92,7 @@ define reprepro::function::repository(
     }
 
     exec { "reprepro ${project}/${name}/${ostype} clearvanished":
-        command     => "/usr/bin/reprepro -V -b ${reprepro::params::homedir}/repos/${project}/${name}/${ostype} clearvanished",
+        command     => "/usr/bin/reprepro -b ${reprepro::params::homedir}/repos/${project}/${name}/${ostype} clearvanished",
         group       => $reprepro::params::user,
         refreshonly => true,
         require     => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/db"],
@@ -96,7 +101,7 @@ define reprepro::function::repository(
     }
 
     exec { "reprepro ${project}/${name}/${ostype} export":
-        command     => "/usr/bin/reprepro -V -b ${reprepro::params::homedir}/repos/${project}/${name}/${ostype} export",
+        command     => "/usr/bin/reprepro -b ${reprepro::params::homedir}/repos/${project}/${name}/${ostype} export",
         group       => $reprepro::params::user,
         refreshonly => true,
         require     => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/dists"],
@@ -105,7 +110,7 @@ define reprepro::function::repository(
     }
 
     cron { "reprepro ${project}/${name}/${ostype} processincoming":
-        command => "/usr/bin/reprepro -V --keepunreferencedfiles -b ${reprepro::params::homedir}/repos/${project}/${name}/${ostype} processincoming incoming",
+        command => "/usr/bin/reprepro -b ${reprepro::params::homedir}/repos/${project}/${name}/${ostype} processincoming incoming",
         minute  => '*/5',
         require => User[$reprepro::params::user],
         user    => $reprepro::params::user,
