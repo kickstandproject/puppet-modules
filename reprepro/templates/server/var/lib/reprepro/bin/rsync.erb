@@ -3,4 +3,4 @@
 EXCLUDE="--exclude=/* --exclude=<%= name %>/*/bin/ --exclude=<%= name %>/*/db/ --exclude=<%= name %>/*/conf/ --exclude=<%= name %>/*/incoming/ --exclude=<%= name %>/*/tmp/"
 INCLUDE="--include=<%= name %>"
 
-rsync -avz ${INCLUDE} ${EXCLUDE} <%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/ <%= scope.lookupvar('reprepro::params::user') %>@<%= rsynchostname %>:/var/www/<%= rsynchostname %>/html/<%= project %>
+rsync -avz --delete ${INCLUDE} ${EXCLUDE} <%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/ <%= scope.lookupvar('reprepro::params::user') %>@<%= rsynchostname %>:/var/www/<%= rsynchostname %>/html/<%= project %>
