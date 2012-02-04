@@ -28,15 +28,15 @@ class pbuilder::common::config {
         require => File[$pbuilder::params::cachedir],
     }
 
-    file { "${pbuilder::params::cachedir}/hook.d/D10aptupdate":
-        content => template('pbuilder/client/hook.d/D10aptupdate.erb'),
+    file { "${pbuilder::params::cachedir}/hook.d/D20aptupdate":
+        content => template('pbuilder/client/hook.d/D20aptupdate.erb'),
         ensure  => present,
         mode    => '0755',
         require => File["${pbuilder::params::cachedir}/hook.d"],
     }
 
-    file { "${pbuilder::params::cachedir}/hook.d/D20repository":
-        content => template('pbuilder/client/hook.d/D20repository.erb'),
+    file { "${pbuilder::params::cachedir}/hook.d/D10repository":
+        content => template('pbuilder/client/hook.d/D10repository.erb'),
         ensure  => present,
         mode    => '0755',
         require => File["${pbuilder::params::cachedir}/hook.d"],
