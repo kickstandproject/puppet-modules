@@ -1,6 +1,0 @@
-[submodule "vcsrepo"]
-	path = vcsrepo
-	url = git://github.com/puppetlabs/puppet-vcsrepo.git
-[submodule "mcollective-plugins"]
-	path = mcollective-plugins
-	url = git://github.com/puppetlabs/mcollective-plugins.git
