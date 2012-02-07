@@ -45,7 +45,9 @@ fi
 BASETGZ="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME-base.tgz"
 DISTRIBUTION="$DIST"
 BUILDRESULT="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME/result/"
+<% if !has_variable?('squid_server') then %>
 APTCACHE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME/aptcache/"
+<% end %>
 BUILDPLACE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/build/"
   
 if $(echo ${UBUNTU_SUITES[@]} | grep -q $DIST); then
