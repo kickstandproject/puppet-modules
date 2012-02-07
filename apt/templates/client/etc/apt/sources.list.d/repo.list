@@ -1,0 +1,2 @@
+deb <%= protocol %><%= url %> <%= dist %> <%= components %>
+deb-src <%= protocol %><%= url %> <%= dist %> <%= components %>

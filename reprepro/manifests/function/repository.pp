@@ -84,11 +84,10 @@ define reprepro::function::repository(
         require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/conf"],
     }
 
-    /* XXX APT module? */
-    file { "/etc/apt/sources.list.d/reprepro-${project}-${name}-${ostype}.list":
-        content => template('reprepro/server/etc/apt/sources.list.d/reprepro.list.erb'),
-        group   => root,
-        owner   => root,
+    apt::function::repository { "reprepro-${project}-${name}-${ostype}":
+        protocol    => 'file:',
+        url         => "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}",
+        components  => main,
     }
 
     exec { "reprepro ${project}/${name}/${ostype} clearvanished":
