@@ -109,6 +109,8 @@ define reprepro::function::repository(
         user        => $reprepro::params::user,
     }
 
+    /* XXX TODO Create cron module */
+    /* XXX TODO This needs to be purged! */
     cron { "reprepro ${project}/${name}/${ostype} processincoming":
         command => "/usr/bin/reprepro -b ${reprepro::params::homedir}/repos/${project}/${name}/${ostype} processincoming incoming",
         minute  => '*/5',

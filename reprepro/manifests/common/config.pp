@@ -18,8 +18,12 @@ class reprepro::common::config {
     }
 
     file { "${reprepro::params::homedir}/repos":
-        ensure  => directory,
-        require => File[$reprepro::params::homedir],
+        ensure          => directory,
+        force           => true,
+        purge           => true,
+        recurse         => true,
+        recurselimit    => 1,
+        require         => File[$reprepro::params::homedir],
     }
 
     file { '/etc/sudoers.d/reprepro':
