@@ -4,7 +4,7 @@ define reprepro::function::repository(
     $gpgkey = '',
     $project = 'default',
     $rsynchostname = '',
-    $rsyncuser = '',
+    $rsyncuser = ''
 ) {
     require reprepro::server
 
