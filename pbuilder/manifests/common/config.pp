@@ -1,11 +1,10 @@
 class pbuilder::common::config {
-    require $pbuilder::params
+    require pbuilder::params
 
     File {
         group   => $pbuilder::params::configfile_group,
         mode    => $pbuilder::params::configfile_mode,
         owner   => $pbuilder::params::configfile_owner,
-        require => Class['pbuilder::common::install'],
     }
 
     file { $pbuilder::params::configfile:
@@ -28,18 +27,14 @@ class pbuilder::common::config {
         require => File[$pbuilder::params::cachedir],
     }
 
-    file { "${pbuilder::params::cachedir}/hook.d/D20aptupdate":
-        content => template('pbuilder/client/hook.d/D20aptupdate.erb'),
+    pbuilder::function::hook { 'D10repository':
         ensure  => present,
-        mode    => '0755',
-        require => File["${pbuilder::params::cachedir}/hook.d"],
+        content => template('pbuilder/client/hook.d/D10repository.erb'),
     }
 
-    file { "${pbuilder::params::cachedir}/hook.d/D10repository":
-        content => template('pbuilder/client/hook.d/D10repository.erb'),
+    pbuilder::function::hook { 'D20aptupdate':
         ensure  => present,
-        mode    => '0755',
-        require => File["${pbuilder::params::cachedir}/hook.d"],
+        content => template('pbuilder/client/hook.d/D20aptupdate.erb'),
     }
 
     /* XXX Remove duplicate logic with another define? */

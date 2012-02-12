@@ -1,5 +1,4 @@
 class rebuildd::common::config {
-    require pbuilder::client
     require rebuildd::params
 
     File {
