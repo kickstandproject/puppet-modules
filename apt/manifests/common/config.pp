@@ -28,6 +28,16 @@ class apt::common::config {
         require => File[$apt::params::configdir],
     }
 
+    apt::function::config { '10periodic':
+        ensure  => present,
+        content => template('apt/client/etc/apt/apt.conf.d/10periodic.erb'),
+    }
+
+    apt::function::config { '50unattended-upgrades':
+        ensure  => present,
+        content => template('apt/client/etc/apt/apt.conf.d/50unattended-upgrades.erb'),
+    }
+
     exec { 'apt-get clean':
         command        => '/usr/bin/apt-get clean',
         subscribe      => [
