@@ -6,11 +6,23 @@ export http_proxy="http://<%= squid_server %>:<%= scope.lookupvar('squid::params
 HOOKDIR="<%= scope.lookupvar('pbuilder::params::cachedir') %>/hook.d"
 EXTRAPACKAGES="ccache"
 BINDMOUNTS="${CCACHE_DIR}"
+
+# Codenames for Debian suites according to their alias. Update these when
+# needed.
+UNSTABLE_CODENAME="sid"
+TESTING_CODENAME="wheezy"
+STABLE_CODENAME="squeeze"
+OLDSTABLE_CODENAME="lenny"
+
+# List of Debian suites.
+DEBIAN_SUITES=($UNSTABLE_CODENAME $TESTING_CODENAME $STABLE_CODENAME $OLDSTABLE_CODENAME
+    "unstable" "testing" "stable" "oldstable")
  
 # List of Ubuntu suites. Update these when needed.
 UBUNTU_SUITES=(<% scope.lookupvar('pbuilder::params::distributions').each do |dist| -%>"<%= dist %>" <% end -%>)
   
 # Mirrors to use. Update these to your preferred mirror.
+DEBIAN_MIRROR="ftp.us.debian.org"
 UBUNTU_MIRROR="<%= scope.lookupvar('pbuilder::params::mirror_protocol') %><%= scope.lookupvar('pbuilder::params::mirror') %>"
 
 # Optionally use the changelog of a package to determine the suite to use if
@@ -49,8 +61,13 @@ BUILDRESULT="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME/result/"
 APTCACHE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/$NAME/aptcache/"
 <% end %>
 BUILDPLACE="<%= scope.lookupvar('pbuilder::params::cachedir') %>/build/"
-  
-if $(echo ${UBUNTU_SUITES[@]} | grep -q $DIST); then
+
+if $(echo ${DEBIAN_SUITES[@]} | grep -q $DIST); then
+    # Debian configuration
+    MIRRORSITE="http://$DEBIAN_MIRROR/debian/"
+    COMPONENTS="main contrib non-free"
+    DEBOOTSTRAPOPTS=("${DEBOOTSTRAPOPTS[@]}" "--keyring=/usr/share/keyrings/debian-archive-keyring.gpg")  
+elif $(echo ${UBUNTU_SUITES[@]} | grep -q $DIST); then
     # Ubuntu configuration.
     MIRRORSITE="$UBUNTU_MIRROR/ubuntu/"
     COMPONENTS="<%= scope.lookupvar('pbuilder::params::components') %>"
