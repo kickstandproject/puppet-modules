@@ -1,0 +1,8 @@
+#!/bin/sh
+
+RELEASE=`cat /etc/lsb-release | grep DISTRIB_CODENAME | cut -f 2 -d '='`
+
+echo "deb file:<%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/<%= name %>/<%= ostype %> ${RELEASE} main" >> /etc/apt/sources.list
+echo "deb-src file:<%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/<%= name %>/<%= ostype %> ${RELEASE} main" >> /etc/apt/sources.list
+<% if gpgkey != '' %>
+apt-key add <%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/<%= name %>/<%= ostype %>/keys/<%= gpgkey %>.pub<% end %>

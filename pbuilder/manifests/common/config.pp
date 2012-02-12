@@ -24,7 +24,9 @@ class pbuilder::common::config {
 
     file { "${pbuilder::params::cachedir}/hook.d":
         ensure  => directory,
+        purge   => true,
         require => File[$pbuilder::params::cachedir],
+        recurse => true,
     }
 
     pbuilder::function::hook { 'D10repository':

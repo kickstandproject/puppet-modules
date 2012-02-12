@@ -7,6 +7,7 @@ define reprepro::function::repository(
     $rsyncuser = ''
 ) {
     require reprepro::server
+    require pbuilder::client
 
     File {
         group   => $reprepro::params::user,
@@ -34,10 +35,12 @@ define reprepro::function::repository(
 
     file { [
         "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin",
+        "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/hook.d",
+        "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/conf",
         "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/db",
         "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/dists",
-        "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/conf",
         "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/incoming",
+        "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/keys",
         "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/logs",
         "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/tmp"
     ]:
@@ -49,6 +52,24 @@ define reprepro::function::repository(
         content => template('reprepro/server/var/lib/reprepro/bin/build_sources.erb'),
         mode    => '0755',
         require => File["${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin"],
+    }
+
+    file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/hook.d/D10repository":
+        ensure  => present,
+        content => template('pbuilder/client/hook.d/D10repository.erb'),
+        mode    => '0755',
+    }
+
+    file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/hook.d/D10reprepro-repository":
+        ensure  => present,
+        content => template('reprepro/server/var/lib/reprepro/bin/hook.d/D10reprepro-repository.erb'),
+        mode    => '0755',
+    }
+
+    file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/hook.d/D20aptupdate":
+        ensure  => present,
+        content => template('pbuilder/client/hook.d/D20aptupdate.erb'),
+        mode    => '0755',
     }
 
     file { "${reprepro::params::homedir}/repos/${project}/${name}/${ostype}/bin/rebuildd-build-cmd":
