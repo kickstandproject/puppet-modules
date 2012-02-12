@@ -1,5 +1,5 @@
 class apt::common::squid {
-    require apt::params
+    require squid::params
 
     apt::function::config { '99-proxy':
         ensure  => present,
