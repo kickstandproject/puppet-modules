@@ -5,7 +5,7 @@ define nagios::nsca::host(
     $use_active = 'generic-host-active',
     $use_passive = 'generic-host-passive'
     ) {
-    require nagios::params
+    require nagios::client
 
     nagios_host { $name:
         address => $address ? {

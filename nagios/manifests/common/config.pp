@@ -15,17 +15,23 @@ class nagios::common::config {
         }
     }
 
+    file { $nagios::params::configdir:
+        ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
+        require => Class['nagios::common::install'],
+    }
+
     file { $nagios::params::configfile:
         ensure  => present,
         notify  => Class['nagios::common::service'],
-        require => Class['nagios::common::install'],
+        require => File[$nagios::params::configdir],
     }
 
     file { $nagios::params::customconfigdir:
         ensure  => directory,
-        force   => true,
         require => Class['nagios::common::install'],
-        recurse => true,
     }
 
     file { "${nagios::params::customconfigdir}/commands":
