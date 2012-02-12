@@ -10,6 +10,11 @@ class apt::common::config {
         require => Class['apt::common::install'],
     }
 
+    file { "${apt::params::configdir}/apt.conf":
+        ensure  => absent,
+        require => File[$apt::params::configdir],
+    }
+
     file { "${apt::params::configdir}/sources.list.d":
         ensure  => directory,
         purge   => true,
