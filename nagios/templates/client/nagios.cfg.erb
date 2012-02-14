@@ -1,12 +1,12 @@
 log_file=/var/log/nagios3/nagios.log
 
-cfg_file=<%= scope.lookupvar('nagios::params::customconfigdir') %>/contacts.cfg
-cfg_file=<%= scope.lookupvar('nagios::params::customconfigdir') %>/timeperiods.cfg
+cfg_file=<%= scope.lookupvar('nagios::params::configdir') %>/contacts.cfg
+cfg_file=<%= scope.lookupvar('nagios::params::configdir') %>/timeperiods.cfg
 
-cfg_dir=<%= scope.lookupvar('nagios::params::customconfigdir') %>/commands
-cfg_dir=<%= scope.lookupvar('nagios::params::customconfigdir') %>/hostgroups
-cfg_dir=<%= scope.lookupvar('nagios::params::customconfigdir') %>/hosts
-cfg_dir=<%= scope.lookupvar('nagios::params::customconfigdir') %>/services
+cfg_dir=<%= scope.lookupvar('nagios::params::configdir') %>/commands
+cfg_dir=<%= scope.lookupvar('nagios::params::configdir') %>/hostgroups
+cfg_dir=<%= scope.lookupvar('nagios::params::configdir') %>/hosts
+cfg_dir=<%= scope.lookupvar('nagios::params::configdir') %>/services
 
 # Debian also defaults to using the check commands defined by the debian
 # nagios-plugins package

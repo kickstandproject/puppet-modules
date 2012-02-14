@@ -1,7 +1,7 @@
 define nagios::nsca::host(
     $address = false,
     $ensure = present,
-    $server = 'nagios',
+    $server, 
     $use_active = 'generic-host-active',
     $use_passive = 'generic-host-passive'
     ) {
@@ -14,11 +14,11 @@ define nagios::nsca::host(
         },
         ensure  => $ensure,
         notify  => Class['nagios::common::service'],
-        target  => "${nagios::params::customconfigdir}/hosts/${name}.cfg",
+        target  => "${nagios::params::configdir}/hosts/${name}.cfg",
         use     => $use_active,
     }
 
-    file { "${nagios::params::customconfigdir}/hosts/${name}.cfg":
+    file { "${nagios::params::configdir}/hosts/${name}.cfg":
         ensure  => $ensure,
         mode    => $nagios::params::configfile_mode,
         owner   => $nagios::params::configfile_owner,
@@ -36,11 +36,11 @@ define nagios::nsca::host(
         host_name   => $name,
         notify      => Class['nagios::common::service'],
         tag         => $server,
-        target      => "${nagios::params::customconfigdir}/hosts/passive-${name}.cfg",
+        target      => "${nagios::params::configdir}/hosts/passive-${name}.cfg",
         use         => $use_passive,
     }
 
-    @@file { "${nagios::params::customconfigdir}/hosts/passive-${name}.cfg":
+    @@file { "${nagios::params::configdir}/hosts/passive-${name}.cfg":
         ensure  => $ensure,
         group   => $nagios::params::configfile_group,
         mode    => $nagios::params::configfile_mode,

@@ -10,27 +10,27 @@ class nagios::nsca::client inherits nagios::nsca::common::init {
     nagios_command { 'submit_ocsp':
         ensure          => present,
         command_line    => "${nagios::params::plugindir}/submit_ocsp \$HOSTNAME\$ '\$SERVICEDESC\$' \$SERVICESTATEID\$ '\$SERVICEOUTPUT\$'",
-        target          => "${nagios::params::customconfigdir}/commands/submit_ocsp.cfg",
+        target          => "${nagios::params::configdir}/commands/submit_ocsp.cfg",
         notify          => Class['nagios::common::service'],
-	require         => File["${nagios::params::customconfigdir}/commands/submit_ocsp.cfg"],
+	require         => File["${nagios::params::configdir}/commands/submit_ocsp.cfg"],
     }
 
-    file { "${nagios::params::customconfigdir}/commands/submit_ocsp.cfg":
+    file { "${nagios::params::configdir}/commands/submit_ocsp.cfg":
         ensure  => present,
-	require => File["${nagios::params::customconfigdir}/commands"],
+	require => File["${nagios::params::configdir}/commands"],
     }
 
     nagios_command { 'submit_ochp':
         ensure          => present,
         command_line    => "${nagios::params::plugindir}/submit_ochp \$HOSTNAME\$ \$HOSTSTATE\$ '\$HOSTOUTPUT\$'",
-        target          => "${nagios::params::customconfigdir}/commands/submit_ochp.cfg",
+        target          => "${nagios::params::configdir}/commands/submit_ochp.cfg",
         notify          => Class['nagios::common::service'],
-        require         => File["${nagios::params::customconfigdir}/commands/submit_ochp.cfg"],
+        require         => File["${nagios::params::configdir}/commands/submit_ochp.cfg"],
     }
 
-    file { "${nagios::params::customconfigdir}/commands/submit_ochp.cfg":
+    file { "${nagios::params::configdir}/commands/submit_ochp.cfg":
         ensure  => present,
-	require => File["${nagios::params::customconfigdir}/commands"],
+	require => File["${nagios::params::configdir}/commands"],
     }
 
     file { "${nagios::params::plugindir}/submit_ocsp":

@@ -18,11 +18,11 @@ define nagios::service::local (
 		hostgroup_name		=> $hostgroup_name,
 		notify			=> Class['nagios::common::service'],
 		service_description	=> $description,
-		target			=> "$nagios::params::customconfigdir/services/$fname.cfg",
+		target			=> "$nagios::params::configdir/services/$fname.cfg",
 		use			=> $use,
 	}
 
-	file { "$nagios::params::customconfigdir/services/$fname.cfg":
+	file { "$nagios::params::configdir/services/$fname.cfg":
 		before	=> Nagios_service[$name],
 		ensure	=> $ensure,
 	}

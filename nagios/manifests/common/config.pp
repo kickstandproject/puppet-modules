@@ -15,7 +15,7 @@ class nagios::common::config {
         }
     }
 
-    file { $nagios::params::configdir:
+    file { $nagios::params::basedir:
         ensure  => directory,
         force   => true,
         purge   => true,
@@ -29,75 +29,75 @@ class nagios::common::config {
         require => File[$nagios::params::configdir],
     }
 
-    file { $nagios::params::customconfigdir:
+    file { $nagios::params::configdir:
         ensure  => directory,
         require => Class['nagios::common::install'],
     }
 
-    file { "${nagios::params::customconfigdir}/commands":
+    file { "${nagios::params::configdir}/commands":
         ensure  => directory,
-        require => File[$nagios::params::customconfigdir],
+        require => File[$nagios::params::configdir],
     }
 
-    file { "${nagios::params::customconfigdir}/commands/general.cfg":
+    file { "${nagios::params::configdir}/commands/general.cfg":
         content => template('nagios/client/commands/general.cfg.erb'),
         ensure  => present,
-        require => File["${nagios::params::customconfigdir}/commands"],
+        require => File["${nagios::params::configdir}/commands"],
     }
 
-    file { "${nagios::params::customconfigdir}/contacts.cfg":
+    file { "${nagios::params::configdir}/contacts.cfg":
         content => template('nagios/client/contacts.cfg.erb'),
         ensure  => present,
-        require => File[$nagios::params::customconfigdir],
+        require => File[$nagios::params::configdir],
     }
 
-    file { "${nagios::params::customconfigdir}/hosts":
+    file { "${nagios::params::configdir}/hosts":
         ensure  => directory,
-        require => File[$nagios::params::customconfigdir],
+        require => File[$nagios::params::configdir],
     }
 
-    file { "${nagios::params::customconfigdir}/hosts/generic.cfg":
+    file { "${nagios::params::configdir}/hosts/generic.cfg":
         content => template('nagios/client/hosts/generic.cfg.erb'),
         ensure  => present,
-        require => File["${nagios::params::customconfigdir}/hosts"],
+        require => File["${nagios::params::configdir}/hosts"],
     }
 
-    file { "${nagios::params::customconfigdir}/hostgroups":
+    file { "${nagios::params::configdir}/hostgroups":
         ensure  => directory,
-        require => File[$nagios::params::customconfigdir],
+        require => File[$nagios::params::configdir],
     }
 
-    file { "${nagios::params::customconfigdir}/hostgroups/all.cfg":
+    file { "${nagios::params::configdir}/hostgroups/all.cfg":
         content => template('nagios/client/hostgroups/all.cfg.erb'),
         ensure  => present,
-        require => File["${nagios::params::customconfigdir}/hostgroups"],
+        require => File["${nagios::params::configdir}/hostgroups"],
     }
 
-    file { "${nagios::params::customconfigdir}/services":
+    file { "${nagios::params::configdir}/services":
         ensure  => directory,
-        require => File[$nagios::params::customconfigdir],
+        require => File[$nagios::params::configdir],
     }
 
-    file { "${nagios::params::customconfigdir}/services/active":
+    file { "${nagios::params::configdir}/services/active":
         ensure  => directory,
-        require => File["${nagios::params::customconfigdir}/services"],
+        require => File["${nagios::params::configdir}/services"],
     }
 
-    file { "${nagios::params::customconfigdir}/services/passive":
+    file { "${nagios::params::configdir}/services/passive":
         ensure  => directory,
-        require => File["${nagios::params::customconfigdir}/services"],
+        require => File["${nagios::params::configdir}/services"],
     }
 
-    file { "${nagios::params::customconfigdir}/services/generic.cfg":
+    file { "${nagios::params::configdir}/services/generic.cfg":
         content => template('nagios/client/services/generic.cfg.erb'),
         ensure  => present,
-        require => File["${nagios::params::customconfigdir}/services"],
+        require => File["${nagios::params::configdir}/services"],
     }
 
-    file { "${nagios::params::customconfigdir}/timeperiods.cfg":
+    file { "${nagios::params::configdir}/timeperiods.cfg":
         content => template('nagios/client/timeperiods.cfg.erb'),
         ensure  => present,
-        require => File[$nagios::params::customconfigdir],
+        require => File[$nagios::params::configdir],
     }
 
     file { $nagios::params::plugindir:

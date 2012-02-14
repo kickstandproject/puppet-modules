@@ -1,6 +1,10 @@
 class nagios::params {
-    $configdir = $operatingsystem ? {
+    $basedir = $operatingsystem ? {
         default => '/etc/nagios3',
+    }
+
+    $configdir = $operatingsystem ? {
+        default => "/etc/nagios3/conf.d",
     }
 
     $configfile = $operatingsystem ? {
@@ -17,10 +21,6 @@ class nagios::params {
 
     $configfile_owner = $operatingsystem ? {
         default => 'root',
-    }
-
-    $customconfigdir = $operatingsystem ? {
-        default => "${configdir}/puppet.d",
     }
 
     $hasstatus = $operatingsystem ? {

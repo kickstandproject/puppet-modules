@@ -23,12 +23,12 @@ define nagios::service::nsca (
 		ensure			=> $ensure,
 		host_name		=> "$fqdn",
 		notify			=> Class['nagios::common::service'],
-		target			=> "$nagios::params::customconfigdir/services/passive/$fname.on.$hostname.cfg",
+		target			=> "$nagios::params::configdir/services/passive/$fname.on.$hostname.cfg",
 		tag			=> $server,
 		use			=> $use_passive,
 	}
 
-	@@file { "$nagios::params::customconfigdir/services/passive/$fname.on.$hostname.cfg":
+	@@file { "$nagios::params::configdir/services/passive/$fname.on.$hostname.cfg":
 		ensure	=> $ensure,
 		group	=> $nagios::params::configfile_group,
 		mode	=> $nagios::params::configfile_mode,

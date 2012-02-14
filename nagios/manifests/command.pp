@@ -8,10 +8,10 @@ define nagios::command(
         command_line    => $command_line,
         ensure      => $ensure,
         notify      => Class['nagios::common::service'],
-        target      => "${nagios::params::customconfigdir}/commands/${name}.cfg",
+        target      => "${nagios::params::configdir}/commands/${name}.cfg",
     }
 
-    file { "${nagios::params::customconfigdir}/commands/${name}.cfg":
+    file { "${nagios::params::configdir}/commands/${name}.cfg":
         before  => Nagios_command[$name],
         ensure  => $ensure,
         group   => $nagios::params::group,
