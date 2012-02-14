@@ -4,7 +4,6 @@ class nagios::apache::config {
 
     file { "${nagios::params::basedir}/stylesheets":
         ensure  => directory,
-        purge   => false,
         require => File[$nagios::params::basedir],
     }
 

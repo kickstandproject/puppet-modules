@@ -1,29 +1,30 @@
 define nagios::service::local (
-	$check_command = false,
-	$description,
-	$ensure = present,
-	$hostgroup_name = 'all',
-	$use = 'generic-service-active'
-	) {
-	require nagios::client
+    $check_command = false,
+    $description,
+    $ensure = present,
+    $hostgroup_name = 'all',
+    $use = 'generic-service-active'
+) {
+    require nagios::client
+    include nagios::params
 
-	$fname = regsubst($name, "\W", "_", "G")
+    $fname = regsubst($name, "\W", "_", "G")
 
-	nagios_service { $name:
-		check_command		=> $check_command ? {
-			false	=> $name,
-			default	=> $check_command,
-		},
-		ensure			=> $ensure,
-		hostgroup_name		=> $hostgroup_name,
-		notify			=> Class['nagios::common::service'],
-		service_description	=> $description,
-		target			=> "$nagios::params::configdir/services/$fname.cfg",
-		use			=> $use,
-	}
+    nagios_service { $name:
+        check_command       => $check_command ? {
+            false   => $name,
+            default => $check_command,
+        },
+        ensure              => $ensure,
+        hostgroup_name      => $hostgroup_name,
+        notify              => Class['nagios::common::service'],
+        service_description => $description,
+        target              => "${nagios::params::configdir}/services/${fname}.cfg",
+        use                 => $use,
+    }
 
-	file { "$nagios::params::configdir/services/$fname.cfg":
-		before	=> Nagios_service[$name],
-		ensure	=> $ensure,
-	}
+    file { "${nagios::params::configdir}/services/${fname}.cfg":
+        ensure  => $ensure,
+        before  => Nagios_service[$name],
+    }
 }
