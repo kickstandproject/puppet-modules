@@ -1,10 +1,10 @@
 define apache::function::virtualhost(
-    template = ''
+    content = ''
 ) {
     require apache::params
 
     apache::function::virtualhost::common { $name:
-	template    => $template,
+	content    => $content,
     }
 
     file { "${apache::params::rootdir}/${name}/conf/default.conf":

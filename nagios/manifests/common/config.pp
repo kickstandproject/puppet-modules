@@ -11,7 +11,7 @@ class nagios::common::config {
         }
     } else {
         File[$nagios::params::configfile] {
-            content => template('nagios/server/nagios.cfg.erb')
+            content => template('nagios/etc/nagios3/nagios.cfg.erb.server')
         }
     }
 
@@ -29,9 +29,16 @@ class nagios::common::config {
         require => File[$nagios::params::configdir],
     }
 
+    file { "${nagios::params::basedir}/resource.cfg":
+        ensure  => present,
+	content => template('nagios/etc/nagios3/resource.cfg.erb'),
+        notify  => Class['nagios::common::service'],
+        require => File[$nagios::params::basedir],
+    }
+
     file { $nagios::params::configdir:
         ensure  => directory,
-        require => Class['nagios::common::install'],
+        require => File[$nagios::params::configdir],
     }
 
     file { "${nagios::params::configdir}/commands":

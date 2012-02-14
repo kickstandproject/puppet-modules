@@ -40,6 +40,10 @@ class nagios::params {
         default => 'nagios-plugins-extra'
     }
 
+    $packagename_web = $operatingsystem ? {
+        default => 'nagios3-cgi',
+    }
+
     $processname = $operatingsystem ? {
         default => 'nagios',
     }
@@ -50,5 +54,10 @@ class nagios::params {
 
     $plugindir = $operatingsystem ? {
         default => '/usr/lib/nagios/plugins',
+    }
+
+    $web = $nagios_web ? {
+        ''      => 'no',
+        default => $nagios_web,
     }
 }

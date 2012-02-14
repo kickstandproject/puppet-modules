@@ -1,5 +1,5 @@
 define apache::function::virtualhost::common(
-    template = ''
+    content = ''
 ) {
     require apache::server
 
@@ -10,21 +10,28 @@ define apache::function::virtualhost::common(
     }
 
     file { "${apache::params::virtualhostdir}/${name}":
-        content => template('apache/server/etc/apache2/sites-available/virtualhost.erb'),
         ensure  => present,
+        content => template('apache/server/etc/apache2/sites-available/virtualhost.erb'),
         notify  => Class['apache::common::service'],
     }
 
     file { "${apache::params::rootdir}/${name}":
         ensure  => directory,
+        purge   => true,
         notify  => Class['apache::common::service'],
+        recurse => true,
         require => File[$apache::params::rootdir],
     }
 
-    file { [
-        "${apache::params::rootdir}/${name}/conf",
-        "${apache::params::rootdir}/${name}/html"
-    ]:
+    file { "${apache::params::rootdir}/${name}/conf":
+        ensure  => directory,
+        purge   => true,
+        notify  => Class['apache::common::service'],
+        recurse => true,
+        require => File["${apache::params::rootdir}/${name}"],
+    }
+
+    file { "${apache::params::rootdir}/${name}/html":
         ensure  => directory,
         notify  => Class['apache::common::service'],
         require => File["${apache::params::rootdir}/${name}"],
@@ -55,10 +62,10 @@ define apache::function::virtualhost::common(
         require => Class['apache::common::install'],
     }
 
-    if ($template != '') {
-        file { "${apache::params::rootdir}/${name}/conf/foo.conf":
+    if ($content != '') {
+        file { "${apache::params::rootdir}/${name}/conf/${name}.conf":
             ensure  => present,
-            content => template($template),
+            content => $content,
             notify  => Class['apache::common::service'],
             require => File["${apache::params::rootdir}/${name}"],
         }
