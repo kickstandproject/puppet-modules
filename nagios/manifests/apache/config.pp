@@ -11,6 +11,7 @@ class nagios::apache::config {
     file { "${nagios::params::basedir}/cgi.cfg":
         ensure  => present,
         content => template('nagios/etc/nagios3/cgi.cfg.erb'),
+        notify  => Class['nagios::common::service'],
         require => File[$nagios::params::basedir],
     }
 
