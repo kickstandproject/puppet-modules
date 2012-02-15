@@ -15,7 +15,6 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-# vim:sw=4:ts=4:expandtab:textwidth=79
 #
 define apache::function::virtualhost::common(
     content = ''
@@ -90,3 +89,5 @@ define apache::function::virtualhost::common(
         }
     }
 }
+
+# vim:sw=4:ts=4:expandtab:textwidth=79

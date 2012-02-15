@@ -15,15 +15,13 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-# vim:sw=4:ts=4:expandtab:textwidth=79
-#
 define apache::function::virtualhost(
     content = ''
 ) {
     require apache::params
 
     apache::function::virtualhost::common { $name:
-	content    => $content,
+    content    => $content,
     }
 
     file { "${apache::params::rootdir}/${name}/conf/default.conf":
@@ -33,3 +31,5 @@ define apache::function::virtualhost(
         require => File["${apache::params::rootdir}/${name}/conf"],
     }
 }
+
+# vim:sw=4:ts=4:expandtab:textwidth=79

@@ -15,8 +15,6 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-# vim:sw=4:ts=4:expandtab:textwidth=79
-#
 class apache::common::config {
     File {
         group   => $apache::params::configfile_group,
@@ -49,3 +47,5 @@ class apache::common::config {
         require => Class['apache::common::install'],
     }
 }
+
+# vim:sw=4:ts=4:expandtab:textwidth=79

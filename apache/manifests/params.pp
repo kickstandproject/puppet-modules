@@ -15,8 +15,6 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-# vim:sw=4:ts=4:expandtab:textwidth=79
-#
 class apache::params {
     $configdir = $operatingsystem ? {
         default => '/etc/apache2',
@@ -74,3 +72,5 @@ class apache::params {
         default => '/etc/apache2/sites-available',
     }
 }
+
+# vim:sw=4:ts=4:expandtab:textwidth=79
