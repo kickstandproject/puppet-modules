@@ -20,6 +20,12 @@ class mysql::common::init {
     include mysql::common::install
     include mysql::common::config
     include mysql::common::service
+
+    File {
+        group   => $mysql::params::group,
+        mode    => $mysql::params::mode,
+        owner   => $mysql::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

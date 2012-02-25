@@ -18,7 +18,7 @@
 class mysql::common::service {
     require mysql::params
 
-    service { "$mysql::params::servicename":
+    service { $mysql::params::servicename:
         enable      => true,
         ensure      => running,
         hasrestart  => true,

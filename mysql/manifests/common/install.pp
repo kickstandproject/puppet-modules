@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class mysql::common::install {
-    package { "$mysql::params::packagename":
+    package { $mysql::params::packagename:
         ensure  => present,
     }
 }

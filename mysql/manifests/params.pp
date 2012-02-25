@@ -16,64 +16,64 @@
 # file at the top of the source tree.
 #
 class mysql::params {
-    $packagename = $operatingsystem ? {
-        default => 'mysql-server',
-    }
-
-    $packagename_client = $operatingsystem ? {
-        default => 'mysql',
-    }
-
-    $servicename = $operatingsystem ? {
-        default => 'mysql',
-    }
-
-    $processname = $operatingsystem ? {
-        default => 'mysqld',
-    }
-
-    $hasstatus = $operatingsystem ? {
-        default => false,
-    }
-
-    $configfile = $operatingsystem ? {
-        default => '/etc/mysql/my.cnf',
-    }
-
-    $configfile_mode = $operatingsystem ? {
-        default => '644',
-    }
-
-    $configfile_owner = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_group = $operatingsystem ? {
-        default => 'root',
+    $basedir = $operatingsystem ? {
+        default => '/etc/mysql',
     }
 
     $configdir = $operatingsystem ? {
         default => '/etc/mysql/conf.d',
     }
 
+    $configfile = $operatingsystem ? {
+        default => '/etc/mysql/my.cnf',
+    }
+
+    $group = $operatingsystem ? {
+        default => 'root',
+    }
+
+    $hasstatus = $operatingsystem ? {
+        default => false,
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'root',
+    }
+
+    $packagename = $operatingsystem ? {
+        default => 'mysql-server',
+    }
+
+    $processname = $operatingsystem ? {
+        default => 'mysqld',
+    }
+
+    $servicename = $operatingsystem ? {
+        default => 'mysql',
+    }
+
     $bindaddr = $mysql_bindaddr ? {
-        ''  => '0.0.0.0',
-        default => "$mysql_bindaddr",
+        ''      => '127.0.0.1',
+        default => $mysql_bindaddr,
     }
 
     $db_user = $mysql_db_user ? {
-        ''  => 'root',
-        default => "$mysql_db_user",
+        ''      => 'root',
+        default => $mysql_db_user,
     }
 
     $db_password = $mysql_db_password ? {
-        ''  => '',
-        default => "$mysql_db_password",
+        ''      => sha1(fqdn_rand(30)),
+        default => $mysql_db_password,
     }
 
     $port = $mysql_port ? {
-        ''  => '3306',
-        default => "$mysql_port",
+        ''      => '3306',
+        default => $mysql_port,
     }
 }
 

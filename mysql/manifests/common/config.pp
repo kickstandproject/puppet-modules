@@ -16,14 +16,23 @@
 # file at the top of the source tree.
 #
 class mysql::common::config {
-    file { "$mysql::params::configfile":
-        content => template('mysql/server/my.cnf.erb'),
-        ensure  => present,
-        group   => $mysql::params::configfile_group,
-        mode    => $mysql::params::configfile_mode,
-        notify  => Class['mysql::common::service'],
-        owner   => $mysql::params::configfile_owner,
+    require mysql::params
+
+    file { $mysql::params::basedir:
+        ensure  => directory,
         require => Class['mysql::common::install'],
+    }
+
+    file { $mysql::params::configdir:
+        ensure  => directory,
+        require => File[$mysql::params::basedir],
+    }
+
+    file { $mysql::params::configfile:
+        ensure  => present,
+        content => template('mysql/etc/mysql/my.cnf.erb'),
+        notify  => Class['mysql::common::service'],
+        require => File[$mysql::params::basedir],
     }
 }
 
