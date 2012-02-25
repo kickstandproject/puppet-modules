@@ -29,7 +29,9 @@ class mysql::common::password {
     
     exec { 'mysqladmin -uroot password':
         command     => "/usr/bin/mysqladmin -uroot password '${mysql::params::db_password}'",
+        refreshonly => true,
         require     => Class['mysql::common::service'],
+        subscribe   => Class['mysql::common::install']
     }
 }
 
