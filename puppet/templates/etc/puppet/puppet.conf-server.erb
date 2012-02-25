@@ -6,7 +6,10 @@ rundir = /var/run/puppet
 factpath = $vardir/lib/facter
 templatedir = $confdir/templates
 storeconfigs = true
-dbadapter = sqlite3
+dbadapter = <%= scope.lookupvar('puppet::params::db') %>
+dbuser = <%= scope.lookupvar('puppet::params::db_user') %>
+dbpassword = <%= scope.lookupvar('puppet::params::db_password') %>
+dbserver = <%= scope.lookupvar('puppet::params::db_server') %>
 
 [agent]
 server = <%= scope.lookupvar('puppet::params::server') %>

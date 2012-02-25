@@ -70,6 +70,30 @@ class puppet::params {
         true    => 'server',
         default => 'client',
     }
+
+    $db = $puppet_db ? {
+        default => 'mysql',
+    }
+
+    $db_name = $puppet_db_name ? {
+        ''      => 'puppet',
+        default => $puppet_db_name,
+    }
+
+    $db_password = $puppet_db_password ? {
+        ''      => sha1(fqdn_rand(30)),
+        default => $puppet_db_password,
+    }
+
+    $db_server = $puppet_db_server ? {
+        ''      => 'localhost',
+        default => $puppet_db_server,
+    }
+
+    $db_user = $puppet_db_user ? {
+        ''      => 'puppet',
+        default => $puppet_db_user,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

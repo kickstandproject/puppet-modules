@@ -16,6 +16,11 @@
 # file at the top of the source tree.
 #
 class puppet::server inherits puppet::common::init {
+    require puppet::params
+
+    if ($puppet::params::db == 'mysql') {
+        include puppet::mysql::init
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
