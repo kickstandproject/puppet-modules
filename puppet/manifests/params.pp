@@ -66,7 +66,7 @@ class puppet::params {
         default => 'puppet',
     }
 
-    $type = defined(Class['puppet:server']) ? {
+    $type = defined(Class['puppet::server']) ? {
         true    => 'server',
         default => 'client',
     }

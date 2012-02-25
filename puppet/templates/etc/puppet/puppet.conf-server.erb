@@ -1,0 +1,13 @@
+[main]
+logdir = /var/log/puppet
+vardir = /var/lib/puppet
+ssldir = /var/lib/puppet/ssl
+rundir = /var/run/puppet
+factpath = $vardir/lib/facter
+templatedir = $confdir/templates
+storeconfigs = true
+dbadapter = sqlite3
+
+[agent]
+server = <%= scope.lookupvar('puppet::params::server') %>
+runinterval = <%= scope.lookupvar('puppet::params::runinterval') %>
