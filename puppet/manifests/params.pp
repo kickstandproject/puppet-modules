@@ -16,19 +16,19 @@
 # file at the top of the source tree.
 #
 class puppet::params {
-    $packagename = $operatingsystem ? {
-        default => 'puppetmaster',
+    $basedir = $operatingsystem ? {
+        default => '/etc/puppet',
     }
 
-    $packagename_client = $operatingsystem ? {
-        default => 'puppet',
+    $configfile = $operatingsystem ? {
+        default => '/etc/puppet/puppet.conf',
     }
 
-    $servicename = $operatingsystem ? {
-        default => 'puppet',
+    $defaultsfile = $operatingsystem ? {
+        default => '/etc/default/puppet',
     }
 
-    $processname = $operatingsystem ? {
+    $group = $operatingsystem ? {
         default => 'root',
     }
 
@@ -36,38 +36,39 @@ class puppet::params {
         default => true,
     }
 
-    $configfile = $operatingsystem ? {
-        default => '/etc/puppet/puppet.conf',
+    $mode = $operatingsystem ? {
+        default => '0644',
     }
 
-    $configfile_mode = $operatingsystem ? {
-        default => '644',
-    }
-
-    $configfile_owner = $operatingsystem ? {
+    $owner = $operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $packagename = $operatingsystem ? {
+        default => 'puppet',
+    }
+
+    $processname = $operatingsystem ? {
         default => 'root',
-    }
-
-    $configdir = $operatingsystem ? {
-        default => '/etc/puppet',
-    }
-
-    $defaultsfile = $operatingsystem ? {
-        default => '/etc/default/puppet',
-    }
-
-    $server = $puppet_server ? {
-        ''  => 'puppet',
-        default => $puppet_server,
     }
 
     $runinterval = $puppet_runinterval ? {
-        ''  => '1800',
+        ''      => '1800',
         default => $puppet_runinterval,
+    }
+
+    $server = $puppet_server ? {
+        ''      => 'puppet',
+        default => $puppet_server,
+    }
+
+    $servicename = $operatingsystem ? {
+        default => 'puppet',
+    }
+
+    $type = defined(Class['puppet:server']) ? {
+        true    => 'server',
+        default => 'client',
     }
 }
 

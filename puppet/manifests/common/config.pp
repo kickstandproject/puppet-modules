@@ -18,29 +18,34 @@
 class puppet::common::config {
     require puppet::params
 
-    if defined(Class['puppet::client']) {
-        $content = 'client'
-    } else {
-        $content = 'server'
-    }
-
-    file { "$puppet::params::configfile":
-        content => template("puppet/$content/puppet.conf.erb"),
-        ensure  => present,
-        group   => $puppet::params::configfile_group,
-        mode    => $puppet::params::configfile_mode,
-        notify  => Class['puppet::common::service'],
-        owner   => $puppet::params::configfile_owner,
+    file { $puppet::params::basedir:
+        ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
         require => Class['puppet::common::install'],
     }
 
-    file { "$puppet::params::defaultsfile":
-        content => template("puppet/$content/puppet.erb"),
+    file { [
+        "${puppet::params::basedir}/manifests",
+        "${puppet::params::basedir}/modules",
+        "${puppet::params::basedir}/templates",
+    ]:
+        ensure  => directory,
+        require => File[$puppet::params::basedir],
+    }
+
+    file { "$puppet::params::configfile":
         ensure  => present,
-        group   => $puppet::params::configfile_group,
-        mode    => $puppet::params::configfile_mode,
+        content => template("puppet/etc/puppet/puppet.conf-${puppet::params::type}.erb"),
         notify  => Class['puppet::common::service'],
-        owner   => $puppet::params::configfile_owner,
+        require => File[$puppet::params::basedir],
+    }
+
+    file { "$puppet::params::defaultsfile":
+        ensure  => present,
+        content => template("puppet/etc/default/puppet.erb"),
+        notify  => Class['puppet::common::service'],
         require => Class['puppet::common::install'],
     }
 }

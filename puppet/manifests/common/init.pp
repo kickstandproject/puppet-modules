@@ -20,6 +20,12 @@ class puppet::common::init {
     include puppet::common::install
     include puppet::common::config
     include puppet::common::service
+
+    File {
+        group   => $puppet::params::group,
+        mode    => $puppet::params::mode,
+        owner   => $puppet::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

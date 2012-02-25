@@ -16,7 +16,6 @@
 # file at the top of the source tree.
 #
 class puppet::server inherits puppet::common::init {
-
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
