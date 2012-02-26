@@ -16,28 +16,20 @@
 # file at the top of the source tree.
 #
 class apache::params {
-    $configdir = $operatingsystem ? {
+    $basedir = $operatingsystem ? {
         default => '/etc/apache2',
+    }
+
+    $configdir = $operatingsystem ? {
+        default => '/etc/apache2/conf.d',
     }
 
     $configfile = $operatingsystem ? {
         default => '/etc/apache2/apache2.conf',
     }
 
-    $configfile_group = $operatingsystem ? {
-        default => 'www-data',
-    }
-
-    $configfile_mode = $operatingsystem ? {
-        default => '0664',
-    }
-
-    $configfile_owner = $operatingsystem ? {
-        default => 'www-data',
-    }
-
-    $customconfigdir = $operatingsystem ? {
-        default => "${configdir}/conf.d",
+    $group = $operatingsystem ? {
+        default => 'root',
     }
 
     $defaultfile = $operatingsystem ? {
@@ -54,6 +46,14 @@ class apache::params {
 
     $logdir = $operatingsystem ? {
         default => '/var/log/apache2',
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'root',
     }
 
     $packagename = $operatingsystem ? {

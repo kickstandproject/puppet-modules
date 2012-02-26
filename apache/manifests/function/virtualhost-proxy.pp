@@ -25,7 +25,7 @@ define apache::function::virtualhost-proxy(
     }
 
     file { "${apache::params::rootdir}/${name}/conf/proxy.conf":
-        content => template('apache/server/etc/apache2/sites-available/virtualhost-proxy.conf.erb'),
+        content => template('apache/etc/apache2/sites-available/virtualhost-proxy.conf.erb'),
         ensure  => present,
         notify  => Class['apache::common::service'],
         require => File["${apache::params::rootdir}/${name}/conf"],

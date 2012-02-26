@@ -15,16 +15,17 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class apache::common::init {
-    include apache::params
-    include apache::common::install
-    include apache::common::config
-    include apache::common::service
-
-    File {
-        group   => $apache::params::group,
-        mode    => $apache::params::mode,
-        owner   => $apache::params::owner,
+define apache::function::htpasswd(
+    $ensure = 'present',
+    $password,
+    $path,
+    $username
+) {
+    exec { 'htpasswd -cb':
+        command => "/usr/bin/htpasswd -cb ${path} ${username} ${password}",
+        creates => $path,
+        notify  => Class['apache::common::service'],
+        require => Class['apache::common::install'],
     }
 }
 

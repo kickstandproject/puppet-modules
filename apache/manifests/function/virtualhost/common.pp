@@ -21,15 +21,9 @@ define apache::function::virtualhost::common(
 ) {
     require apache::server
 
-    File {
-        group   => $apache::params::configfile_group,
-        mode    => $apache::params::configfile_mode,
-        owner   => $apache::params::configfile_owner,
-    }
-
     file { "${apache::params::virtualhostdir}/${name}":
         ensure  => present,
-        content => template('apache/server/etc/apache2/sites-available/virtualhost.erb'),
+        content => template('apache/etc/apache2/sites-available/virtualhost.erb'),
         notify  => Class['apache::common::service'],
     }
 
