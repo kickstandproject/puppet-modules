@@ -24,13 +24,11 @@ define apt::function::repository (
     require apt::client
 
     file { "${name}.list":
-    ensure  => present,
-    content => template('apt/client/etc/apt/sources.list.d/repo.list'),
-    group   => 'root',
-    mode    => '0644',
-    owner   => 'root',
-    path    => "${apt::params::configdir}/sources.list.d/${name}.list",
-    notify  => Exec['apt-get update'],
+        ensure  => present,
+        content => template('apt/etc/apt/sources.list.d/repo.list'),
+        path    => "${apt::params::configdir}/sources.list.d/${name}.list",
+        notify  => Exec['apt-get update'],
+        require => File[$apt:params::configdir],
     }
 }
 

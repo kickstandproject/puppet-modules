@@ -16,20 +16,8 @@
 # file at the top of the source tree.
 #
 class apt::params {
-    $packagename = $operatingsystem ? {
-        default => 'python-software-properties',
-    }
-
-    $servicename = $operatingsystem ? {
-        default => 'apt',
-    }
-
-    $processname = $operatingsystem ? {
-        default => 'apt',
-    }
-
-    $hasstatus = $operatingsystem ? {
-        default => true,
+    $basedir = $operatingsystem ? {
+        default => '/etc/apt',
     }
 
     $components = $apt_components ? {
@@ -38,22 +26,34 @@ class apt::params {
     }
 
     $configdir = $operatingsystem ? {
-        default => '/etc/apt',
-    }
-
-    $configfile_dir = $operatingsystem ? {
         default => '/etc/apt/apt.conf.d',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $group = $operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_mode = $operatingsystem ? {
+    $hasstatus = $operatingsystem ? {
+        default => true,
+    }
+
+    $packagename = $operatingsystem ? {
+        default => 'python-software-properties',
+    }
+
+    $processname = $operatingsystem ? {
+        default => 'apt',
+    }
+
+    $servicename = $operatingsystem ? {
+        default => 'apt',
+    }
+
+    $mode = $operatingsystem ? {
         default => '0644',
     }
 
-    $configfile_owner = $operatingsystem ? {
+    $owner = $operatingsystem ? {
         default => 'root',
     }
 

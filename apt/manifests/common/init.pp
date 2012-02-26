@@ -19,6 +19,12 @@ class apt::common::init {
     include apt::params
     include apt::common::install
     include apt::common::config
+
+    File {
+        group   => $apt::params::group,
+        mode    => $apt::params::mode,
+        owner   => $apt::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

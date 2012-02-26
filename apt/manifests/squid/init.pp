@@ -15,12 +15,12 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class apt::common::squid {
+class apt::squid::init {
     require squid::params
 
-    apt::function::config { '99-proxy':
+    apt::function::config { '99proxy':
         ensure  => present,
-        content => template('apt/client/etc/apt/apt.conf.d/99-proxy.erb'),
+        content => template('apt/etc/apt/apt.conf.d/99proxy.erb'),
     }
 }
 
