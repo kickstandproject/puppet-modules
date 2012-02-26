@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class squid::params {
-    $configdir = $operatingsystem ? {
+    $basedir = $operatingsystem ? {
         default => '/etc/squid3',
     }
 
@@ -24,20 +24,20 @@ class squid::params {
         default => '/etc/squid3/squid.conf',
     }
 
-    $configfile_mode = $operatingsystem ? {
-        default => '0644',
-    }
-
-    $configfile_owner = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_group = $operatingsystem ? {
+    $group = $operatingsystem ? {
         default => 'root',
     }
 
     $hasstatus = $operatingsystem ? {
         default => true,
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'root',
     }
 
     $packagename = $operatingsystem ? {

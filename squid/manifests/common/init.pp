@@ -20,6 +20,12 @@ class squid::common::init {
     include squid::common::install
     include squid::common::config
     include squid::common::service
+
+    File {
+        group   => $squid::params::group,
+        mode    => $squid::params::mode,
+        owner   => $squid::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
