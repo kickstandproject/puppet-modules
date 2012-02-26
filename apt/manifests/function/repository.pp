@@ -26,9 +26,9 @@ define apt::function::repository (
     file { "${name}.list":
         ensure  => present,
         content => template('apt/etc/apt/sources.list.d/repo.list'),
-        path    => "${apt::params::configdir}/sources.list.d/${name}.list",
+        path    => "${apt::params::basedir}/sources.list.d/${name}.list",
         notify  => Exec['apt-get update'],
-        require => File[$apt:params::configdir],
+        require => File[$apt::params::basedir],
     }
 }
 

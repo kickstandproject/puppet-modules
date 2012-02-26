@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class snmp::params {
-    $configdir = $operatingsystem ? {
+    $basedir = $operatingsystem ? {
         default => '/etc/snmp',
     }
 
@@ -24,20 +24,20 @@ class snmp::params {
         default => '/etc/snmp/snmpd.conf',
     }
 
-    $configfile_mode = $operatingsystem ? {
-        default => '600',
-    }
-
-    $configfile_owner = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_group = $operatingsystem ? {
-        default => 'root',
+    $mode = $operatingsystem ? {
+        default => '0640',
     }
 
     $hasstatus = $operatingsystem ? {
         default => false,
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'root',
+    }
+
+    $group = $operatingsystem ? {
+        default => 'root',
     }
 
     $packagename = $operatingsystem ? {

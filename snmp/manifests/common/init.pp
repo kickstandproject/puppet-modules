@@ -20,6 +20,12 @@ class snmp::common::init {
     include snmp::common::install
     include snmp::common::config
     include snmp::common::service
+
+    File {
+        group   => $snmp::params::group,
+        mode    => $snmp::params::mode,
+        owner   => $snmp::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

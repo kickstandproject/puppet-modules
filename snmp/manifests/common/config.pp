@@ -16,14 +16,18 @@
 # file at the top of the source tree.
 #
 class snmp::common::config {
-    file { "$snmp::params::configfile":
-        content => template('snmp/server/snmpd.conf.erb'),
-                ensure  => present,
-                group   => $snmp::params::configfile_group,
-                mode    => $snmp::params::configfile_mode,
-                notify  => Class["snmp::common::service"],
-                owner   => $snmp::params::configfile_owner,
-                require => Class["snmp::common::install"],
+    require snmp::params
+
+    file { $snmp::params::basedir:
+        ensure  => directory,
+        require => Class['snmp::common::install'],
+    }
+
+    file { $snmp::params::configfile:
+        ensure  => present,
+        content => template('snmp/etc/snmp/snmpd.conf.erb'),
+        notify  => Class['snmp::common::service'],
+        require => File[$snmp::params::basedir],
     }
 }
 

@@ -16,6 +16,8 @@
 # file at the top of the source tree.
 #
 class snmp::common::install {
+    require snmp::params
+
     package { $snmp::params::packagename:
         ensure  => present,
     }
