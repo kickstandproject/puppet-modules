@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class jenkins::server inherits jenkins::common::init {
-    include jenkins::common::apache
+    require jenkins::apache::init
 
     if ($firewall == 'yes') {
         include jenkins::common::firewall

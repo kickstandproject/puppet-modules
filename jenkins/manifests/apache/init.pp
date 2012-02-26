@@ -15,7 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class jenkins::common::apache {
+class jenkins::apache::init {
     require jenkins::params
 
     apache::function::virtualhost-proxy { $fqdn:

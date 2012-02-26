@@ -20,6 +20,12 @@ class jenkins::common::init {
     include jenkins::common::install
     include jenkins::common::config
     include jenkins::common::service
+
+    File {
+        group   => $jenkins::params::group,
+        mode    => $jenkins::params::mode,
+        owner   => $jenkins::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

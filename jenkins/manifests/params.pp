@@ -16,11 +16,31 @@
 # file at the top of the source tree.
 #
 class jenkins::params {
-    $packagename = $operatingsystem ? {
-        default => 'jenkins',
+    $basedir = $operatingsystem ? {
+        default => '/var/lib/jenkins',
     }
 
-    $servicename = $operatingsystem ? {
+    $defaultfile = $operatingsystem ? {
+        default => '/etc/default/jenkins',
+    }
+
+    $group = $operatingsystem ? {
+        default => 'root',
+    }
+
+    $hasstatus = $operatingsystem ? {
+        default => true,
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'root',
+    }
+
+    $packagename = $operatingsystem ? {
         default => 'jenkins',
     }
 
@@ -28,32 +48,8 @@ class jenkins::params {
         default => 'jenkins',
     }
 
-    $hasstatus = $operatingsystem ? {
-        default => true,
-    }
-
-    $configfile = $operatingsystem ? {
-        default => '/etc/ssh/sshd_config',
-    }
-
-    $configfile_mode = $operatingsystem ? {
-        default => '0644',
-    }
-
-    $configfile_owner = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_group = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configdir = $operatingsystem ? {
-        default => '/var/lib/jenkins',
-    }
-
-    $defaultfile = $operatingsystem ? {
-        default => '/etc/default/jenkins',
+    $servicename = $operatingsystem ? {
+        default => 'jenkins',
     }
 
     $port = $jenkins_port ? {
