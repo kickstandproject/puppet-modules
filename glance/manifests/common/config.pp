@@ -15,11 +15,18 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openstack::glance::server inherits openstack::glance::common::init {
-    if ($openstack::glance::params::db == 'sqlite') {
-        include openstack::glance::common::sqlite
-    } elsif ($openstack::glance::params::db == 'mysql') {
-        include openstack::glance::common::mysql
+class glance::common::config {
+
+    file { $glance::params::basedir:
+        ensure  => directory,
+        require => Class['glance::common::install'],
+    }
+
+    file { $glance::params::configfile:
+        ensure  => present,
+        content => template('glance/etc/glance/glance-registry.conf.erb'),
+        notify  => Class['glance::common::service'],
+        require => File[$glance::params::basedir],
     }
 }
 

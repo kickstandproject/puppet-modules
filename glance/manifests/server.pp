@@ -15,8 +15,14 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openstack::glance::common::sqlite {
-    require sqlite::server
+class glance::server inherits glance::common::init {
+    if ($glance::params::db == 'mysql') {
+        include glance::common::mysql
+    }
+
+    if ($monitor == 'yes') {
+        include glance::common::monitor
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

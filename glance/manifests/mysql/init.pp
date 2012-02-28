@@ -15,13 +15,11 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openstack::glance::common::service {
-    service { $openstack::glance::params::servicename:
-        enable      => true,
-        ensure      => running,
-        hasrestart  => true,
-        hasstatus   => $openstack::glance::params::hasstatus,
-        require     => Class['openstack::glance::common::config'],
+class glance::mysql::init {
+    require mysql::server
+
+    package { $glance::params::mysql:
+        ensure  => present,
     }
 }
 

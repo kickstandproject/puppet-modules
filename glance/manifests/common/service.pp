@@ -15,12 +15,14 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openstack::glance::common::monitor {
-	require openstack::glance::params
-
-	monitor::process { 'openstack_glance_process':
-		process	=> $openstack::glance::params::processname,
-	}
+class glance::common::service {
+    service { $glance::params::servicename:
+        enable      => true,
+        ensure      => running,
+        hasrestart  => true,
+        hasstatus   => $glance::params::hasstatus,
+        require     => Class['glance::common::config'],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

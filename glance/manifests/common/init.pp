@@ -15,11 +15,16 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openstack::glance::common::mysql {
-    require mysql::server
+class glance::common::init {
+    include glance::params
+    include glance::common::install
+    include glance::common::config
+    include glance::common::service
 
-    package { $openstack::glance::params::python_mysqldb:
-        ensure  => present,
+    File {
+        group   => $glance::params::group,
+        mode    => $glance::params::mode,
+        owner   => $glance::params::owner,
     }
 }
 

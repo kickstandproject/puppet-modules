@@ -15,10 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openstack::glance::common::install {
-	package { $openstack::glance::params::packagename:
-		ensure	=> present,
-	}
+class glance::common::firewall {
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

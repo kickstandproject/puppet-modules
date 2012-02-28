@@ -15,16 +15,12 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openstack::glance::common::config {
-    file { "$openstack::glance::params::configfile_registry":
-        content => template('openstack/glance/server/glance-registry.conf.erb'),
-        ensure  => present,
-        group   => $openstack::glance::params::configfile_group,
-        mode    => $openstack::glance::params::configfile_mode,
-        notify  => Class['openstack::glance::common::service'],
-        owner   => $openstack::glance::params::configfile_owner,
-        require => Class['openstack::glance::common::install'],
-    }
+class glance::common::monitor {
+	require glance::params
+
+	monitor::process { 'glance_process':
+		process	=> $glance::params::processname,
+	}
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
