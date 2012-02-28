@@ -16,11 +16,31 @@
 # file at the top of the source tree.
 #
 class ntp::params {
-    $packagename = $operatingsystem ? {
-        default => 'ntp',
+    $configfile = $operatingsystem ? {
+        default => '/etc/ntp.conf',
     }
 
-    $servicename = $operatingsystem ? {
+    $defaultfile = $operatingsystem ? {
+        default => '/etc/default/ntp',
+    }
+
+    $group = $operatingsystem ? {
+        default => 'root',
+    }
+
+    $hasstatus = $operatingsystem ? {
+        default => true,
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'root',
+    }
+
+    $packagename = $operatingsystem ? {
         default => 'ntp',
     }
 
@@ -28,28 +48,8 @@ class ntp::params {
         default => 'ntpd',
     }
 
-    $hasstatus = $operatingsystem ? {
-        default => true,
-    }
-
-    $configfile = $operatingsystem ? {
-        default => '/etc/ntp.conf',
-    }
-
-    $configfile_mode = $operatingsystem ? {
-        default => '0644',
-    }
-
-    $configfile_owner = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_group = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configdir = $operatingsystem ? {
-        default => '/etc/ntp',
+    $servicename = $operatingsystem ? {
+        default => 'ntp',
     }
 }
 

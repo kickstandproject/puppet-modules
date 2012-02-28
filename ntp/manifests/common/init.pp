@@ -20,6 +20,12 @@ class ntp::common::init {
     include ntp::common::install
     include ntp::common::config
     include ntp::common::service
+
+    File {
+        group   => $ntp::params::group,
+        mode    => $ntp::params::mode,
+        owner   => $ntp::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
