@@ -1,0 +1,14 @@
+--dhcpbridge_flagfile=/etc/nova/nova.conf
+--dhcpbridge=/usr/bin/nova-dhcpbridge
+--logdir=/var/log/nova
+--state_path=/var/lib/nova
+--lock_path=/var/lock/nova
+--force_dhcp_release
+--iscsi_helper=tgtadm
+--libvirt_use_virtio_for_bridges
+--connection_type=libvirt
+--root_helper=sudo nova-rootwrap
+--verbose
+<% if (scope.lookupvar('nova::params::db') == 'mysql') %>
+--sql_connection = <%= scope.lookupvar('nova::params::db') %>://<%= scope.lookupvar('nova::params::db_user') %>:<%= scope.lookupvar('nova::params::db_password') %>@<%= scope.lookupvar('nova::params::db_server') %>/<%= scope.lookupvar('nova::params::db_name') %>
+<% end %>
