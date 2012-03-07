@@ -22,6 +22,13 @@ class glance::mysql::init {
         include mysql::server
     }
 
+    mysql::functions::grant { 'glance::mysql::init':
+        db_name     => $glance::params::db_name,
+        db_password => $glance::params::db_password,
+        db_server   => $glance::params::db_server,
+        db_user     => $glance::params::db_user,
+    }
+
     package { $glance::params::mysql:
         ensure  => present,
     }
