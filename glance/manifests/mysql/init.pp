@@ -16,7 +16,11 @@
 # file at the top of the source tree.
 #
 class glance::mysql::init {
-    require mysql::server
+    require glance::params
+
+    if ($glance::params::db_server == 'localhost') {
+        include mysql::server
+    }
 
     package { $glance::params::mysql:
         ensure  => present,

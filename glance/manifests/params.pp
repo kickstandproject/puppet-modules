@@ -17,7 +17,7 @@
 #
 class glance::params {
     $basedir = $operatingsystem ? {
-        default => '/etc/glance/',
+        default => '/etc/glance',
     }
 
     $configfile = $operatingsystem ? {
@@ -25,7 +25,7 @@ class glance::params {
     }
 
     $group = $operatingsystem ? {
-        default => 'root',
+        default => 'glance',
     }
 
     $hasstatus = $operatingsystem ? {
@@ -37,7 +37,7 @@ class glance::params {
     }
 
     $owner = $operatingsystem ? {
-        default => 'root',
+        default => 'glance',
     }
 
     $packagename = $operatingsystem ? {
@@ -63,13 +63,13 @@ class glance::params {
     }
 
     $db_password = $glance_db_password ? {
-        ''      => 'bob',
+        ''      => '',
         default => $glance_db_password,
     }
 
     $db_server = $glance_db_server ? {
         ''      => 'localhost',
-        default => $glance_db_server",
+        default => $glance_db_server,
     }
 
     $db_user = $glance_db_user ? {
@@ -78,7 +78,11 @@ class glance::params {
     }
 
     $mysql = $operatingsystem ? {
-        default => "python-mysqldb",
+        default => 'python-mysqldb',
+    }
+
+    if ($glance::params::db_password == '') {
+        fail("You must assign a default password using '\$glance_db_password'")
     }
 }
 

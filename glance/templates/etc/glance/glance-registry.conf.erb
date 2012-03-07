@@ -15,14 +15,14 @@ bind_port = 9191
 # file for both the API and registry servers!
 log_file = /var/log/glance/registry.log
 
-# Send logs to syslog (/dev/log) instead of to file specified by `log_file`
-use_syslog = False
+# Backlog requests when creating socket
+backlog = 4096
 
 # SQLAlchemy connection string for the reference implementation
 # registry server. Any valid SQLAlchemy connection string is fine.
 # See: http://www.sqlalchemy.org/docs/05/reference/sqlalchemy/connections.html#sqlalchemy.create_engine
 <% if (scope.lookupvar('glance::params::db') == 'mysql') %>
-sql_connection = mysql://<%=scope.lookupvar('glance::params::db_user')%>:<%=scope.lookupvar('glance::params::db_password')%>@<%=scope.lookupvar('glance::params::db_server')%>/<%=scope.lookupvar('glance::params::db_name')%>
+sql_connection = <%= scope.lookupvar('glance::params::db') %>://<%= scope.lookupvar('glance::params::db_user') %>:<%= scope.lookupvar('glance::params::db_password') %>@<%= scope.lookupvar('glance::params::db_server') %>/<%= scope.lookupvar('glance::params::db_name') %>
 <% end %>
 
 # Period in seconds after which SQLAlchemy should reestablish its connection
@@ -42,28 +42,19 @@ api_limit_max = 1000
 # default to `limit_param_default`
 limit_param_default = 25
 
-[pipeline:glance-registry]
-pipeline = context registryapp
-# NOTE: use the following pipeline for keystone
-# pipeline = authtoken keystone_shim context registryapp
+# ================= Syslog Options ============================
 
-[app:registryapp]
-paste.app_factory = glance.registry.server:app_factory
+# Send logs to syslog (/dev/log) instead of to file specified
+# by `log_file`
+use_syslog = False
 
-[filter:context]
-context_class = glance.registry.context.RequestContext
-paste.filter_factory = glance.common.context:filter_factory
+# Facility to use. If unset defaults to LOG_USER.
+# syslog_log_facility = LOG_LOCAL1
 
-[filter:authtoken]
-paste.filter_factory = keystone.middleware.auth_token:filter_factory
-service_protocol = http
-service_host = 127.0.0.1
-service_port = 5000
-auth_host = 127.0.0.1
-auth_port = 5001
-auth_protocol = http
-auth_uri = http://127.0.0.1:5000/
-admin_token = 999888777666
+# ================= SSL Options ===============================
 
-[filter:keystone_shim]
-paste.filter_factory = keystone.middleware.glance_auth_token:filter_factory
+# Certificate file to use when starting registry server securely
+# cert_file = /path/to/certfile
+
+# Private key file to use when starting registry server securely
+# key_file = /path/to/keyfile

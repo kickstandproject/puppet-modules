@@ -21,6 +21,12 @@ define monitor::process(
     ) {
     require nagios::nsca::params
 
+    File {
+        group   => $nagios::nsca::params::configfile_group,
+        mode    => $nagios::nsca::params::configfile_mode,
+        owner   => $nagios::nsca::params::configfile_owner,
+    }
+
     if ($fqdn != $nagios_nsca_server) {
         nagios::service::nsca { "check_procs_${process}!1!1":
             description => "Check Process ${process}",

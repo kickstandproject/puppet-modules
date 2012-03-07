@@ -72,7 +72,8 @@ class puppet::params {
     }
 
     $db = $puppet_db ? {
-        default => 'mysql',
+        ''      => 'mysql',
+        default => $puppet_db,
     }
 
     $db_name = $puppet_db_name ? {

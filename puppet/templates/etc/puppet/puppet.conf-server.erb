@@ -5,11 +5,13 @@ ssldir = /var/lib/puppet/ssl
 rundir = /var/run/puppet
 factpath = $vardir/lib/facter
 templatedir = $confdir/templates
+<% if (scope.lookupvar('puppet::params::db') == 'mysql') %>
 storeconfigs = true
 dbadapter = <%= scope.lookupvar('puppet::params::db') %>
 dbuser = <%= scope.lookupvar('puppet::params::db_user') %>
 dbpassword = <%= scope.lookupvar('puppet::params::db_password') %>
 dbserver = <%= scope.lookupvar('puppet::params::db_server') %>
+<% end %>
 
 [agent]
 server = <%= scope.lookupvar('puppet::params::server') %>

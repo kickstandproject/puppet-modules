@@ -17,7 +17,7 @@
 #
 class glance::server inherits glance::common::init {
     if ($glance::params::db == 'mysql') {
-        include glance::common::mysql
+        include glance::mysql::init
     }
 
     if ($monitor == 'yes') {
