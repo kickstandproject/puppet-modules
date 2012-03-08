@@ -15,8 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nova::common::install {
-	package { $nova::params::packagename:
+class nova::scheduler::common::install {
+    require nova::scheduler::params
+
+	package { $nova::scheduler::params::packagename:
 		ensure	=> present,
 	}
 }

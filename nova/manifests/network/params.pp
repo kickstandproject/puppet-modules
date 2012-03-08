@@ -15,10 +15,22 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nova::common::install {
-	package { $nova::params::packagename:
-		ensure	=> present,
-	}
+class nova::network::params {
+    $hasstatus = $operatingsystem ? {
+        default => true,
+    }
+
+    $packagename = $operatingsystem ? {
+        default => 'nova-network',
+    }
+
+    $processname = $operatingsystem ? {
+        default => 'nova-network',
+    }
+
+    $servicename = $operatingsystem ? {
+        default => 'nova-network',
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

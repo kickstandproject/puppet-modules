@@ -15,9 +15,11 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nova::common::install {
-	package { $nova::params::packagename:
-		ensure	=> present,
+class nova::network::common::monitor {
+	require nova::network::params
+
+	monitor::process { $name:
+		process	=> $nova::network::params::processname,
 	}
 }
 

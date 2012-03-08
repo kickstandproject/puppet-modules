@@ -18,7 +18,7 @@
 class nova::common::monitor {
 	require nova::params
 
-	monitor::process { 'nova_process':
+	monitor::process { $name:
 		process	=> $nova::params::processname,
 	}
 }

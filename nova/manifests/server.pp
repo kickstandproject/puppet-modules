@@ -22,6 +22,14 @@ class nova::server inherits nova::common::init {
         include nova::mysql::init
     }
 
+    if ($nova::params::network) {
+        include nova::network::server
+    }
+
+    if ($nova::params::scheduler) {
+        include nova::scheduler::server
+    }
+
     if ($monitor == 'yes') {
         include nova::common::monitor
     }

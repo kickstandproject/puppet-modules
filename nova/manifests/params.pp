@@ -78,21 +78,13 @@ class nova::params {
     }
 
     $scheduler = $nova_scheduler ? {
-        ''      => 'present',
+        ''      => True,
         default => $nova_scheduler,
     }
 
-    $scheduler_packagename = $operatingsystem ? {
-        default => 'nova-scheduler',
-    }
-
     $network = $nova_network ? {
-        ''      => 'present',
+        ''      => True,
         default => $nova_network,
-    }
-
-    $network_packagename = $operatingsystem ? {
-        default => 'nova-network',
     }
 
     if ($nova::params::db_password == '') {
