@@ -22,6 +22,14 @@ class nova::server inherits nova::common::init {
         include nova::mysql::init
     }
 
+    if ($nova::params::api) {
+        include nova::api::server
+    }
+
+    if ($nova::params::cert) {
+        include nova::cert::server
+    }
+
     if ($nova::params::network) {
         include nova::network::server
     }

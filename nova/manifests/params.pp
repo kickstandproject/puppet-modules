@@ -77,9 +77,14 @@ class nova::params {
         default => $nova_db_user,
     }
 
-    $scheduler = $nova_scheduler ? {
+    $api = $nova_api ? {
         ''      => True,
-        default => $nova_scheduler,
+        default => $nova_api,
+    }
+
+    $cert = $nova_cert ? {
+        ''      => True,
+        default => $nova_cert,
     }
 
     $network = $nova_network ? {
@@ -90,6 +95,11 @@ class nova::params {
     $objectstore = $nova_objectstore ? {
         ''      => True,
         default => $nova_objectstore,
+    }
+
+    $scheduler = $nova_scheduler ? {
+        ''      => True,
+        default => $nova_scheduler,
     }
 
     $volume = $nova_volume ? {

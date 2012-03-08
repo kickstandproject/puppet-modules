@@ -9,6 +9,7 @@
 --connection_type=libvirt
 --root_helper=sudo nova-rootwrap
 --verbose
+--rabbit_host = localhost
 <% if (scope.lookupvar('nova::params::db') == 'mysql') %>
 --sql_connection = <%= scope.lookupvar('nova::params::db') %>://<%= scope.lookupvar('nova::params::db_user') %>:<%= scope.lookupvar('nova::params::db_password') %>@<%= scope.lookupvar('nova::params::db_server') %>/<%= scope.lookupvar('nova::params::db_name') %>
 <% end %>
