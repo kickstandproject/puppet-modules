@@ -16,6 +16,8 @@
 # file at the top of the source tree.
 #
 class nova::server inherits nova::common::init {
+    require rabbitmq::server
+
     if ($nova::params::db == 'mysql') {
         include nova::mysql::init
     }

@@ -16,7 +16,9 @@
 # file at the top of the source tree.
 #
 class rabbitmq::common::service {
-    service { "$rabbitmq::params::servicename":
+    require rabbitmq::params
+
+    service { $rabbitmq::params::servicename:
         enable      => true,
         ensure      => running,
         hasrestart  => true,

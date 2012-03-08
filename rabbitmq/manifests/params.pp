@@ -16,15 +16,11 @@
 # file at the top of the source tree.
 #
 class rabbitmq::params {
-    $packagename = $operatingsystem ? {
-        default => 'rabbitmq-server',
+    $basedir = $operatingsystem ? {
+        default => '/etc/rabbitmq',
     }
 
-    $servicename = $operatingsystem ? {
-        default => 'rabbitmq-server',
-    }
-
-    $processname = $operatingsystem ? {
+    $group = $operatingsystem ? {
         default => 'rabbitmq',
     }
 
@@ -32,24 +28,24 @@ class rabbitmq::params {
         default => true,
     }
 
-    $configfile = $operatingsystem ? {
-        default => '/etc/rabbitmq/rabbitmq.conf',
+    $mode = $operatingsystem ? {
+        default => '0644',
     }
 
-    $configfile_mode = $operatingsystem ? {
-        default => '644',
+    $owner = $operatingsystem ? {
+        default => 'rabbitmq',
     }
 
-    $configfile_owner = $operatingsystem ? {
-        default => 'root',
+    $packagename = $operatingsystem ? {
+        default => 'rabbitmq-server',
     }
 
-    $configfile_group = $operatingsystem ? {
-        default => 'root',
+    $processname = $operatingsystem ? {
+        default => 'rabbitmq',
     }
 
-    $configdir = $operatingsystem ? {
-        default => '/etc/rabbitmq',
+    $servicename = $operatingsystem ? {
+        default => 'rabbitmq-server',
     }
 }
 

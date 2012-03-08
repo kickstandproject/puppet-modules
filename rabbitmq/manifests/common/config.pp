@@ -16,6 +16,12 @@
 # file at the top of the source tree.
 #
 class rabbitmq::common::config {
+    require rabbitmq::params
+
+    file { $rabbitmq::params::basedir:
+        ensure  => directory,
+        require => Class['rabbitmq::common::install'],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

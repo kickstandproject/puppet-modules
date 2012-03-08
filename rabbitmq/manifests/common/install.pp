@@ -1,5 +1,7 @@
 class rabbitmq::common::install {
-	package { "$rabbitmq::params::packagename":
+    require rabbitmq::params
+
+	package { $rabbitmq::params::packagename:
 		ensure	=> present,
 	}
 }
