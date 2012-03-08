@@ -15,31 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nova::server inherits nova::common::init {
-    require rabbitmq::server
-
-    if ($nova::params::db == 'mysql') {
-        include nova::mysql::init
-    }
-
-    if ($nova::params::network) {
-        include nova::network::server
-    }
-
-    if ($nova::params::objectstore) {
-        include nova::objectstore::server
-    }
-
-    if ($nova::params::scheduler) {
-        include nova::scheduler::server
-    }
-
-    if ($nova::params::volume) {
-        include nova::volume::server
-    }
-
+class nova::objectstore::server inherits nova::objectstore::common::init {
     if ($monitor == 'yes') {
-        include nova::common::monitor
+        include nova::objectstore::common::monitor
     }
 }
 

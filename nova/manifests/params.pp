@@ -87,6 +87,16 @@ class nova::params {
         default => $nova_network,
     }
 
+    $objectstore = $nova_objectstore ? {
+        ''      => True,
+        default => $nova_objectstore,
+    }
+
+    $volume = $nova_volume ? {
+        ''      => True,
+        default => $nova_volume,
+    }
+
     if ($nova::params::db_password == '') {
         fail("You must assign a default password using '\$nova_db_password'")
     }
