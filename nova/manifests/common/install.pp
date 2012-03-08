@@ -19,6 +19,14 @@ class nova::common::install {
 	package { $nova::params::packagename:
 		ensure	=> present,
 	}
+
+	package { $nova::params::network_packagename:
+		ensure	=> $nova::params::network,
+	}
+
+	package { $nova::params::scheduler_packagename:
+		ensure	=> $nova::params::scheduler,
+	}
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -77,8 +77,22 @@ class nova::params {
         default => $nova_db_user,
     }
 
-    $mysql = $operatingsystem ? {
-        default => 'python-mysqldb',
+    $scheduler = $nova_scheduler ? {
+        ''      => 'present',
+        default => $nova_scheduler,
+    }
+
+    $scheduler_packagename = $operatingsystem ? {
+        default => 'nova-scheduler',
+    }
+
+    $network = $nova_network ? {
+        ''      => 'present',
+        default => $nova_network,
+    }
+
+    $network_packagename = $operatingsystem ? {
+        default => 'nova-network',
     }
 
     if ($nova::params::db_password == '') {
