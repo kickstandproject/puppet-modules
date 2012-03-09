@@ -16,6 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::api::common::service {
+    require nova::params
     require nova::api::params
 
     service { $nova::api::params::servicename:
@@ -24,6 +25,7 @@ class nova::api::common::service {
         hasrestart  => true,
         hasstatus   => $nova::api::params::hasstatus,
         require     => Class['nova::api::common::config'],
+        subscribe   => File[$nova::params::configfile],
     }
 }
 

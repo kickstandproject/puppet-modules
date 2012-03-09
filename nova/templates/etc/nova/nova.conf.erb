@@ -1,15 +1,33 @@
+# DATABASE<% if (scope.lookupvar('nova::params::db') == 'mysql') %>
+--sql_connection = <%= scope.lookupvar('nova::params::db') %>://<%= scope.lookupvar('nova::params::db_user') %>:<%= scope.lookupvar('nova::params::db_password') %>@<%= scope.lookupvar('nova::params::db_server') %>/<%= scope.lookupvar('nova::params::db_name') %>
+<% end %>
+# LOGS/STATE
+--verbose
 --dhcpbridge_flagfile=/etc/nova/nova.conf
 --dhcpbridge=/usr/bin/nova-dhcpbridge
 --logdir=/var/log/nova
 --state_path=/var/lib/nova
 --lock_path=/var/lock/nova
---force_dhcp_release
+
+# RABBITMQ
+
+# SCHEDULER
+
+# NETWORK
+--network_manager = nova.network.manager.FlatDHCPManager
+--fixed_range = 192.168.200.0/24
+--flat_network_dhcp_start = 192.168.200.2
+--public_interface = eth0
+--flat_interface = eth0
+--flat_network_bridge = br100
+
+# GLANCE
+--image_service = nova.image.glance.GlanceImageService
+
+# COMPUTE
+--compute_manager = nova.compute.manager.ComputeManager
+
 --iscsi_helper=tgtadm
 --libvirt_use_virtio_for_bridges
 --connection_type=libvirt
 --root_helper=sudo nova-rootwrap
---verbose
---rabbit_host = localhost
-<% if (scope.lookupvar('nova::params::db') == 'mysql') %>
---sql_connection = <%= scope.lookupvar('nova::params::db') %>://<%= scope.lookupvar('nova::params::db_user') %>:<%= scope.lookupvar('nova::params::db_password') %>@<%= scope.lookupvar('nova::params::db_server') %>/<%= scope.lookupvar('nova::params::db_name') %>
-<% end %>
