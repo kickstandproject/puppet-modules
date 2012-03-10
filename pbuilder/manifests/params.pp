@@ -33,15 +33,15 @@ class pbuilder::params {
         default => '/etc/pbuilderrc',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $group = $operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_mode = $operatingsystem ? {
+    $mode = $operatingsystem ? {
         default => '0644',
     }
 
-    $configfile_owner = $operatingsystem ? {
+    $owner = $operatingsystem ? {
         default => 'root',
     }
 

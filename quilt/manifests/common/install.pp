@@ -15,8 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class pbuilder::client inherits pbuilder::common::init {
-    require ccache::client
+class quilt::common::install {
+	package { $quilt::params::packagename:
+		ensure	=> present,
+	}
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

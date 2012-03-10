@@ -18,15 +18,9 @@
 class pbuilder::common::config {
     require pbuilder::params
 
-    File {
-        group   => $pbuilder::params::configfile_group,
-        mode    => $pbuilder::params::configfile_mode,
-        owner   => $pbuilder::params::configfile_owner,
-    }
-
     file { $pbuilder::params::configfile:
-        content => template('pbuilder/client/pbuilderrc.erb'),
         ensure  => present,
+        content => template('pbuilder/client/pbuilderrc.erb'),
     }
 
     file { $pbuilder::params::cachedir:

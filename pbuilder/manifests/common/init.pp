@@ -19,6 +19,13 @@ class pbuilder::common::init {
     include pbuilder::params
     include pbuilder::common::install
     include pbuilder::common::config
+
+    File {
+        group   => $pbuilder::params::group,
+        mode    => $pbuilder::params::mode,
+        owner   => $pbuilder::params::owner,
+    }
+
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
