@@ -17,14 +17,22 @@
 #
 class apache::common::config {
     file { $apache::params::defaultfile:
-        content => template('apache/etc/default/apache2.erb'),
         ensure  => present,
+        content => template('apache/etc/default/apache2.erb'),
         require => Class['apache::common::install'],
     }
 
     file { $apache::params::basedir:
         ensure  => directory,
         require => Class['apache::common::install'],
+    }
+
+    file { "${apache::params::basedir}/sites-available":
+        ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
+        require => File[$apache::params::basedir],
     }
 
     file { $apache::params::configdir:
@@ -43,13 +51,6 @@ class apache::common::config {
         force   => true,
         purge   => true,
         recurse => true,
-        require => Class['apache::common::install'],
-    }
-
-    exec { "apache_a2dissite_default":
-        command => "/usr/sbin/a2dissite default",
-        onlyif => "/usr/bin/test -f ${apache::params::configdir}/sites-enabled/000-default",
-        notify  => Class['apache::common::service'],
         require => Class['apache::common::install'],
     }
 }
