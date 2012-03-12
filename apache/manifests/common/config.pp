@@ -35,6 +35,14 @@ class apache::common::config {
         require => File[$apache::params::basedir],
     }
 
+    file { "${apache::params::basedir}/sites-enabled":
+        ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
+        require => File[$apache::params::basedir],
+    }
+
     file { $apache::params::configdir:
         ensure  => directory,
         require => File[$apache::params::basedir],

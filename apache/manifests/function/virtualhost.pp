@@ -21,7 +21,7 @@ define apache::function::virtualhost(
     require apache::params
 
     apache::function::virtualhost::common { $name:
-    content    => $content,
+        content => $content,
     }
 
     file { "${apache::params::rootdir}/${name}/conf/default.conf":

@@ -69,9 +69,9 @@ define apache::function::virtualhost::common(
 
     exec { "apache_a2ensite_${name}":
         command => "/usr/sbin/a2ensite ${name}",
-        creates => "${apache::params::configdir}/sites-enabled/${name}",
+        creates => "${apache::params::basedir}/sites-enabled/${name}",
         notify  => Class['apache::common::service'],
-        require => Class['apache::common::install'],
+        require => File["${apache::params::basedir}/sites-enabled"],
     }
 
     if ($content != '') {
