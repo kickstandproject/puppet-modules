@@ -40,12 +40,10 @@ class apache::common::config {
 
     file { $apache::params::rootdir:
         ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
         require => Class['apache::common::install'],
-    }
-
-    file { "${apache::params::rootdir}/index.html":
-        ensure  => absent,
-        require => File[$apache::params::rootdir],
     }
 
     exec { "apache_a2dissite_default":
