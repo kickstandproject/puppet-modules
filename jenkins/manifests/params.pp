@@ -52,6 +52,11 @@ class jenkins::params {
         default => 'jenkins',
     }
 
+    $hostname = $jenkins_hostname ? {
+        ''      => $fqdn,
+        default => $jenkins_hostname,
+    }
+
     $port = $jenkins_port ? {
         ''      => '8080',
         default => $jenkins_port,

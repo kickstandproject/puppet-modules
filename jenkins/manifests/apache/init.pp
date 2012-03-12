@@ -18,7 +18,7 @@
 class jenkins::apache::init {
     require jenkins::params
 
-    apache::function::virtualhost-proxy { $fqdn:
+    apache::function::virtualhost-proxy { $jenkins::params::hostname:
         port => $jenkins::params::port,
     }
 }
