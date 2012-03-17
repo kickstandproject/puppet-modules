@@ -4,6 +4,6 @@ Architectures: i386 amd64 source
 Components: main<% if gpgkey != '' %>
 SignWith: <%= gpgkey %><% end %>
 Log: logfile
-  --changes <%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/<%= name %>/<%= ostype %>/bin/build_sources
+  --changes <%= scope.lookupvar('reprepro::params::basedir') %>/repos/<%= name %>/<%= repo %>/<%= ostype %>/bin/build_sources
 
 <% end -%>

@@ -20,7 +20,7 @@ class pbuilder::common::config {
 
     file { $pbuilder::params::configfile:
         ensure  => present,
-        content => template('pbuilder/client/pbuilderrc.erb'),
+        content => template('pbuilder/pbuilderrc.erb'),
     }
 
     file { $pbuilder::params::cachedir:
@@ -42,31 +42,31 @@ class pbuilder::common::config {
 
     pbuilder::function::hook { 'D10repository':
         ensure  => present,
-        content => template('pbuilder/client/hook.d/D10repository.erb'),
+        content => template('pbuilder/hook.d/D10repository.erb'),
     }
 
     pbuilder::function::hook { 'D20aptupdate':
         ensure  => present,
-        content => template('pbuilder/client/hook.d/D20aptupdate.erb'),
+        content => template('pbuilder/hook.d/D20aptupdate.erb'),
     }
 
     /* XXX Remove duplicate logic with another define? */
     define pbuilder-distribution() {
         file { "${pbuilder::params::localbindir}/pbuilder-${name}-amd64":
-            content => template('pbuilder/client/pbuilder-distribution.erb'),
+            content => template('pbuilder/pbuilder-distribution.erb'),
             ensure  => present,
             mode    => '0755',
         }
 
         file { "${pbuilder::params::localbindir}/pbuilder-${name}-i386":
-            content => template('pbuilder/client/pbuilder-distribution.erb'),
+            content => template('pbuilder/pbuilder-distribution.erb'),
             ensure  => present,
             mode    => '0755',
         }
 
         /* XXX crontab module? */
         file { "/etc/cron.daily/pbuilder-${name}-amd64":
-            content => template('pbuilder/client/cron.daily/pbuilder.erb'),
+            content => template('pbuilder/cron.daily/pbuilder.erb'),
             ensure  => present,
             group   => root,
             mode    => '0755',
@@ -75,7 +75,7 @@ class pbuilder::common::config {
 
         /* XXX crontab module? */
         file { "/etc/cron.daily/pbuilder-${name}-i386":
-            content => template('pbuilder/client/cron.daily/pbuilder.erb'),
+            content => template('pbuilder/cron.daily/pbuilder.erb'),
             ensure  => present,
             group   => root,
             mode    => '0755',

@@ -5,7 +5,7 @@ release=$2
 package=$3
 version=$4
 changes_file=$5
-repo=<%= project %>/<%= name %>/<%= ostype %>
+repo=<%= name %>/<%= repo %>/<%= ostype %>
 
 # Only care about packages being added
 if [ "$action" != "accepted" ]; then

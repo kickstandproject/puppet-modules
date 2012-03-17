@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXCLUDE="--exclude=/* --exclude=<%= name %>/*/bin/ --exclude=<%= name %>/*/db/ --exclude=<%= name %>/*/conf/ --exclude=<%= name %>/*/incoming/ --exclude=<%= name %>/*/tmp/"
-INCLUDE="--include=<%= name %>"
+EXCLUDE="--exclude=/* --exclude=<%= repo %>/*/bin/ --exclude=<%= repo %>/*/db/ --exclude=<%= repo %>/*/conf/ --exclude=<%= repo %>/*/incoming/ --exclude=<%= repo %>/*/tmp/"
+INCLUDE="--include=<%= repo %>"
 
-rsync -avz --delete ${INCLUDE} ${EXCLUDE} <%= scope.lookupvar('reprepro::params::homedir') %>/repos/<%= project %>/ <%= scope.lookupvar('reprepro::params::user') %>@<%= rsynchostname %>:/var/www/<%= rsynchostname %>/html/<%= project %>
+rsync -avz --delete ${INCLUDE} ${EXCLUDE} <%= scope.lookupvar('reprepro::params::basedir') %>/repos/<%= name %>/ <%= scope.lookupvar('reprepro::params::user') %>@<%= rsynchostname %>:/var/www/<%= rsynchostname %>/html/<%= name %>

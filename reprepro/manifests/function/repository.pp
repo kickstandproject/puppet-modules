@@ -19,7 +19,7 @@ define reprepro::function::repository(
     $buildoptions = '',
     $ostype = 'ubuntu',
     $gpgkey = '',
-    $project = 'default',
+    $repo,
     $rsynchostname = '',
     $rsyncuser = ''
 ) {
@@ -32,134 +32,134 @@ define reprepro::function::repository(
         owner   => $reprepro::params::user,
     }
 
-    if (!defined(File["${reprepro::params::basedir}/repos/${project}"])) {
-        file { "${reprepro::params::basedir}/repos/${project}":
+    if (!defined(File["${reprepro::params::basedir}/repos/${name}"])) {
+        file { "${reprepro::params::basedir}/repos/${name}":
             ensure  => directory,
             require => File["${reprepro::params::basedir}/repos"],
         }
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}":
         ensure  => directory,
-        require => File["${reprepro::params::basedir}/repos/${project}"],
+        require => File["${reprepro::params::basedir}/repos/${name}"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}":
         ensure  => directory,
-        require => File["$reprepro::params::basedir/repos/${project}/${name}"],
+        require => File["$reprepro::params::basedir/repos/${name}/${repo}"],
         recurse => true,
     }
 
     file { [
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/hook.d",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/db",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/dists",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/incoming",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/keys",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/logs",
-        "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/tmp"
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/hook.d",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/db",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/dists",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/incoming",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/keys",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/logs",
+        "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/tmp"
     ]:
         ensure  => directory,
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/build_sources":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/build_sources":
         content => template('reprepro/var/lib/reprepro/bin/build_sources.erb'),
         mode    => '0755',
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/hook.d/D10repository":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/hook.d/D10repository":
         ensure  => present,
-        content => template('pbuilder/client/hook.d/D10repository.erb'),
+        content => template('pbuilder/hook.d/D10repository.erb'),
         mode    => '0755',
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/hook.d/D10reprepro-repository":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/hook.d/D10reprepro-repository":
         ensure  => present,
         content => template('reprepro/var/lib/reprepro/bin/hook.d/D10reprepro-repository.erb'),
         mode    => '0755',
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/hook.d/D20aptupdate":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/hook.d/D20aptupdate":
         ensure  => present,
-        content => template('pbuilder/client/hook.d/D20aptupdate.erb'),
+        content => template('pbuilder/hook.d/D20aptupdate.erb'),
         mode    => '0755',
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/rebuildd-build-cmd":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/rebuildd-build-cmd":
         content => template('reprepro/var/lib/reprepro/bin/rebuildd-build-cmd.erb'),
         mode    => '0755',
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/rebuildd-post-build-cmd":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/rebuildd-post-build-cmd":
         content => template('reprepro/var/lib/reprepro/bin/rebuildd-post-build-cmd.erb'),
         mode    => '0755',
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/rebuildd-source-cmd":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/rebuildd-source-cmd":
         content => template('reprepro/var/lib/reprepro/bin/rebuildd-source-cmd.erb'),
         mode    => '0755',
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf/distributions":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/distributions":
         content => template('reprepro/var/lib/reprepro/conf/distributions.erb'),
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf/incoming":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/incoming":
         content => template('reprepro/var/lib/reprepro/conf/incoming.erb'),
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf"],
     }
 
-    file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf/options":
+    file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/options":
         content => template('reprepro/var/lib/reprepro/conf/options.erb'),
-        require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf"],
+        require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf"],
     }
 
-    apt::function::repository { "reprepro-${project}-${name}-${ostype}":
+    apt::function::repository { "reprepro-${name}-${repo}-${ostype}":
         protocol    => 'file:',
-        url         => "${reprepro::params::basdir}/repos/${project}/${name}/${ostype}",
+        url         => "${reprepro::params::basdir}/repos/${name}/${repo}/${ostype}",
         components  => main,
     }
 
-    exec { "reprepro ${project}/${name}/${ostype} clearvanished":
-        command     => "/usr/bin/reprepro -b ${reprepro::params::basedir}/repos/${project}/${name}/${ostype} clearvanished",
+    exec { "reprepro ${name}/${repo}/${ostype} clearvanished":
+        command     => "/usr/bin/reprepro -b ${reprepro::params::basedir}/repos/${name}/${repo}/${ostype} clearvanished",
         group       => $reprepro::params::user,
         refreshonly => true,
-        require     => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/db"],
-        subscribe   => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/conf/distributions"],
+        require     => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/db"],
+        subscribe   => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/distributions"],
         user        => $reprepro::params::user,
     }
 
-    exec { "reprepro ${project}/${name}/${ostype} export":
-        command     => "/usr/bin/reprepro -b ${reprepro::params::basedir}/repos/${project}/${name}/${ostype} export",
+    exec { "reprepro ${name}/${repo}/${ostype} export":
+        command     => "/usr/bin/reprepro -V -b ${reprepro::params::basedir}/repos/${name}/${repo}/${ostype} export",
         group       => $reprepro::params::user,
         refreshonly => true,
-        require     => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/dists"],
-        subscribe   => Exec["reprepro ${project}/${name}/${ostype} clearvanished"],
+        require     => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/dists"],
+        subscribe   => Exec["reprepro ${name}/${repo}/${ostype} clearvanished"],
         user        => $reprepro::params::user,
     }
 
     /* XXX TODO Create cron module */
     /* XXX TODO This needs to be purged! */
-    cron { "reprepro ${project}/${name}/${ostype} processincoming":
-        command => "/usr/bin/reprepro -b ${reprepro::params::basedir}/repos/${project}/${name}/${ostype} processincoming incoming",
+    cron { "reprepro ${name}/${repo}/${ostype} processincoming":
+        command => "/usr/bin/reprepro -b ${reprepro::params::basedir}/repos/${name}/${repo}/${ostype} processincoming incoming",
         minute  => '*/5',
         require => User[$reprepro::params::user],
         user    => $reprepro::params::user,
     }
 
     if ($rsynchostname != '') {
-        file { "${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin/rsync":
+        file { "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin/rsync":
             content => template('reprepro/var/lib/reprepro/bin/rsync.erb'),
             mode    => '0755',
-            require => File["${reprepro::params::basedir}/repos/${project}/${name}/${ostype}/bin"],
+            require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/bin"],
         }
     }
 }
