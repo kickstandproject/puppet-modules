@@ -16,28 +16,26 @@
 # file at the top of the source tree.
 #
 class rebuildd::common::config {
-    require rebuildd::params
+    include rebuildd::params
 
-    File {
-        ensure  => present,
-        group   => $rebuildd::params::configfile_group,
-        mode    => $rebuildd::params::configfile_mode,
-        notify  => Class['rebuildd::common::service'],
-        owner   => $rebuildd::params::configfile_owner,
-        require => Class['rebuildd::common::install'],
+    file { $rebuildd::params::basedir:
+        ensure  => directory,
+        require => Class['rebuildd::common::install']
     }
 
     file { $rebuildd::params::configfile:
-        content => template("rebuildd/server/etc/rebuildd/rebuilddrc.erb"),
+        content => template("rebuildd/etc/rebuildd/rebuilddrc.erb"),
+        require => File[$rebuildd::params::basedir],
     }
 
     file { $rebuildd::params::defaultsfile:
-        content => template("rebuildd/server/etc/default/rebuildd.erb"),
+        content => template("rebuildd/etc/default/rebuildd.erb"),
     }
 
     exec { 'rebuildd-create-database':
         command => '/usr/sbin/rebuildd init',
         creates => '/var/lib/rebuildd/rebuildd.db',
+        require => Class['rebuildd::common::install'],
     }
 }
 

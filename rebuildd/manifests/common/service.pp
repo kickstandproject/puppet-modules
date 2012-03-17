@@ -16,6 +16,8 @@
 # file at the top of the source tree.
 #
 class rebuildd::common::service {
+    include rebuildd::params
+
     service { $rebuildd::params::servicename:
         enable      => true,
         ensure      => running,

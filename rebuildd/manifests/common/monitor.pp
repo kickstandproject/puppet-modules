@@ -18,7 +18,7 @@
 class rebuildd::common::monitor {
     require rebuildd::params
 
-    monitor::process { 'rebuildd_process':
+    monitor::process { $name:
         process => $rebuildd::params::processname,
     }
 }

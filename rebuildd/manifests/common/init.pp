@@ -21,8 +21,10 @@ class rebuildd::common::init {
     include rebuildd::common::config
     include rebuildd::common::service
 
-    if ($monitor == 'yes') {
-        include rebuildd::common::monitor
+    File {
+        group   => $rebuildd::params::group,
+        mode    => $rebuildd::params::mode,
+        owner   => $rebuildd::params::owner,
     }
 }
 

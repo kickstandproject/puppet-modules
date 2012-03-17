@@ -16,6 +16,8 @@
 # file at the top of the source tree.
 #
 class rebuildd::common::install {
+    include rebuildd::params
+
     package { $rebuildd::params::packagename:
         ensure  => present,
     }

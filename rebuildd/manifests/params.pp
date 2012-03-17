@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class rebuildd::params {
-    $configdir = $operatingsystem ? {
+    $basedir = $operatingsystem ? {
         default => '/etc/rebuildd',
     }
 
@@ -24,36 +24,12 @@ class rebuildd::params {
         default => '/etc/rebuildd/rebuilddrc',
     }
 
-    $configfile_group = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_mode = $operatingsystem ? {
-        default => '0644',
-    }
-
-    $configfile_owner = $operatingsystem ? {
-        default => 'root',
-    }
-
-    $customconfigdir = $operatingsystem ? {
-        default => "${configdir}/puppet.d",
-    }
-
     $defaultsfile = $operatingsystem ? {
         default => '/etc/default/rebuildd',
     }
 
-    $distributions = $rebuildd_distributions ? {
-        ''      => [
-            'precise',
-        ],
-        default => $rebuildd_distributions,
-    }
-
-    $email = $rebuildd_email ? {
-        ''      => 'rebuildd@localhost',
-        default => $rebuildd_email,
+    $group = $operatingsystem ? {
+        default => 'root',
     }
 
     $hasrestart = $operatingsystem ? {
@@ -62,6 +38,14 @@ class rebuildd::params {
 
     $hasstatus = $operatingsystem ? {
         default => false,
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'root',
     }
 
     $packagename = $operatingsystem ? {
@@ -74,6 +58,18 @@ class rebuildd::params {
 
     $servicename = $operatingsystem ? {
         default => 'rebuildd',
+    }
+
+    $distributions = $rebuildd_distributions ? {
+        ''      => [
+            'precise',
+        ],
+        default => $rebuildd_distributions,
+    }
+
+    $email = $rebuildd_email ? {
+        ''      => 'rebuildd@localhost',
+        default => $rebuildd_email,
     }
 }
 
