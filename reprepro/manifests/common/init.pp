@@ -19,6 +19,12 @@ class reprepro::common::init {
     include reprepro::params
     include reprepro::common::install
     include reprepro::common::config
+
+    File {
+        group   => $reprepro::params::group,
+        mode    => $reprepro::params::mode,
+        owner   => $reprepro::params::user,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

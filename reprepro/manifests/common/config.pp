@@ -16,36 +16,35 @@
 # file at the top of the source tree.
 #
 class reprepro::common::config {
-    require reprepro::params
+    include reprepro::params
 
     File {
         group   => $reprepro::params::user,
-        mode    => '0644',
+        mode    => $reprepro::params::mode,
         owner   => $reprepro::params::user,
     }
 
     user { $reprepro::params::user:
         ensure  => present,
-        home    => $reprepro::params::homedir,
+        home    => $reprepro::params::basedir,
         system  => true,
     }
 
-    file { $reprepro::params::homedir:
+    file { $reprepro::params::basedir:
         ensure  => directory,
     }
 
-    file { "${reprepro::params::homedir}/repos":
+    file { "${reprepro::params::basedir}/repos":
         ensure          => directory,
         force           => true,
         purge           => true,
         recurse         => true,
-        recurselimit    => 1,
-        require         => File[$reprepro::params::homedir],
+        require         => File[$reprepro::params::basedir],
     }
 
     file { '/etc/sudoers.d/reprepro':
         ensure  => present,
-        content => template('reprepro/server/etc/sudoers.d/reprepro.erb'),
+        content => template('reprepro/etc/sudoers.d/reprepro.erb'),
         group   => 'root',
         mode    => '0440',
         owner   => 'root',

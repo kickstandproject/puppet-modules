@@ -16,19 +16,23 @@
 # file at the top of the source tree.
 #
 class reprepro::params {
+    $basedir = $operatingsystem ? {
+        default => '/var/lib/reprepro',
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0644',
+    }
+
+    $packagename = $operatingsystem ? {
+        default => 'reprepro',
+    }
+
     $distributions = $reprepro_distributions ? {
         ''      => [
             'precise'
         ],
         default => $reprepro_distributions,
-    }
-
-    $homedir = $operatingsystem ? {
-        default => '/var/lib/reprepro',
-    }
-
-    $packagename = $operatingsystem ? {
-        default => 'reprepro',
     }
 
     $user = $reprepro_user ? {
