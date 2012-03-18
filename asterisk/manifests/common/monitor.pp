@@ -18,7 +18,7 @@
 class asterisk::common::monitor {
     include asterisk::params
 
-    monitor::process { 'asterisk_process':
+    monitor::process { $name:
         process => $asterisk::params::processname,
     }
 }

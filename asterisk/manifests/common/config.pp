@@ -15,16 +15,12 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::init {
+class asterisk::common::config {
     include asterisk::params
-    include asterisk::common::install
-    include asterisk::common::config
-    include asterisk::common::service
 
-    File {
-        group   => $asterisk::params::group,
-        mode    => $asterisk::params::mode,
-        owner   => $asterisk::params::owner,
+    file { $asterisk::params::basedir:
+        ensure  => directory,
+        require => Class['asterisk::common::install'],
     }
 }
 

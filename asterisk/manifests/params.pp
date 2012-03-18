@@ -16,11 +16,27 @@
 # file at the top of the source tree.
 #
 class asterisk::params {
-    $packagename = $operatingsystem ? {
+    $basedir = $operatingsystem ? {
+        default => '/etc/asterisk/',
+    }
+
+    $group = $operatingsystem ? {
         default => 'asterisk',
     }
 
-    $servicename = $operatingsystem ? {
+    $hasstatus = $operatingsystem ? {
+        default => true,
+    }
+
+    $mode = $operatingsystem ? {
+        default => '0640',
+    }
+
+    $owner = $operatingsystem ? {
+        default => 'asterisk',
+    }
+
+    $packagename = $operatingsystem ? {
         default => 'asterisk',
     }
 
@@ -28,9 +44,11 @@ class asterisk::params {
         default => 'asterisk',
     }
 
-    $hasstatus = $operatingsystem ? {
-        default => true,
+    $servicename = $operatingsystem ? {
+        default => 'asterisk',
     }
+
+
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
