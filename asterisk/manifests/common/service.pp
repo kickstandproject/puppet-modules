@@ -21,6 +21,7 @@ class asterisk::common::service {
         ensure      => running,
         hasrestart  => true,
         hasstatus   => $asterisk::params::hasstatus,
+        require     => Class['asterisk::common::config'],
     }
 }
 

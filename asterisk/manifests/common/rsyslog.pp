@@ -18,8 +18,8 @@
 class asterisk::common::rsyslog {
     require rsyslog::client
 
-    file { "${rsyslog::params::configdir}/99-asterisk.conf":
-        content => template('asterisk/99-asterisk.conf.erb'),
+    file { "${rsyslog::params::configdir}/99asterisk.conf":
+        content => template('asterisk/99asterisk.conf.erb'),
         ensure  => present,
         group   => $rsyslog::params::configfile_group,
         mode    => $rsyslog::params::configfile_mode,
