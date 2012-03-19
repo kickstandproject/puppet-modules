@@ -133,7 +133,11 @@ define reprepro::function::repository(
         group       => $reprepro::params::user,
         refreshonly => true,
         require     => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/db"],
-        subscribe   => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/distributions"],
+        subscribe   => File[
+            "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/distributions",
+            "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/incoming",
+            "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/options",
+        ],
         user        => $reprepro::params::user,
     }
 
