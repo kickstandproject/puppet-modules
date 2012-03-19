@@ -17,12 +17,12 @@ max_threads = 2
 check_every = 300
 more_archs = amd64 i386
 kill_timeout = 90
-source_cmd = <%= scope.lookupvar('reprepro::params::homedir') %>/repos/${r}/bin/rebuildd-source-cmd ${d} ${p} ${v}
+source_cmd = <%= scope.lookupvar('reprepro::params::basedir') %>/repos/${r}/bin/rebuildd-source-cmd ${d} ${p} ${v}
 work_dir = /var/cache/rebuildd/build
-post_build_cmd = <%= scope.lookupvar('reprepro::params::homedir') %>/repos/${r}/bin/rebuildd-post-build-cmd ${d} ${p} ${v} ${a} ${r}
+post_build_cmd = <%= scope.lookupvar('reprepro::params::basedir') %>/repos/${r}/bin/rebuildd-post-build-cmd ${d} ${p} ${v} ${a} ${r}
 dists =<% scope.lookupvar('rebuildd::params::distributions').each do |dist| -%> <%= dist %><% end -%>
 
-build_cmd = <%= scope.lookupvar('reprepro::params::homedir') %>/repos/${r}/bin/rebuildd-build-cmd ${d} ${a} ${p} ${v} ${r}
+build_cmd = <%= scope.lookupvar('reprepro::params::basedir') %>/repos/${r}/bin/rebuildd-build-cmd ${d} ${a} ${p} ${v} ${r}
 database_uri = sqlite:///var/lib/rebuildd/rebuildd.db
 build_more_recent = 1
 
