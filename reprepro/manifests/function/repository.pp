@@ -124,7 +124,7 @@ define reprepro::function::repository(
 
     apt::function::repository { "reprepro-${name}-${repo}-${ostype}":
         protocol    => 'file:',
-        url         => "${reprepro::params::basdir}/repos/${name}/${repo}/${ostype}",
+        url         => "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}",
         components  => main,
     }
 
