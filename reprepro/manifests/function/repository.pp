@@ -133,16 +133,16 @@ define reprepro::function::repository(
         group       => $reprepro::params::user,
         refreshonly => true,
         require     => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/db"],
-        subscribe   => File[
+        subscribe   => File[[
             "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/distributions",
             "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/incoming",
-            "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/options",
-        ],
+            "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf/options"
+        ]],
         user        => $reprepro::params::user,
     }
 
     exec { "reprepro ${name}/${repo}/${ostype} export":
-        command     => "/usr/bin/reprepro -V -b ${reprepro::params::basedir}/repos/${name}/${repo}/${ostype} export",
+        command     => "/usr/bin/reprepro -b ${reprepro::params::basedir}/repos/${name}/${repo}/${ostype} export",
         group       => $reprepro::params::user,
         refreshonly => true,
         require     => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/dists"],
