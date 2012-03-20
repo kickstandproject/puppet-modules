@@ -17,8 +17,43 @@
 #
 class asterisk::common::config {
     include asterisk::params
+    include asterisk::common::command
 
     file { $asterisk::params::basedir:
+        ensure  => directory,
+        require => Class['asterisk::common::install'],
+    }
+
+    file { "${asterisk::params::basedir}/modules.conf.d":
+        ensure  => directory,
+        require => File[$asterisk::params::basedir],
+    }
+
+    file { "${asterisk::params::basedir}/sip.conf.d":
+        ensure  => directory,
+        require => File[$asterisk::params::basedir],
+    }
+
+    file { "${asterisk::params::basedir}/sip.conf.d/10templates.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/sip.conf.d/10templates.conf.erb'),
+        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        require => File["${asterisk::params::basedir}/sip.conf.d"],
+    }
+
+    file { "${asterisk::params::basedir}/sip.conf.d/20devices.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/sip.conf.d/20devices.conf.erb'),
+        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        require => File["${asterisk::params::basedir}/sip.conf.d"],
+    }
+
+    file { "${asterisk::params::basedir}/sip.conf.d/devices":
+        ensure  => directory,
+        require => File["${asterisk::params::basedir}/sip.conf.d/20devices.conf"],
+    }
+
+    file { $asterisk::params::spooldir:
         ensure  => directory,
         require => Class['asterisk::common::install'],
     }

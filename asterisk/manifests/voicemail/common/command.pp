@@ -15,17 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::init {
-    include asterisk::params
-    include asterisk::common::install
-    include asterisk::common::config
-    include asterisk::common::service
-    include asterisk::common::command
-
-    File {
-        group   => $asterisk::params::group,
-        mode    => $asterisk::params::mode,
-        owner   => $asterisk::params::owner,
+class asterisk::voicemail::common::command {
+    exec { 'asterisk-module-reload-app_voicemail.so':
+        command     => 'asterisk -rx "module reload app_voicemail.so"',
+        refreshonly => true,
     }
 }
 

@@ -24,6 +24,10 @@ class asterisk::server inherits asterisk::common::init {
         include asterisk::common::firewall
     }
 
+    if ($asterisk::params::voicemail) {
+        include asterisk::voicemail::server
+    }
+
     if ($rsyslog_server) {
         include asterisk::common::rsyslog
     }

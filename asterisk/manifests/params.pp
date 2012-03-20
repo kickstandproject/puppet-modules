@@ -17,11 +17,15 @@
 #
 class asterisk::params {
     $basedir = $operatingsystem ? {
-        default => '/etc/asterisk/',
+        default => '/etc/asterisk',
     }
 
     $group = $operatingsystem ? {
         default => 'asterisk',
+    }
+
+    $hasrestart = $operatingsystem ? {
+        default => true,
     }
 
     $hasstatus = $operatingsystem ? {
@@ -48,7 +52,15 @@ class asterisk::params {
         default => 'asterisk',
     }
 
+    $spooldir = $operatingsystem ? {
+        default => '/var/spool/asterisk',
+    }
 
+    $voicemail = $asterisk_voicemail ? {
+        ''      => false,
+        'yes'   => true,
+        default => $asterisk_voicemail,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
