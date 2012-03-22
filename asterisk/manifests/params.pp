@@ -61,6 +61,16 @@ class asterisk::params {
         'yes'   => true,
         default => $asterisk_voicemail,
     }
+
+    $sip_port = $asterisk_sip_port ? {
+        ''      => '5060',
+        default => $asterisk_sip_port,
+    }
+
+    $externaddr = $asterisk_externaddr ? {
+        ''      => false,
+        default => $asterisk_externaddr,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

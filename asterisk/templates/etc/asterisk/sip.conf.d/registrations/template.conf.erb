@@ -1,0 +1,11 @@
+[general](+)
+register => <%= user %><% if (domain != '') then %>@<%= domain %><% end %><% if (secret != '') then %>:<%= secret %><% end %>@<%= host %>/<% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>
+
+[<% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>]
+type = peer
+host = <%= host %>
+secret = <%= secret %>
+context = <%= context %>
+nat = yes
+directmedia = no
+quality = yes

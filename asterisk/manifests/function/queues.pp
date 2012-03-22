@@ -15,15 +15,13 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::command {
-    exec { 'asterisk-module-reload-chan_sip.so':
-        command     => 'asterisk -rx "module reload chan_sip.so"',
-        refreshonly => true,
-    }
-
-    exec { 'asterisk-module-reload-app_queue.so':
-        command     => 'asterisk -rx "module reload app_queue.so"',
-        refreshonly => true,
+define asterisk::function::queues(
+    strategy = '',
+    timeout = ''
+) {
+    asterisk::function::queue { $name:
+        strategy    => $strategy,
+        timeout     => $timeout,
     }
 }
 

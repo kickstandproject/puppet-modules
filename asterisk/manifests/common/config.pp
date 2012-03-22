@@ -31,7 +31,17 @@ class asterisk::common::config {
 
     file { "${asterisk::params::basedir}/sip.conf.d":
         ensure  => directory,
+        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        purge   => true,
+        recurse => true,
         require => File[$asterisk::params::basedir],
+    }
+
+    file { "${asterisk::params::basedir}/sip.conf.d/10general.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/sip.conf.d/10general.conf.erb'),
+        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        require => File["${asterisk::params::basedir}/sip.conf.d"],
     }
 
     file { "${asterisk::params::basedir}/sip.conf.d/10templates.conf":
@@ -41,16 +51,60 @@ class asterisk::common::config {
         require => File["${asterisk::params::basedir}/sip.conf.d"],
     }
 
-    file { "${asterisk::params::basedir}/sip.conf.d/20devices.conf":
+    file { "${asterisk::params::basedir}/sip.conf.d/20includes.conf":
         ensure  => present,
-        content => template('asterisk/etc/asterisk/sip.conf.d/20devices.conf.erb'),
+        content => template('asterisk/etc/asterisk/sip.conf.d/20includes.conf.erb'),
         notify  => Exec['asterisk-module-reload-chan_sip.so'],
         require => File["${asterisk::params::basedir}/sip.conf.d"],
     }
 
     file { "${asterisk::params::basedir}/sip.conf.d/devices":
         ensure  => directory,
-        require => File["${asterisk::params::basedir}/sip.conf.d/20devices.conf"],
+        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        purge   => true,
+        recurse => true,
+        require => File["${asterisk::params::basedir}/sip.conf.d/20includes.conf"],
+    }
+
+    file { "${asterisk::params::basedir}/sip.conf.d/registrations":
+        ensure  => directory,
+        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        purge   => true,
+        recurse => true,
+        require => File["${asterisk::params::basedir}/sip.conf.d/20includes.conf"],
+    }
+
+    if ($asterisk::params::externaddr) {
+        file { "${asterisk::params::basedir}/sip.conf.d/10nat.conf":
+            ensure  => present,
+            content => template('asterisk/etc/asterisk/sip.conf.d/10nat.conf.erb'),
+            notify  => Exec['asterisk-module-reload-chan_sip.so'],
+            require => File["${asterisk::params::basedir}/sip.conf.d"],
+        }
+    }
+
+    file { "${asterisk::params::basedir}/queues.conf.d":
+        ensure  => directory,
+        notify  => Exec['asterisk-module-reload-app_queue.so'],
+        purge   => true,
+        recurse => true,
+        require => File[$asterisk::params::basedir],
+    }
+
+    file { "${asterisk::params::basedir}/queues.conf.d/20includes.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/queues.conf.d/20includes.conf.erb'),
+        notify  => Exec['asterisk-module-reload-app_queue.so'],
+        require => File["${asterisk::params::basedir}/queues.conf.d"],
+    }
+
+    file { "${asterisk::params::basedir}/queues.conf.d/includes":
+        ensure  => directory,
+        force   => true,
+        notify  => Exec['asterisk-module-reload-app_queue.so'],
+        purge   => true,
+        recurse => true,
+        require => File["${asterisk::params::basedir}/queues.conf.d"],
     }
 
     file { $asterisk::params::spooldir:

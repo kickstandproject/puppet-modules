@@ -15,15 +15,21 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::command {
-    exec { 'asterisk-module-reload-chan_sip.so':
-        command     => 'asterisk -rx "module reload chan_sip.so"',
-        refreshonly => true,
-    }
+define asterisk::function::queuemember(
+    $channel = 'SIP',
+    $queue
+) {
+    require asterisk::server
 
-    exec { 'asterisk-module-reload-app_queue.so':
-        command     => 'asterisk -rx "module reload app_queue.so"',
-        refreshonly => true,
+    $base = "${asterisk::params::basedir}/queues.conf.d/includes"
+
+    if (defined(File["${base}/${queue}"])) {
+        file { "${base}/${queue}/${name}.conf":
+            ensure  => present,
+            content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
+            notify  => Exec['asterisk-module-reload-app_queue.so'],
+            require => File["${base}/${queue}"],
+        }
     }
 }
 

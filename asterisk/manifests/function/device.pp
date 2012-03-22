@@ -19,10 +19,12 @@ define asterisk::function::device(
     callerid = '',
     channel = 'SIP',
     context,
-    description,
+    email = '',
     extension,
+    fullname,
     host = 'dynamic',
     mailbox = '',
+    queues = '',
     secret,
     template = '',
     type = 'friend'
@@ -32,7 +34,7 @@ define asterisk::function::device(
     $ast_type = $type
     $ast_template = $template
     $base = "${asterisk::params::basedir}/sip.conf.d/devices"
-
+    $description = "${fullname} <${extension}>"
     $md5secret = md5("${name}:asterisk:${secret}")
 
     file { "$base/${name}.conf":
@@ -40,6 +42,21 @@ define asterisk::function::device(
         content => template('asterisk/etc/asterisk/sip.conf.d/devices/template.conf.erb'),
         notify  => Exec['asterisk-module-reload-chan_sip.so'],
         require => File[$base],
+    }
+
+    if ($mailbox != '') {
+        asterisk::function::voicemail { $mailbox:
+            description => $description,
+            email       => $email,
+            fullname    => $fullname,
+        }
+    }
+
+    if ($queues != '') {
+        asterisk::function::queuemember { $name:
+            channel => $channel,
+            queue   => $queues,
+        }
     }
 }
 
