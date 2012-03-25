@@ -15,22 +15,16 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define apache::function::virtualhost(
-    content = ''
-) {
-    require apache::params
+class redmine::common::init {
+    include redmine::params
+    include redmine::common::install
+    include redmine::common::config
+    include redmine::common::service
 
-    if ($content != '') {
-        apache::function::virtualhost::common { $name:
-            content => $content,
-        }
-    } else {
-        file { "${apache::params::rootdir}/${name}/conf/default.conf":
-            content => template('apache/etc/apache2/sites-available/virtualhost-default.conf.erb'),
-            ensure  => present,
-            notify  => Class['apache::common::service'],
-            require => File["${apache::params::rootdir}/${name}/conf"],
-        }
+    File {
+        group   => $redmine::params::group,
+        mode    => $redmine::params::mode,
+        owner   => $redmine::params::owner,
     }
 }
 

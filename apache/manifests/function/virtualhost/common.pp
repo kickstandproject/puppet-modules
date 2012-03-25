@@ -29,16 +29,16 @@ define apache::function::virtualhost::common(
 
     file { "${apache::params::rootdir}/${name}":
         ensure  => directory,
-        purge   => true,
         notify  => Class['apache::common::service'],
+        purge   => true,
         recurse => true,
         require => File[$apache::params::rootdir],
     }
 
     file { "${apache::params::rootdir}/${name}/conf":
         ensure  => directory,
-        purge   => true,
         notify  => Class['apache::common::service'],
+        purge   => true,
         recurse => true,
         require => File["${apache::params::rootdir}/${name}"],
     }
@@ -57,21 +57,16 @@ define apache::function::virtualhost::common(
         owner   => root,
     }
 
-    file { ["${apache::params::logdir}/${name}/access.log",
-        "${apache::params::logdir}/${name}/error.log"]:
+    file { [
+        "${apache::params::logdir}/${name}/access.log",
+        "${apache::params::logdir}/${name}/error.log"
+    ]:
         ensure  => present,
         group   => adm,
         mode    => '0640',
         notify  => Class['apache::common::service'],
         owner   => root,
         require => File["${apache::params::logdir}/${name}"],
-    }
-
-    exec { "apache_a2ensite_${name}":
-        command => "/usr/sbin/a2ensite ${name}",
-        creates => "${apache::params::basedir}/sites-enabled/${name}",
-        notify  => Class['apache::common::service'],
-        require => File["${apache::params::basedir}/sites-enabled"],
     }
 
     if ($content != '') {

@@ -1,0 +1,10 @@
+redmine redmine/instances/default/internal/skip-preseed boolean true
+redmine redmine/instances/default/mysql/method select tcp/ip
+redmine redmine/instances/default/database-type select mysql
+redmine redmine/instances/default/remote/newhost string <%= scope.lookupvar('redmine::params::db_server') %>
+redmine redmine/instances/default/remote/port string <%= scope.lookupvar('::mysql::params::port') %>
+redmine redmine/instances/default/mysql/admin-user string <%= scope.lookupvar('::mysql::params::db_user') %>
+redmine redmine/instances/default/mysql/admin-pass password <%= scope.lookupvar('::mysql::params::db_password') %>
+redmine redmine/instances/default/db/app-user string <%= scope.lookupvar('redmine::params::db_user') %>
+redmine redmine/instances/default/mysql/app-pass password <%= scope.lookupvar('redmine::params::db_password') %>
+redmine redmine/instances/default/db/dbname string <%= scope.lookupvar('redmine::params::db_name') %>

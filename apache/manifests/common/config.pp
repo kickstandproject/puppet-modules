@@ -29,7 +29,6 @@ class apache::common::config {
 
     file { "${apache::params::basedir}/sites-available":
         ensure  => directory,
-        force   => true,
         purge   => true,
         recurse => true,
         require => File[$apache::params::basedir],
@@ -37,7 +36,6 @@ class apache::common::config {
 
     file { "${apache::params::basedir}/sites-enabled":
         ensure  => directory,
-        force   => true,
         purge   => true,
         recurse => true,
         require => File[$apache::params::basedir],

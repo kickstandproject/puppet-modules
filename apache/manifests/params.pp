@@ -69,7 +69,7 @@ class apache::params {
     }
 
     $virtualhostdir = $operatingsystem ? {
-        default => '/etc/apache2/sites-available',
+        default => '/etc/apache2/sites-enabled',
     }
 }
 
