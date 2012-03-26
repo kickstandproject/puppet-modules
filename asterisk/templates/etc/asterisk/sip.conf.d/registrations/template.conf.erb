@@ -3,9 +3,10 @@ register => <%= user %><% if (domain != '') then %>@<%= domain %><% end %><% if 
 
 [<% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>]
 type = peer
-host = <%= host %>
-secret = <%= secret %>
 context = <%= context %>
-nat = yes
+defaultuser = <% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>
 directmedia = no
+host = <%= host %>
+nat = yes
+secret = <%= secret %>
 quality = yes
