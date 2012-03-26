@@ -15,17 +15,18 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class redmine::mysql::common::install {
-    require ::mysql::params
-    include redmine::params
+define apt::function::preseed(
+    $content
+) {
+    require apt::client
 
-    package { $redmine::mysql::params::packagename:
+    file { "/var/local/preseed/${name}":
         ensure  => present,
-    }
-
-
-    apt::function::preseed { "${redmine::params::packagename}.preseed":
-        content => template("redmine/var/log/preseed/${redmine::params::packagename}.preseed.erb"),
+        content => $content,
+        group   => root,
+        mode    => '0400',
+        owner   => root,
+        require => File['/var/local/preseed'],
     }
 }
 

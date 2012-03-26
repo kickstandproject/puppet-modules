@@ -40,6 +40,12 @@ class apt::common::config {
         require => File[$apt::params::basedir],
     }
 
+    file { '/var/local/preseed':
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
+    }
+
     file { "${apt::params::basedir}/sources.list":
         ensure  => present,
         content => template('apt/etc/apt/sources.list.erb'),
