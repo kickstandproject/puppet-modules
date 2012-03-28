@@ -56,6 +56,11 @@ class asterisk::params {
         default => '/var/spool/asterisk',
     }
 
+    $ensure = $asterisk_ensure ? {
+        ''      => 'present',
+        default => $asterisk_ensure,
+    }
+
     $voicemail = $asterisk_voicemail ? {
         ''      => false,
         'yes'   => true,
