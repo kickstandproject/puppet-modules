@@ -35,13 +35,28 @@ define asterisk::function::device(
     $ast_template = $template
     $base = "${asterisk::params::basedir}/sip.conf.d/devices"
     $description = "${fullname} <${extension}>"
-    $md5secret = md5("${name}:asterisk:${secret}")
+    $split = split($name, '-')
 
-    file { "$base/${name}.conf":
+    if ($split[1] != '') {
+        $line = $split[1]
+    } else {
+        $line = '1'
+    }
+
+    $filename = "${split[0]}-${line}"
+    $md5secret = md5("${filename}:asterisk:${secret}")
+
+    file { "$base/${filename}.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/sip.conf.d/devices/template.conf.erb'),
         notify  => Exec['asterisk-module-reload-chan_sip.so'],
         require => File[$base],
+    }
+
+    exec { "asterisk-database-put-${filename}":
+        command     => "asterisk -rx \"database put ${channel}/Device ${extension}@${context} ${filename}\"",
+        refreshonly => true,
+        subscribe   => File["$base/${filename}.conf"],
     }
 
     if ($mailbox != '') {
@@ -53,7 +68,7 @@ define asterisk::function::device(
     }
 
     if ($queues != '') {
-        asterisk::function::queuemember { $name:
+        asterisk::function::queuemember { $filename:
             channel => $channel,
             queue   => $queues,
         }

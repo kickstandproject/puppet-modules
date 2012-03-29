@@ -27,6 +27,7 @@ class asterisk::voicemail::common::config {
 
     file { "${asterisk::params::basedir}/voicemail.conf.d":
         ensure  => directory,
+        force   => true,
         notify  => Exec['asterisk-module-reload-app_voicemail.so'],
         purge   => true,
         recurse => true,
