@@ -111,6 +111,11 @@ class asterisk::common::config {
         ensure  => directory,
         require => Class['asterisk::common::install'],
     }
+
+    polycom-provision::function::sip-basic { $name:
+        server  => $asterisk::params::server,
+        port    => $asterisk::params::sip_port,
+   }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

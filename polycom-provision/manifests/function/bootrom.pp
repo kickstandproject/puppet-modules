@@ -15,20 +15,15 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define apache::function::virtualhost(
-    content = ''
+define polycom-provision::function::bootrom(
 ) {
-    require apache::params
+    require polycom-bootrom::client
+    include polycom-provision::params
 
-    apache::function::virtualhost::common { $name:
-        content => $content,
-    }
-
-    file { "${apache::params::rootdir}/${name}/conf/default.conf":
-        content => template('apache/etc/apache2/sites-available/virtualhost-default.conf.erb'),
-        ensure  => present,
-        notify  => Class['apache::common::service'],
-        require => File["${apache::params::rootdir}/${name}/conf"],
+    file { "${polycom-provision::params::basedir}/${name}":
+        ensure  => link,
+        target  => "${polycom-bootrom::params::basedir}/${name}",
+        require => File[$polycom-provision::params::basedir],
     }
 }
 

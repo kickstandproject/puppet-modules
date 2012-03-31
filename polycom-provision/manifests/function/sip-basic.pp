@@ -15,20 +15,22 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define apache::function::virtualhost(
-    content = ''
+define polycom-provision::function::sip-basic(
+    $server,
+    $port = '5060',
 ) {
-    require apache::params
+    require polycom-provision::server
 
-    apache::function::virtualhost::common { $name:
-        content => $content,
+    File {
+        group   => $polycom-provision::params::group,
+        mode    => $polycom-provision::params::mode,
+        owner   => $polycom-provision::params::owner,
     }
 
-    file { "${apache::params::rootdir}/${name}/conf/default.conf":
-        content => template('apache/etc/apache2/sites-available/virtualhost-default.conf.erb'),
+    file { "${polycom-provision::params::basedir}/sip-basic.cfg":
         ensure  => present,
-        notify  => Class['apache::common::service'],
-        require => File["${apache::params::rootdir}/${name}/conf"],
+        content => template('polycom-provision/var/lib/polycom-provision/sip-basic.cfg.erb'),
+        require => File[$polycom-provision::params::basedir],
     }
 }
 

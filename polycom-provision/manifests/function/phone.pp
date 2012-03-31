@@ -15,20 +15,16 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define apache::function::virtualhost(
-    content = ''
+define polycom-provision::function::phone(
+    label = '',
+    password
 ) {
-    require apache::params
+    require polycom-provision::server
 
-    apache::function::virtualhost::common { $name:
-        content => $content,
-    }
-
-    file { "${apache::params::rootdir}/${name}/conf/default.conf":
-        content => template('apache/etc/apache2/sites-available/virtualhost-default.conf.erb'),
+    file { "${polycom-provision::params::basedir}/configs/${name}-user.cfg":
         ensure  => present,
-        notify  => Class['apache::common::service'],
-        require => File["${apache::params::rootdir}/${name}/conf"],
+        content => template('polycom-provision/var/lib/polycom-provision/configs/template.cfg.erb'),
+        require => File["${polycom-provision::params::basedir}/configs"],
     }
 }
 

@@ -15,21 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define apache::function::virtualhost(
-    content = ''
-) {
-    require apache::params
-
-    apache::function::virtualhost::common { $name:
-        content => $content,
-    }
-
-    file { "${apache::params::rootdir}/${name}/conf/default.conf":
-        content => template('apache/etc/apache2/sites-available/virtualhost-default.conf.erb'),
-        ensure  => present,
-        notify  => Class['apache::common::service'],
-        require => File["${apache::params::rootdir}/${name}/conf"],
-    }
+class polycom-bootrom::common::monitor {
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

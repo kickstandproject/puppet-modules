@@ -67,6 +67,11 @@ class asterisk::params {
         default => $asterisk_voicemail,
     }
 
+    $server = $asterisk_server ? {
+        ''      => $fqdn,
+        default => $asterisk_server,
+    }
+
     $sip_port = $asterisk_sip_port ? {
         ''      => '5060',
         default => $asterisk_sip_port,
