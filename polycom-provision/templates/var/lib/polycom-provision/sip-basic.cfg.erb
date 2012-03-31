@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Generated sip-basic.cfg Configuration File -->
 <polycomConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="polycomConfig.xsd">
-  <msg>
-    <msg.mwi msg.mwi.1.callBackMode="registration" msg.mwi.2.callBackMode="registration"/>
+  <msg msg.bypassInstantMessage="1">
+    <msg.mwi msg.mwi.1.callBackMode="contact" msg.mwi.1.callBack="*97" msg.mwi.2.callBackMode="contact" msg.mwi.2.callBack="*97" />
   </msg>
   <voIpProt>
-    <voIpProt.SIP voIpProt.SIP.enable="1">
+    <voIpProt.SIP voIpProt.SIP.enable="0">
       <voIpProt.SIP.outboundProxy voIpProt.SIP.outboundProxy.address=""/>
     </voIpProt.SIP>
     <voIpProt.server voIpProt.server.1.address="<%= server %>" voIpProt.server.1.port="<%= port %>" voIpProt.server.2.address="" voIpProt.server.2.port="0"/>
