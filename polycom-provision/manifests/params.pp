@@ -28,6 +28,11 @@ class polycom-provision::params {
         default => true,
     }
 
+    $hostname = $polycom-provision_hostname ? {
+        ''      => $fqdn,
+        default => $polycom-provision_hostname,
+    }
+
     $mode = $operatingsystem ? {
         default => '0644',
     }
@@ -35,6 +40,20 @@ class polycom-provision::params {
     $owner = $operatingsystem ? {
         default => 'root',
     }
+
+    $password = $polycom-provision_password ? {
+        default => $polycom-provision_password,
+    }
+
+    $username = $polycom-provision_username ? {
+        ''      => 'ksp-polycom',
+        default => $polycom-provision_username,
+    }
+
+    if ($polycom-provision::params::password == '') {
+        fail("You must assign a default password using '\$polycom-provision_password'")
+    }
+
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

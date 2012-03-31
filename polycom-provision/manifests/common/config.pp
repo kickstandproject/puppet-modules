@@ -89,9 +89,17 @@ class polycom-provision::common::config {
     polycom-provision::function::bootrom { $bootroms:
     }
 
-    apache::function::virtualhost { $fqdn:
-        content => template('polycom-provision/etc/apache2/conf.d/polycom-provision.conf.erb'),
+    apache::function::virtualhost { $polycom-provision::params::hostname:
+        content     => template('polycom-provision/etc/apache2/conf.d/polycom-provision.conf.erb'),
     }
+
+    apache::function::htdigest { $polycom-provision::params::hostname:
+        authname    => 'polycom-provision',
+        location    => '/polycom',
+        password    => $polycom-provision::params::password,
+        username    => $polycom-provision::params::username,
+    }
+        
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
