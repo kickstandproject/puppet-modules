@@ -99,7 +99,6 @@ class polycom-provision::common::config {
         password    => $polycom-provision::params::password,
         username    => $polycom-provision::params::username,
     }
-        
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

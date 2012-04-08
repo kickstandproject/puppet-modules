@@ -24,7 +24,20 @@ define polycom-provision::function::phone(
     file { "${polycom-provision::params::basedir}/configs/${name}-user.cfg":
         ensure  => present,
         content => template('polycom-provision/var/lib/polycom-provision/configs/template.cfg.erb'),
+        notify  => Exec["asterisk-sip-notify-${name}"],
         require => File["${polycom-provision::params::basedir}/configs"],
+    }
+
+    exec { "asterisk-sip-notify-${name}":
+        command     => "asterisk -rx \"sip notify polycom-check-cfg ${name}-1\"",
+        refreshonly => true,
+        subscribe   => [
+            Class['polycom-provision::common::config'],
+            File["${polycom-provision::params::basedir}/site.cfg"],
+            File["${polycom-provision::params::basedir}/sip-basic.cfg"],
+        ],
+        
+
     }
 }
 
