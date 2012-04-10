@@ -6,6 +6,7 @@ package=$3
 version=$4
 changes_file=$5
 repo=<%= name %>/<%= repo %>/<%= ostype %>
+architecture=$(dpkg --print-architecture)
 
 # Only care about packages being added
 if [ "$action" != "accepted" ]; then
@@ -18,6 +19,13 @@ if [ $? = 1 ]; then
 	exit 0
 fi
 
+dsc=${changes_file/_source.changes/.dsc}
+arch=$(cat $dsc | sed -n -e 's/Architecture: //p')
+
 # Kick off the job
-echo "$package $version 1 $release amd64 None $repo" | sudo /usr/sbin/rebuildd-job add
-echo "$package $version 5 $release i386 None $repo" | sudo /usr/sbin/rebuildd-job add
+if [ "$arch" == "all" ]; then
+	echo "$package $version 1 $release $architecture None $repo" | sudo /usr/sbin/rebuildd-job add
+else
+	echo "$package $version 1 $release amd64 None $repo" | sudo /usr/sbin/rebuildd-job add
+	echo "$package $version 5 $release i386 None $repo" | sudo /usr/sbin/rebuildd-job add
+fi

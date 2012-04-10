@@ -1,7 +1,7 @@
 [mail]
 mailto = <%= scope.lookupvar('rebuildd::params::email') %>
-from = rebuildd@localhost
-subject_prefix = [rebuildd]
+from = root@localhost
+subject_prefix =
 
 [http]
 logfile = /var/log/rebuildd/httpd.log
@@ -36,5 +36,5 @@ port = 9999
 time_format = %d-%m-%Y %H:%M:%S
 logs_dir = /var/log/rebuildd/build_logs
 mail_failed = 1
-mail_successful = 0
+mail_successful = 1
 file = /var/log/rebuildd/rebuildd.log
