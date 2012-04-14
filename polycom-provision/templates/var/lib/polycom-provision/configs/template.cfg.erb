@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Registration info -->
 <userinfo>
-<reg reg.1.displayName="Paul Belanger" reg.1.address="<%= name %>-1" reg.1.auth.userId="<%= name %>-1" reg.1.auth.password="<%= password %>" reg.1.type="private" <% if (label != '') then %>reg.1.label="<%= label %>"<% end %>/>
+<% hashdata.each_pair do |key, value| %>
+	<reg reg.<%= key %>.displayName="<%= value['fullname'] %>" reg.<%= key %>.address="<%= name %>-<%= key %>" reg.<%= key %>.auth.userId="<%= name %>-<%= key %>" reg.<%= key %>.auth.password="<%= value['password'] %>" reg.<%= key %>.type="private" <% if (value['label'] != '') then %>reg.<%= key %>.label="<%= value['label'] %>"<% end %>/>
+<% end %>
 </userinfo>

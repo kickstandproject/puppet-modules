@@ -15,9 +15,8 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define polycom-provision::function::phone(
-    label = '',
-    password
+define polycom-provision::function::device(
+    hashdata
 ) {
     require polycom-provision::server
 
@@ -36,8 +35,6 @@ define polycom-provision::function::phone(
             File["${polycom-provision::params::basedir}/site.cfg"],
             File["${polycom-provision::params::basedir}/sip-basic.cfg"],
         ],
-        
-
     }
 }
 

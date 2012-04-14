@@ -34,11 +34,15 @@ class polycom-provision::common::config {
 
     file { "${polycom-provision::params::basedir}/configs":
         ensure  => directory,
+        purge   => true,
+        recurse => true,
         require => File[$polycom-provision::params::basedir],
     }
 
     file { "${polycom-provision::params::basedir}/contacts":
         ensure  => directory,
+        purge   => true,
+        recurse => true,
         require => File[$polycom-provision::params::basedir],
     }
 
