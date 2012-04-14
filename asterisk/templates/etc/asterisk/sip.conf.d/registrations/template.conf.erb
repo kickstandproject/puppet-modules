@@ -1,12 +1,11 @@
 [general](+)
 register => <%= user %><% if (domain != '') then %>@<%= domain %><% end %><% if (secret != '') then %>:<%= secret %><% end %>@<%= host %>/<% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>
 
-[<% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>]
+[<% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>]<% if (ast_template != '') then %>(<%= ast_template %>)<% end %>
 type = peer
 context = <%= context %>
 defaultuser = <% if (extension != '') then %><%= extension %><% else %><%= user %><% end %>
 directmedia = no
 host = <%= host %>
-nat = yes
 secret = <%= secret %>
 quality = yes

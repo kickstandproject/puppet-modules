@@ -81,6 +81,11 @@ class asterisk::params {
         ''      => false,
         default => $asterisk_externaddr,
     }
+
+    $externhost = $asterisk_externhost ? {
+        ''      => false,
+        default => $asterisk_externhost,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

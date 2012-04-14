@@ -7,3 +7,10 @@ permit = <%= network_eth0 %>/<%= netmask_eth0 %>
 
 [ksp-local-hd-phone](!,ksp-local-phone)
 allow = g722
+
+[ksp-itsp](!)
+allow = ulaw
+allow = gsm
+
+[ksp-hd-itsp](!,ksp-itsp)
+allow = g722

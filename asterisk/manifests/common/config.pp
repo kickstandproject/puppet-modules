@@ -74,7 +74,7 @@ class asterisk::common::config {
         require => File["${asterisk::params::basedir}/sip.conf.d/20includes.conf"],
     }
 
-    if ($asterisk::params::externaddr) {
+    if (($asterisk::params::externaddr) or ($asterisk::params::externhost)) {
         file { "${asterisk::params::basedir}/sip.conf.d/10nat.conf":
             ensure  => present,
             content => template('asterisk/etc/asterisk/sip.conf.d/10nat.conf.erb'),

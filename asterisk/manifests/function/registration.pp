@@ -20,10 +20,12 @@ define asterisk::function::registration(
     domain = '',
     extension = '',
     secret,
+    template = 'ksp-itsp',
 ) {
     require asterisk::server
 
     $base = "${asterisk::params::basedir}/sip.conf.d/registrations"
+    $ast_template = $template
 
     $split = split($name, '@')
     $user = $split[0]
