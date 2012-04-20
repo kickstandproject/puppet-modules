@@ -86,6 +86,11 @@ class asterisk::params {
         ''      => false,
         default => $asterisk_externhost,
     }
+
+    $sip_allowguest = $asterisk_sip_allowguest ? {
+        ''      => 'no',
+        default => $asterisk_sip_allowguest,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

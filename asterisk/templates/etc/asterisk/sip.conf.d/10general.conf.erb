@@ -1,3 +1,4 @@
 [general](+)
 udpbindaddr = <%= ipaddress_eth0 %>:<%= scope.lookupvar('asterisk::params::sip_port') %>
 contactpermit = <%= network_eth0 %>/<%= netmask_eth0 %>
+allowguest = <%= scope.lookupvar('asterisk::params::sip_allowguest') %>
