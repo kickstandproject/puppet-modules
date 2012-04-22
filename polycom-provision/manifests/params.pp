@@ -29,7 +29,7 @@ class polycom-provision::params {
     }
 
     $hostname = $polycom-provision_hostname ? {
-        ''      => $fqdn,
+        ''      => $::fqdn,
         default => $polycom-provision_hostname,
     }
 

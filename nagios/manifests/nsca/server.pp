@@ -16,10 +16,10 @@
 # file at the top of the source tree.
 #
 class nagios::nsca::server inherits nagios::nsca::common::init {
-    File            <<| tag == "$fqdn" |>>
-    Nagios_command  <<| tag == "$fqdn" |>>
-    Nagios_host     <<| tag == "$fqdn" |>>
-    Nagios_service  <<| tag == "$fqdn" |>>
+    File            <<| tag == "$::fqdn" |>>
+    Nagios_command  <<| tag == "$::fqdn" |>>
+    Nagios_host     <<| tag == "$::fqdn" |>>
+    Nagios_service  <<| tag == "$::fqdn" |>>
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -36,7 +36,7 @@ class nagios::apache::config {
         require => Class['apache::common::config'],
     }
 
-    apache::function::virtualhost { $fqdn:
+    apache::function::virtualhost { $::fqdn:
         content => template('nagios/etc/apache2/conf.d/nagios3.conf.erb'),
     }
 }

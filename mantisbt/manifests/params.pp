@@ -78,7 +78,7 @@ class mantisbt::params {
     }
 
     $hostname = $mantisbt_hostname ? {
-        ''      => $fqdn,
+        ''      => $::fqdn,
         default => $mantisbt_hostname,
     }
 

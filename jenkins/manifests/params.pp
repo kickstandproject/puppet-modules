@@ -53,7 +53,7 @@ class jenkins::params {
     }
 
     $hostname = $jenkins_hostname ? {
-        ''      => $fqdn,
+        ''      => $::fqdn,
         default => $jenkins_hostname,
     }
 

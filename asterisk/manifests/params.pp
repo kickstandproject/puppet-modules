@@ -68,7 +68,7 @@ class asterisk::params {
     }
 
     $server = $asterisk_server ? {
-        ''      => $fqdn,
+        ''      => $::fqdn,
         default => $asterisk_server,
     }
 

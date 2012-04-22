@@ -36,7 +36,7 @@ define nagios::service::nsca (
 
     @@nagios_service { "@@${name} on ${hostname}":
         ensure              => $ensure,
-        host_name           => $fqdn,
+        host_name           => $::fqdn,
         notify              => Class['nagios::common::service'],
         service_description => $description,
         tag                 => $server,

@@ -70,7 +70,7 @@ class redmine::params {
     }
 
     $sitename = $redmine_sitename ? {
-        ''      => $fqdn,
+        ''      => $::fqdn,
         default => $redmine_sitename,
     }
 }
