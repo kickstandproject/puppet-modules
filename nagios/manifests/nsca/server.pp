@@ -16,6 +16,8 @@
 # file at the top of the source tree.
 #
 class nagios::nsca::server inherits nagios::nsca::common::init {
+    require $nagios::server
+
     File            <<| tag == "$::fqdn" |>>
     Nagios_command  <<| tag == "$::fqdn" |>>
     Nagios_host     <<| tag == "$::fqdn" |>>
