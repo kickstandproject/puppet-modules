@@ -16,43 +16,43 @@
 # file at the top of the source tree.
 #
 class mysql::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/etc/mysql',
     }
 
-    $configdir = $operatingsystem ? {
+    $configdir = $::operatingsystem ? {
         default => '/etc/mysql/conf.d',
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/mysql/my.cnf',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => false,
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'mysql-server',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'mysqld',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'mysql',
     }
 

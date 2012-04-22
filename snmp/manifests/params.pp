@@ -16,39 +16,39 @@
 # file at the top of the source tree.
 #
 class snmp::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/etc/snmp',
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/snmp/snmpd.conf',
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0640',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => false,
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'snmpd',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'snmp',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'snmpd',
     }
 }

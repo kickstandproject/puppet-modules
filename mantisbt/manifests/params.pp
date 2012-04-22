@@ -16,39 +16,39 @@
 # file at the top of the source tree.
 #
 class mantisbt::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/etc/mantis',
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/mantis',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'mantis',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'mantis',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'mantis',
     }
 

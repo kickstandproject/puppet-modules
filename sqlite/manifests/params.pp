@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class sqlite::params {
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'sqlite',
     }
 }

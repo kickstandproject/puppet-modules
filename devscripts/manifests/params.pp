@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class devscripts::params {
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'devscripts',
     }
 }

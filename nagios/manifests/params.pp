@@ -16,31 +16,31 @@
 # file at the top of the source tree.
 #
 class nagios::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/etc/nagios3',
     }
 
-    $configdir = $operatingsystem ? {
+    $configdir = $::operatingsystem ? {
         default => "/etc/nagios3/conf.d",
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/nagios3/nagios.cfg',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $configfile_group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_mode = $operatingsystem ? {
+    $configfile_mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $configfile_owner = $operatingsystem ? {
+    $configfile_owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
@@ -49,27 +49,27 @@ class nagios::params {
         default => $nagios_hostgroup,
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'nagios3-core',
     }
 
-    $packagename_plugins = $operatingsystem ? {
+    $packagename_plugins = $::operatingsystem ? {
         default => 'nagios-plugins-extra'
     }
 
-    $packagename_web = $operatingsystem ? {
+    $packagename_web = $::operatingsystem ? {
         default => 'nagios3-cgi',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'nagios',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'nagios3',
     }
 
-    $plugindir = $operatingsystem ? {
+    $plugindir = $::operatingsystem ? {
         default => '/usr/lib/nagios/plugins',
     }
 

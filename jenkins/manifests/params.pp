@@ -16,39 +16,39 @@
 # file at the top of the source tree.
 #
 class jenkins::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/var/lib/jenkins',
     }
 
-    $defaultfile = $operatingsystem ? {
+    $defaultfile = $::operatingsystem ? {
         default => '/etc/default/jenkins',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'jenkins',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'jenkins',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'jenkins',
     }
 

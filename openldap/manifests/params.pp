@@ -1,21 +1,21 @@
 class openldap::params {
-	$packagename = $operatingsystem ? {
+	$packagename = $::operatingsystem ? {
 		default => 'slapd',
 	}
 
-	$packagename_client = $operatingsystem ? {
+	$packagename_client = $::operatingsystem ? {
 		default => 'ldap-utils',
 	}
 
-	$servicename = $operatingsystem ? {
+	$servicename = $::operatingsystem ? {
 		default => 'slapd',
 	}
 
-	$processname = $operatingsystem ? {
+	$processname = $::operatingsystem ? {
 		default => 'slapd',
 	}
 
-	$hasstatus = $operatingsystem ? {
+	$hasstatus = $::operatingsystem ? {
 		default => true,
 	}
 }

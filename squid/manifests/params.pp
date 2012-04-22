@@ -16,35 +16,35 @@
 # file at the top of the source tree.
 #
 class squid::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/etc/squid3',
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/squid3/squid.conf',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'squid3',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'proxy',
     }
 
@@ -53,7 +53,7 @@ class squid::params {
         default => $squid_port,
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'squid3',
     }
 }

@@ -16,43 +16,43 @@
 # file at the top of the source tree.
 #
 class asterisk::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/etc/asterisk',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'asterisk',
     }
 
-    $hasrestart = $operatingsystem ? {
+    $hasrestart = $::operatingsystem ? {
         default => true,
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0640',
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'asterisk',
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'asterisk',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'asterisk',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'asterisk',
     }
 
-    $spooldir = $operatingsystem ? {
+    $spooldir = $::operatingsystem ? {
         default => '/var/spool/asterisk',
     }
 

@@ -16,31 +16,31 @@
 # file at the top of the source tree.
 #
 class nagios::nsca::params {
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/nsca.cfg',
     }
 
-    $configfile_client = $operatingsystem ? {
+    $configfile_client = $::operatingsystem ? {
         default => '/etc/send_nsca.cfg',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $configfile_group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_mode = $operatingsystem ? {
+    $configfile_mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $configfile_owner = $operatingsystem ? {
+    $configfile_owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => false,
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'nsca',
     }
 
@@ -49,7 +49,7 @@ class nagios::nsca::params {
         default => $nagios_nsca_server,
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'nsca',
     }
 }

@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class pbuilder::params {
-    $cachedir = $operatingsystem ? {
+    $cachedir = $::operatingsystem ? {
         default => '/var/cache/pbuilder',
     }
 
@@ -25,23 +25,23 @@ class pbuilder::params {
         default => $pbuilder_components,
     }
 
-    $configdir = $operatingsystem ? {
+    $configdir = $::operatingsystem ? {
         default => '/etc/pbuilder',
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/pbuilderrc',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
@@ -51,7 +51,7 @@ class pbuilder::params {
     }
 
     /* XXX TODO common module? */
-    $localbindir = $operatingsystem ? {
+    $localbindir = $::operatingsystem ? {
         default => '/usr/local/bin',
     }
 
@@ -65,7 +65,7 @@ class pbuilder::params {
         default => $pbuilder_mirror_protocol,
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'pbuilder',
     }
 }

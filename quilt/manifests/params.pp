@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class quilt::params {
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'quilt',
     }
 }

@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class redmine::mysql::params {
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'redmine-mysql',
     }
 }

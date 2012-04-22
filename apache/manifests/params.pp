@@ -16,59 +16,59 @@
 # file at the top of the source tree.
 #
 class apache::params {
-    $basedir = $operatingsystem ? {
+    $basedir = $::operatingsystem ? {
         default => '/etc/apache2',
     }
 
-    $configdir = $operatingsystem ? {
+    $configdir = $::operatingsystem ? {
         default => '/etc/apache2/conf.d',
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/apache2/apache2.conf',
     }
 
-    $group = $operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $defaultfile = $operatingsystem ? {
+    $defaultfile = $::operatingsystem ? {
         default => '/etc/default/apache2',
     }
 
-    $rootdir = $operatingsystem ? {
+    $rootdir = $::operatingsystem ? {
         default => '/var/www',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
-    $logdir = $operatingsystem ? {
+    $logdir = $::operatingsystem ? {
         default => '/var/log/apache2',
     }
 
-    $mode = $operatingsystem ? {
+    $mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $owner = $operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'apache2',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'apache2',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'apache2',
     }
 
-    $virtualhostdir = $operatingsystem ? {
+    $virtualhostdir = $::operatingsystem ? {
         default => '/etc/apache2/sites-enabled',
     }
 }

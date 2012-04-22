@@ -16,23 +16,23 @@
 # file at the top of the source tree.
 #
 class timezone::params {
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'tzdata',
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/timezone',
     }
 
-    $configfile_mode = $operatingsystem ? {
+    $configfile_mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $configfile_owner = $operatingsystem ? {
+    $configfile_owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $configfile_group = $::operatingsystem ? {
         default => 'root',
     }
 

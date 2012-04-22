@@ -16,39 +16,39 @@
 # file at the top of the source tree.
 #
 class openssh::params {
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'openssh-server',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'ssh',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'sshd',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
-    $configfile = $operatingsystem ? {
+    $configfile = $::operatingsystem ? {
         default => '/etc/ssh/sshd_config',
     }
 
-    $configfile_mode = $operatingsystem ? {
+    $configfile_mode = $::operatingsystem ? {
         default => '0600',
     }
 
-    $configfile_owner = $operatingsystem ? {
+    $configfile_owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $configfile_group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $configdir = $operatingsystem ? {
+    $configdir = $::operatingsystem ? {
         default => '/etc/ssh',
     }
 

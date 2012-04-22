@@ -16,39 +16,39 @@
 # file at the top of the source tree.
 #
 class openvpn::params {
-    $configdir = $operatingsystem ? {
+    $configdir = $::operatingsystem ? {
         default => '/etc/openvpn',
     }
 
-    $configfile_group = $operatingsystem ? {
+    $configfile_group = $::operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_mode = $operatingsystem ? {
+    $configfile_mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $configfile_owner = $operatingsystem ? {
+    $configfile_owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $defaultfile = $operatingsystem ? {
+    $defaultfile = $::operatingsystem ? {
         default => '/etc/default/openvpn',
     }
 
-    $hasstatus = $operatingsystem ? {
+    $hasstatus = $::operatingsystem ? {
         default => true,
     }
 
-    $packagename = $operatingsystem ? {
+    $packagename = $::operatingsystem ? {
         default => 'openvpn',
     }
 
-    $processname = $operatingsystem ? {
+    $processname = $::operatingsystem ? {
         default => 'openvpn',
     }
 
-    $servicename = $operatingsystem ? {
+    $servicename = $::operatingsystem ? {
         default => 'openvpn',
     }
 }
