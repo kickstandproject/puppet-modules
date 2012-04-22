@@ -1,0 +1,3 @@
+class mcollective::classes::firewall {
+
+}
