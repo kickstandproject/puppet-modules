@@ -24,20 +24,20 @@ class nagios::nsca::params {
         default => '/etc/send_nsca.cfg',
     }
 
-    $configfile_group = $::operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_mode = $::operatingsystem ? {
-        default => '0644',
-    }
-
-    $configfile_owner = $::operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
     $hasstatus = $::operatingsystem ? {
         default => false,
+    }
+
+    $mode = $::operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $::operatingsystem ? {
+        default => 'root',
     }
 
     $packagename = $::operatingsystem ? {

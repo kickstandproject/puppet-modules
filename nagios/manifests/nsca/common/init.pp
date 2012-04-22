@@ -20,6 +20,12 @@ class nagios::nsca::common::init {
     include nagios::nsca::common::install
     include nagios::nsca::common::config
     include nagios::nsca::common::service
+
+    File {
+        group   => $nagios::nsca::params::group,
+        mode    => $nagios::nsca::params::mode,
+        owner   => $nagios::nsca::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -22,8 +22,7 @@ class nagios::nsca::common::service {
         $ensure = running
     }
 
-    service { 'nagios_nsca':
-        name        => $nagios::nsca::params::servicename,
+    service { $nagios::nsca::params::servicename:
         enable      => true,
         ensure      => $ensure,
         hasrestart  => true,

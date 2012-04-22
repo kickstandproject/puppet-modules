@@ -28,27 +28,29 @@ define nagios::nsca::host(
         address => $address,
         ensure  => $ensure,
         notify  => Class['nagios::common::service'],
+        require => File["${nagios::params::configdir}/hosts"],
         target  => "${nagios::params::configdir}/hosts/${name}.cfg",
         use     => $use_active,
     }
 
     file { "${nagios::params::configdir}/hosts/${name}.cfg":
         ensure  => $ensure,
+        before  => Nagios_host[$name],
+        group   => $nagios::params::configfile_group,
         mode    => $nagios::params::configfile_mode,
         owner   => $nagios::params::configfile_owner,
-        group   => $nagios::params::configfile_group,
-        before  => Nagios_host[$name],
     }
 
     @@nagios_host { "@@${name}":
+        ensure      => $ensure,
         address     => $address ? {
             false   => $ipaddress,
             default => $address,
         },
         alias       => $name,
-        ensure      => $ensure,
         host_name   => $name,
         notify      => Class['nagios::common::service'],
+        require     => File["${nagios::params::configdir}/hosts"],
         tag         => $server,
         target      => "${nagios::params::configdir}/hosts/passive-${name}.cfg",
         use         => $use_passive,

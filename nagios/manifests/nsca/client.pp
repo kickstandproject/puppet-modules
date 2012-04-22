@@ -18,12 +18,6 @@
 class nagios::nsca::client inherits nagios::nsca::common::init {
     require nagios::params
 
-    File {
-        mode    => '0644',
-        owner   => $nagios::params::configfile_owner,
-        group   => $nagios::params::configfile_group,
-    }
-
     nagios_command { 'submit_ocsp':
         ensure          => present,
         command_line    => "${nagios::params::plugindir}/submit_ocsp \$HOSTNAME\$ '\$SERVICEDESC\$' \$SERVICESTATEID\$ '\$SERVICEOUTPUT\$'",
