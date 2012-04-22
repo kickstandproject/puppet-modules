@@ -25,8 +25,6 @@ define nagios::service::local (
     require nagios::client
     include nagios::params
 
-    $fname = regsubst($name, "\W", "_", "G")
-
     nagios_service { $name:
         check_command       => $check_command ? {
             false   => $name,
@@ -36,11 +34,11 @@ define nagios::service::local (
         hostgroup_name      => $hostgroup_name,
         notify              => Class['nagios::common::service'],
         service_description => $description,
-        target              => "${nagios::params::configdir}/services/${fname}.cfg",
+        target              => "${nagios::params::configdir}/services/${name}.cfg",
         use                 => $use,
     }
 
-    file { "${nagios::params::configdir}/services/${fname}.cfg":
+    file { "${nagios::params::configdir}/services/${name}.cfg":
         ensure  => $ensure,
         before  => Nagios_service[$name],
     }

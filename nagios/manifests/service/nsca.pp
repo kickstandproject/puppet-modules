@@ -26,8 +26,6 @@ define nagios::service::nsca (
     require nagios::client
     include nagios::params
 
-    $fname = regsubst($name, "\W", "_", "G")
-
     nagios::service::local { $name:
         ensure          => $ensure,
         check_command   => $check_command,
@@ -42,11 +40,11 @@ define nagios::service::nsca (
         notify              => Class['nagios::common::service'],
         service_description => $description,
         tag                 => $server,
-        target              => "${nagios::params::configdir}/services/passive/${fname}.on.${hostname}.cfg",
+        target              => "${nagios::params::configdir}/services/passive/${name}.on.${hostname}.cfg",
         use                 => $use_passive,
     }
 
-    @@file { "${nagios::params::configdir}/services/passive/${fname}.on.${hostname}.cfg":
+    @@file { "${nagios::params::configdir}/services/passive/${name}.on.${hostname}.cfg":
         ensure  => $ensure,
         group   => $nagios::params::configfile_group,
         mode    => $nagios::params::configfile_mode,
