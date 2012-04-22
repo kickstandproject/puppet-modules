@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 define apache::function::virtualhost(
-    content = ''
+    $content = ''
 ) {
     require apache::params
 

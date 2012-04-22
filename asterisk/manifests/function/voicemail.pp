@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 define asterisk::function::voicemail(
-    email = '',
-    fullname = '',
-    description = '',
+    $email = '',
+    $fullname = '',
+    $description = '',
 ) {
     $asterisk_voicemail = 'yes'
     require asterisk::server

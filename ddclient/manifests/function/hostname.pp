@@ -16,8 +16,8 @@
 # file at the top of the source tree.
 #
 define ddclient::function::hostname(
-    password,
-    username,
+    $password,
+    $username
 ) {
     require ddclient::client
 

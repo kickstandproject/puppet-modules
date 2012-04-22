@@ -16,8 +16,8 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queues(
-    strategy = '',
-    timeout = ''
+    $strategy = '',
+    $timeout = ''
 ) {
     asterisk::function::queue { $name:
         strategy    => $strategy,

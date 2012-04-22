@@ -16,18 +16,18 @@
 # file at the top of the source tree.
 #
 define asterisk::function::device(
-    callerid = '',
-    channel = 'SIP',
-    context,
-    email = '',
-    extension,
-    fullname,
-    host = 'dynamic',
-    mailbox = '',
-    queues = '',
-    secret,
-    template = '',
-    type = 'friend'
+    $callerid = '',
+    $channel = 'SIP',
+    $context,
+    $email = '',
+    $extension,
+    $fullname,
+    $host = 'dynamic',
+    $mailbox = '',
+    $queues = '',
+    $secret,
+    $template = '',
+    $type = 'friend'
 ) {
     require asterisk::server
 

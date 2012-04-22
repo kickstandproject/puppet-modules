@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 define polycom-provision::function::device(
-    hashdata
+    $hashdata
 ) {
     require polycom-provision::server
 

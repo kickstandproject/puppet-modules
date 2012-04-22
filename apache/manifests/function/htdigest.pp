@@ -16,10 +16,10 @@
 # file at the top of the source tree.
 #
 define apache::function::htdigest(
-    authname = 'default',
-    location,
-    password,
-    username
+    $authname = 'default',
+    $location,
+    $password,
+    $username
 ) {
     require apache::params
 

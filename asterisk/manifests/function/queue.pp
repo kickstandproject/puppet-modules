@@ -16,8 +16,8 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queue(
-    strategy = '',
-    timeout = ''
+    $strategy = '',
+    $timeout = ''
 ) {
     require asterisk::server
 

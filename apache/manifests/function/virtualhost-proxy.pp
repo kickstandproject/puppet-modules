@@ -16,8 +16,8 @@
 # file at the top of the source tree.
 #
 define apache::function::virtualhost-proxy(
-    host = 'localhost',
-    port
+    $host = 'localhost',
+    $port
 ) {
     require apache::params
 

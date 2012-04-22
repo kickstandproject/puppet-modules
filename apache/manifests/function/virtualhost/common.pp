@@ -17,7 +17,7 @@
 #
 #
 define apache::function::virtualhost::common(
-    content = ''
+    $content = ''
 ) {
     require apache::server
 
