@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class ntp::common::config {
-    require $ntp::params
+    include ntp::params
 
     file { $ntp::params::configfile:
         ensure  => present,
