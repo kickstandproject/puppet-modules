@@ -26,13 +26,14 @@ define nagios::service::local (
     include nagios::params
 
     nagios_service { $name:
+        ensure              => $ensure,
         check_command       => $check_command ? {
             false   => $name,
             default => $check_command,
         },
-        ensure              => $ensure,
         hostgroup_name      => $hostgroup_name,
         notify              => Class['nagios::common::service'],
+        require             => File["${nagios::params::configdir}/services"],
         service_description => $description,
         target              => "${nagios::params::configdir}/services/${name}.cfg",
         use                 => $use,
@@ -41,6 +42,7 @@ define nagios::service::local (
     file { "${nagios::params::configdir}/services/${name}.cfg":
         ensure  => $ensure,
         before  => Nagios_service[$name],
+        require => File["${nagios::params::configdir}/services"],
     }
 }
 

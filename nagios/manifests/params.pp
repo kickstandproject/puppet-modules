@@ -28,15 +28,7 @@ class nagios::params {
         default => '/etc/nagios3/nagios.cfg',
     }
 
-    $configfile_group = $::operatingsystem ? {
-        default => 'root',
-    }
-
-    $configfile_mode = $::operatingsystem ? {
-        default => '0644',
-    }
-
-    $configfile_owner = $::operatingsystem ? {
+    $group = $::operatingsystem ? {
         default => 'root',
     }
 
@@ -47,6 +39,14 @@ class nagios::params {
     $hostgroups = $nagios_hostgroups ? {
         ''      => 'all',
         default => $nagios_hostgroup,
+    }
+
+    $mode = $::operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $::operatingsystem ? {
+        default => 'root',
     }
 
     $packagename = $::operatingsystem ? {

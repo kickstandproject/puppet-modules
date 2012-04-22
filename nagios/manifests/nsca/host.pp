@@ -36,9 +36,9 @@ define nagios::nsca::host(
     file { "${nagios::params::configdir}/hosts/${name}.cfg":
         ensure  => $ensure,
         before  => Nagios_host[$name],
-        group   => $nagios::params::configfile_group,
-        mode    => $nagios::params::configfile_mode,
-        owner   => $nagios::params::configfile_owner,
+        group   => $nagios::params::group,
+        mode    => $nagios::params::mode,
+        owner   => $nagios::params::owner,
     }
 
     @@nagios_host { "@@${name}":
@@ -58,9 +58,9 @@ define nagios::nsca::host(
 
     @@file { "${nagios::params::configdir}/hosts/passive-${name}.cfg":
         ensure  => $ensure,
-        group   => $nagios::params::configfile_group,
-        mode    => $nagios::params::configfile_mode,
-        owner   => $nagios::params::configfile_owner,
+        group   => $nagios::params::group,
+        mode    => $nagios::params::mode,
+        owner   => $nagios::params::owner,
         tag     => $server,
     }
 }

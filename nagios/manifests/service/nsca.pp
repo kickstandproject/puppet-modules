@@ -38,6 +38,7 @@ define nagios::service::nsca (
         ensure              => $ensure,
         host_name           => $::fqdn,
         notify              => Class['nagios::common::service'],
+        require             => File["${nagios::params::configdir}/services/passive"],
         service_description => $description,
         tag                 => $server,
         target              => "${nagios::params::configdir}/services/passive/${name}.on.${hostname}.cfg",
@@ -46,9 +47,10 @@ define nagios::service::nsca (
 
     @@file { "${nagios::params::configdir}/services/passive/${name}.on.${hostname}.cfg":
         ensure  => $ensure,
-        group   => $nagios::params::configfile_group,
-        mode    => $nagios::params::configfile_mode,
-        owner   => $nagios::params::configfile_owner,
+        group   => $nagios::params::group,
+        mode    => $nagios::params::mode,
+        owner   => $nagios::params::owner,
+        require => File["${nagios::params::configdir}/services/passive"],
         tag     => $server,
     }
 }
