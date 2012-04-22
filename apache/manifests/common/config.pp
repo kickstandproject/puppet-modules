@@ -43,7 +43,15 @@ class apache::common::config {
 
     file { $apache::params::configdir:
         ensure  => directory,
+        purge   => true,
+        recurse => true,
         require => File[$apache::params::basedir],
+    }
+
+    file { "${apache::params::configdir}/security":
+        ensure  => present,
+        content => template('apache/etc/apache2/conf.d/security.erb'),
+        require => File[$apache::params::configdir],
     }
 
     file { $apache::params::configfile:
