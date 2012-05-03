@@ -15,22 +15,23 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class glance::mysql::init {
-    require glance::params
+define common::function::database(
+    $password,
+    $server,
+    $type,
+    $user,
+) {
+    if ($type == 'mysql') {
+        if ($server == 'localhost') {
+            require mysql::server
+        }
 
-    if ($glance::params::db_server == 'localhost') {
-        include mysql::server
-    }
-
-    mysql::functions::grant { 'glance::mysql::init':
-        db_name     => $glance::params::db_name,
-        db_password => $glance::params::db_password,
-        db_server   => $glance::params::db_server,
-        db_user     => $glance::params::db_user,
-    }
-
-    package { $glance::params::mysql:
-        ensure  => present,
+        mysql::functions::grant { $name:
+            db_name     => $name,
+            db_password => $password,
+            db_server   => $server,
+            db_user     => $user,
+        }
     }
 }
 
