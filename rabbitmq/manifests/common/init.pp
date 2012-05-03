@@ -16,6 +16,7 @@
 # file at the top of the source tree.
 #
 class rabbitmq::common::init {
+    include rabbitmq::params
     include rabbitmq::common::install
     include rabbitmq::common::config
     include rabbitmq::common::service
