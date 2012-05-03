@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class nova::scheduler::common::install {
-    require nova::scheduler::params
-
 	package { $nova::scheduler::params::packagename:
 		ensure	=> present,
 	}

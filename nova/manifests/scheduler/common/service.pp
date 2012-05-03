@@ -16,15 +16,12 @@
 # file at the top of the source tree.
 #
 class nova::scheduler::common::service {
-    require nova::params
-    require nova::scheduler::params
-
     service { $nova::scheduler::params::servicename:
         enable      => true,
         ensure      => running,
         hasrestart  => true,
         hasstatus   => $nova::scheduler::params::hasstatus,
-        require     => Class['nova::scheduler::common::config'],
+        require     => Class['nova::scheduler::common::install'],
         subscribe   => File[$nova::params::configfile],
     }
 }

@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class nova::scheduler::common::monitor {
-	require nova::scheduler::params
-
 	monitor::process { $name:
 		process	=> $nova::scheduler::params::processname,
 	}
