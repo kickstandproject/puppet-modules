@@ -1,0 +1,24 @@
+# Create top-level object in domain
+dn: <%= scope.lookupvar('openldap::params::domain') %>
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: <%= scope.lookupvar('openldap::params::organization') %>
+dc: <%= scope.lookupvar('openldap::params::dc') %>
+description: <%= scope.lookupvar('openldap::params::description') %>
+
+# Admin user.
+dn: cn=<%= scope.lookupvar('openldap::params::rootdn') %>,<%= scope.lookupvar('openldap::params::domain') %>
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: <%= scope.lookupvar('openldap::params::rootdn') %>
+description: <%= scope.lookupvar('openldap::params::admin_description') %>
+userPassword: <%= scope.lookupvar('openldap::params::admin_passwd') %>
+
+dn: ou=people,<%= scope.lookupvar('openldap::params::domain') %>
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,<%= scope.lookupvar('openldap::params::domain') %>
+objectClass: organizationalUnit
+ou: groups
