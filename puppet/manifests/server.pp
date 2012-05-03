@@ -16,10 +16,14 @@
 # file at the top of the source tree.
 #
 class puppet::server inherits puppet::common::init {
-    require puppet::params
+    require ruby-activerecord::client
+    require ruby-mysql::client
 
-    if ($puppet::params::db == 'mysql') {
-        include puppet::mysql::init
+    common::function::database { $puppet::params::db_name:
+        password    => $puppet::params::db_password,
+        server      => $puppet::params::db_server,
+        type        => $puppet::params::db,
+        user        => $puppet::params::db_user,
     }
 }
 
