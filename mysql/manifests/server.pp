@@ -23,10 +23,6 @@ class mysql::server inherits mysql::common::init {
     if ($monitor == 'yes') {
         include mysql::common::monitor
     }
-
-    if ($mysql::params::db_password != '') {
-        include mysql::common::password
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class mysql::common::config {
-    require mysql::params
-
     file { $mysql::params::basedir:
         ensure  => directory,
         require => Class['mysql::common::install'],
@@ -33,6 +31,12 @@ class mysql::common::config {
         content => template('mysql/etc/mysql/my.cnf.erb'),
         notify  => Class['mysql::common::service'],
         require => File[$mysql::params::basedir],
+    }
+
+    file { '/root/.my.cnf':
+        ensure  => present,
+        content => template('mysql/root/my.cnf.erb'),
+        mode    => 0400,
     }
 }
 
