@@ -37,6 +37,7 @@ class mysql::common::config {
         ensure  => present,
         content => template('mysql/root/my.cnf.erb'),
         mode    => 0400,
+        require => Class['mysql::common::install'],
     }
 }
 
