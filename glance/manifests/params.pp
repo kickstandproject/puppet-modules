@@ -52,6 +52,10 @@ class glance::params {
         default => 'glance-registry',
     }
 
+    $varlib = $::operatingsystem ? {
+        default => '/var/lib/glance',
+    }
+
     $db = $glance_db ? {
         ''      => 'mysql',
         default => $glance_db,

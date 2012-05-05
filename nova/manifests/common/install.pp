@@ -19,6 +19,15 @@ class nova::common::install {
 	package { $nova::params::packagename:
 		ensure	=> present,
 	}
+
+    common::function::database { $nova::params::packagename:
+        notify      => Exec['nova-manage-db-sync'],
+        password    => $nova::params::db_password,
+        server      => $nova::params::db_server,
+        table       => $nova::params::db_name,
+        type        => $nova::params::db,
+        user        => $nova::params::db_user,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

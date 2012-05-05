@@ -19,6 +19,15 @@ class glance::common::install {
 	package { $glance::params::packagename:
 		ensure	=> present,
 	}
+
+    common::function::database { $glance::params::packagename:
+        notify      => Exec['glance-manage-db-sync'],
+        password    => $glance::params::db_password,
+        server      => $glance::params::db_server,
+        table       => $glance::params::db_name,
+        type        => $glance::params::db,
+        user        => $glance::params::db_user,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

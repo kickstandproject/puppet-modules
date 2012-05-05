@@ -16,7 +16,6 @@
 # file at the top of the source tree.
 #
 class glance::common::config {
-
     file { $glance::params::basedir:
         ensure  => directory,
         require => Class['glance::common::install'],
@@ -27,6 +26,21 @@ class glance::common::config {
         content => template('glance/etc/glance/glance-registry.conf.erb'),
         notify  => Class['glance::common::service'],
         require => File[$glance::params::basedir],
+    }
+
+    file { $glance::params::varlib:
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
+        require => Class['glance::common::install'],
+    }
+
+    file { [
+        "${glance::params::varlib}/image-cache",
+        "${glance::params::varlib}/images"
+    ]:
+        ensure  => directory,
+        require => File[$glance::params::varlib],
     }
 }
 

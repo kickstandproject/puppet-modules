@@ -15,31 +15,16 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define common::function::database(
-    $password,
-    $server,
-    $table,
-    $type,
-    $user,
+define puppet::function::localconfig(
+    $directory = $name,
 ) {
     require puppet::client
 
-    if (!defined(File["${puppet::params::varlocal}/${name}"])) {
-        puppet::function::localconfig { $name:
-        }
-    }
-
-    if ($type == 'mysql') {
-        if ($server == 'localhost') {
-            require mysql::server
-        }
-
-        mysql::functions::grant { $name:
-            db_name     => $table,
-            db_password => $password,
-            db_server   => $server,
-            db_user     => $user,
-        }
+    file { "${puppet::params::varlocal}/${directory}":
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
+        require => File[$puppet::params::varlocal],
     }
 }
 

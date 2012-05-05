@@ -48,6 +48,14 @@ class puppet::common::config {
         notify  => Class['puppet::common::service'],
         require => Class['puppet::common::install'],
     }
+
+    file { $puppet::params::varlocal:
+        ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
+        require => Class['puppet::common::install'],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

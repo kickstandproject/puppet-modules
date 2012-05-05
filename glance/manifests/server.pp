@@ -16,13 +16,6 @@
 # file at the top of the source tree.
 #
 class glance::server inherits glance::common::init {
-    common::function::database { $glance::params::db_name:
-        password    => $glance::params::db_password,
-        server      => $glance::params::db_server,
-        type        => $glance::params::db,
-        user        => $glance::params::db_user,
-    }
-
     package { $glance::params::mysql:
         ensure  => present,
     }

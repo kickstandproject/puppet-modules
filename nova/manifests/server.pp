@@ -18,13 +18,6 @@
 class nova::server inherits nova::common::init {
     require rabbitmq::server
 
-    common::function::database { $nova::params::db_name:
-        password    => $nova::params::db_password,
-        server      => $nova::params::db_server,
-        type        => $nova::params::db,
-        user        => $nova::params::db_user,
-    }
-
     if ($nova::params::api) {
         include nova::api::server
     }

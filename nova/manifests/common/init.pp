@@ -20,6 +20,7 @@ class nova::common::init {
     include nova::common::install
     include nova::common::config
     include nova::common::service
+    include nova::common::command
 
     File {
         group   => $nova::params::group,

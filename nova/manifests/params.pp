@@ -52,6 +52,10 @@ class nova::params {
         default => 'nova-compute',
     }
 
+    $varlib = $::operatingsystem ? {
+        default => '/var/lib/nova',
+    }
+
     $db = $nova_db ? {
         ''      => 'mysql',
         default => $nova_db,

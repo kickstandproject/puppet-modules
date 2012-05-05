@@ -1,5 +1,5 @@
 <% if db_name != "*" then %>
 CREATE DATABASE IF NOT EXISTS <%= db_name %>;
 <% end %>
-GRANT <%= db_privileges %> ON <%= db_name %>.* TO '<%= db_user %>'@'<%= db_server %>' IDENTIFIED BY '<%= db_password %>';
+GRANT ALL ON <%= db_name %>.* TO '<%= db_user %>'@'<%= db_server %>' IDENTIFIED BY '<%= db_password %>';
 FLUSH PRIVILEGES;

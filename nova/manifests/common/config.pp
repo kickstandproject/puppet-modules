@@ -27,6 +27,27 @@ class nova::common::config {
         notify  => Class['nova::common::service'],
         require => File[$nova::params::basedir],
     }
+
+    file { $nova::params::varlib:
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
+        require => Class['nova::common::install'],
+    }
+
+    file { [
+        "${nova::params::varlib}/buckets",
+        "${nova::params::varlib}/CA",
+        "${nova::params::varlib}/images",
+        "${nova::params::varlib}/instances",
+        "${nova::params::varlib}/keys",
+        "${nova::params::varlib}/networks",
+        "${nova::params::varlib}/tmp"
+    ]:
+        ensure  => directory,
+        require => File[$nova::params::varlib],
+    }
+
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

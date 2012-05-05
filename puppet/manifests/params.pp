@@ -24,6 +24,10 @@ class puppet::params {
         default => '/etc/puppet/puppet.conf',
     }
 
+    $varlocal = $::operatingsystem ? {
+        default => '/var/local/puppet',
+    }
+
     $defaultsfile = $::operatingsystem ? {
         default => '/etc/default/puppet',
     }

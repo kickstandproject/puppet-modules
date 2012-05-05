@@ -20,6 +20,7 @@ class glance::common::init {
     include glance::common::install
     include glance::common::config
     include glance::common::service
+    include glance::common::command
 
     File {
         group   => $glance::params::group,

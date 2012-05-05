@@ -15,31 +15,20 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define common::function::database(
-    $password,
-    $server,
-    $table,
-    $type,
-    $user,
-) {
-    require puppet::client
-
-    if (!defined(File["${puppet::params::varlocal}/${name}"])) {
-        puppet::function::localconfig { $name:
-        }
-    }
-
-    if ($type == 'mysql') {
-        if ($server == 'localhost') {
-            require mysql::server
-        }
-
-        mysql::functions::grant { $name:
-            db_name     => $table,
-            db_password => $password,
-            db_server   => $server,
-            db_user     => $user,
-        }
+class nova::common::command {
+    exec { 'nova-manage-db-sync':
+        before      => [
+            Class['nova::common::service'],
+            Class['nova::api::common::service'],
+            Class['nova::cert::common::service'],
+            Class['nova::network::common::service'],
+            Class['nova::objectstore::common::service'],
+            Class['nova::volume::common::service'],
+        ],
+        command     => 'nova-manage db sync',
+        refreshonly => true,
+        require     => Class['nova::common::config'],
+        user        => $nova::params::owner,
     }
 }
 
