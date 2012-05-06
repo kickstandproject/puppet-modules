@@ -47,6 +47,39 @@ class keystone::params {
     $servicename = $::operatingsystem ? {
         default => 'keystone',
     }
+
+    $varlib = $::operatingsystem ? {
+        default => '/var/lib/keystone',
+    }
+
+    $db = $keystone_db ? {
+        ''      => 'mysql',
+        default => $keystone_db,
+    }
+
+    $db_name = $keytone_db_name ? {
+        ''      => 'keystone',
+        default => $keystone_db_name,
+    }
+
+    $db_password = $keystone_db_password ? {
+        ''      => '',
+        default => $keystone_db_password,
+    }
+
+    $db_server = $keystone_db_server ? {
+        ''      => 'localhost',
+        default => $keystone_db_server,
+    }
+
+    $db_user = $keystone_db_user ? {
+        ''      => 'keystonedbadmin',
+        default => $keystone_db_user,
+    }
+
+    if ($keystone::params::db_password == '') {
+        fail("You must assign a default password using '\$keystone_db_password'")
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

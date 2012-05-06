@@ -15,17 +15,13 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class keystone::common::init {
-    include keystone::params
-    include keystone::common::install
-    include keystone::common::config
-    include keystone::common::service
-    include keystone::common::command
-
-    File {
-        group   => $keystone::params::group,
-        mode    => $keystone::params::mode,
-        owner   => $keystone::params::owner,
+class keystone::common::command {
+    exec { 'keystone-manage-db-sync':
+        before      => Class['keystone::common::service'],
+        command     => 'keystone-manage db_sync',
+        refreshonly => true,
+        require     => Class['keystone::common::config'],
+        user        => $keystone::params::owner,
     }
 }
 

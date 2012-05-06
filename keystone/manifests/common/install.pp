@@ -19,6 +19,15 @@ class keystone::common::install {
 	package { $keystone::params::packagename:
 		ensure	=> present,
 	}
+
+    common::function::database { $keystone::params::packagename:
+        notify      => Exec['keystone-manage-db-sync'],
+        password    => $keystone::params::db_password,
+        server      => $keystone::params::db_server,
+        table       => $keystone::params::db_name,
+        type        => $keystone::params::db,
+        user        => $keystone::params::db_user,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

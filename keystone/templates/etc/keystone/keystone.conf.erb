@@ -1,11 +1,10 @@
-DEFAULT]
+[DEFAULT]
 #bind_host = 0.0.0.0
 public_port = 5000
 admin_port = 35357
 admin_token = ADMIN
 compute_port = 8774
 verbose = True
-debug = True
 log_config = /etc/keystone/logging.conf
 
 # ================= Syslog Options ============================
@@ -17,18 +16,10 @@ use_syslog = False
 # syslog_log_facility = LOG_LOCAL0
 
 [sql]
-connection = sqlite:////var/lib/keystone/keystone.db
+<% if (scope.lookupvar('keystone::params::db') == 'mysql') %>
+connection = <%= scope.lookupvar('keystone::params::db') %>://<%= scope.lookupvar('keystone::params::db_user') %>:<%= scope.lookupvar('keystone::params::db_password') %>@<%= scope.lookupvar('keystone::params::db_server') %>/<%= scope.lookupvar('keystone::params::db_name') %>
+<% end %>
 idle_timeout = 200
-
-[ldap]
-#url = ldap://localhost
-#tree_dn = dc=example,dc=com
-#user_tree_dn = ou=Users,dc=example,dc=com
-#role_tree_dn = ou=Roles,dc=example,dc=com
-#tenant_tree_dn = ou=Groups,dc=example,dc=com
-#user = dc=Manager,dc=example,dc=com
-#password = freeipa4all
-#suffix = cn=example,cn=com
 
 [identity]
 driver = keystone.identity.backends.sql.Identity
@@ -102,4 +93,3 @@ use = egg:Paste#urlmap
 use = egg:Paste#urlmap
 /v2.0 = admin_api
 / = admin_version_api
-

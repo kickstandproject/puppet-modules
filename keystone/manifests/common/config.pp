@@ -27,6 +27,18 @@ class keystone::common::config {
         notify  => Class['keystone::common::service'],
         require => File[$keystone::params::basedir],
     }
+
+    file { $keystone::params::varlib:
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
+        require => Class['keystone::common::install'],
+    }
+
+    file { "${keystone::params::varlib}/cache":
+        ensure  => directory,
+        require => File[$keystone::params::varlib],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
