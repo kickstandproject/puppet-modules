@@ -14,5 +14,7 @@ dbserver = <%= scope.lookupvar('puppet::params::db_server') %>
 <% end %>
 
 [agent]
+pluginsync = false
 server = <%= scope.lookupvar('puppet::params::server') %>
 runinterval = <%= scope.lookupvar('puppet::params::runinterval') %>
+usecacheonfailure = false
