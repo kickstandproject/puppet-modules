@@ -16,19 +16,25 @@
 # file at the top of the source tree.
 #
 define apt::function::repository (
-    $url,
-    $dist = $lsbdistcodename,
     $components,
+    $dist = $lsbdistcodename,
+    $key,
     $protocol = 'http://',
+    $url,
 ) {
     require apt::client
 
     file { "${name}.list":
         ensure  => present,
         content => template('apt/etc/apt/sources.list.d/repo.list'),
+        notify  => Exec["apt-key ${key}"],
         path    => "${apt::params::basedir}/sources.list.d/${name}.list",
-        notify  => Exec['apt-get update'],
-        require => File[$apt::params::basedir],
+        require => Class['apt::common::config'],
+    }
+
+    exec { "apt-key ${key}":
+        command     => "apt-key adv --keyserver pgp.mit.edu --recv-keys ${key}",
+        refreshonly => true,
     }
 }
 

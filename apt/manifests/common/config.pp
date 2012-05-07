@@ -63,7 +63,7 @@ class apt::common::config {
     }
 
     exec { 'apt-get clean':
-        command        => '/usr/bin/apt-get clean',
+        command        => 'apt-get clean',
         subscribe      => [
             File["${apt::params::basedir}/sources.list"],
             File["${apt::params::basedir}/sources.list.d"],
@@ -71,15 +71,9 @@ class apt::common::config {
         refreshonly    => true,
     }
 
-    exec { 'apt-get autoclean':
-        command        => '/usr/bin/apt-get autoclean',
-        subscribe      => Exec['apt-get clean'],
-        refreshonly    => true,
-    }
-
     exec { 'apt-get update':
-        command        => '/usr/bin/apt-get update',
-        subscribe      => Exec['apt-get autoclean'],
+        command        => 'apt-get update',
+        subscribe      => Exec['apt-get clean'],
         refreshonly    => true,
     }
 }
