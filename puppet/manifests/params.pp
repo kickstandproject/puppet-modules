@@ -86,7 +86,7 @@ class puppet::params {
     }
 
     $db_password = $puppet_db_password ? {
-        ''      => sha1(fqdn_rand(30)),
+        ''      => '',
         default => $puppet_db_password,
     }
 
@@ -99,6 +99,10 @@ class puppet::params {
         ''      => 'puppet',
         default => $puppet_db_user,
     }
+    if ($puppet::params::db_password == '') {
+        fail("You must assign a default password using '\$puppet_db_password'")
+    }
+
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

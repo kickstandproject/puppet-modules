@@ -19,9 +19,10 @@ class puppet::server inherits puppet::common::init {
     require ruby-activerecord::client
     require ruby-mysql::client
 
-    common::function::database { $puppet::params::db_name:
+    common::function::database { $puppet::params::packagename:
         password    => $puppet::params::db_password,
         server      => $puppet::params::db_server,
+        table       => $puppet::params::db_name,
         type        => $puppet::params::db,
         user        => $puppet::params::db_user,
     }

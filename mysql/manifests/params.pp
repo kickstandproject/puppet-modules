@@ -67,13 +67,17 @@ class mysql::params {
     }
 
     $db_password = $mysql_db_password ? {
-        ''      => sha1(fqdn_rand(30)),
+        ''      => '',
         default => $mysql_db_password,
     }
 
     $port = $mysql_port ? {
         ''      => '3306',
         default => $mysql_port,
+    }
+
+    if ($mysql::params::db_password == '') {
+        fail("You must assign a default password using '\$mysql_db_password'")
     }
 }
 
