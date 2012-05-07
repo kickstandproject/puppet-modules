@@ -15,7 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class apt::client inherits apt::common::init {
+class apt::client(
+    $stage = 'bootstrap'
+) inherits apt::common::init {
     if ($squid_server) {
         include apt::squid::init
     }

@@ -15,7 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class apt::common::init {
+class apt::common::init(
+    $stage = 'bootstrap')
+{
     include apt::params
     include apt::common::install
     include apt::common::config

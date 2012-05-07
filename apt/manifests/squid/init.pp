@@ -15,7 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class apt::squid::init {
+class apt::squid::init(
+    $stage = 'bootstrap'
+) {
     require squid::params
 
     apt::function::config { '99proxy':
