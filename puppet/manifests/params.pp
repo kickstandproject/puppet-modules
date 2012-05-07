@@ -99,7 +99,7 @@ class puppet::params {
         ''      => 'puppet',
         default => $puppet_db_user,
     }
-    if ($puppet::params::db_password == '') {
+    if (defined(Class['puppet::server']) and ($puppet::params::db_password == '')) {
         fail("You must assign a default password using '\$puppet_db_password'")
     }
 
