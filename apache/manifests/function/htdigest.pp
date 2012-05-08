@@ -23,6 +23,9 @@ define apache::function::htdigest(
 ) {
     require apache::params
 
+    apache::function::a2enmod { 'auth_digest':
+    }
+
     file { "${apache::params::rootdir}/${name}/conf/htdigest.conf":
         content => template('apache/etc/apache2/conf.d/htdigest.conf.erb'),
         ensure  => present,
