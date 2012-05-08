@@ -15,7 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::apache::config {
+class nagios::web::common::config {
     include nagios::params
     include apache::params
 
@@ -38,6 +38,12 @@ class nagios::apache::config {
 
     apache::function::virtualhost { $::fqdn:
         content => template('nagios/etc/apache2/conf.d/nagios3.conf.erb'),
+    }
+
+    apache::function::htdigest { $nagios::web::params::hostname:
+        location    => '/nagios3',
+        password    => $nagios::web::params::password,
+        username    => $nagios::web::params::username,
     }
 }
 

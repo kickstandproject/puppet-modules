@@ -12,11 +12,6 @@ Alias /nagios3 /usr/share/nagios3/htdocs
 	AllowOverride AuthConfig
 	Order Allow,Deny
 	Allow From All
-
-	AuthName "Nagios Access"
-	AuthType Basic
-	AuthUserFile /etc/nagios3/htpasswd.users
-	require valid-user
 </DirectoryMatch>
 
 <Directory /usr/share/nagios3/htdocs>

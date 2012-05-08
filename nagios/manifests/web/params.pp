@@ -15,15 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::params {
-    $basedir = $::operatingsystem ? {
-        default => '/etc/nagios3',
-    }
-
-    $configdir = $::operatingsystem ? {
-        default => "/etc/nagios3/conf.d",
-    }
-
+class nagios::web::params {
     $configfile = $::operatingsystem ? {
         default => '/etc/nagios3/nagios.cfg',
     }
@@ -36,11 +28,6 @@ class nagios::params {
         default => true,
     }
 
-    $hostgroups = $nagios_hostgroups ? {
-        ''      => 'all',
-        default => $nagios_hostgroup,
-    }
-
     $mode = $::operatingsystem ? {
         default => '0644',
     }
@@ -50,23 +37,26 @@ class nagios::params {
     }
 
     $packagename = $::operatingsystem ? {
-        default => 'nagios3-core',
+        default => 'nagios3-cgi',
     }
 
-    $packagename_plugins = $::operatingsystem ? {
-        default => 'nagios-plugins-extra'
+    $hostname = $nagios_web_hostname ? {
+        ''      => $::fqdn,
+        default => $nagios_web_hostname,
     }
 
-    $processname = $::operatingsystem ? {
-        default => 'nagios',
+    $password = $nagios_web_password ? {
+        ''      => '',
+        default => $nagios_web_password,
     }
 
-    $servicename = $::operatingsystem ? {
-        default => 'nagios3',
+    $username = $nagios_web_username ? {
+        ''      => 'nagiosadmin',
+        default => $nagios_web_username,
     }
 
-    $plugindir = $::operatingsystem ? {
-        default => '/usr/lib/nagios/plugins',
+    if ($nagios::web::params::password == '') {
+        fail("You must assign a default password using '\$nagios_web_password'")
     }
 }
 

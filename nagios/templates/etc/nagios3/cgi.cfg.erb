@@ -101,7 +101,7 @@ use_ssl_authentication=0
 # default, *no one* has access to this unless you choose to
 # not use authorization.  You may use an asterisk (*) to
 # authorize any user who has authenticated to the web server.
-authorized_for_system_information=nagiosadmin
+authorized_for_system_information=<%= scope.lookupvar('nagios::web::params::username') %>
 
 # CONFIGURATION INFORMATION ACCESS
 # This option is a comma-delimited list of all usernames that
@@ -110,7 +110,7 @@ authorized_for_system_information=nagiosadmin
 # for the hosts and services they are contacts for. You may use
 # an asterisk (*) to authorize any user who has authenticated
 # to the web server.
-authorized_for_configuration_information=nagiosadmin
+authorized_for_configuration_information=<%= scope.lookupvar('nagios::web::params::username') %>
 
 # SYSTEM/PROCESS COMMAND ACCESS
 # This option is a comma-delimited list of all usernames that
@@ -120,7 +120,7 @@ authorized_for_configuration_information=nagiosadmin
 # has access to this unless you choose to not use authorization.
 # You may use an asterisk (*) to authorize any user who has
 # authenticated to the web server.
-authorized_for_system_commands=nagiosadmin
+authorized_for_system_commands=<%= scope.lookupvar('nagios::web::params::username') %>
 
 # GLOBAL HOST/SERVICE VIEW ACCESS
 # These two options are comma-delimited lists of all usernames that
@@ -129,8 +129,8 @@ authorized_for_system_commands=nagiosadmin
 # for hosts or services that they are contacts for (unless you
 # you choose to not use authorization). You may use an asterisk (*)
 # to authorize any user who has authenticated to the web server.
-authorized_for_all_services=nagiosadmin
-authorized_for_all_hosts=nagiosadmin
+authorized_for_all_services=<%= scope.lookupvar('nagios::web::params::username') %>
+authorized_for_all_hosts=<%= scope.lookupvar('nagios::web::params::username') %>
 
 # GLOBAL HOST/SERVICE COMMAND ACCESS
 # These two options are comma-delimited lists of all usernames that
@@ -140,8 +140,8 @@ authorized_for_all_hosts=nagiosadmin
 # that they are contacts for (unless you you choose to not use 
 # authorization).  You may use an asterisk (*) to authorize any
 # user who has authenticated to the web server.
-authorized_for_all_service_commands=nagiosadmin
-authorized_for_all_host_commands=nagiosadmin
+authorized_for_all_service_commands=<%= scope.lookupvar('nagios::web::params::username') %>
+authorized_for_all_host_commands=<%= scope.lookupvar('nagios::web::params::username') %>
 
 # READ-ONLY USERS
 # A comma-delimited list of usernames that have read-only rights in

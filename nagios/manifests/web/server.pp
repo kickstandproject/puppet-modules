@@ -15,11 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::server inherits nagios::common::init {
-    include nagios::nsca::server
-
+class nagios::web::server inherits nagios::web::common::init {
     if ($firewall == 'yes') {
-        include nagios::common::firewall
+        include nagios::web::common::firewall
     }
 }
 

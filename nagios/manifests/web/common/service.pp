@@ -15,12 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::apache::install {
-    require nagios::params
-
-    package { $nagios::params::packagename_web:
-        ensure  => present,
-    }
+class nagios::web::common::service {
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
