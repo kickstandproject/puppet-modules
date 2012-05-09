@@ -18,31 +18,7 @@
 class nova::server inherits nova::common::init {
     require rabbitmq::server
 
-    if ($nova::params::api) {
-        include nova::api::server
-    }
-
-    if ($nova::params::cert) {
-        include nova::cert::server
-    }
-
-    if ($nova::params::network) {
-        include nova::network::server
-    }
-
-    if ($nova::params::objectstore) {
-        include nova::objectstore::server
-    }
-
-    if ($nova::params::scheduler) {
-        include nova::scheduler::server
-    }
-
-    if ($nova::params::volume) {
-        include nova::volume::server
-    }
-
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include nova::common::monitor
     }
 }

@@ -16,11 +16,11 @@
 # file at the top of the source tree.
 #
 class nova::volume::common::monitor {
-	require nova::volume::params
+    require nova::volume::params
 
-	monitor::process { $name:
-		process	=> $nova::volume::params::processname,
-	}
+    monitor::process { $name:
+        process => $nova::volume::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

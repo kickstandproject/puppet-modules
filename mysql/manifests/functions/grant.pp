@@ -35,7 +35,7 @@ define mysql::functions::grant(
     }
 
     exec { "mysqlgrant-${db_user}-${db_server}-${db_name}":
-        command => "mysql --defaults-file=/root/.my.cnf -uroot < ${path}/${mysql_grant_file}",
+        command     => "mysql --defaults-file=/root/.my.cnf -uroot < ${path}/${mysql_grant_file}",
         subscribe   => File[$mysql_grant_file],
         refreshonly => true,
         require     => File['/root/.my.cnf'],

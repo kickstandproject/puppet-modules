@@ -20,10 +20,6 @@ class rsyslog::common::init {
     include rsyslog::common::install
     include rsyslog::common::config
     include rsyslog::common::service
-
-    if ($monitor == 'yes') {
-        include rsyslog::common::monitor
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

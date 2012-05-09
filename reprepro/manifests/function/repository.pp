@@ -16,10 +16,10 @@
 # file at the top of the source tree.
 #
 define reprepro::function::repository(
+    $repo,
     $buildoptions = '',
     $ostype = 'ubuntu',
     $gpgkey = '',
-    $repo,
     $rsynchostname = '',
     $rsyncuser = ''
 ) {

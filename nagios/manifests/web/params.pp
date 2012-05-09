@@ -40,23 +40,23 @@ class nagios::web::params {
         default => 'nagios3-cgi',
     }
 
-    $hostname = $nagios_web_hostname ? {
+    $hostname = $::nagios_web_hostname ? {
         ''      => $::fqdn,
-        default => $nagios_web_hostname,
+        default => $::nagios_web_hostname,
     }
 
-    $password = $nagios_web_password ? {
+    $password = $::nagios_web_password ? {
         ''      => '',
-        default => $nagios_web_password,
+        default => $::nagios_web_password,
     }
 
-    $username = $nagios_web_username ? {
+    $username = $::nagios_web_username ? {
         ''      => 'nagiosadmin',
-        default => $nagios_web_username,
+        default => $::nagios_web_username,
     }
 
     if ($nagios::web::params::password == '') {
-        fail("You must assign a default password using '\$nagios_web_password'")
+        fail('You must assign a default password using \'\$::nagios_web_password\'')
     }
 }
 

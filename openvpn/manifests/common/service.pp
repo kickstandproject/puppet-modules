@@ -17,8 +17,8 @@
 #
 class openvpn::common::service {
     service { $openvpn::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $openvpn::params::hasstatus,
         require     => Class['openvpn::common::config'],

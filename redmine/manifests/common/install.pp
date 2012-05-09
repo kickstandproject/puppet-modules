@@ -16,16 +16,14 @@
 # file at the top of the source tree.
 #
 class redmine::common::install {
-    include $redmine::params
-
     package { $redmine::params::packagename:
-		ensure          => present,
+        ensure          => present,
         responsefile    => "/var/local/preseed/${redmine::params::packagename}.preseed",
         require         => [
             Package["${redmine::params::packagename}-${redmine::params::db}"],
             File["/var/local/preseed/${redmine::params::packagename}.preseed"],
         ],
-	}
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

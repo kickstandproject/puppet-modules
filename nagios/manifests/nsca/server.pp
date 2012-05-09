@@ -18,10 +18,10 @@
 class nagios::nsca::server inherits nagios::nsca::common::init {
     require nagios::server
 
-    File            <<| tag == "$::fqdn" |>>
-    Nagios_command  <<| tag == "$::fqdn" |>>
-    Nagios_host     <<| tag == "$::fqdn" |>>
-    Nagios_service  <<| tag == "$::fqdn" |>>
+    File            <<| tag == '$::fqdn' |>>
+    Nagios_command  <<| tag == '$::fqdn' |>>
+    Nagios_host     <<| tag == '$::fqdn' |>>
+    Nagios_service  <<| tag == '$::fqdn' |>>
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

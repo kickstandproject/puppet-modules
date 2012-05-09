@@ -45,15 +45,15 @@ class nagios::nsca::client inherits nagios::nsca::common::init {
     }
 
     file { "${nagios::params::plugindir}/submit_ocsp":
-        content => template('nagios/nsca/client/submit_ocsp.erb'),
         ensure  => present,
+        content => template('nagios/nsca/client/submit_ocsp.erb'),
         mode    => '0755',
         require => File[$nagios::params::plugindir],
     }
 
     file { "${nagios::params::plugindir}/submit_ochp":
-        content => template('nagios/nsca/client/submit_ochp.erb'),
         ensure  => present,
+        content => template('nagios/nsca/client/submit_ochp.erb'),
         mode    => '0755',
         require => File[$nagios::params::plugindir],
     }

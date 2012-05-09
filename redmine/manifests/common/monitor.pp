@@ -1,4 +1,4 @@
-#
+e
 # puppet-modules: The Kickstand Project
 #
 # Copyright (C) 2011, Polybeacon, Inc.
@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class redmine::common::monitor {
-	require redmine::params
-
-	monitor::process { $name:
-		process	=> $redmine::params::processname,
-	}
+    monitor::process { $name:
+        process => $redmine::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

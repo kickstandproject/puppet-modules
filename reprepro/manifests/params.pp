@@ -28,16 +28,16 @@ class reprepro::params {
         default => 'reprepro',
     }
 
-    $distributions = $reprepro_distributions ? {
+    $distributions = $::reprepro_distributions ? {
         ''      => [
             'precise'
         ],
-        default => $reprepro_distributions,
+        default => $::reprepro_distributions,
     }
 
-    $user = $reprepro_user ? {
+    $user = $::reprepro_user ? {
         ''      => 'reprepro',
-        default => $reprepro_user,
+        default => $::reprepro_user,
     }
 }
 

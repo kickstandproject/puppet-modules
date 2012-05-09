@@ -21,7 +21,7 @@ class nagios::params {
     }
 
     $configdir = $::operatingsystem ? {
-        default => "/etc/nagios3/conf.d",
+        default => '/etc/nagios3/conf.d',
     }
 
     $configfile = $::operatingsystem ? {
@@ -34,11 +34,6 @@ class nagios::params {
 
     $hasstatus = $::operatingsystem ? {
         default => true,
-    }
-
-    $hostgroups = $nagios_hostgroups ? {
-        ''      => 'all',
-        default => $nagios_hostgroup,
     }
 
     $mode = $::operatingsystem ? {
@@ -67,6 +62,11 @@ class nagios::params {
 
     $plugindir = $::operatingsystem ? {
         default => '/usr/lib/nagios/plugins',
+    }
+
+    $hostgroups = $::nagios_hostgroups ? {
+        ''      => 'all',
+        default => $::nagios_hostgroup,
     }
 }
 

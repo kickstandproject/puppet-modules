@@ -18,14 +18,7 @@
 class mantisbt::server inherits mantisbt::common::init {
     require apache::server
 
-    common::function::database { $mantisbt::params::db_name:
-        password    => $mantisbt::params::db_password,
-        server      => $mantisbt::params::db_server,
-        type        => $mantisbt::params::db,
-        user        => $mantisbt::params::db_user,
-    }
-
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include mantisbt::common::monitor
     }
 }

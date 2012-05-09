@@ -16,10 +16,10 @@
 # file at the top of the source tree.
 #
 define nagios::service::nsca (
-    $check_command = false,
     $description,
-    $ensure = 'present',
     $server,
+    $check_command = false,
+    $ensure = 'present',
     $use_active = 'generic-service-active',
     $use_passive = 'generic-service-passive'
 ) {
@@ -34,18 +34,18 @@ define nagios::service::nsca (
         use             => $use_active,
     }
 
-    @@nagios_service { "@@${name} on ${hostname}":
+    @@nagios_service { "@@${name} on $::{hostname}":
         ensure              => $ensure,
         host_name           => $::fqdn,
         notify              => Class['nagios::common::service'],
         require             => File["${nagios::params::configdir}/services/passive"],
         service_description => $description,
         tag                 => $server,
-        target              => "${nagios::params::configdir}/services/passive/${name}.on.${hostname}.cfg",
+        target              => "${nagios::params::configdir}/services/passive/${name}.on.$::{hostname}.cfg",
         use                 => $use_passive,
     }
 
-    @@file { "${nagios::params::configdir}/services/passive/${name}.on.${hostname}.cfg":
+    @@file { "${nagios::params::configdir}/services/passive/${name}.on.$::{hostname}.cfg":
         ensure  => $ensure,
         group   => $nagios::params::group,
         mode    => $nagios::params::mode,

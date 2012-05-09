@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::api::common::monitor {
-	require nova::api::params
-
-	monitor::process { $name:
-		process	=> $nova::api::params::processname,
-	}
+    monitor::process { $name:
+        process => $nova::api::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

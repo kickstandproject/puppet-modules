@@ -17,8 +17,8 @@
 #
 class ddclient::common::service {
     service { $ddclient::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $ddclient::params::hasstatus,
         require     => Class['ddclient::common::config'],

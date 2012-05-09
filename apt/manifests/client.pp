@@ -18,7 +18,7 @@
 class apt::client(
     $stage = 'bootstrap'
 ) inherits apt::common::init {
-    if ($squid_server) {
+    if ($::squid_server) {
         include apt::squid::init
     }
 }

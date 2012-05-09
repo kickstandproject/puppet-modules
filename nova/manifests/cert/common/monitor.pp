@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::cert::common::monitor {
-	require nova::cert::params
-
-	monitor::process { $name:
-		process	=> $nova::cert::params::processname,
-	}
+    monitor::process { $name:
+        process => $nova::cert::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

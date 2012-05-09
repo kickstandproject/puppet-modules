@@ -16,11 +16,7 @@
 # file at the top of the source tree.
 #
 class timezone::common::config {
-    file { 'timezone':
-        name    => $timezone::params::configfile,
-        mode    => $timezone::params::configfile_mode,
-        owner   => $timezone::params::configfile_owner,
-        group   => $timezone::params::configfile_group,
+    file { $timezone::params::configfile:
         ensure  => present,
         content => template('timezone/client/timezone.erb'),
         require => Class['timezone::common::install'],
@@ -28,7 +24,7 @@ class timezone::common::config {
     }
 
     exec { 'set-timezone':
-        command     => '/usr/sbin/dpkg-reconfigure -f noninteractive tzdata',
+        command     => 'dpkg-reconfigure -f noninteractive tzdata',
         refreshonly => true,
     }
 }

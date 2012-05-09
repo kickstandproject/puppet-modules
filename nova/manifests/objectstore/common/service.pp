@@ -20,8 +20,8 @@ class nova::objectstore::common::service {
     require nova::objectstore::params
 
     service { $nova::objectstore::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $nova::objectstore::params::hasstatus,
         require     => Class['nova::objectstore::common::config'],

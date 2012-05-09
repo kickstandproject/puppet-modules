@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class glance::common::install {
-	package { $glance::params::packagename:
-		ensure	=> present,
-	}
+    package { $glance::params::packagename:
+        ensure  => present,
+    }
 
     common::function::database { $glance::params::packagename:
         notify      => Exec['glance-manage-db-sync'],

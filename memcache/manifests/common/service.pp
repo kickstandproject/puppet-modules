@@ -17,8 +17,8 @@
 #
 class memcache::common::service {
     service { $memcache::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $memcache::params::hasstatus,
         require     => Class['memcache::common::config'],

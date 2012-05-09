@@ -25,7 +25,7 @@ define asterisk::function::voicemail(
     include asterisk::voicemail::common::init
 
     /* XXX TODO Why do we need this here?  For some reason puppet will not honor
-       existing one from asterisk::common::init. */
+      existing one from asterisk::common::init. */
     File {
         group   => $asterisk::params::group,
         mode    => $asterisk::params::mode,

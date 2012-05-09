@@ -48,13 +48,13 @@ class squid::params {
         default => 'proxy',
     }
 
-    $port = $squid_port ? {
-        ''      => '3128',
-        default => $squid_port,
-    }
-
     $servicename = $::operatingsystem ? {
         default => 'squid3',
+    }
+
+    $port = $::squid_port ? {
+        ''      => '3128',
+        default => $::squid_port,
     }
 }
 

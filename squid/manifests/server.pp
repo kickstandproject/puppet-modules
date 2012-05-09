@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class squid::server inherits squid::common::init {
-    if ($firewall == 'yes') {
+    if ($::firewall == 'yes') {
         include squid::common::firewall
     }
 }

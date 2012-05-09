@@ -20,7 +20,7 @@ class jenkins::common::config {
 
     file { $jenkins::params::basedir:
         ensure  => directory,
-        require  => Class['jenkins::common::install'],
+        require => Class['jenkins::common::install'],
     }
 
     file { $jenkins::params::defaultfile:

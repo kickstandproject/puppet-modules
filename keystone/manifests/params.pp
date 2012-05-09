@@ -52,33 +52,33 @@ class keystone::params {
         default => '/var/lib/keystone',
     }
 
-    $db = $keystone_db ? {
+    $db = $::keystone_db ? {
         ''      => 'mysql',
-        default => $keystone_db,
+        default => $::keystone_db,
     }
 
-    $db_name = $keytone_db_name ? {
+    $db_name = $::keytone_db_name ? {
         ''      => 'keystone',
-        default => $keystone_db_name,
+        default => $::keystone_db_name,
     }
 
-    $db_password = $keystone_db_password ? {
+    $db_password = $::keystone_db_password ? {
         ''      => '',
-        default => $keystone_db_password,
+        default => $::keystone_db_password,
     }
 
-    $db_server = $keystone_db_server ? {
+    $db_server = $::keystone_db_server ? {
         ''      => 'localhost',
-        default => $keystone_db_server,
+        default => $::keystone_db_server,
     }
 
-    $db_user = $keystone_db_user ? {
+    $db_user = $::keystone_db_user ? {
         ''      => 'keystonedbadmin',
-        default => $keystone_db_user,
+        default => $::keystone_db_user,
     }
 
     if ($keystone::params::db_password == '') {
-        fail("You must assign a default password using '\$keystone_db_password'")
+        fail('You must assign a default password using \'\$::keystone_db_password\'')
     }
 }
 

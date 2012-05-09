@@ -44,13 +44,13 @@ class nagios::nsca::params {
         default => 'nsca',
     }
 
-    $server = $nagios_nsca_server ? {
-        ''      => 'nagios',
-        default => $nagios_nsca_server,
-    }
-
     $servicename = $::operatingsystem ? {
         default => 'nsca',
+    }
+
+    $server = $::nagios_nsca_server ? {
+        ''      => 'nagios',
+        default => $::nagios_nsca_server,
     }
 }
 

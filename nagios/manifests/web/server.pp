@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class nagios::web::server inherits nagios::web::common::init {
-    if ($firewall == 'yes') {
+    if ($::firewall == 'yes') {
         include nagios::web::common::firewall
     }
 }

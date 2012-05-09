@@ -16,11 +16,11 @@
 # file at the top of the source tree.
 #
 class ntp::server inherits ntp::common::init {
-    if ($firewall == 'yes') {
+    if ($::firewall == 'yes') {
         include ntp::common::firewall
     }
 
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include ntp::common::monitor
     }
 }

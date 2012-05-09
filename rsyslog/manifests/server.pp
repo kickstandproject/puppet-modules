@@ -16,12 +16,16 @@
 # file at the top of the source tree.
 #
 class rsyslog::server inherits rsyslog::common::init {
-    if ($firewall == 'yes') {
+    if ($rsyslog::params::db == 'mysql') {
+        include rsyslog::common::mysql
+    }
+
+    if ($::firewall == 'yes') {
         include rsyslog::common::firewall
     }
 
-    if ($rsyslog::params::db == 'mysql') {
-        include rsyslog::common::mysql
+    if ($::monitor == 'yes') {
+        include rsyslog::common::monitor
     }
 }
 

@@ -16,8 +16,8 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queuemember(
+    $queue,
     $channel = 'SIP',
-    $queue
 ) {
     require asterisk::server
 

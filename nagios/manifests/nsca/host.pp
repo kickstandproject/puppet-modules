@@ -16,17 +16,17 @@
 # file at the top of the source tree.
 #
 define nagios::nsca::host(
+    $server,
     $address = 'localhost',
     $ensure = present,
-    $server, 
     $use_active = 'generic-host-active',
     $use_passive = 'generic-host-passive'
     ) {
     require nagios::client
 
     nagios_host { $name:
-        address => $address,
         ensure  => $ensure,
+        address => $address,
         notify  => Class['nagios::common::service'],
         require => File["${nagios::params::configdir}/hosts"],
         target  => "${nagios::params::configdir}/hosts/${name}.cfg",
@@ -44,7 +44,7 @@ define nagios::nsca::host(
     @@nagios_host { "@@${name}":
         ensure      => $ensure,
         address     => $address ? {
-            false   => $ipaddress,
+            false   => $::ipaddress,
             default => $address,
         },
         alias       => $name,

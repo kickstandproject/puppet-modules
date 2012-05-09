@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class keystone::common::install {
-	package { $keystone::params::packagename:
-		ensure	=> present,
-	}
+    package { $keystone::params::packagename:
+        ensure  => present,
+    }
 
     common::function::database { $keystone::params::packagename:
         notify      => Exec['keystone-manage-db-sync'],

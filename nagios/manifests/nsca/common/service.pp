@@ -23,8 +23,8 @@ class nagios::nsca::common::service {
     }
 
     service { $nagios::nsca::params::servicename:
-        enable      => true,
         ensure      => $ensure,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $nagios::nsca::params::hasstatus,
         require     => Class['nagios::nsca::common::config'],

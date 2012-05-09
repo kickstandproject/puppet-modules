@@ -20,8 +20,8 @@ class nova::cert::common::service {
     require nova::cert::params
 
     service { $nova::cert::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $nova::cert::params::hasstatus,
         require     => Class['nova::cert::common::config'],

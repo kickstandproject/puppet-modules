@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class mantisbt::common::monitor {
-	monitor::process { $name:
-		process	=> $mantisbt::params::processname,
-	}
+    monitor::process { $name:
+        process => $mantisbt::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

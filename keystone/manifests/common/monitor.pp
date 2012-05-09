@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class keystone::common::monitor {
-	monitor::process { $name:
-		process	=> $keystone::params::processname,
-	}
+    monitor::process { $name:
+        process => $keystone::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

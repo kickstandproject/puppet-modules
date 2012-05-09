@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::objectstore::common::monitor {
-	require nova::objectstore::params
-
-	monitor::process { $name:
-		process	=> $nova::objectstore::params::processname,
-	}
+    monitor::process { $name:
+        process => $nova::objectstore::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

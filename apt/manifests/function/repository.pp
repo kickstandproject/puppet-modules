@@ -17,10 +17,10 @@
 #
 define apt::function::repository (
     $components,
-    $dist = $lsbdistcodename,
     $key,
-    $protocol = 'http://',
     $url,
+    $dist = $lsbdistcodename,
+    $protocol = 'http://',
 ) {
     require apt::client
 

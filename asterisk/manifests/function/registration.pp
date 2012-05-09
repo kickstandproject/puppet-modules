@@ -16,11 +16,11 @@
 # file at the top of the source tree.
 #
 define asterisk::function::registration(
-    context,
-    domain = '',
-    extension = '',
-    secret,
-    template = 'ksp-itsp',
+    $context,
+    $secret,
+    $domain = '',
+    $extension = '',
+    $template = 'ksp-itsp',
 ) {
     require asterisk::server
 

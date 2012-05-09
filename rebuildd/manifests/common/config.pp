@@ -24,13 +24,13 @@ class rebuildd::common::config {
     }
 
     file { $rebuildd::params::configfile:
-        content => template("rebuildd/etc/rebuildd/rebuilddrc.erb"),
+        content => template('rebuildd/etc/rebuildd/rebuilddrc.erb'),
         require => File[$rebuildd::params::basedir],
         notify  => Class[rebuildd::common::service],
     }
 
     file { $rebuildd::params::defaultsfile:
-        content => template("rebuildd/etc/default/rebuildd.erb"),
+        content => template('rebuildd/etc/default/rebuildd.erb'),
         notify  => Class[rebuildd::common::service],
     }
 

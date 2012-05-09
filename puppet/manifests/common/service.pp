@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class puppet::common::service {
-    require puppet::params
-
     service { $puppet::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $puppet::params::hasstatus,
         require     => Class['puppet::common::config'],

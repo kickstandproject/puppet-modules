@@ -44,34 +44,34 @@ class redmine::params {
         default => 'redmine',
     }
 
-    $db = $redmine_db ? {
+    $db = $::redmine_db ? {
         ''      => 'mysql',
-        default => $redmine_db,
+        default => $::redmine_db,
     }
 
-    $db_name = $redmin_db_name ? {
+    $db_name = $::redmine_db_name ? {
         ''      => 'redmine',
-        default => $redmine_db_name,
+        default => $::redmine_db_name,
     }
 
-    $db_password = $redmine_db_password ? {
+    $db_password = $::redmine_db_password ? {
         ''      => '',
-        default => $redmine_db_password,
+        default => $::redmine_db_password,
     }
 
-    $db_server = $redmine_db_server ? {
+    $db_server = $::redmine_db_server ? {
         ''      => 'localhost',
-        default => $redmin_db_server,
+        default => $::redmine_db_server,
     }
 
-    $db_user = $redmine_db_user ? {
+    $db_user = $::redmine_db_user ? {
         ''      => 'redmine',
-        default => $redmine_db_user,
+        default => $::redmine_db_user,
     }
 
-    $sitename = $redmine_sitename ? {
+    $sitename = $::redmine_sitename ? {
         ''      => $::fqdn,
-        default => $redmine_sitename,
+        default => $::redmine_sitename,
     }
 }
 

@@ -16,10 +16,10 @@
 # file at the top of the source tree.
 #
 define apache::function::htpasswd(
-    $ensure = 'present',
     $password,
     $path,
-    $username
+    $username,
+    $ensure = 'present',
 ) {
     exec { 'htpasswd -cb':
         command => "/usr/bin/htpasswd -cb ${path} ${username} ${password}",

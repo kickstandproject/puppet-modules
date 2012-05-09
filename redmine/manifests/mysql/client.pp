@@ -19,8 +19,8 @@ class redmine::mysql::client inherits redmine::mysql::common::init {
     if ($redmine::params::db_server == 'localhost') {
         require mysql::server
     }
-    
-    if ($monitor == 'yes') {
+
+    if ($::monitor == 'yes') {
         include redmine::mysql::common::monitor
     }
 }

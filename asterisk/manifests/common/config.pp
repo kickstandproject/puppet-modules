@@ -115,7 +115,7 @@ class asterisk::common::config {
     polycom-provision::function::sip-basic { $name:
         server  => $asterisk::params::server,
         port    => $asterisk::params::sip_port,
-   }
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class rabbitmq::server inherits rabbitmq::common::init {
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include rabbitmq::common::monitor
     }
 }

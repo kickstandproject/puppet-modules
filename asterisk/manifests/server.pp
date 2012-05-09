@@ -16,19 +16,19 @@
 # file at the top of the source tree.
 #
 class asterisk::server inherits asterisk::common::init {
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include asterisk::common::monitor
     }
 
-    if ($firewall == 'yes') {
+    if ($::firewall == 'yes') {
         include asterisk::common::firewall
     }
 
-    if ($asterisk::params::voicemail) {
+    if ($::asterisk::params::voicemail) {
         include asterisk::voicemail::server
     }
 
-    if ($rsyslog_server) {
+    if ($::rsyslog_server) {
         include asterisk::common::rsyslog
     }
 }

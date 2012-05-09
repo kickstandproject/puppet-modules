@@ -56,18 +56,18 @@ class puppet::params {
         default => 'root',
     }
 
-    $runinterval = $puppet_runinterval ? {
-        ''      => '1800',
-        default => $puppet_runinterval,
-    }
-
-    $server = $puppet_server ? {
-        ''      => 'puppet',
-        default => $puppet_server,
-    }
-
     $servicename = $::operatingsystem ? {
         default => 'puppet',
+    }
+
+    $runinterval = $::puppet_runinterval ? {
+        ''      => '1800',
+        default => $::puppet_runinterval,
+    }
+
+    $server = $::puppet_server ? {
+        ''      => 'puppet',
+        default => $::puppet_server,
     }
 
     $type = defined(Class['puppet::server']) ? {
@@ -75,32 +75,32 @@ class puppet::params {
         default => 'client',
     }
 
-    $db = $puppet_db ? {
+    $db = $::puppet_db ? {
         ''      => 'mysql',
-        default => $puppet_db,
+        default => $::puppet_db,
     }
 
-    $db_name = $puppet_db_name ? {
+    $db_name = $::puppet_db_name ? {
         ''      => 'puppet',
-        default => $puppet_db_name,
+        default => $::puppet_db_name,
     }
 
-    $db_password = $puppet_db_password ? {
+    $db_password = $::puppet_db_password ? {
         ''      => '',
-        default => $puppet_db_password,
+        default => $::puppet_db_password,
     }
 
-    $db_server = $puppet_db_server ? {
+    $db_server = $::puppet_db_server ? {
         ''      => 'localhost',
-        default => $puppet_db_server,
+        default => $::puppet_db_server,
     }
 
-    $db_user = $puppet_db_user ? {
+    $db_user = $::puppet_db_user ? {
         ''      => 'puppet',
-        default => $puppet_db_user,
+        default => $::puppet_db_user,
     }
     if (defined(Class['puppet::server']) and ($puppet::params::db_password == '')) {
-        fail("You must assign a default password using '\$puppet_db_password'")
+        fail('You must assign a default password using \'\$::puppet_db_password\'')
     }
 
 }

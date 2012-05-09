@@ -16,8 +16,8 @@
 # file at the top of the source tree.
 #
 define nagios::service::local (
-    $check_command = false,
     $description,
+    $check_command = false,
     $ensure = present,
     $hostgroup_name = 'all',
     $use = 'generic-service-active'

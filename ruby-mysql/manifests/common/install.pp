@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class ruby-mysql::common::install {
-	package { $ruby-mysql::params::packagename:
-		ensure	=> present,
-	}
+    package { $ruby-mysql::params::packagename:
+        ensure  => present,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

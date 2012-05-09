@@ -16,21 +16,21 @@
 # file at the top of the source tree.
 #
 define nagios::command(
+    $command_line,
     $ensure = present,
-    $command_line
-    ) {
+) {
     include nagios::params
 
     nagios_command { $name:
+        ensure          => $ensure,
         command_line    => $command_line,
-        ensure      => $ensure,
-        notify      => Class['nagios::common::service'],
-        target      => "${nagios::params::configdir}/commands/${name}.cfg",
+        notify          => Class['nagios::common::service'],
+        target          => "${nagios::params::configdir}/commands/${name}.cfg",
     }
 
     file { "${nagios::params::configdir}/commands/${name}.cfg":
-        before  => Nagios_command[$name],
         ensure  => $ensure,
+        before  => Nagios_command[$name],
         group   => $nagios::params::group,
         mode    => $nagios::params::mode,
         owner   => $nagios::params::owner,

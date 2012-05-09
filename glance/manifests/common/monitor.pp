@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class glance::common::monitor {
-	require glance::params
-
-	monitor::process { 'glance_process':
-		process	=> $glance::params::processname,
-	}
+    monitor::process { $name:
+        process => $glance::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

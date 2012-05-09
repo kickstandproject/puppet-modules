@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::network::server inherits nova::network::common::init {
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include nova::network::common::monitor
     }
 }

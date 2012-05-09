@@ -16,9 +16,17 @@
 # file at the top of the source tree.
 #
 class mantisbt::common::install {
-	package { $mantisbt::params::packagename:
-		ensure	=> present,
-	}
+    package { $mantisbt::params::packagename:
+        ensure  => present,
+    }
+
+    common::function::database { $mantisbt::params::packagename:
+        password    => $mantisbt::params::db_password,
+        server      => $mantisbt::params::db_server,
+        table       => $mantisbt::params::db_name,
+        type        => $mantisbt::params::db,
+        user        => $mantisbt::params::db_user,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

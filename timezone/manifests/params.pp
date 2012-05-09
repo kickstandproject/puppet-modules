@@ -24,21 +24,21 @@ class timezone::params {
         default => '/etc/timezone',
     }
 
-    $configfile_mode = $::operatingsystem ? {
+    $group = $::operatingsystem ? {
+        default => 'root',
+    }
+
+    $mode = $::operatingsystem ? {
         default => '0644',
     }
 
-    $configfile_owner = $::operatingsystem ? {
+    $owner = $::operatingsystem ? {
         default => 'root',
     }
 
-    $configfile_group = $::operatingsystem ? {
-        default => 'root',
-    }
-
-    $zone = $timezone_zoneinfo ? {
+    $zone = $::timezone_zoneinfo ? {
         ''      => 'America/Toronto',
-        default => $timezone_zone,
+        default => $::timezone_zone,
     }
 }
 

@@ -20,8 +20,8 @@ class nova::volume::common::service {
     require nova::volume::params
 
     service { $nova::volume::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $nova::volume::params::hasstatus,
         require     => Class['nova::volume::common::config'],

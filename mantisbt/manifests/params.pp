@@ -52,38 +52,38 @@ class mantisbt::params {
         default => 'mantis',
     }
 
-    $db = $mantisbt_db ? {
+    $db = $::mantisbt_db ? {
         ''      => 'mysql',
-        default => $mantisbt_db,
+        default => $::mantisbt_db,
     }
 
-    $db_name = $mantisbt_db_name ? {
+    $db_name = $::mantisbt_db_name ? {
         ''      => 'mantisbt',
-        default => $mantisbt_db_name,
+        default => $::mantisbt_db_name,
     }
 
-    $db_password = $mantisbt_db_password ? {
+    $db_password = $::mantisbt_db_password ? {
         ''      => '',
-        default => $mantisbt_db_password,
+        default => $::mantisbt_db_password,
     }
 
-    $db_server = $mantisbt_db_server ? {
+    $db_server = $::mantisbt_db_server ? {
         ''      => 'localhost',
-        default => $mantisbt_db_server,
+        default => $::mantisbt_db_server,
     }
 
-    $db_user = $mantisbt_db_user ? {
+    $db_user = $::mantisbt_db_user ? {
         ''      => 'mantisbtdbadmin',
-        default => $mantisbt_db_user,
+        default => $::mantisbt_db_user,
     }
 
-    $hostname = $mantisbt_hostname ? {
+    $hostname = $::mantisbt_hostname ? {
         ''      => $::fqdn,
-        default => $mantisbt_hostname,
+        default => $::mantisbt_hostname,
     }
 
     if ($mantisbt::params::db_password == '') {
-        fail("You must assign a default password using '\$mantisbt_db_password'")
+        fail('You must assign a default password using \'\$::mantisbt_db_password\'')
     }
 }
 

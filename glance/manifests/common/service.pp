@@ -17,8 +17,8 @@
 #
 class glance::common::service {
     service { $glance::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $glance::params::hasstatus,
         require     => Class['glance::common::config'],

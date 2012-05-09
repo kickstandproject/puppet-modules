@@ -19,6 +19,12 @@ class timezone::common::init {
     include timezone::params
     include timezone::common::install
     include timezone::common::config
+
+    File {
+        group   => $timezone::params::group,
+        mode    => $timezone::params::mode,
+        owner   => $timezone::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

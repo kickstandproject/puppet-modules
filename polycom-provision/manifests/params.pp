@@ -28,11 +28,6 @@ class polycom-provision::params {
         default => true,
     }
 
-    $hostname = $polycom-provision_hostname ? {
-        ''      => $::fqdn,
-        default => $polycom-provision_hostname,
-    }
-
     $mode = $::operatingsystem ? {
         default => '0644',
     }
@@ -41,17 +36,23 @@ class polycom-provision::params {
         default => 'root',
     }
 
-    $password = $polycom-provision_password ? {
-        default => $polycom-provision_password,
+    $hostname = $::polycom-provision_hostname ? {
+        ''      => $::fqdn,
+        default => $::polycom-provision_hostname,
     }
 
-    $username = $polycom-provision_username ? {
+    $password = $::polycom-provision_password ? {
+        ''      => '',
+        default => $::polycom-provision_password,
+    }
+
+    $username = $::polycom-provision_username ? {
         ''      => 'ksp-polycom',
-        default => $polycom-provision_username,
+        default => $::polycom-provision_username,
     }
 
     if ($polycom-provision::params::password == '') {
-        fail("You must assign a default password using '\$polycom-provision_password'")
+        fail('You must assign a default password using \'\$::polycom-provision_password\'')
     }
 
 }

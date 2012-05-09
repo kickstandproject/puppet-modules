@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::objectstore::common::install {
-    require nova::objectstore::params
-
-	package { $nova::objectstore::params::packagename:
-		ensure	=> present,
-	}
+    package { $nova::objectstore::params::packagename:
+        ensure  => present,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

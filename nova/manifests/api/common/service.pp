@@ -20,8 +20,8 @@ class nova::api::common::service {
     require nova::api::params
 
     service { $nova::api::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $nova::api::params::hasstatus,
         require     => Class['nova::api::common::config'],

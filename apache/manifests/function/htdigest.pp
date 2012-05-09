@@ -16,10 +16,10 @@
 # file at the top of the source tree.
 #
 define apache::function::htdigest(
-    $authname = 'default',
     $location,
     $password,
-    $username
+    $username,
+    $authname = 'default',
 ) {
     require apache::params
 
@@ -27,8 +27,8 @@ define apache::function::htdigest(
     }
 
     file { "${apache::params::rootdir}/${name}/conf/htdigest.conf":
-        content => template('apache/etc/apache2/conf.d/htdigest.conf.erb'),
         ensure  => present,
+        content => template('apache/etc/apache2/conf.d/htdigest.conf.erb'),
         notify  => Class['apache::common::service'],
         require => File["${apache::params::rootdir}/${name}/conf"],
     }
@@ -36,8 +36,8 @@ define apache::function::htdigest(
     $md5password = md5("${username}:${authname}:${password}")
 
     file { "${apache::params::rootdir}/${name}/conf/.htdigest":
-        content => template('apache/etc/apache2/conf.d/htdigest.erb'),
         ensure  => present,
+        content => template('apache/etc/apache2/conf.d/htdigest.erb'),
         notify  => Class['apache::common::service'],
         require => File["${apache::params::rootdir}/${name}/conf/htdigest.conf"],
     }

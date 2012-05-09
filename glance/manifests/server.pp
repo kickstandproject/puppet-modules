@@ -20,7 +20,7 @@ class glance::server inherits glance::common::init {
         ensure  => present,
     }
 
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include glance::common::monitor
     }
 }

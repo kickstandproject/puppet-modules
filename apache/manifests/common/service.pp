@@ -17,8 +17,8 @@
 #
 class apache::common::service {
     service { $apache::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $apache::params::hasstatus,
         require     => Class['apache::common::config'],

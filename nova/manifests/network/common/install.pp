@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::network::common::install {
-    require nova::network::params
-
-	package { $nova::network::params::packagename:
-		ensure	=> present,
-	}
+    package { $nova::network::params::packagename:
+        ensure  => present,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

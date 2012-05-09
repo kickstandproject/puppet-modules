@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class keystone::server inherits keystone::common::init {
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include keystone::common::monitor
     }
 }

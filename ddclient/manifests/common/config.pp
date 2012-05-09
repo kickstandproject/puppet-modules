@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class ddclient::common::config {
-    file { "$ddclient::params::defaultsfile":
+    file { $ddclient::params::defaultsfile:
         ensure  => present,
-        content => template("ddclient/etc/default/ddclient.erb"),
+        content => template('ddclient/etc/default/ddclient.erb'),
         notify  => Class['ddclient::common::service'],
         require => Class['ddclient::common::install'],
     }

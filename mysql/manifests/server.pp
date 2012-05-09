@@ -16,11 +16,11 @@
 # file at the top of the source tree.
 #
 class mysql::server inherits mysql::common::init {
-    if ($firewall == 'yes') {
+    if ($::firewall == 'yes') {
         include mysql::common::firewall
     }
 
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include mysql::common::monitor
     }
 }

@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class ruby-activerecord::common::install {
-	package { $ruby-activerecord::params::packagename:
-		ensure	=> present,
-	}
+    package { $ruby-activerecord::params::packagename:
+        ensure  => present,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

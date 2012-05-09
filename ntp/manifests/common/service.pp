@@ -17,8 +17,8 @@
 #
 class ntp::common::service {
     service { $ntp::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $ntp::params::hasstatus,
         require     => Class['ntp::common::config'],

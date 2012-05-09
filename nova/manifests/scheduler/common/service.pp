@@ -17,8 +17,8 @@
 #
 class nova::scheduler::common::service {
     service { $nova::scheduler::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $nova::scheduler::params::hasstatus,
         require     => Class['nova::scheduler::common::install'],

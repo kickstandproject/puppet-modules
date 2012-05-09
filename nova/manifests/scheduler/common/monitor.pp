@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::scheduler::common::monitor {
-	monitor::process { $name:
-		process	=> $nova::scheduler::params::processname,
-	}
+    monitor::process { $name:
+        process => $nova::scheduler::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

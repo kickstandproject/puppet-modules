@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::cert::server inherits nova::cert::common::init {
-    if ($monitor == 'yes') {
+    if ($::monitor == 'yes') {
         include nova::cert::common::monitor
     }
 }

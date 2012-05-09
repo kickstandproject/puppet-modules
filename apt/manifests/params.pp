@@ -20,11 +20,6 @@ class apt::params {
         default => '/etc/apt',
     }
 
-    $components = $apt_components ? {
-        ''      => 'main universe',
-        default => $apt_components,
-    }
-
     $configdir = $::operatingsystem ? {
         default => '/etc/apt/apt.conf.d',
     }
@@ -57,14 +52,19 @@ class apt::params {
         default => 'root',
     }
 
-    $mirror = $apt_mirror ? {
-        ''      => 'ca.archive.ubuntu.com',
-        default => $apt_mirror,
+    $components = $::apt_components ? {
+        ''      => 'main universe',
+        default => $::apt_components,
     }
 
-    $mirror_protocol = $apt_mirror_protocol ? {
+    $mirror = $::apt_mirror ? {
+        ''      => 'ca.archive.ubuntu.com',
+        default => $::apt_mirror,
+    }
+
+    $mirror_protocol = $::apt_mirror_protocol ? {
         ''      => 'http://',
-        default => $apt_mirror_protocol,
+        default => $::apt_mirror_protocol,
     }
 }
 

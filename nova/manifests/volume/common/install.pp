@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::volume::common::install {
-    require nova::volume::params
-
-	package { $nova::volume::params::packagename:
-		ensure	=> present,
-	}
+    package { $nova::volume::params::packagename:
+        ensure  => present,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

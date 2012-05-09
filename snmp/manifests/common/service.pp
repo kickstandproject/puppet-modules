@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class snmp::common::service {
-    require snmp::params
-
     service { $snmp::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $snmp::params::hasstatus,
         require     => Class['snmp::common::config'],

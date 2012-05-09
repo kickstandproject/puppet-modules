@@ -35,16 +35,16 @@ class puppet::common::config {
         require => File[$puppet::params::basedir],
     }
 
-    file { "$puppet::params::configfile":
+    file { $puppet::params::configfile:
         ensure  => present,
         content => template("puppet/etc/puppet/puppet.conf-${puppet::params::type}.erb"),
         notify  => Class['puppet::common::service'],
         require => File[$puppet::params::basedir],
     }
 
-    file { "$puppet::params::defaultsfile":
+    file { $puppet::params::defaultsfile:
         ensure  => present,
-        content => template("puppet/etc/default/puppet.erb"),
+        content => template('puppet/etc/default/puppet.erb'),
         notify  => Class['puppet::common::service'],
         require => Class['puppet::common::install'],
     }

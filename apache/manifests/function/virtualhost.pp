@@ -25,8 +25,8 @@ define apache::function::virtualhost(
     }
 
     file { "${apache::params::rootdir}/${name}/conf/default.conf":
-        content => template('apache/etc/apache2/sites-available/virtualhost-default.conf.erb'),
         ensure  => present,
+        content => template('apache/etc/apache2/sites-available/virtualhost-default.conf.erb'),
         notify  => Class['apache::common::service'],
         require => File["${apache::params::rootdir}/${name}/conf"],
     }

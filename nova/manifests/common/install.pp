@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::common::install {
-	package { $nova::params::packagename:
-		ensure	=> present,
-	}
+    package { $nova::params::packagename:
+        ensure  => present,
+    }
 
     common::function::database { $nova::params::packagename:
         notify      => Exec['nova-manage-db-sync'],

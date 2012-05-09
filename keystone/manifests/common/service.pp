@@ -17,8 +17,8 @@
 #
 class keystone::common::service {
     service { $keystone::params::servicename:
-        enable      => true,
         ensure      => running,
+        enable      => true,
         hasrestart  => true,
         hasstatus   => $keystone::params::hasstatus,
         require     => Class['keystone::common::config'],

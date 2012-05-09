@@ -20,11 +20,6 @@ class pbuilder::params {
         default => '/var/cache/pbuilder',
     }
 
-    $components = $pbuilder_components ? {
-        ''      => 'main universe',
-        default => $pbuilder_components,
-    }
-
     $configdir = $::operatingsystem ? {
         default => '/etc/pbuilder',
     }
@@ -45,29 +40,36 @@ class pbuilder::params {
         default => 'root',
     }
 
-    $distributions = $pbuilder_distributions ? {
-        ''      => 'precise',
-        default => $pbuilder_distributions,
-    }
-
     /* XXX TODO common module? */
     $localbindir = $::operatingsystem ? {
         default => '/usr/local/bin',
     }
 
-    $mirror = $pbuilder_mirror ? {
-        ''      => 'ca.archive.ubuntu.com',
-        default => $pbuilder_mirror,
-    }
-
-    $mirror_protocol = $pbuilder_mirror_protocol ? {
-        ''      => 'http://',
-        default => $pbuilder_mirror_protocol,
-    }
-
     $packagename = $::operatingsystem ? {
         default => 'pbuilder',
     }
+
+    $components = $::pbuilder_components ? {
+        ''      => 'main universe',
+        default => $::pbuilder_components,
+    }
+
+    $distributions = $::pbuilder_distributions ? {
+        ''      => 'precise',
+        default => $::pbuilder_distributions,
+    }
+
+    $mirror = $::pbuilder_mirror ? {
+        ''      => 'ca.archive.ubuntu.com',
+        default => $::pbuilder_mirror,
+    }
+
+    $mirror_protocol = $::pbuilder_mirror_protocol ? {
+        ''      => 'http://',
+        default => $::pbuilder_mirror_protocol,
+    }
+
+
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

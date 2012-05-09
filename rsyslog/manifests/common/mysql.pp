@@ -29,8 +29,8 @@ class rsyslog::common::mysql {
     }
 
     file { "${rsyslog::params::configdir}/mysql.conf":
-        content => template('rsyslog/server/mysql.conf.erb'),
         ensure  => present,
+        content => template('rsyslog/server/mysql.conf.erb'),
         group   => $rsyslog::params::configfile_group,
         mode    => $rsyslog::params::configfile_mode,
         notify  => Class['rsyslog::common::service'],

@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class nova::cert::common::install {
-    require nova::cert::params
-
-	package { $nova::cert::params::packagename:
-		ensure	=> present,
-	}
+    package { $nova::cert::params::packagename:
+        ensure  => present,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

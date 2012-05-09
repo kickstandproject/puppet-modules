@@ -16,11 +16,9 @@
 # file at the top of the source tree.
 #
 class ddclient::common::monitor {
-	include ddclient::params
-
-	monitor::process { $name:
-		process	=> $ddclient::params::processname,
-	}
+    monitor::process { $name:
+        process => $ddclient::params::processname,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

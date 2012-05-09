@@ -56,40 +56,40 @@ class asterisk::params {
         default => '/var/spool/asterisk',
     }
 
-    $ensure = $asterisk_ensure ? {
+    $ensure = $::asterisk_ensure ? {
         ''      => 'present',
-        default => $asterisk_ensure,
+        default => $::asterisk_ensure,
     }
 
-    $voicemail = $asterisk_voicemail ? {
+    $voicemail = $::asterisk_voicemail ? {
         ''      => false,
         'yes'   => true,
-        default => $asterisk_voicemail,
+        default => $::asterisk_voicemail,
     }
 
-    $server = $asterisk_server ? {
+    $server = $::asterisk_server ? {
         ''      => $::fqdn,
-        default => $asterisk_server,
+        default => $::asterisk_server,
     }
 
-    $sip_port = $asterisk_sip_port ? {
+    $sip_port = $::asterisk_sip_port ? {
         ''      => '5060',
-        default => $asterisk_sip_port,
+        default => $::asterisk_sip_port,
     }
 
-    $externaddr = $asterisk_externaddr ? {
+    $externaddr = $::asterisk_externaddr ? {
         ''      => false,
-        default => $asterisk_externaddr,
+        default => $::asterisk_externaddr,
     }
 
-    $externhost = $asterisk_externhost ? {
+    $externhost = $::asterisk_externhost ? {
         ''      => false,
-        default => $asterisk_externhost,
+        default => $::asterisk_externhost,
     }
 
-    $sip_allowguest = $asterisk_sip_allowguest ? {
+    $sip_allowguest = $::asterisk_sip_allowguest ? {
         ''      => 'no',
-        default => $asterisk_sip_allowguest,
+        default => $::asterisk_sip_allowguest,
     }
 }
 
