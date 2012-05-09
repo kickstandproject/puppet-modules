@@ -18,7 +18,7 @@
 class mantisbt::server inherits mantisbt::common::init {
     require apache::server
 
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include mantisbt::common::monitor
     }
 }

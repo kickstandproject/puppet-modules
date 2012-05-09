@@ -56,33 +56,33 @@ class rsyslog::params {
         default => '/etc/rsyslog.d',
     }
 
-    $db = $::rsyslog_db ? {
+    $db = $rsyslog_db ? {
         mysql   => 'mysql',
         default => '',
     }
 
-    $db_name = $::rsyslog_db_name ? {
+    $db_name = $rsyslog_db_name ? {
         ''      => 'Syslog',
-        default => $::rsyslog_db_name,
+        default => $rsyslog_db_name,
     }
 
-    $db_password = $::rsyslog_db_password ? {
+    $db_password = $rsyslog_db_password ? {
         ''      => '',
-        default => $::rsyslog_db_password,
+        default => $rsyslog_db_password,
     }
 
-    $db_server = $::rsyslog_db_server ? {
+    $db_server = $rsyslog_db_server ? {
         ''      => 'localhost',
-        default => $::rsyslog_db_server,
+        default => $rsyslog_db_server,
     }
 
-    $db_user = $::rsyslog_db_user ? {
+    $db_user = $rsyslog_db_user ? {
         ''      => 'rsyslog',
-        default => $::rsyslog_db_user,
+        default => $rsyslog_db_user,
     }
 
-    if ($rsyslog::params::db_password == '') {
-        fail('You must assign a default password using \'\$::rsyslog_db_password\'')
+    if ($db_password == '') {
+        fail('You must assign a default password using \'\$rsyslog_db_password\'')
     }
 }
 

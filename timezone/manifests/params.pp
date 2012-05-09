@@ -36,9 +36,9 @@ class timezone::params {
         default => 'root',
     }
 
-    $zone = $::timezone_zoneinfo ? {
+    $zone = $timezone_zoneinfo ? {
         ''      => 'America/Toronto',
-        default => $::timezone_zone,
+        default => $timezone_zoneinfo,
     }
 }
 

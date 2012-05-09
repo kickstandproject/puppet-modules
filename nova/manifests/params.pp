@@ -56,33 +56,33 @@ class nova::params {
         default => '/var/lib/nova',
     }
 
-    $db = $::nova_db ? {
+    $db = $nova_db ? {
         ''      => 'mysql',
-        default => $::nova_db,
+        default => $nova_db,
     }
 
-    $db_name = $::nova_db_name ? {
+    $db_name = $nova_db_name ? {
         ''      => 'nova',
-        default => $::nova_db_name,
+        default => $nova_db_name,
     }
 
-    $db_password = $::nova_db_password ? {
+    $db_password = $nova_db_password ? {
         ''      => '',
-        default => $::nova_db_password,
+        default => $nova_db_password,
     }
 
-    $db_server = $::nova_db_server ? {
+    $db_server = $nova_db_server ? {
         ''      => 'localhost',
-        default => $::nova_db_server,
+        default => $nova_db_server,
     }
 
-    $db_user = $::nova_db_user ? {
+    $db_user = $nova_db_user ? {
         ''      => 'novadbadmin',
-        default => $::nova_db_user,
+        default => $nova_db_user,
     }
 
-    if ($nova::params::db_password == '') {
-        fail('You must assign a default password using \'\$::nova_db_password\'')
+    if ($db_password == '') {
+        fail('You must assign a default password using \'\$nova_db_password\'')
     }
 }
 

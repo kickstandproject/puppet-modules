@@ -56,28 +56,28 @@ class mysql::params {
         default => 'mysql',
     }
 
-    $bindaddr = $::mysql_bindaddr ? {
+    $bindaddr = $mysql_bindaddr ? {
         ''      => '127.0.0.1',
-        default => $::mysql_bindaddr,
+        default => $mysql_bindaddr,
     }
 
-    $db_user = $::mysql_db_user ? {
+    $db_user = $mysql_db_user ? {
         ''      => 'root',
-        default => $::mysql_db_user,
+        default => $mysql_db_user,
     }
 
-    $db_password = $::mysql_db_password ? {
+    $db_password = $mysql_db_password ? {
         ''      => '',
-        default => $::mysql_db_password,
+        default => $mysql_db_password,
     }
 
-    $port = $::mysql_port ? {
+    $port = $mysql_port ? {
         ''      => '3306',
-        default => $::mysql_port,
+        default => $mysql_port,
     }
 
-    if ($mysql::params::db_password == '') {
-        fail('You must assign a default password using \'\$::mysql_db_password\'')
+    if ($db_password == '') {
+        fail('You must assign a default password using \'\$mysql_db_password\'')
     }
 }
 

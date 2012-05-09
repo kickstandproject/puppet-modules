@@ -52,9 +52,9 @@ class squid::params {
         default => 'squid3',
     }
 
-    $port = $::squid_port ? {
+    $port = $squid_port ? {
         ''      => '3128',
-        default => $::squid_port,
+        default => $squid_port,
     }
 }
 

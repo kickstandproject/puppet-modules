@@ -49,24 +49,24 @@ class pbuilder::params {
         default => 'pbuilder',
     }
 
-    $components = $::pbuilder_components ? {
+    $components = $pbuilder_components ? {
         ''      => 'main universe',
-        default => $::pbuilder_components,
+        default => $pbuilder_components,
     }
 
-    $distributions = $::pbuilder_distributions ? {
+    $distributions = $pbuilder_distributions ? {
         ''      => 'precise',
-        default => $::pbuilder_distributions,
+        default => $pbuilder_distributions,
     }
 
-    $mirror = $::pbuilder_mirror ? {
+    $mirror = $pbuilder_mirror ? {
         ''      => 'ca.archive.ubuntu.com',
-        default => $::pbuilder_mirror,
+        default => $pbuilder_mirror,
     }
 
-    $mirror_protocol = $::pbuilder_mirror_protocol ? {
+    $mirror_protocol = $pbuilder_mirror_protocol ? {
         ''      => 'http://',
-        default => $::pbuilder_mirror_protocol,
+        default => $pbuilder_mirror_protocol,
     }
 
 

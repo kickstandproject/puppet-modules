@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class openssh::server inherits openssh::common::init {
-    if ($::firewall == 'yes') {
+    if ($firewall == 'yes') {
         include openssh::common::firewall
     }
 }

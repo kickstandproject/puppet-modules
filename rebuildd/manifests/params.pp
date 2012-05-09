@@ -60,16 +60,16 @@ class rebuildd::params {
         default => 'rebuildd',
     }
 
-    $distributions = $::rebuildd_distributions ? {
+    $distributions = $rebuildd_distributions ? {
         ''      => [
             'precise',
         ],
-        default => $::rebuildd_distributions,
+        default => $rebuildd_distributions,
     }
 
-    $email = $::rebuildd_email ? {
+    $email = $rebuildd_email ? {
         ''      => 'rebuildd@localhost',
-        default => $::rebuildd_email,
+        default => $rebuildd_email,
     }
 }
 

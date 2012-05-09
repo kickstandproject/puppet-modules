@@ -20,11 +20,11 @@ class rsyslog::server inherits rsyslog::common::init {
         include rsyslog::common::mysql
     }
 
-    if ($::firewall == 'yes') {
+    if ($firewall == 'yes') {
         include rsyslog::common::firewall
     }
 
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include rsyslog::common::monitor
     }
 }

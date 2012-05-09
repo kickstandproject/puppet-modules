@@ -18,7 +18,7 @@
 class nova::api::server inherits nova::api::common::init {
     include nova::cert::server
 
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include nova::api::common::monitor
     }
 }

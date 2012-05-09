@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::objectstore::server inherits nova::objectstore::common::init {
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include nova::objectstore::common::monitor
     }
 }

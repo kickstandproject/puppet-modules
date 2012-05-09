@@ -18,7 +18,7 @@
 class jenkins::server inherits jenkins::common::init {
     require jenkins::apache::init
 
-    if ($::firewall == 'yes') {
+    if ($firewall == 'yes') {
         include jenkins::common::firewall
     }
 }

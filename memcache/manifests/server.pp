@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class memcache::server inherits memcache::common::init {
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include memcache::common::monitor
     }
 }

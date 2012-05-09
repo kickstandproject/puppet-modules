@@ -64,9 +64,9 @@ class nagios::params {
         default => '/usr/lib/nagios/plugins',
     }
 
-    $hostgroups = $::nagios_hostgroups ? {
+    $hostgroups = $nagios_hostgroups ? {
         ''      => 'all',
-        default => $::nagios_hostgroup,
+        default => $nagios_hostgroup,
     }
 }
 

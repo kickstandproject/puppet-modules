@@ -52,19 +52,19 @@ class openssh::params {
         default => '/etc/ssh',
     }
 
-    $port = $::openssh_port ? {
+    $port = $openssh_port ? {
         ''      => '22',
-        default => $::openssh_port,
+        default => $openssh_port,
     }
 
-    $password_auth = $::openssh_password_auth ? {
+    $password_auth = $openssh_password_auth ? {
         ''      => 'no',
-        default => $::openssh_password_auth,
+        default => $openssh_password_auth,
     }
 
-    $permit_root = $::openssh_permit_root ? {
+    $permit_root = $openssh_permit_root ? {
         ''      => 'no',
-        default => $::openssh_permit_root,
+        default => $openssh_permit_root,
     }
 }
 

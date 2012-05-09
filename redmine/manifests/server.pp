@@ -22,7 +22,7 @@ class redmine::server inherits redmine::common::init {
         include redmine::mysql::client
     }
 
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include redmine::common::monitor
     }
 }

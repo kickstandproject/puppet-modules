@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class openvpn::server inherits openvpn::common::init {
-    if ($::firewall == 'yes') {
+    if ($firewall == 'yes') {
         include openvpn::common::firewall
     }
 }

@@ -20,7 +20,7 @@ class redmine::mysql::client inherits redmine::mysql::common::init {
         require mysql::server
     }
 
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include redmine::mysql::common::monitor
     }
 }

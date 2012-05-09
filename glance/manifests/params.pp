@@ -56,37 +56,37 @@ class glance::params {
         default => '/var/lib/glance',
     }
 
-    $db = $::glance_db ? {
-        ''      => 'mysql',
-        default => $::glance_db,
-    }
-
-    $db_name = $::glance_db_name ? {
-        ''      => 'glance',
-        default => $::glance_db_name,
-    }
-
-    $db_password = $::glance_db_password ? {
-        ''      => '',
-        default => $::glance_db_password,
-    }
-
-    $db_server = $::glance_db_server ? {
-        ''      => 'localhost',
-        default => $::glance_db_server,
-    }
-
-    $db_user = $::glance_db_user ? {
-        ''      => 'glancedbadmin',
-        default => $::glance_db_user,
-    }
-
     $mysql = $::operatingsystem ? {
         default => 'python-mysqldb',
     }
 
-    if ($glance::params::db_password == '') {
-        fail('You must assign a default password using \'\$::glance_db_password\'')
+    $db = $glance_db ? {
+        ''      => 'mysql',
+        default => $glance_db,
+    }
+
+    $db_name = $glance_db_name ? {
+        ''      => 'glance',
+        default => $glance_db_name,
+    }
+
+    $db_password = $glance_db_password ? {
+        ''      => '',
+        default => $glance_db_password,
+    }
+
+    $db_server = $glance_db_server ? {
+        ''      => 'localhost',
+        default => $glance_db_server,
+    }
+
+    $db_user = $glance_db_user ? {
+        ''      => 'glancedbadmin',
+        default => $glance_db_user,
+    }
+
+    if ($db_password == '') {
+        fail('You must assign a default password using \'\$glance_db_password\'')
     }
 }
 

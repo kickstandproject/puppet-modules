@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::scheduler::server inherits nova::scheduler::common::init {
-    if ($::monitor == 'yes') {
+    if ($monitor == 'yes') {
         include nova::scheduler::common::monitor
     }
 }

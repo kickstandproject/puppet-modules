@@ -52,19 +52,19 @@ class apt::params {
         default => 'root',
     }
 
-    $components = $::apt_components ? {
+    $components = $apt_components ? {
         ''      => 'main universe',
-        default => $::apt_components,
+        default => $apt_components,
     }
 
-    $mirror = $::apt_mirror ? {
+    $mirror = $apt_mirror ? {
         ''      => 'ca.archive.ubuntu.com',
-        default => $::apt_mirror,
+        default => $apt_mirror,
     }
 
-    $mirror_protocol = $::apt_mirror_protocol ? {
+    $mirror_protocol = $apt_mirror_protocol ? {
         ''      => 'http://',
-        default => $::apt_mirror_protocol,
+        default => $apt_mirror_protocol,
     }
 }
 
