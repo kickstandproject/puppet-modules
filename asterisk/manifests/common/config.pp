@@ -116,9 +116,6 @@ class asterisk::common::config {
         server  => $asterisk::params::server,
         port    => $asterisk::params::sip_port,
     }
-
-    asterisk::function::customdir { 'asterisk.conf':
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
