@@ -49,7 +49,7 @@ define asterisk::function::device(
     file { "$base/${filename}.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/sip.conf.d/devices/template.conf.erb'),
-        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        notify  => Exec['asterisk-module-reload-sip.conf'],
         require => File[$base],
     }
 

@@ -15,21 +15,30 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define asterisk::function::queuemember(
-    $queue,
-    $channel = 'SIP',
+define asterisk::function::customdir(
 ) {
     require asterisk::server
 
-    $base = "${asterisk::params::basedir}/queues.conf.d/includes"
+    $base = "${asterisk::params::basedir}/${name}.d"
 
-    if (defined(File["${base}/${queue}"])) {
-        file { "${base}/${queue}/${name}.conf":
-            ensure  => present,
-            content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
-            notify  => Exec['asterisk-module-reload-queues.conf'],
-            require => File["${base}/${queue}"],
-        }
+    file { $base:
+        ensure  => directory,
+        force   => true,
+        notify  => Exec["asterisk-module-reload-${name}"],
+        purge   => true,
+        recurse => true,
+        require => File[$asterisk::params::basedir],
+    }
+
+    file { "${base}/custom.d":
+        ensure  => directory,
+        require => File[$base],
+    }
+
+    file { "${base}/99custom.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/sip.conf.d/99custom.conf.erb'),
+        require => File[$base],
     }
 }
 

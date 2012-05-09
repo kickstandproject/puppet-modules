@@ -25,15 +25,6 @@ class asterisk::voicemail::common::config {
         require => File["${asterisk::params::basedir}/modules.conf.d"],
     }
 
-    file { "${asterisk::params::basedir}/voicemail.conf.d":
-        ensure  => directory,
-        force   => true,
-        notify  => Exec['asterisk-module-reload-app_voicemail.so'],
-        purge   => true,
-        recurse => true,
-        require => File[$asterisk::params::basedir],
-    }
-
     file { "${asterisk::params::spooldir}/voicemail":
         ensure  => directory,
         require => File[$asterisk::params::spooldir],
