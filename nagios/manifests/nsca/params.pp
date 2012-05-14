@@ -44,6 +44,10 @@ class nagios::nsca::params {
         default => 'nsca',
     }
 
+    $packagename_client = $::operatingsystem ? {
+        default => 'nsca-client',
+    }
+
     $servicename = $::operatingsystem ? {
         default => 'nsca',
     }

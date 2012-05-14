@@ -19,7 +19,7 @@ define monitor::process(
     $process,
     $ensure = present,
 ) {
-    require nagios::nsca::params
+    require nagios::nsca::client
 
     File {
         group   => $nagios::nsca::params::configfile_group,

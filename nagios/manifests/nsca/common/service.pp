@@ -16,18 +16,14 @@
 # file at the top of the source tree.
 #
 class nagios::nsca::common::service {
-    if defined(Class['nagios::nsca::client']) {
-        $ensure = stopped
-    } else {
-        $ensure = running
-    }
-
-    service { $nagios::nsca::params::servicename:
-        ensure      => $ensure,
-        enable      => true,
-        hasrestart  => true,
-        hasstatus   => $nagios::nsca::params::hasstatus,
-        require     => Class['nagios::nsca::common::config'],
+    if defined(Class['nagios::nsca::server']) {
+        service { $nagios::nsca::params::servicename:
+            ensure      => 'running',
+            enable      => true,
+            hasrestart  => true,
+            hasstatus   => $nagios::nsca::params::hasstatus,
+            require     => Class['nagios::nsca::common::config'],
+        }
     }
 }
 

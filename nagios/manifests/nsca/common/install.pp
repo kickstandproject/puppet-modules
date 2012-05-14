@@ -16,7 +16,12 @@
 # file at the top of the source tree.
 #
 class nagios::nsca::common::install {
-    package { $nagios::nsca::params::packagename:
+    if defined(Class['nagios::nsca::server']) {
+        package { $nagios::nsca::params::packagename:
+            ensure  => present,
+        }
+    }
+    package { $nagios::nsca::params::packagename_client:
         ensure  => present,
     }
 }
