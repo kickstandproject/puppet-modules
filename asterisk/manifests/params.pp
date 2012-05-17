@@ -61,12 +61,6 @@ class asterisk::params {
         default => $asterisk_ensure,
     }
 
-    $voicemail = $asterisk_voicemail ? {
-        ''      => false,
-        'yes'   => true,
-        default => $asterisk_voicemail,
-    }
-
     $server = $asterisk_server ? {
         ''      => $::fqdn,
         default => $asterisk_server,

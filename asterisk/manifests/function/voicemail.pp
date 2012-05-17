@@ -20,9 +20,8 @@ define asterisk::function::voicemail(
     $fullname = '',
     $description = '',
 ) {
-    $asterisk_voicemail = 'yes'
     require asterisk::server
-    include asterisk::voicemail::common::init
+    require asterisk::voicemail::server
 
     /* XXX TODO Why do we need this here?  For some reason puppet will not honor
       existing one from asterisk::common::init. */
@@ -34,7 +33,11 @@ define asterisk::function::voicemail(
 
     $split = split($name, '@')
     $extension = $split[0]
-    $context = $split[1]
+    if ($split[1] != '') {
+        $context = $split[1]
+    } else {
+        $context = 'default'
+    }
 
     $base = "${asterisk::params::basedir}/voicemail.conf.d"
     $spool = "${asterisk::params::spooldir}/voicemail"
@@ -58,15 +61,15 @@ define asterisk::function::voicemail(
         }
     }
 
-    file { "$base/${context}/${extension}.conf":
+    file { "${base}/${context}/${extension}.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/voicemail.conf.d/default/template.conf.erb'),
         notify  => Exec['asterisk-module-reload-app_voicemail.so'],
         require => File["${base}/${context}"],
     }
 
-    if (!defined(File["$spool/${context}"])) {
-        file { "$spool/${context}":
+    if (!defined(File["${spool}/${context}"])) {
+        file { "${spool}/${context}":
             ensure  => directory,
             force   => true,
             notify  => Exec['asterisk-module-reload-app_voicemail.so'],
@@ -76,18 +79,18 @@ define asterisk::function::voicemail(
         }
     }
 
-    file { "$spool/${context}/${extension}":
+    file { "${spool}/${context}/${extension}":
         ensure  => directory,
         notify  => Exec['asterisk-module-reload-app_voicemail.so'],
-        require => File["$spool/${context}"],
+        require => File["${spool}/${context}"],
     }
 
-    file { "$spool/${context}/${extension}/secret.conf":
+    file { "${spool}/${context}/${extension}/secret.conf":
         ensure  => present,
         content => template('asterisk/var/spool/asterisk/voicemail/secret.conf.erb'),
         notify  => Exec['asterisk-module-reload-app_voicemail.so'],
         replace => false,
-        require => File["$spool/${context}"],
+        require => File["${spool}/${context}"],
     }
 }
 

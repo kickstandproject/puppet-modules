@@ -35,6 +35,11 @@ define asterisk::function::device(
     $ast_template = $template
     $base = "${asterisk::params::basedir}/sip.conf.d/devices"
     $description = "${fullname} <${extension}>"
+    if ($mailbox == '') {
+        $mailbox_real = "${extension}@default"
+    } else {
+        $mailbox_real = $mailbox
+    }
     $split = split($name, '-')
 
     if ($split[1] != '') {
@@ -59,8 +64,8 @@ define asterisk::function::device(
         subscribe   => File["$base/${filename}.conf"],
     }
 
-    if ($mailbox != '') {
-        asterisk::function::voicemail { $mailbox:
+    if ($mailbox_real != 'none') {
+        asterisk::function::voicemail { $mailbox_real:
             description => $description,
             email       => $email,
             fullname    => $fullname,
