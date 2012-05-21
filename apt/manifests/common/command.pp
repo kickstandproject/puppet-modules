@@ -15,18 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class apt::common::init(
-    $stage = 'bootstrap')
-{
-    include apt::params
-    include apt::common::install
-    include apt::common::config
-    include apt::common::command
-
-    File {
-        group   => $apt::params::group,
-        mode    => $apt::params::mode,
-        owner   => $apt::params::owner,
+class apt::common::command {
+    exec { 'apt-get update':
+        command        => 'apt-get update',
+        refreshonly    => true,
     }
 }
 
