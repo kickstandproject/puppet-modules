@@ -2,6 +2,6 @@
 <!-- Registration info -->
 <userinfo>
 <% hashdata.each_pair do |key, value| %>
-	<reg reg.<%= key %>.displayName="<%= value['fullname'] %>" reg.<%= key %>.address="<%= name %>-<%= key %>" reg.<%= key %>.auth.userId="<%= name %>-<%= key %>" reg.<%= key %>.auth.password="<%= value['password'] %>" reg.<%= key %>.type="private" <% if (value['label'] != '') then %>reg.<%= key %>.label="<%= value['label'] %>"<% end %>/>
+	<reg reg.<%= key %>.displayName="<%= value['fullname'] %>" reg.<%= key %>.address="<%= name %>-<%= key %>" reg.<%= key %>.auth.userId="<%= name %>-<%= key %>" reg.<%= key %>.auth.password="<%= value['password'] %>" reg.<%= key %>.type="private" <% if (value['label'] != '') then %>reg.<%= key %>.label="<%= value['label'] %>"<% end %> />
 <% end %>
 </userinfo>
