@@ -21,6 +21,7 @@ class apt::common::init(
     include apt::params
     include apt::common::install
     include apt::common::config
+    include apt::common::comand
 
     File {
         group   => $apt::params::group,

@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class apt::common::config {
-    require apt::params
-
     file { $apt::params::basedir:
         ensure  => directory,
         require => Class['apt::common::install'],
@@ -60,21 +58,6 @@ class apt::common::config {
     apt::function::config { '50unattended-upgrades':
         ensure  => present,
         content => template('apt/etc/apt/apt.conf.d/50unattended-upgrades.erb'),
-    }
-
-    exec { 'apt-get clean':
-        command        => 'apt-get clean',
-        subscribe      => [
-            File["${apt::params::basedir}/sources.list"],
-            File["${apt::params::basedir}/sources.list.d"],
-        ],
-        refreshonly    => true,
-    }
-
-    exec { 'apt-get update':
-        command        => 'apt-get update',
-        subscribe      => Exec['apt-get clean'],
-        refreshonly    => true,
     }
 }
 
