@@ -17,7 +17,6 @@
 #
 class polycom-provision::common::config {
     require polycom-ucs::params
-    require polycom-bootrom::params
     include polycom-provision::params
 
     file { $polycom-provision::params::basedir:
@@ -91,6 +90,26 @@ class polycom-provision::common::config {
     ]
 
     polycom-provision::function::bootrom { $bootroms:
+    }
+
+    $legacy_bootroms = [
+        '2201-06642-001.bootrom.ld',
+        '2345-11000-001.bootrom.ld',
+        '2345-11300-001.bootrom.ld',
+        '2345-11300-010.bootrom.ld',
+        '2345-11402-001.bootrom.ld',
+        '2345-11500-001.bootrom.ld',
+        '2345-11500-010.bootrom.ld',
+        '2345-11500-020.bootrom.ld',
+        '2345-11500-030.bootrom.ld',
+        '2345-11500-040.bootrom.ld',
+        '2345-11600-001.bootrom.ld',
+        '2345-11605-001.bootrom.ld',
+        '2345-17960-001.bootrom.ld',
+    ]
+
+    polycom-provision::function::bootrom { $legacy_bootroms:
+        legacy => 'yes',
     }
 
     apache::function::virtualhost { $polycom-provision::params::hostname:

@@ -16,13 +16,21 @@
 # file at the top of the source tree.
 #
 define polycom-provision::function::bootrom(
+    $legacy = 'no',
 ) {
-    require polycom-bootrom::client
     include polycom-provision::params
+
+    if ($legacy == 'no') {
+        require polycom-bootrom::client
+        $target = "${polycom-bootrom::params::basedir}/${name}"
+    } else {
+        require polycom-bootrom::legacy::client
+        $target = "${polycom-bootrom::legacy::params::basedir}/${name}"
+    }
 
     file { "${polycom-provision::params::basedir}/${name}":
         ensure  => link,
-        target  => "${polycom-bootrom::params::basedir}/${name}",
+        target  => $target,
         require => File[$polycom-provision::params::basedir],
     }
 }
