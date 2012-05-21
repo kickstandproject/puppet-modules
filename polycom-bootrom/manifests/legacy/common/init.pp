@@ -15,10 +15,17 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class polycom-provision::server inherits polycom-provision::common::init {
-    require polycom-ucs::client
-    require polycom-bootrom::client
-    require polycom-bootrom::legacy::client
+class polycom-bootrom::legacy::common::init {
+    include polycom-bootrom::legacy::params
+    include polycom-bootrom::legacy::common::install
+    include polycom-bootrom::legacy::common::config
+    include polycom-bootrom::legacy::common::service
+
+    File {
+        group   => $polycom-bootrom::legacy::params::group,
+        mode    => $polycom-bootrom::legacy::params::mode,
+        owner   => $polycom-bootrom::legacy::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
