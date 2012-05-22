@@ -15,11 +15,24 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class polycom-provision::server inherits polycom-provision::common::init {
-    require polycom-ucs::client
-    require polycom-ucs::legacy::client
-    require polycom-bootrom::client
-    require polycom-bootrom::legacy::client
+define polycom-provision::function::firmware(
+    $legacy = 'no',
+) {
+    include polycom-provision::params
+
+    if ($legacy == 'no') {
+        require polycom-ucs::client
+        $target = $polycom-ucs::params::basedir
+    } else {
+        require polycom-ucs::legacy::client
+        $target = $polycom-ucs::legacy::params::basedir
+    }
+
+    file { "${polycom-provision::params::basedir}/firmwares/${name}":
+        ensure  => link,
+        target  => "${target}/firmwares/${name}",
+        require => File["${polycom-provision::params::basedir}/firmwares"],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

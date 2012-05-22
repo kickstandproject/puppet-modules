@@ -52,8 +52,9 @@ class polycom-provision::common::config {
     }
 
     file { "${polycom-provision::params::basedir}/firmwares":
-        ensure  => link,
-        target  => "${polycom-ucs::params::basedir}/firmwares",
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
         require => File[$polycom-provision::params::basedir],
     }
 
@@ -86,11 +87,10 @@ class polycom-provision::common::config {
         '2345-12670-001.bootrom.ld',
         '3111-15600-001.bootrom.ld',
         '3111-30900-001.bootrom.ld',
-        '3111-40000-001.bootrom.ld'
+        '3111-40000-001.bootrom.ld',
     ]
 
-    polycom-provision::function::bootrom { $bootroms:
-    }
+    polycom-provision::function::bootrom { $bootroms: }
 
     $legacy_bootroms = [
         '2201-06642-001.bootrom.ld',
@@ -109,6 +109,40 @@ class polycom-provision::common::config {
     ]
 
     polycom-provision::function::bootrom { $legacy_bootroms:
+        legacy => 'yes',
+    }
+
+    $firmwares = [
+        '2345-12200-001.sip.ld',
+        '2345-12200-002.sip.ld',
+        '2345-12200-004.sip.ld',
+        '2345-12200-005.sip.ld',
+        '2345-12360-001.sip.ld',
+        '2345-12365-001.sip.ld',
+        '2345-12375-001.sip.ld',
+        '2345-12450-001.sip.ld',
+        '2345-12500-001.sip.ld',
+        '2345-12560-001.sip.ld',
+        '2345-12600-001.sip.ld',
+        '2345-12670-001.sip.ld',
+        '2345-17960-001.sip.ld',
+        '3111-15600-001.sip.ld',
+        '3111-30900-001.sip.ld',
+        '3111-40000-001.sip.ld',
+    ]
+
+    polycom-provision::function::firmware { $firmwares: }
+
+    $legacy_firmwares = [
+        '2201-06642-001.sip.ld',
+        '2345-11300-010.sip.ld',
+        '2345-11500-030.sip.ld',
+        '2345-11500-040.sip.ld',
+        '2345-11600-001.sip.ld',
+        '2345-11605-001.sip.ld',
+    ]
+
+    polycom-provision::function::firmware { $legacy_firmwares:
         legacy => 'yes',
     }
 
