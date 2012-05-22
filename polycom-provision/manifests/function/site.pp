@@ -24,6 +24,12 @@ define polycom-provision::function::site(
         content => template('polycom-provision/var/lib/polycom-provision/site.cfg.erb'),
         require => File[$polycom-provision::params::basedir],
     }
+
+    file { "${polycom-provision::params::basedir}/site-legacy.cfg":
+        ensure  => present,
+        content => template('polycom-provision/var/lib/polycom-provision/site-legacy.cfg.erb'),
+        require => File[$polycom-provision::params::basedir],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

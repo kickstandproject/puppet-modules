@@ -32,6 +32,12 @@ define polycom-provision::function::sip-basic(
         content => template('polycom-provision/var/lib/polycom-provision/sip-basic.cfg.erb'),
         require => File[$polycom-provision::params::basedir],
     }
+
+    file { "${polycom-provision::params::basedir}/sip-basic-legacy.cfg":
+        ensure  => present,
+        content => template('polycom-provision/var/lib/polycom-provision/sip-basic-legacy.cfg.erb'),
+        require => File[$polycom-provision::params::basedir],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
