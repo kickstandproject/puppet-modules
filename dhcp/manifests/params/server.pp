@@ -39,7 +39,6 @@ class dhcp::params::server inherits dhcp::params {
     $servicename = $::operatingsystem ? {
         default => 'isc-dhcp-server',
     }
-
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
