@@ -23,6 +23,7 @@ class network::client(
         }
     },
 ) {
+    require dhcp::client
     include network::params::client
     include network::client::init
 }
