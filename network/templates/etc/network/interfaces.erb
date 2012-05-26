@@ -1,0 +1,10 @@
+auto lo <% if auto.any? %><%= auto.join(' ') %><% end %>
+
+iface lo inet loopback
+
+<%- interfaces.reject { |k,v| k == 'auto' }.sort.each do |key,val| -%>
+iface <%= key %> inet <%= val['method'] %>
+    <%- val.reject { |i,j| i == 'method' }.sort.each do |option,value| -%>
+    <%= option %> <%= value %>
+    <%- end -%>
+<%- end -%>
