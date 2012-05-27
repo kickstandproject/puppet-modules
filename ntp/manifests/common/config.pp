@@ -16,19 +16,10 @@
 # file at the top of the source tree.
 #
 class ntp::common::config {
-    include ntp::params
-
     file { $ntp::params::configfile:
         ensure  => present,
         content => template('ntp/etc/ntp.conf.erb'),
-        notify  => Class['ntp::common::service'],
         require => Class['ntp::common::install'],
-    }
-
-    file { $ntp::params::defaultfile:
-        ensure  => present,
-        content => template('ntp/etc/default/ntp.erb'),
-        notify  => Class['ntp::common::service'],
     }
 }
 

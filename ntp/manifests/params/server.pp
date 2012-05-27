@@ -15,16 +15,26 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class ntp::server(
-    $servers = [
-        '0.pool.ntp.org',
-        '1.pool.ntp.org',
-        '2.pool.ntp.org',
-    ],
-) {
-    include ntp::client
-    include ntp::params::server
-    include ntp::server::init
+class ntp::params::server inherits ntp::params {
+    $defaultfile = $::operatingsystem ? {
+        default => '/etc/default/ntp',
+    }
+
+    $hasstatus = $::operatingsystem ? {
+        default => true,
+    }
+
+    $packagename = $::operatingsystem ? {
+        default => 'ntp',
+    }
+
+    $processname = $::operatingsystem ? {
+        default => 'ntpd',
+    }
+
+    $servicename = $::operatingsystem ? {
+        default => 'ntp',
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

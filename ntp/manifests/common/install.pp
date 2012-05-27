@@ -16,9 +16,6 @@
 # file at the top of the source tree.
 #
 class ntp::common::install {
-    package { $ntp::params::packagename:
-        ensure => present,
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -15,16 +15,8 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class ntp::server(
-    $servers = [
-        '0.pool.ntp.org',
-        '1.pool.ntp.org',
-        '2.pool.ntp.org',
-    ],
-) {
-    include ntp::client
-    include ntp::params::server
-    include ntp::server::init
+class ntp::client::service {
+    include ntp::common::service
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

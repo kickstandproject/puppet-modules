@@ -16,11 +16,6 @@
 # file at the top of the source tree.
 #
 class ntp::common::init {
-    include ntp::params
-    include ntp::common::install
-    include ntp::common::config
-    include ntp::common::service
-
     File {
         group   => $ntp::params::group,
         mode    => $ntp::params::mode,

@@ -16,13 +16,6 @@
 # file at the top of the source tree.
 #
 class ntp::common::service {
-    service { $ntp::params::servicename:
-        ensure      => running,
-        enable      => true,
-        hasrestart  => true,
-        hasstatus   => $ntp::params::hasstatus,
-        require     => Class['ntp::common::config'],
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

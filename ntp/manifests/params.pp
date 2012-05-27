@@ -20,16 +20,8 @@ class ntp::params {
         default => '/etc/ntp.conf',
     }
 
-    $defaultfile = $::operatingsystem ? {
-        default => '/etc/default/ntp',
-    }
-
     $group = $::operatingsystem ? {
         default => 'root',
-    }
-
-    $hasstatus = $::operatingsystem ? {
-        default => true,
     }
 
     $mode = $::operatingsystem ? {
@@ -38,18 +30,6 @@ class ntp::params {
 
     $owner = $::operatingsystem ? {
         default => 'root',
-    }
-
-    $packagename = $::operatingsystem ? {
-        default => 'ntp',
-    }
-
-    $processname = $::operatingsystem ? {
-        default => 'ntpd',
-    }
-
-    $servicename = $::operatingsystem ? {
-        default => 'ntp',
     }
 }
 

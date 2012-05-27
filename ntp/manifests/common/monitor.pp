@@ -16,11 +16,6 @@
 # file at the top of the source tree.
 #
 class ntp::common::monitor {
-    include ntp::params
-
-    monitor::process { 'ntp_process':
-        process => $ntp::params::processname,
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
