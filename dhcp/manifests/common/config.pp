@@ -18,6 +18,7 @@
 class dhcp::common::config {
     file { $dhcp::params::basedir:
         ensure  => directory,
+        force   => true,
         purge   => true,
         recurse => true,
     }

@@ -16,6 +16,7 @@
 # file at the top of the source tree.
 #
 class dhcp::server {
+    include dhcp::client
     include dhcp::params::server
     include dhcp::server::init
 }

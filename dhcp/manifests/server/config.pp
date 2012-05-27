@@ -30,6 +30,21 @@ class dhcp::server::config {
         content => template('dhcp/etc/default/isc-dhcp-server.erb'),
         notify  => Class['dhcp::server::service'],
     }
+
+    file { "${dhcp::params::server::basedir}/dhcpd.conf.d":
+        ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
+        require => File[$dhcp::params::server::basedir],
+    }
+
+    file { "${dhcp::params::server::basedir}/dhcpd.conf.d/custom.conf":
+        ensure  => present,
+        content => template('dhcp/etc/dhcp/dhcpd.conf.d/custom.conf.erb'),
+        replace => false,
+        require => File["${dhcp::params::server::basedir}/dhcpd.conf.d"],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
