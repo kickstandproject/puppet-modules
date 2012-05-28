@@ -18,11 +18,6 @@
 class apt::common::init(
     $stage = 'bootstrap')
 {
-    include apt::params
-    include apt::common::install
-    include apt::common::config
-    include apt::common::command
-
     File {
         group   => $apt::params::group,
         mode    => $apt::params::mode,

@@ -20,28 +20,8 @@ class apt::params {
         default => '/etc/apt',
     }
 
-    $configdir = $::operatingsystem ? {
-        default => '/etc/apt/apt.conf.d',
-    }
-
     $group = $::operatingsystem ? {
         default => 'root',
-    }
-
-    $hasstatus = $::operatingsystem ? {
-        default => true,
-    }
-
-    $packagename = $::operatingsystem ? {
-        default => 'python-software-properties',
-    }
-
-    $processname = $::operatingsystem ? {
-        default => 'apt',
-    }
-
-    $servicename = $::operatingsystem ? {
-        default => 'apt',
     }
 
     $mode = $::operatingsystem ? {
@@ -50,21 +30,6 @@ class apt::params {
 
     $owner = $::operatingsystem ? {
         default => 'root',
-    }
-
-    $components = $apt_components ? {
-        ''      => 'main universe',
-        default => $apt_components,
-    }
-
-    $mirror = $apt_mirror ? {
-        ''      => 'ca.archive.ubuntu.com',
-        default => $apt_mirror,
-    }
-
-    $mirror_protocol = $apt_mirror_protocol ? {
-        ''      => 'http://',
-        default => $apt_mirror_protocol,
     }
 }
 

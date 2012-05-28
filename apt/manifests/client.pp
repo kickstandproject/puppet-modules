@@ -16,11 +16,13 @@
 # file at the top of the source tree.
 #
 class apt::client(
-    $stage = 'bootstrap'
-) inherits apt::common::init {
-    if ($squid_server) {
-        include apt::squid::init
-    }
+    $components = 'main universe',
+    $mirror     = 'ca.archive.ubuntu.com',
+    $protocol   = 'http://',
+    $stage      = 'bootstrap',
+) {
+    include apt::params::client
+    include apt::client::init
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
