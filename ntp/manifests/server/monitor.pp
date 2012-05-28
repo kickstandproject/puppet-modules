@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class ntp::server::monitor {
-    include ntp::common::monitor
-
     monitor::process { $name:
         process => $ntp::params::server::processname,
     }

@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class dhcp::server::monitor {
-    include dhcp::common::monitor
-
     monitor::process { $name:
         process => $dhcp::params::server::processname,
     }

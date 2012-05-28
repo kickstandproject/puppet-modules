@@ -20,8 +20,6 @@ class ntp::client::init {
     include ntp::client::install
     include ntp::client::config
     include ntp::client::service
-    include ntp::client::monitor
-    include ntp::client::firewall
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
