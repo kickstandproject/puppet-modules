@@ -15,7 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class git::client inherits git::common::init {
+class git::client {
+    include git::params::client
+    include git::client::init
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

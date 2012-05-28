@@ -15,7 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class git::common::init {
+class git::params::client inherits git::params {
+    $packagename = $::operatingsystem ? {
+        default => 'git',
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
