@@ -1,13 +1,4 @@
-[main]
-logdir = /var/log/puppet
-vardir = /var/lib/puppet
-ssldir = /var/lib/puppet/ssl
-rundir = /var/run/puppet
-factpath = $vardir/lib/facter
-templatedir = $confdir/templates
-
 [agent]
-pluginsync = false
-server = <%= scope.lookupvar('puppet::params::server') %>
-runinterval = <%= scope.lookupvar('puppet::params::runinterval') %>
-usecacheonfailure = false
+<%- scope.lookupvar('puppet::client::options_real').sort.each do |key,val| -%>
+<%= key %> = <%= val %>
+<%- end -%>

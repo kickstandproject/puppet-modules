@@ -15,11 +15,16 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class puppet::common::init {
-    File {
-        group   => $puppet::params::group,
-        mode    => $puppet::params::mode,
-        owner   => $puppet::params::owner,
+class puppet::server::service {
+    include puppet::common::service
+
+    service { $puppet::params::server::servicename:
+        ensure      => running,
+        enable      => true,
+        hasrestart  => true,
+        hasstatus   => $puppet::params::server::hasstatus,
+        require     => Class['puppet::server::config'],
+        subscribe   => File[$puppet::params::server::configfile],
     }
 }
 

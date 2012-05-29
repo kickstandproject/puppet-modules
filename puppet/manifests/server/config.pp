@@ -15,11 +15,20 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class puppet::common::init {
-    File {
-        group   => $puppet::params::group,
-        mode    => $puppet::params::mode,
-        owner   => $puppet::params::owner,
+class puppet::server::config {
+    include puppet::common::config
+
+    common::function::concat::fragment { 'puppet.conf-server':
+        target  => $puppet::params::server::configfile,
+        content => template('puppet/etc/puppet/puppet.conf-server.erb'),
+        order   => 02,
+    }
+
+    file { $puppet::params::server::defaultsfile:
+        ensure  => present,
+        content => template('puppet/etc/default/puppetmaster.erb'),
+        notify  => Class['puppet::server::service'],
+        require => Class['puppet::server::install'],
     }
 }
 

@@ -15,16 +15,37 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class puppet::server inherits puppet::common::init {
+class puppet::server(
+    $options = {}
+
+) {
     require ruby-activerecord::client
     require ruby-mysql::client
 
-    common::function::database { $puppet::params::packagename:
-        password    => $puppet::params::db_password,
-        server      => $puppet::params::db_server,
-        table       => $puppet::params::db_name,
-        type        => $puppet::params::db,
-        user        => $puppet::params::db_user,
+    $defaults = {
+        'dbadapter'     => 'mysql',
+        'dbname'        => 'puppet',
+        'dbpassword'    => '',
+        'dbserver'      => 'localhost',
+        'dbuser'        => 'puppet',
+        'storeconfigs'  => 'true',
+    }
+
+    $options_real = merge($defaults, $options)
+
+    if (($options_real['storeconfigs'] == 'true') and ($options_real['dbpassword'] == '')) {
+        fail('$options[\'dbpassword\'] paramater must not be empty.')
+    }
+
+    include puppet::params::server
+    include puppet::server::init
+
+    common::function::database { $puppet::params::server::packagename:
+        password    => $options_real['dbpassword'],
+        server      => $options_real['dbserver'],
+        table       => $options_real['dbname'],
+        type        => $options_real['dbadapter'],
+        user        => $options_real['dbuser'],
     }
 }
 

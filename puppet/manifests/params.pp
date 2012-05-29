@@ -24,20 +24,8 @@ class puppet::params {
         default => '/etc/puppet/puppet.conf',
     }
 
-    $varlocal = $::operatingsystem ? {
-        default => '/var/local/puppet',
-    }
-
-    $defaultsfile = $::operatingsystem ? {
-        default => '/etc/default/puppet',
-    }
-
     $group = $::operatingsystem ? {
         default => 'root',
-    }
-
-    $hasstatus = $::operatingsystem ? {
-        default => true,
     }
 
     $mode = $::operatingsystem ? {
@@ -46,62 +34,6 @@ class puppet::params {
 
     $owner = $::operatingsystem ? {
         default => 'root',
-    }
-
-    $packagename = $::operatingsystem ? {
-        default => 'puppet',
-    }
-
-    $processname = $::operatingsystem ? {
-        default => 'root',
-    }
-
-    $servicename = $::operatingsystem ? {
-        default => 'puppet',
-    }
-
-    $runinterval = $puppet_runinterval ? {
-        ''      => '1800',
-        default => $puppet_runinterval,
-    }
-
-    $server = $puppet_server ? {
-        ''      => 'puppet',
-        default => $puppet_server,
-    }
-
-    $type = defined(Class['puppet::server']) ? {
-        true    => 'server',
-        default => 'client',
-    }
-
-    $db = $puppet_db ? {
-        ''      => 'mysql',
-        default => $puppet_db,
-    }
-
-    $db_name = $puppet_db_name ? {
-        ''      => 'puppet',
-        default => $puppet_db_name,
-    }
-
-    $db_password = $puppet_db_password ? {
-        ''      => '',
-        default => $puppet_db_password,
-    }
-
-    $db_server = $puppet_db_server ? {
-        ''      => 'localhost',
-        default => $puppet_db_server,
-    }
-
-    $db_user = $puppet_db_user ? {
-        ''      => 'puppet',
-        default => $puppet_db_user,
-    }
-
-    if (defined(Class['puppet::server']) and ($db_password == '')) {
-        fail('You must assign a default password using \'\$puppet_db_password\'')
     }
 }
 

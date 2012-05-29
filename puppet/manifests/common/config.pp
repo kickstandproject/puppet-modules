@@ -16,14 +16,21 @@
 # file at the top of the source tree.
 #
 class puppet::common::config {
-    require puppet::params
-
     file { $puppet::params::basedir:
         ensure  => directory,
         force   => true,
         purge   => true,
         recurse => true,
         require => Class['puppet::common::install'],
+    }
+
+    common::function::concat { $puppet::params::configfile:
+    }
+
+    common::function::concat::fragment { 'puppet.conf-header':
+        target  => $puppet::params::configfile,
+        content => template('puppet/etc/puppet/puppet.conf-header.erb'),
+        order   => 01,
     }
 
     file { [
@@ -33,28 +40,6 @@ class puppet::common::config {
     ]:
         ensure  => directory,
         require => File[$puppet::params::basedir],
-    }
-
-    file { $puppet::params::configfile:
-        ensure  => present,
-        content => template("puppet/etc/puppet/puppet.conf-${puppet::params::type}.erb"),
-        notify  => Class['puppet::common::service'],
-        require => File[$puppet::params::basedir],
-    }
-
-    file { $puppet::params::defaultsfile:
-        ensure  => present,
-        content => template('puppet/etc/default/puppet.erb'),
-        notify  => Class['puppet::common::service'],
-        require => Class['puppet::common::install'],
-    }
-
-    file { $puppet::params::varlocal:
-        ensure  => directory,
-        force   => true,
-        purge   => true,
-        recurse => true,
-        require => Class['puppet::common::install'],
     }
 }
 

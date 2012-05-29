@@ -16,13 +16,6 @@
 # file at the top of the source tree.
 #
 class puppet::common::service {
-    service { $puppet::params::servicename:
-        ensure      => running,
-        enable      => true,
-        hasrestart  => true,
-        hasstatus   => $puppet::params::hasstatus,
-        require     => Class['puppet::common::config'],
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

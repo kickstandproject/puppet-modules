@@ -15,11 +15,25 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class puppet::common::init {
-    File {
-        group   => $puppet::params::group,
-        mode    => $puppet::params::mode,
-        owner   => $puppet::params::owner,
+class common::params {
+    $group = $::operatingsystem ? {
+        default => 'root',
+    }
+
+    $localbindir = $::operatingsystem ? {
+        default => '/usr/local/bin/puppet',
+    }
+
+    $mode = $::operatingsystem ? {
+        default => '0644',
+    }
+
+    $owner = $::operatingsystem ? {
+        default => 'root',
+    }
+
+    $varlocaldir = $::operatingsystem ? {
+        default => '/var/local/puppet',
     }
 }
 

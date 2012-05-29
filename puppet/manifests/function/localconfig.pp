@@ -16,15 +16,21 @@
 # file at the top of the source tree.
 #
 define puppet::function::localconfig(
-    $directory = $name,
+    $directory = '',
 ) {
     require puppet::client
 
-    file { "${puppet::params::varlocal}/${directory}":
+    if ($directory != '') {
+        $dir = $directory
+    } else {
+        $dir = $name
+    }
+
+    file { "${common::params::varlocaldir}/${dir}":
         ensure  => directory,
         purge   => true,
         recurse => true,
-        require => File[$puppet::params::varlocal],
+        require => File[$common::params::varlocaldir],
     }
 }
 

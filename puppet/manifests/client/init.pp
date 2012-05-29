@@ -15,12 +15,13 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class puppet::common::init {
-    File {
-        group   => $puppet::params::group,
-        mode    => $puppet::params::mode,
-        owner   => $puppet::params::owner,
-    }
+class puppet::client::init {
+    include puppet::common::init
+    include puppet::client::install
+    include puppet::client::config
+    include puppet::client::service
+    include puppet::client::firewall
+    include puppet::client::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
