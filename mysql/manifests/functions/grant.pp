@@ -22,9 +22,9 @@ define mysql::functions::grant(
     $db_server = 'localhost',
 ) {
     require mysql::server
-    require puppet::client
+    require common::client
 
-    $path = "${puppet::params::varlocal}/${name}"
+    $path = "${common::params::varlocaldir}/${name}"
     $mysql_grant_file = "mysqlgrant-${db_user}-${db_server}-${db_name}.sql"
 
     file { $mysql_grant_file:

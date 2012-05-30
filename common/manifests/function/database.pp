@@ -22,10 +22,14 @@ define common::function::database(
     $type,
     $user,
 ) {
-    require puppet::client
+    require common::client
 
-    if (!defined(File["${puppet::params::varlocal}/${name}"])) {
-        puppet::function::localconfig { $name:
+    if (!defined(File["${common::params::varlocaldir}/${name}"])) {
+        file { "${common::params::varlocaldir}/${name}":
+            ensure  => directory,
+            purge   => true,
+            recurse => true,
+            require => File[$common::params::varlocaldir],
         }
     }
 
