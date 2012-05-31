@@ -22,9 +22,9 @@ define monitor::process(
     require nagios::nsca::client
 
     File {
-        group   => $nagios::nsca::params::configfile_group,
-        mode    => $nagios::nsca::params::configfile_mode,
-        owner   => $nagios::nsca::params::configfile_owner,
+        group   => $nagios::nsca::params::group,
+        mode    => $nagios::nsca::params::mode,
+        owner   => $nagios::nsca::params::owner,
     }
 
     if ($::fqdn != $nagios_nsca_server) {
