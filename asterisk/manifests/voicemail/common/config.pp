@@ -27,6 +27,9 @@ class asterisk::voicemail::common::config {
 
     file { "${asterisk::params::spooldir}/voicemail":
         ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
         require => File[$asterisk::params::spooldir],
     }
 }

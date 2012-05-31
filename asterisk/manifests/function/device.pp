@@ -16,11 +16,11 @@
 # file at the top of the source tree.
 #
 define asterisk::function::device(
-    $context,
     $extension,
     $fullname,
     $secret,
     $callerid = '',
+    $context = 'from-internal',
     $channel = 'SIP',
     $email = '',
     $host = 'dynamic',
@@ -36,7 +36,7 @@ define asterisk::function::device(
     $base = "${asterisk::params::basedir}/sip.conf.d/devices"
     $description = "${fullname} <${extension}>"
     if ($mailbox == '') {
-        $mailbox_real = "${extension}@default"
+        $mailbox_real = "${extension}@${context}"
     } else {
         $mailbox_real = $mailbox
     }
@@ -64,7 +64,7 @@ define asterisk::function::device(
         subscribe   => File["$base/${filename}.conf"],
     }
 
-    if ($mailbox_real != 'none') {
+    if ($mailbox != 'none') {
         asterisk::function::voicemail { $mailbox_real:
             description => $description,
             email       => $email,
