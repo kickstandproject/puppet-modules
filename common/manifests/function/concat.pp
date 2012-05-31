@@ -1,7 +1,4 @@
 define common::function::concat(
-    $mode = '0644',
-    $owner = $::id,
-    $group = $concat::setup::root_group,
     $force = false,
     $gnu = undef,
     $order='alpha'
@@ -57,10 +54,7 @@ define common::function::concat(
     file { $name:
         ensure   => present,
         source   => "${fragdir}/${concat_name}",
-        owner    => $owner,
-        group    => $group,
         checksum => md5,
-        mode     => $mode,
         alias    => "concat_${name}";
     }
 

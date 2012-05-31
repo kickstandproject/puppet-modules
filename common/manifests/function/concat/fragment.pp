@@ -21,9 +21,6 @@ define common::function::concat::fragment(
     $content = '',
     $order = 10,
     $ensure = 'present',
-    $mode = '0644',
-    $owner = $::id,
-    $group = $concat::setup::root_group,
 ) {
     require common::concat::client
 
@@ -36,10 +33,7 @@ define common::function::concat::fragment(
         ensure  => $ensure,
         alias   => "concat_fragment_${name}",
         content => $content,
-        group   => $group,
-        mode    => $mode,
         notify  => Exec["concat_${target}"],
-        owner   => $owner,
         require => File["${fragdir}/fragments"],
     }
 }
