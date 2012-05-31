@@ -15,10 +15,12 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class apt::common::command {
+class apt::common::command(
+    $stage = 'bootstrap'
+) {
     exec { 'apt-get update':
-        command        => 'apt-get update',
-        refreshonly    => true,
+        command     => 'apt-get update',
+        refreshonly => true,
     }
 }
 

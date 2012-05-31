@@ -34,6 +34,7 @@ define apt::function::repository (
 
     exec { "apt-key ${key}":
         command     => "apt-key adv --keyserver pgp.mit.edu --recv-keys ${key}",
+        before      => Exec['apt-get update'],
         notify      => Exec['apt-get update'],
         refreshonly => true,
     }
