@@ -41,7 +41,8 @@ class nagios::web::common::config {
     }
 
     apache::function::htdigest { $nagios::web::params::hostname:
-        location    => '/nagios3',
+        authname    => 'default',
+        content     => template('nagios/etc/apache2/conf.d/htdigest.conf.erb'),
         password    => $nagios::web::params::password,
         username    => $nagios::web::params::username,
     }

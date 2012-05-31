@@ -1,0 +1,8 @@
+<DirectoryMatch (/usr/share/nagios3/htdocs|/usr/lib/cgi-bin/nagios3|/etc/nagios3/stylesheets)>
+	AuthType Digest
+	AuthName "default"
+	AuthDigestDomain /nagios3
+	AuthDigestProvider file
+	AuthUserFile <%= scope.lookupvar('apache::params::rootdir') %>/<%= scope.lookupvar('nagios::web::params::hostname') %>/conf/.htdigest
+	Require valid-user
+</DirectoryMatch>

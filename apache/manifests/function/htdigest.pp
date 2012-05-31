@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 define apache::function::htdigest(
-    $location,
+    $content,
     $password,
     $username,
     $authname = 'default',
@@ -28,7 +28,7 @@ define apache::function::htdigest(
 
     file { "${apache::params::rootdir}/${name}/conf/htdigest.conf":
         ensure  => present,
-        content => template('apache/etc/apache2/conf.d/htdigest.conf.erb'),
+        content => $content,
         notify  => Class['apache::common::service'],
         require => File["${apache::params::rootdir}/${name}/conf"],
     }

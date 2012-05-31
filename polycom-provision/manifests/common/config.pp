@@ -16,6 +16,7 @@
 # file at the top of the source tree.
 #
 class polycom-provision::common::config {
+    require apache::server
     require polycom-ucs::params
     include polycom-provision::params
 
@@ -152,7 +153,7 @@ class polycom-provision::common::config {
 
     apache::function::htdigest { $polycom-provision::params::hostname:
         authname    => 'polycom-provision',
-        location    => '/polycom',
+        content     => template('polycom-provision/etc/apache2/conf.d/htdigest.conf.erb'),
         password    => $polycom-provision::params::password,
         username    => $polycom-provision::params::username,
     }

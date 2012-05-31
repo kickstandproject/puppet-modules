@@ -1,8 +1,0 @@
-<Location <%= location %>>
-	AuthType Digest
-	AuthName "<%= authname %>"
-	AuthDigestDomain <%= location %>
-	AuthDigestProvider file
-	AuthUserFile <%= scope.lookupvar('apache::params::rootdir') %>/<%= name %>/conf/.htdigest
-	Require valid-user
-</Location>
