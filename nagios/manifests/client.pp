@@ -15,9 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::client inherits nagios::common::init {
-    include snmp::server
-    include nagios::nsca::client
+class nagios::client {
+    require snmp::server
+    include nagios::params::client
+    include nagios::client::init
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

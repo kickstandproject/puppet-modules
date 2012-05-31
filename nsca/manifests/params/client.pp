@@ -15,9 +15,13 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::common::install {
-    package { $nagios::params::packagename:
-        ensure  => present,
+class nsca::params::client inherits nsca::params {
+    $configfile = $::operatingsystem ? {
+        default => '/etc/send_nsca.cfg',
+    }
+
+    $packagename = $::operatingsystem ? {
+        default => 'nsca-client',
     }
 }
 

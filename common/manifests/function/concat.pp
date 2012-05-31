@@ -22,9 +22,11 @@ define common::function::concat(
         default: { fail("Improper 'order' value given to concat: ${order}") }
     }
 
-    file { $concatdir:
-        ensure  => directory,
-        require => File[$common::params::varlocaldir],
+    if (!defined(File[$concatdir])) {
+        file { $concatdir:
+            ensure  => directory,
+            require => File[$common::params::varlocaldir],
+        }
     }
 
     file { $fragdir:

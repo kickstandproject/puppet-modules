@@ -45,11 +45,10 @@ class nagios::params {
     }
 
     $packagename = $::operatingsystem ? {
-        default => 'nagios3-core',
-    }
-
-    $packagename_plugins = $::operatingsystem ? {
-        default => 'nagios-plugins-extra'
+        default => [
+            'nagios3-core',
+            'nagios-plugins-extra'
+        ],
     }
 
     $processname = $::operatingsystem ? {
@@ -62,11 +61,6 @@ class nagios::params {
 
     $plugindir = $::operatingsystem ? {
         default => '/usr/lib/nagios/plugins',
-    }
-
-    $hostgroups = $nagios_hostgroups ? {
-        ''      => 'all',
-        default => $nagios_hostgroup,
     }
 }
 

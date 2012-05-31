@@ -16,11 +16,6 @@
 # file at the top of the source tree.
 #
 class nagios::common::init {
-    include nagios::params
-    include nagios::common::install
-    include nagios::common::config
-    include nagios::common::service
-
     File {
         group   => $nagios::params::group,
         mode    => $nagios::params::mode,

@@ -15,27 +15,21 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define monitor::process(
-    $process,
-    $ensure = present,
-) {
-    require nsca::client
-    include monitor::params
-
-    File {
-        group   => $nsca::params::group,
-        mode    => $nsca::params::mode,
-        owner   => $nsca::params::owner,
+class nsca::params::server inherits nsca::params {
+    $configfile = $::operatingsystem ? {
+        default => '/etc/nsca.cfg',
     }
 
-    nagios::function::service::nsca { "check_procs_${process}!1!1":
-        ensure      => $ensure,
-        description => "Check Process ${process}",
-        server      => $monitor::params::server,
+    $hasstatus = $::operatingsystem ? {
+        default => false,
     }
 
-    nagios::command { "check_procs_${process}":
-        command_line    => "/usr/lib/nagios/plugins/check_procs -C ${process} -w '\$ARG1$:' -c '\$ARG2$:'"
+    $packagename = $::operatingsystem ? {
+        default => 'nsca',
+    }
+
+    $servicename = $::operatingsystem ? {
+        default => 'nsca',
     }
 }
 

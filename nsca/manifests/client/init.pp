@@ -15,10 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::common::install {
-    package { $nagios::params::packagename:
-        ensure  => present,
-    }
+class nsca::client::init {
+    include nsca::common::init
+    include nsca::client::install
+    include nsca::client::config
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

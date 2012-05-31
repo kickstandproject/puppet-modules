@@ -15,8 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::common::install {
-    package { $nagios::params::packagename:
+class nsca::server::install {
+    include nsca::common::install
+
+    package { $nsca::params::server::packagename:
         ensure  => present,
     }
 }

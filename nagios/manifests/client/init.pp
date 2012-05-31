@@ -15,10 +15,11 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class nagios::common::install {
-    package { $nagios::params::packagename:
-        ensure  => present,
-    }
+class nagios::client::init {
+    include nagios::common::init
+    include nagios::client::install
+    include nagios::client::config
+    include nagios::client::service
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

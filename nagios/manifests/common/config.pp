@@ -16,22 +16,22 @@
 # file at the top of the source tree.
 #
 class nagios::common::config {
-    if (defined(Class['nagios::client'])) {
-        File[$nagios::params::configfile] {
-            content => template('nagios/client/nagios.cfg.erb')
-        }
-    } else {
-        File[$nagios::params::configfile] {
-            content => template('nagios/etc/nagios3/nagios.cfg.erb.server')
-        }
-    }
-
     file { $nagios::params::basedir:
         ensure  => directory,
         force   => true,
         purge   => true,
         recurse => true,
         require => Class['nagios::common::install'],
+    }
+
+    common::function::concat { $nagios::params::configfile:
+    }
+
+    common::function::concat::fragment { 'nagios.cfg':
+        target  => $nagios::params::configfile,
+        content => template('nagios/etc/nagios3/nagios.cfg.erb'),
+        order   => 01,
+        require => File[$nagios::params::basedir],
     }
 
     file { "${nagios::params::basedir}/resource.cfg":
@@ -49,12 +49,6 @@ class nagios::common::config {
         require => File[$nagios::params::basedir],
     }
 
-    file { $nagios::params::configfile:
-        ensure  => present,
-        notify  => Class['nagios::common::service'],
-        require => File[$nagios::params::basedir],
-    }
-
     file { [
         "${nagios::params::configdir}/commands",
         "${nagios::params::configdir}/hostgroups",
@@ -63,6 +57,7 @@ class nagios::common::config {
     ]:
         ensure  => directory,
         force   => true,
+        notify  => Class['nagios::common::service'],
         purge   => true,
         recurse => true,
         require => File[$nagios::params::configdir],
@@ -70,25 +65,25 @@ class nagios::common::config {
 
     file { "${nagios::params::configdir}/commands/general.cfg":
         ensure  => present,
-        content => template('nagios/client/commands/general.cfg.erb'),
+        content => template('nagios/etc/nagios3/conf.d/commands/general.cfg.erb'),
         require => File["${nagios::params::configdir}/commands"],
     }
 
     file { "${nagios::params::configdir}/contacts.cfg":
         ensure  => present,
-        content => template('nagios/client/contacts.cfg.erb'),
+        content => template('nagios/etc/nagios3/conf.d/contacts.cfg.erb'),
         require => File[$nagios::params::configdir],
     }
 
     file { "${nagios::params::configdir}/hosts/generic.cfg":
         ensure  => present,
-        content => template('nagios/client/hosts/generic.cfg.erb'),
+        content => template('nagios/etc/nagios3/conf.d/hosts/generic.cfg.erb'),
         require => File["${nagios::params::configdir}/hosts"],
     }
 
     file { "${nagios::params::configdir}/hostgroups/all.cfg":
         ensure  => present,
-        content => template('nagios/client/hostgroups/all.cfg.erb'),
+        content => template('nagios/etc/nagios3/conf.d/hostgroups/all.cfg.erb'),
         require => File["${nagios::params::configdir}/hostgroups"],
     }
 
@@ -105,13 +100,13 @@ class nagios::common::config {
 
     file { "${nagios::params::configdir}/services/generic.cfg":
         ensure  => present,
-        content => template('nagios/client/services/generic.cfg.erb'),
+        content => template('nagios/etc/nagios3/conf.d/services/generic.cfg.erb'),
         require => File["${nagios::params::configdir}/services"],
     }
 
     file { "${nagios::params::configdir}/timeperiods.cfg":
         ensure  => present,
-        content => template('nagios/client/timeperiods.cfg.erb'),
+        content => template('nagios/etc/nagios3/conf.d/timeperiods.cfg.erb'),
         require => File[$nagios::params::configdir],
     }
 
