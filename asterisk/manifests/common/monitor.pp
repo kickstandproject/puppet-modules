@@ -16,10 +16,9 @@
 # file at the top of the source tree.
 #
 class asterisk::common::monitor {
-    include asterisk::params
-
-    monitor::process { $name:
-        process => $asterisk::params::processname,
+    monitor::function::process { $name:
+        description => 'Asterisk',
+        process     => $asterisk::params::processname,
     }
 }
 

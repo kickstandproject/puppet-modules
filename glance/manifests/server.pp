@@ -20,9 +20,7 @@ class glance::server inherits glance::common::init {
         ensure  => present,
     }
 
-    if ($monitor == 'yes') {
-        include glance::common::monitor
-    }
+    include glance::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

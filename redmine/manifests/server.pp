@@ -22,9 +22,7 @@ class redmine::server inherits redmine::common::init {
         include redmine::mysql::client
     }
 
-    if ($monitor == 'yes') {
-        include redmine::common::monitor
-    }
+    include redmine::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

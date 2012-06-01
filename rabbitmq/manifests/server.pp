@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class rabbitmq::server inherits rabbitmq::common::init {
-    if ($monitor == 'yes') {
-        include rabbitmq::common::monitor
-    }
+    include rabbitmq::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

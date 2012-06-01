@@ -18,9 +18,7 @@
 class mantisbt::server inherits mantisbt::common::init {
     require apache::server
 
-    if ($monitor == 'yes') {
-        include mantisbt::common::monitor
-    }
+    include mantisbt::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

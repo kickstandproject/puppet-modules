@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::objectstore::common::monitor {
-    monitor::process { $name:
+    monitor::function::process { $name:
         process => $nova::objectstore::params::processname,
     }
 }

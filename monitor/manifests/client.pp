@@ -15,10 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class ddclient::common::monitor {
-    monitor::function::process { $name:
-        process => $ddclient::params::processname,
-    }
+class monitor::client(
+    $server = 'localhost'
+) {
+    include monitor::params
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

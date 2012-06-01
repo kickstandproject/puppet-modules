@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::network::server inherits nova::network::common::init {
-    if ($monitor == 'yes') {
-        include nova::network::common::monitor
-    }
+    include nova::network::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

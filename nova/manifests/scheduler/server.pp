@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::scheduler::server inherits nova::scheduler::common::init {
-    if ($monitor == 'yes') {
-        include nova::scheduler::common::monitor
-    }
+    include nova::scheduler::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::objectstore::server inherits nova::objectstore::common::init {
-    if ($monitor == 'yes') {
-        include nova::objectstore::common::monitor
-    }
+    include nova::objectstore::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

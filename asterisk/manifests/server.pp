@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class asterisk::server inherits asterisk::common::init {
-    if ($monitor == 'yes') {
-        include asterisk::common::monitor
-    }
+    include asterisk::common::monitor
 
     if ($firewall == 'yes') {
         include asterisk::common::firewall

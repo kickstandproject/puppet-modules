@@ -24,9 +24,7 @@ class rsyslog::server inherits rsyslog::common::init {
         include rsyslog::common::firewall
     }
 
-    if ($monitor == 'yes') {
-        include rsyslog::common::monitor
-    }
+    include rsyslog::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

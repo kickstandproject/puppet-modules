@@ -16,8 +16,9 @@
 # file at the top of the source tree.
 #
 class ntp::server::monitor {
-    monitor::process { $name:
-        process => $ntp::params::server::processname,
+    monitor::function::process { $name:
+        description => 'NTP',
+        process     => $ntp::params::server::processname,
     }
 }
 

@@ -18,9 +18,7 @@
 class rebuildd::server inherits rebuildd::common::init {
     require pbuilder::client
 
-    if ($monitor == 'yes') {
-        include rebuildd::common::monitor
-    }
+    include rebuildd::common::monitor
 
     if ($firewall == 'yes') {
         include rebuildd::common::firewall

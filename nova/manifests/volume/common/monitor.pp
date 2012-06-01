@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::volume::common::monitor {
-    require nova::volume::params
-
-    monitor::process { $name:
+    monitor::function::process { $name:
         process => $nova::volume::params::processname,
     }
 }

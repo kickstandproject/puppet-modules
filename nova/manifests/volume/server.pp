@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class nova::volume::server inherits nova::volume::common::init {
-    if ($monitor == 'yes') {
-        include nova::volume::common::monitor
-    }
+    include nova::volume::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

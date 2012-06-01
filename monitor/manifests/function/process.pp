@@ -15,12 +15,19 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define monitor::process(
+define monitor::function::process(
     $process,
+    $description = '',
     $ensure = present,
 ) {
     require nsca::client
     include monitor::params
+
+    if ($description != '') {
+        $description_real = $description
+    } else {
+        $description_real = "Check Process ${process}"
+    }
 
     File {
         group   => $nsca::params::group,
@@ -30,8 +37,8 @@ define monitor::process(
 
     nagios::function::service::nsca { "check_procs_${process}!1!1":
         ensure      => $ensure,
-        description => "Check Process ${process}",
-        server      => $monitor::params::server,
+        description => $description_real,
+        server      => $monitor::client::server,
     }
 
     nagios::command { "check_procs_${process}":

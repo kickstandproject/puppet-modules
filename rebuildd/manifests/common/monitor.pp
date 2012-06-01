@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class rebuildd::common::monitor {
-    require rebuildd::params
-
-    monitor::process { $name:
+    monitor::function::process { $name:
         process => $rebuildd::params::processname,
     }
 }

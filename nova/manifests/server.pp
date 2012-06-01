@@ -18,9 +18,7 @@
 class nova::server inherits nova::common::init {
     require rabbitmq::server
 
-    if ($monitor == 'yes') {
-        include nova::common::monitor
-    }
+    include nova::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

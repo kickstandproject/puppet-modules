@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class mysql::common::monitor {
-    require mysql::params
-
-    monitor::process { 'mysql_process':
+    monitor::function:process { $name:
         process => $mysql::params::processname,
     }
 }

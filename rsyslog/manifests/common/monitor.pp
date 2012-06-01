@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class rsyslog::common::monitor {
-    require rsyslog::params
-
-    monitor::process { 'rsyslog_process':
+    monitor::function::process { $name:
         process => $rsyslog::params::processname,
     }
 }

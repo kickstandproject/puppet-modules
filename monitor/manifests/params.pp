@@ -27,8 +27,6 @@ class monitor::params {
     $owner = $::operatingsystem ? {
         default => 'root',
     }
-
-    $server = 'nagios-01-test.polybeacon.lan'
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class glance::common::monitor {
-    monitor::process { $name:
+    monitor::function::process { $name:
         process => $glance::params::processname,
     }
 }

@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class rabbitmq::common::monitor {
-    require rabbitmq::params
-
-    monitor::process { 'rabbitmq_process':
+    monitor::function::process { $name:
         process => $rabbitmq::params::processname,
     }
 }

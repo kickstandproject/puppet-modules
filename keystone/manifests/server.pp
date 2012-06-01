@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class keystone::server inherits keystone::common::init {
-    if ($monitor == 'yes') {
-        include keystone::common::monitor
-    }
+    include keystone::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

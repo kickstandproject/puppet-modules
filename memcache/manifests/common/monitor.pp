@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class memcache::common::monitor {
-    monitor::process { $name:
+    monitor::function::process { $name:
         process => $memcache::params::processname,
     }
 }

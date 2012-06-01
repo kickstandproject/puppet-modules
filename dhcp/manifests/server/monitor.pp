@@ -16,7 +16,7 @@
 # file at the top of the source tree.
 #
 class dhcp::server::monitor {
-    monitor::process { $name:
+    monitor::function::process { $name:
         process => $dhcp::params::server::processname,
     }
 }

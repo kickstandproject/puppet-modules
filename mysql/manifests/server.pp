@@ -20,9 +20,7 @@ class mysql::server inherits mysql::common::init {
         include mysql::common::firewall
     }
 
-    if ($monitor == 'yes') {
-        include mysql::common::monitor
-    }
+    include mysql::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

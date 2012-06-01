@@ -16,8 +16,9 @@
 # file at the top of the source tree.
 #
 class puppet::client::monitor {
-    monitor::process { $name:
-        process => $puppet::params::client::processname,
+    monitor::function::process { $name:
+        description => 'Puppet',
+        process     => $puppet::params::client::processname,
     }
 }
 

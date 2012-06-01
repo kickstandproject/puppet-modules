@@ -16,9 +16,7 @@
 # file at the top of the source tree.
 #
 class memcache::server inherits memcache::common::init {
-    if ($monitor == 'yes') {
-        include memcache::common::monitor
-    }
+    include memcache::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

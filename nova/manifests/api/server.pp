@@ -18,9 +18,7 @@
 class nova::api::server inherits nova::api::common::init {
     include nova::cert::server
 
-    if ($monitor == 'yes') {
-        include nova::api::common::monitor
-    }
+    include nova::api::common::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
