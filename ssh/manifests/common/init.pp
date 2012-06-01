@@ -15,11 +15,12 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openssh::common::init {
-    include openssh::params
-    include openssh::common::install
-    include openssh::common::config
-    include openssh::common::service
+class ssh::common::init {
+    File {
+        group   => $ssh::params::group,
+        mode    => $ssh::params::mode,
+        owner   => $ssh::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

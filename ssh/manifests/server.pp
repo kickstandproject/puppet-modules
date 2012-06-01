@@ -15,19 +15,19 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openssh::common::config {
-    File {
-        ensure  => present,
-        group   => $openssh::params::configfile_group,
-        mode    => $openssh::params::configfile_mode,
-        owner   => $openssh::params::configfile_owner,
+class ssh::server(
+    $options = {}
+) {
+    $defaults = {
+        'PasswordAuthentication'    => 'no',
+        'PermitRootLogin'           => 'no',
+        'Port'                      => '22',
     }
 
-    file { $openssh::params::configfile:
-        content => template('openssh/server/etc/ssh/sshd_config.erb'),
-        notify  => Class['openssh::common::service'],
-        require => Class['openssh::common::install'],
-    }
+    $options_real = merge($defaults, $options)
+
+    include ssh::params::server
+    include ssh::server::init
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

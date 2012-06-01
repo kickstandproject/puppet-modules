@@ -15,14 +15,12 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openssh::common::service {
-    service { $openssh::params::servicename:
-        ensure      => running,
-        enable      => true,
-        hasrestart  => true,
-        hasstatus   => $openssh::params::hasstatus,
-        require     => Class['openssh::common::config'],
-    }
+class ssh::server::init {
+    include ssh::common::init
+    include ssh::server::install
+    include ssh::server::config
+    include ssh::server::service
+    include ssh::server::firewall
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

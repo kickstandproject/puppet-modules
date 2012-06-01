@@ -15,7 +15,11 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openssh::common::firewall {
+class ssh::common::config {
+    file { $ssh::params::basedir:
+        ensure  => directory,
+        require => Class['ssh::common::install'],
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

@@ -15,9 +15,25 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openssh::common::install {
-    package { $openssh::params::packagename:
-        ensure  => present,
+class ssh::params::server inherits ssh::params {
+    $configfile = $::operatingsystem ? {
+        default => '/etc/ssh/sshd_config',
+    }
+
+    $hasstatus = $::operatingsystem ? {
+        default => true,
+    }
+
+    $packagename = $::operatingsystem ? {
+        default => 'openssh-server',
+    }
+
+    $processname = $::operatingsystem ? {
+        default => 'sshd',
+    }
+
+    $servicename = $::operatingsystem ? {
+        default => 'ssh',
     }
 }
 

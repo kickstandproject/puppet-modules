@@ -15,9 +15,11 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class openssh::server inherits openssh::common::init {
-    if ($firewall == 'yes') {
-        include openssh::common::firewall
+class ssh::server::install {
+    include ssh::common::install
+
+    package { $ssh::params::server::packagename:
+        ensure  => present,
     }
 }
 
