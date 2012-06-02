@@ -24,14 +24,6 @@ class asterisk::params {
         default => 'asterisk',
     }
 
-    $hasrestart = $::operatingsystem ? {
-        default => true,
-    }
-
-    $hasstatus = $::operatingsystem ? {
-        default => true,
-    }
-
     $mode = $::operatingsystem ? {
         default => '0640',
     }
@@ -40,50 +32,8 @@ class asterisk::params {
         default => 'asterisk',
     }
 
-    $packagename = $::operatingsystem ? {
-        default => 'asterisk',
-    }
-
-    $processname = $::operatingsystem ? {
-        default => 'asterisk',
-    }
-
-    $servicename = $::operatingsystem ? {
-        default => 'asterisk',
-    }
-
     $spooldir = $::operatingsystem ? {
         default => '/var/spool/asterisk',
-    }
-
-    $ensure = $asterisk_ensure ? {
-        ''      => 'present',
-        default => $asterisk_ensure,
-    }
-
-    $server = $asterisk_server ? {
-        ''      => $::fqdn,
-        default => $asterisk_server,
-    }
-
-    $sip_port = $asterisk_sip_port ? {
-        ''      => '5060',
-        default => $asterisk_sip_port,
-    }
-
-    $externaddr = $asterisk_externaddr ? {
-        ''      => false,
-        default => $asterisk_externaddr,
-    }
-
-    $externhost = $asterisk_externhost ? {
-        ''      => false,
-        default => $asterisk_externhost,
-    }
-
-    $sip_allowguest = $asterisk_sip_allowguest ? {
-        ''      => 'no',
-        default => $asterisk_sip_allowguest,
     }
 }
 

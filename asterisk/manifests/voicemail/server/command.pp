@@ -15,7 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::voicemail::common::command {
+class asterisk::voicemail::server::command {
     exec { 'asterisk-module-reload-app_voicemail.so':
         command     => 'asterisk -rx "module reload app_voicemail.so"',
         refreshonly => true,

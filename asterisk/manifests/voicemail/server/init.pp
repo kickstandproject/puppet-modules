@@ -15,7 +15,16 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::firewall {
+class asterisk::voicemail::server::init {
+    include asterisk::voicemail::server::install
+    include asterisk::voicemail::server::config
+    include asterisk::voicemail::server::command
+
+    File {
+        group   => $asterisk::params::voicemail::group,
+        mode    => $asterisk::params::voicemail::mode,
+        owner   => $asterisk::params::voicemail::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

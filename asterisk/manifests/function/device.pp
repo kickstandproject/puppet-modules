@@ -51,21 +51,27 @@ define asterisk::function::device(
     $filename = "${split[0]}-${line}"
     $md5secret = md5("${filename}:asterisk:${secret}")
 
+    common::function::concat::fragment { $name:
+        target  => "${asterisk::params::server::basedir}/sip.conf.d/20devices.conf",
+        content => template('asterisk/etc/asterisk/sip.conf.d/20devices.conf.erb'),
+        notify  => Exec["asterisk-database-put-${filename}"],
+        order   => 02,
+    }
+/*
     file { "$base/${filename}.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/sip.conf.d/devices/template.conf.erb'),
         notify  => Exec['asterisk-module-reload-sip.conf'],
         require => File[$base],
     }
-
+*/
     exec { "asterisk-database-put-${filename}":
         command     => "asterisk -rx \"database put ${channel}/Device ${extension}@${context} ${filename}\"",
         refreshonly => true,
-        subscribe   => File["$base/${filename}.conf"],
     }
 
     if ($mailbox != 'none') {
-        asterisk::function::voicemail { $mailbox_real:
+        asterisk::voicemail::function::mailbox { $mailbox_real:
             description => $description,
             email       => $email,
             fullname    => $fullname,

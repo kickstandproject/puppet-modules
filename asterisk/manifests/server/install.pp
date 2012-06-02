@@ -15,13 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::service {
-    service { $asterisk::params::servicename:
-        ensure      => running,
-        enable      => true,
-        hasrestart  => $asterisk::params::hasrestart,
-        hasstatus   => $asterisk::params::hasstatus,
-        require     => Class['asterisk::common::config'],
+class asterisk::server::install {
+    package { $asterisk::params::server::packagename:
+        ensure => present,
     }
 }
 

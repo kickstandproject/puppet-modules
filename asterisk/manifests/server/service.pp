@@ -15,9 +15,13 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::voicemail::common::install {
-    package { $asterisk::voicemail::params::packagename:
-        ensure  => present,
+class asterisk::server::service {
+    service { $asterisk::params::server::servicename:
+        ensure      => running,
+        enable      => true,
+        hasrestart  => $asterisk::params::server::hasrestart,
+        hasstatus   => $asterisk::params::server::hasstatus,
+        require     => Class['asterisk::server::config'],
     }
 }
 

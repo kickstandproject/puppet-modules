@@ -15,9 +15,9 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::voicemail::params {
-    $packagename = $::operatingsystem ? {
-        default => 'asterisk-voicemail',
+class asterisk::voicemail::server::install {
+    package { $asterisk::params::voicemail::packagename:
+        ensure  => present,
     }
 }
 

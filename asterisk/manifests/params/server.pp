@@ -15,7 +15,26 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::voicemail::common::monitor {
+class asterisk::params::server inherits asterisk::params {
+    $hasrestart = $::operatingsystem ? {
+        default => true,
+    }
+
+    $hasstatus = $::operatingsystem ? {
+        default => true,
+    }
+
+    $packagename = $::operatingsystem ? {
+        default => 'asterisk',
+    }
+
+    $processname = $::operatingsystem ? {
+        default => 'asterisk',
+    }
+
+    $servicename = $::operatingsystem ? {
+        default => 'asterisk',
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

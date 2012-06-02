@@ -15,11 +15,10 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::voicemail::common::init inherits asterisk::common::init {
-    include asterisk::voicemail::params
-    include asterisk::voicemail::common::install
-    include asterisk::voicemail::common::config
-    include asterisk::voicemail::common::command
+class asterisk::params::voicemail inherits asterisk::params {
+    $packagename = $::operatingsystem ? {
+        default => 'asterisk-voicemail',
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

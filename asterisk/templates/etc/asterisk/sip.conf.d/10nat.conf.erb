@@ -1,7 +1,0 @@
-[general](+)
-<% if (scope.lookupvar('asterisk::params::externaddr') != false) then %>
-externaddr = <%= scope.lookupvar('asterisk::params::externaddr') %>
-<% elsif (scope.lookupvar('asterisk::params::externhost') != false) then %>
-externhost = <%= scope.lookupvar('asterisk::params::externhost') %>
-<% end %>
-localnet = <%= network_eth0 %>/<%= netmask_eth0 %>

@@ -15,17 +15,20 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::rsyslog {
-    require rsyslog::client
+class asterisk::voicemail::server::config {
+    file { "${asterisk::params::voicemail::spooldir}/voicemail":
+        ensure  => directory,
+        force   => true,
+        purge   => true,
+        recurse => true,
+        require => File[$asterisk::params::voicemail::spooldir],
+    }
 
-    file { "${rsyslog::params::configdir}/99asterisk.conf":
+    file { "${asterisk::params::voicemail::basedir}/modules.conf.d/01voicemail.conf":
         ensure  => present,
-        content => template('asterisk/99asterisk.conf.erb'),
-        group   => $rsyslog::params::configfile_group,
-        mode    => $rsyslog::params::configfile_mode,
-        notify  => Class['rsyslog::common::service'],
-        owner   => $rsyslog::params::configfile_owner,
-        require => Class['rsyslog::client'],
+        content => template('asterisk/etc/asterisk/modules.conf.d/01voicemail.conf.erb'),
+        notify  => Class['asterisk::server::service'],
+        require => File["${asterisk::params::voicemail::basedir}/modules.conf.d"],
     }
 }
 

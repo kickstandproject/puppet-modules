@@ -19,7 +19,13 @@ define asterisk::function::customdir(
 ) {
     require asterisk::server
 
-    $base = "${asterisk::params::basedir}/${name}.d"
+    File {
+        group   => $asterisk::params::group,
+        mode    => $asterisk::params::mode,
+        owner   => $asterisk::params::owner,
+    }
+
+    $base = "${asterisk::params::server::basedir}/${name}.d"
 
     file { $base:
         ensure  => directory,
@@ -27,7 +33,7 @@ define asterisk::function::customdir(
         notify  => Exec["asterisk-module-reload-${name}"],
         purge   => true,
         recurse => true,
-        require => File[$asterisk::params::basedir],
+        require => File[$asterisk::params::server::basedir],
     }
 
     file { "${base}/custom.d":

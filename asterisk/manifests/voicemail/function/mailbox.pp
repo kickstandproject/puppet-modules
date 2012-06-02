@@ -15,20 +15,19 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define asterisk::function::voicemail(
+define asterisk::voicemail::function::mailbox(
     $email = '',
     $fullname = '',
     $description = '',
 ) {
-    require asterisk::server
     require asterisk::voicemail::server
 
     /* XXX TODO Why do we need this here?  For some reason puppet will not honor
       existing one from asterisk::common::init. */
     File {
-        group   => $asterisk::params::group,
-        mode    => $asterisk::params::mode,
-        owner   => $asterisk::params::owner,
+        group   => $asterisk::params::voicemail::group,
+        mode    => $asterisk::params::voicemail::mode,
+        owner   => $asterisk::params::voicemail::owner,
     }
 
     $split = split($name, '@')
@@ -42,30 +41,22 @@ define asterisk::function::voicemail(
     $base = "${asterisk::params::basedir}/voicemail.conf.d"
     $spool = "${asterisk::params::spooldir}/voicemail"
 
-    if (!defined(File["${base}/10${context}.conf"])) {
-        file { "${base}/10${context}.conf":
-            ensure  => present,
-            content => template('asterisk/etc/asterisk/voicemail.conf.d/10mailboxes.conf.erb'),
-            notify  => Exec['asterisk-module-reload-app_voicemail.so'],
-            purge   => true,
-            recurse => true,
-            require => File[$base],
+    if (!defined(Common::Function::Concat["${base}/20${context}.conf"])) {
+        common::function::concat { "${base}/20${context}.conf":
+            notify => Exec['asterisk-module-reload-app_voicemail.so'],
         }
 
-        file { "${base}/${context}":
-            ensure  => directory,
-            notify  => Exec['asterisk-module-reload-app_voicemail.so'],
-            purge   => true,
-            recurse => true,
-            require => File[$base],
+        common::function::concat::fragment { "20${context}.conf-header":
+            target  => "${base}/20${context}.conf",
+            content => template('asterisk/etc/asterisk/voicemail.conf.d/20mailboxes.conf.erb'),
+            order   => 01,
         }
     }
 
-    file { "${base}/${context}/${extension}.conf":
-        ensure  => present,
+    common::function::concat::fragment { "${extension}@${context}":
+        target  => "${base}/20${context}.conf",
         content => template('asterisk/etc/asterisk/voicemail.conf.d/default/template.conf.erb'),
-        notify  => Exec['asterisk-module-reload-app_voicemail.so'],
-        require => File["${base}/${context}"],
+        order   => 02,
     }
 
     if (!defined(File["${spool}/${context}"])) {

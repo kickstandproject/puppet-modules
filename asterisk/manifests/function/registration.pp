@@ -34,7 +34,7 @@ define asterisk::function::registration(
     file { "$base/${name}.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/sip.conf.d/registrations/template.conf.erb'),
-        notify  => Exec['asterisk-module-reload-chan_sip.so'],
+        notify  => Exec['asterisk-module-reload-sip.conf'],
         require => File[$base],
     }
 }

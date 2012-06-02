@@ -16,10 +16,18 @@
 # file at the top of the source tree.
 #
 define polycom-provision::function::sip-basic(
-    $server,
-    $port = '5060',
+    $address,
 ) {
     require polycom-provision::server
+
+    $split = split($address, ':')
+    $address_real = $split[0]
+
+    if ($split[1]) {
+        $port_real = $split[1]
+    } else {
+        $port_real = '5060'
+    }
 
     File {
         group   => $polycom-provision::params::group,

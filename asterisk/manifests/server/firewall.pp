@@ -15,11 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::monitor {
-    monitor::function::process { $name:
-        description => 'Asterisk',
-        process     => $asterisk::params::processname,
-    }
+class asterisk::server::firewall {
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

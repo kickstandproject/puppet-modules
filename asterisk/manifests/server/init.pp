@@ -15,10 +15,18 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::common::install {
-    package { $asterisk::params::packagename:
-        ensure      => $asterisk::params::ensure,
-        configfiles => replace,
+class asterisk::server::init {
+    include asterisk::server::install
+    include asterisk::server::config
+    include asterisk::server::service
+    include asterisk::server::command
+    include asterisk::server::monitor
+    include asterisk::server::firewall
+
+    File {
+        group   => $asterisk::params::group,
+        mode    => $asterisk::params::mode,
+        owner   => $asterisk::params::owner,
     }
 }
 

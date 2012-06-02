@@ -15,20 +15,19 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class asterisk::server inherits asterisk::common::init {
-    include asterisk::common::monitor
-
-    if ($firewall == 'yes') {
-        include asterisk::common::firewall
+class asterisk::server(
+    $sip = {}
+) {
+    $sip_defaults = {
+        'udpbindaddr'   => "${ipaddress_eth0}:5060",
+        'contactpermit' => "${network_eth0}/${netmask_eth0}",
+        'localnet'      => "${network_eth0}/${netmask_eth0}",
     }
 
-    if ($::asterisk::params::voicemail) {
-        include asterisk::voicemail::server
-    }
+    $sip_real = merge($sip_defaults, $sip)
 
-    if ($rsyslog_server) {
-        include asterisk::common::rsyslog
-    }
+    include asterisk::params::server
+    include asterisk::server::init
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
