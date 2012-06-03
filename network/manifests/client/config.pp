@@ -16,7 +16,17 @@
 # file at the top of the source tree.
 #
 class network::client::config {
-    include network::common::config
+    file { $network::params::basedir:
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
+    }
+
+    file { "${network::params::client::basedir}/run":
+        ensure  => link,
+        require => File[$network::params::client::basedir],
+        target  => '/run/network',
+    }
 
     file { "${network::params::client::basedir}/if-down.d":
         ensure  => directory,

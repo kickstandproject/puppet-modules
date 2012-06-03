@@ -16,10 +16,15 @@
 # file at the top of the source tree.
 #
 class network::client::init {
-    include network::common::init
     include network::client::install
     include network::client::config
     include network::client::service
+
+    File {
+        group   => $network::params::group,
+        mode    => $network::params::mode,
+        owner   => $network::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

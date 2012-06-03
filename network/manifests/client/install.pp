@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class network::client::install {
-    include network::common::install
-
     package { $network::params::client::packagename:
         ensure => present,
     }

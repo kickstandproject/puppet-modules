@@ -16,8 +16,6 @@
 # file at the top of the source tree.
 #
 class network::client::service {
-    include network::common::service
-
     service { $network::params::client::servicename:
         ensure      => 'stopped',
         enable      => true,
