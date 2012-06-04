@@ -76,7 +76,7 @@ class asterisk::server::config {
         notify => Exec['asterisk-module-reload-sip.conf'],
     }
 
-    common::function::concat::fragment { "20devices.conf-header":
+    common::function::concat::fragment { '20devices.conf-header':
         target  => "${asterisk::params::server::basedir}/sip.conf.d/20devices.conf",
         content => template('asterisk/etc/asterisk/sip.conf.d/20header.conf.erb'),
         order   => 01,
