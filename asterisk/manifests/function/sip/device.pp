@@ -27,9 +27,10 @@ define asterisk::function::sip::device(
     $base = "${asterisk::params::basedir}/sip.conf.d/devices"
 
     $defaults = {
-        'type'          => 'friend',
-        'host'          => 'dynamic',
-        'context'       => 'from-internal',
+        'type'      => 'friend',
+        'host'      => 'dynamic',
+        'context'   => 'from-internal',
+        'template'  => 'ksp-local-phone'
     }
 
     $options_real = merge($defaults, $options)
