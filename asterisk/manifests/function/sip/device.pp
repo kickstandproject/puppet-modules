@@ -66,7 +66,7 @@ define asterisk::function::sip::device(
     }
 
     exec { "asterisk-database-put-${name_real}":
-        command     => "asterisk -rx \"database put ${channel}/Device ${extension}@${context} ${name_real}\"",
+        command     => "asterisk -rx \"database put SIP/Device ${extension}@${options_real['context']} ${name_real}\"",
         refreshonly => true,
     }
 
@@ -77,16 +77,6 @@ define asterisk::function::sip::device(
             fullname    => $fullname,
         }
     }
-
-/*
-
-    if ($queues != '') {
-        asterisk::function::queuemember { $name_real:
-            channel => $channel,
-            queue   => $queues,
-        }
-    }
-*/
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
