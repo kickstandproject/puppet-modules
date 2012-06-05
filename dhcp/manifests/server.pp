@@ -36,7 +36,7 @@ class dhcp::server(
     if ($interfaces != '') {
         $interfaces_real = $interfaces
     } else {
-        $interfaces = 'eth0'
+        $interfaces_real = 'eth0'
     }
 
     include dhcp::client
