@@ -94,6 +94,7 @@ class polycom-provision::common::config {
     polycom-provision::function::bootrom { $bootroms: }
 
     $legacy_bootroms = [
+        'bootrom.ld',
         '2201-06642-001.bootrom.ld',
         '2345-11000-001.bootrom.ld',
         '2345-11300-001.bootrom.ld',
