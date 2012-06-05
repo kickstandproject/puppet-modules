@@ -17,6 +17,7 @@
 #
 class dhcp::server(
     $authoritative = true,
+    $interfaces = '',
     $options = {}
 ) {
     $defaults = {
@@ -27,6 +28,16 @@ class dhcp::server(
     }
 
     $options_real = merge($defaults, $options)
+
+    if ($authoritative) {
+        $authoritative_real = 'authoritative'
+    }
+
+    if ($interfaces != '') {
+        $interfaces_real = $interfaces
+    } else {
+        $interfaces = 'eth0'
+    }
 
     include dhcp::client
     include dhcp::params::server
