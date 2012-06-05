@@ -15,24 +15,18 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class dhcp::server::config {
-    include dhcp::common::config
+define dhcp::function::subnet(
+    $subnet,
+    $range,
+    $netmask = '255.255.255.0',
+    $options = {},
+) {
+    require dhcp::server
 
-    common::function::concat { $dhcp::params::server::configfile:
-        notify  => Class['dhcp::server::service'],
-        require => File[$dhcp::params::server::basedir],
-    }
-
-    common::function::concat::fragment { 'dhcpd.conf-header':
+    common::function::concat::fragment { $name:
         target  => $dhcp::params::server::configfile,
-        content => template('dhcp/etc/dhcp/dhcpd.conf.erb'),
-        order   => 01,
-    }
-
-    file { $dhcp::params::server::defaultfile:
-        ensure  => present,
-        content => template('dhcp/etc/default/isc-dhcp-server.erb'),
-        notify  => Class['dhcp::server::service'],
+        content => template('dhcp/etc/dhcp/subnet.conf.erb'),
+        order   => 02,
     }
 }
 

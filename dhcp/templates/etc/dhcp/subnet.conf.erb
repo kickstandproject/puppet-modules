@@ -1,0 +1,6 @@
+subnet <%= subnet %> netmask <%= netmask %> {
+    range <%= range %>;
+<%- options.sort.each do |key,val| -%>
+    option <%= key %> <%= val %>;
+<%- end -%>
+}

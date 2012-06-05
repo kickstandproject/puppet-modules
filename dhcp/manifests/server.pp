@@ -15,7 +15,19 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class dhcp::server {
+class dhcp::server(
+    $authoritative = true,
+    $options = {}
+) {
+    $defaults = {
+        'ddns-update-style'     => 'interim',
+        'log-facility'          => 'local7',
+        'default-lease-time'    => '600',
+        'max-lease-time'        => '7200',
+    }
+
+    $options_real = merge($defaults, $options)
+
     include dhcp::client
     include dhcp::params::server
     include dhcp::server::init
