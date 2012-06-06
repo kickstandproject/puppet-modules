@@ -23,8 +23,8 @@ class dhcp::server(
     $defaults = {
         'ddns-update-style'     => 'interim',
         'log-facility'          => 'local7',
-        'default-lease-time'    => '600',
-        'max-lease-time'        => '7200',
+        'default-lease-time'    => '3600',
+        'max-lease-time'        => '86400',
     }
 
     $options_real = merge($defaults, $options)
