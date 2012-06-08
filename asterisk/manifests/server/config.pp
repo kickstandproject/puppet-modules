@@ -105,10 +105,6 @@ class asterisk::server::config {
         recurse => true,
         require => File["${asterisk::params::server::basedir}/queues.conf.d"],
     }
-
-    polycom-provision::function::sip-basic { $name:
-        address => $asterisk::server::sip_real['udpbindaddr'],
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
