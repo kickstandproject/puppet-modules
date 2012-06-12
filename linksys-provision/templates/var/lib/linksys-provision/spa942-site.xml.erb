@@ -1,0 +1,5 @@
+<flat-profile>
+    <Profile_Rule_B group="Provisioning/Configuration_Profile">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/configs/$MA.xml</Profile_Rule_B>
+    <Proxy_1_ group="Ext_1/Proxy_and_Registration"><%= scope.lookupvar('linksys-provision::server::sip_server') %></Proxy_1_>
+    <Resync_Periodic ua="na">3600</Resync_Periodic>
+</flat-profile>
