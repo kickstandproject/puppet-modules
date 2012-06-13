@@ -1,0 +1,7 @@
+host <%= name %> {
+    hardware ethernet <%= address %>;
+    <%- options.sort.each do |key,val| -%>
+    option <%= key %> <%= val %>;
+    <%- end -%>
+}
+
