@@ -20,7 +20,7 @@ class ssh::server::init {
     include ssh::server::install
     include ssh::server::config
     include ssh::server::service
-    include ssh::server::firewall
+    include ssh::server::monitor
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
