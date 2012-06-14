@@ -15,11 +15,21 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class polycom-provision::server inherits polycom-provision::common::init {
+class polycom-provision::server(
+    $hostname = $::fqdn,
+    $password = '',
+    $username = 'ksp-polycom',
+) {
     require polycom-ucs::client
     require polycom-ucs::legacy::client
     require polycom-bootrom::client
     require polycom-bootrom::legacy::client
+
+    include polycom-provision::server::init
+
+    if ($password == '') {
+        fail('You must assign a default password for polycom-provision::server')
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

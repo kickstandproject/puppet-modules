@@ -57,7 +57,6 @@ define polycom-provision::function::device::650(
     if (!defined(Common::Function::Concat["${base}/${name_real}-user.cfg"])) {
         common::function::concat { "${base}/${name_real}-user.cfg":
             require => File["${polycom-provision::params::basedir}/configs"],
-            notify  => Exec["asterisk-sip-notify-${name_real}"],
         }
 
         common::function::concat::fragment { "${name_real}-user.cfg-header":
@@ -77,18 +76,6 @@ define polycom-provision::function::device::650(
         target  => "${base}/${name_real}-user.cfg",
         content => template('polycom-provision/var/lib/polycom-provision/configs/650.cfg.erb'),
         order   => 02,
-    }
-
-    if (!defined(Exec["asterisk-sip-notify-${name_real}"])) {
-        exec { "asterisk-sip-notify-${name_real}":
-            command     => "asterisk -rx \"sip notify polycom-check-cfg ${name_real}-1\"",
-            refreshonly => true,
-            subscribe   => [
-                Class['polycom-provision::common::config'],
-                File["${polycom-provision::params::basedir}/site.cfg"],
-                File["${polycom-provision::params::basedir}/sip-basic.cfg"],
-            ],
-        }
     }
 }
 

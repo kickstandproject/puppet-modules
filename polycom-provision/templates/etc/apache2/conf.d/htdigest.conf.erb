@@ -3,6 +3,6 @@
 	AuthName "polycom-provision"
 	AuthDigestDomain /polycom
 	AuthDigestProvider file
-	AuthUserFile <%= scope.lookupvar('apache::params::rootdir') %>/<%= scope.lookupvar('polycom-provision::params::hostname') %>/conf/.htdigest
+	AuthUserFile <%= scope.lookupvar('apache::params::rootdir') %>/<%= scope.lookupvar('polycom-provision::server::hostname') %>/conf/.htdigest
 	Require valid-user
 </Location>

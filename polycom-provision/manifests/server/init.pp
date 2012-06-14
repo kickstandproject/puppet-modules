@@ -15,7 +15,15 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class polycom-provision::common::install {
+class polycom-provision::server::init {
+    include polycom-provision::params
+    include polycom-provision::server::config
+
+    File {
+        group   => $polycom-provision::params::group,
+        mode    => $polycom-provision::params::mode,
+        owner   => $polycom-provision::params::owner,
+    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

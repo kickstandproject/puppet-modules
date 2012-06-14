@@ -15,7 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-class polycom-provision::common::config {
+class polycom-provision::server::config {
     require apache::server
     require polycom-ucs::params
     include polycom-provision::params
@@ -148,15 +148,15 @@ class polycom-provision::common::config {
         legacy => 'yes',
     }
 
-    apache::function::virtualhost { $polycom-provision::params::hostname:
+    apache::function::virtualhost { $polycom-provision::server::hostname:
         content     => template('polycom-provision/etc/apache2/conf.d/polycom-provision.conf.erb'),
     }
 
-    apache::function::htdigest { $polycom-provision::params::hostname:
+    apache::function::htdigest { $polycom-provision::server::hostname:
         authname    => 'polycom-provision',
         content     => template('polycom-provision/etc/apache2/conf.d/htdigest.conf.erb'),
-        password    => $polycom-provision::params::password,
-        username    => $polycom-provision::params::username,
+        password    => $polycom-provision::server::password,
+        username    => $polycom-provision::server::username,
     }
 
     $mods = [
