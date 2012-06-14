@@ -78,18 +78,6 @@ define polycom-provision::function::device::601(
         content => template('polycom-provision/var/lib/polycom-provision/configs/601.cfg.erb'),
         order   => 02,
     }
-
-    if (!defined(Exec["asterisk-sip-notify-${name_real}"])) {
-        exec { "asterisk-sip-notify-${name_real}":
-            command     => "asterisk -rx \"sip notify polycom-check-cfg ${name_real}-1\"",
-            refreshonly => true,
-            subscribe   => [
-                Class['polycom-provision::common::config'],
-                File["${polycom-provision::params::basedir}/site.cfg"],
-                File["${polycom-provision::params::basedir}/sip-basic.cfg"],
-            ],
-        }
-    }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
