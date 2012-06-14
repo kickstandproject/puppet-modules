@@ -57,7 +57,6 @@ define polycom-provision::function::device::601(
     if (!defined(Common::Function::Concat["${base}/${name_real}-user.cfg"])) {
         common::function::concat { "${base}/${name_real}-user.cfg":
             require => File["${polycom-provision::params::basedir}/configs"],
-            notify  => Exec["asterisk-sip-notify-${name_real}"],
         }
 
         common::function::concat::fragment { "${name_real}-user.cfg-header":
