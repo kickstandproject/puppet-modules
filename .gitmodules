@@ -3,4 +3,7 @@
 	url = git://github.com/puppetlabs/puppetlabs-stdlib.git
 [submodule "ssh"]
 	path = ssh
-	url = git://github.com/kickstandproject/puppet-ssh.git
+	url = git://github.com/kickstandproject/kickstandproject-ssh.git
+[submodule "ntp"]
+	path = ntp
+	url = git://github.com/kickstandproject/kickstandproject-ntp.git
