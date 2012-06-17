@@ -7,3 +7,6 @@
 [submodule "ssh"]
 	path = ssh
 	url = git://github.com/kickstandproject/kickstandproject-ssh.git
+[submodule "puppet"]
+	path = puppet
+	url = git://github.com/kickstandproject/kickstandproject-puppet.git
