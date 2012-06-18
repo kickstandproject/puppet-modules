@@ -10,3 +10,6 @@
 [submodule "puppet"]
 	path = puppet
 	url = git://github.com/kickstandproject/kickstandproject-puppet.git
+[submodule "apache"]
+	path = apache
+	url = git://github.com/kickstandproject/kickstandproject-apache.git
