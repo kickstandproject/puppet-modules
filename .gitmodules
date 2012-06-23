@@ -13,3 +13,6 @@
 [submodule "apache"]
 	path = apache
 	url = git://github.com/kickstandproject/kickstandproject-apache.git
+[submodule "common"]
+	path = common
+	url = git://github.com/kickstandproject/kickstandproject-common.git
