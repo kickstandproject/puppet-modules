@@ -1,7 +1,7 @@
 <flat-profile>
-    <Profile_Rule ua="na">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/spa$PSN-site.xml</Profile_Rule>
-    <Resync_Periodic ua="na">30</Resync_Periodic>
-    <Upgrade_Enable group="Provisioning/Firmware_Upgrade">Yes</Upgrade_Enable>
-    <Upgrade_Error_Retry_Delay group="Provisioning/Firmware_Upgrade">3600</Upgrade_Error_Retry_Delay>
-    <Upgrade_Rule group="Provisioning/Firmware_Upgrade">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/firmwares/spa$PSN.bin</Upgrade_Rule>
+<Profile_Rule ua="na">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/spa$PSN-site.xml</Profile_Rule>
+<Resync_Periodic group="Provisioning/Configuration_Profile">30</Resync_Periodic>
+<Upgrade_Enable group="Provisioning/Firmware_Upgrade">Yes</Upgrade_Enable>
+<Upgrade_Error_Retry_Delay group="Provisioning/Firmware_Upgrade">3600</Upgrade_Error_Retry_Delay>
+<Upgrade_Rule group="Provisioning/Firmware_Upgrade">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/firmwares/spa$PSN.bin</Upgrade_Rule>
 </flat-profile>

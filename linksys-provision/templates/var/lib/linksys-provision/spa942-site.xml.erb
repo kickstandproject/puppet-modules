@@ -1,9 +1,5 @@
 <flat-profile>
-    <Extension_1_ group="Phone/Line_Key_1">Disabled</Extension_1_>
-    <Extension_2_ group="Phone/Line_Key_2">Disabled</Extension_2_>
-    <Extension_3_ group="Phone/Line_Key_3">Disabled</Extension_3_>
-    <Extension_4_ group="Phone/Line_Key_4">Disabled</Extension_4_>
-    <Profile_Rule_B group="Provisioning/Configuration_Profile">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/configs/$MA.xml</Profile_Rule_B>
-    <Proxy_1_ group="Ext_1/Proxy_and_Registration"><%= scope.lookupvar('linksys-provision::server::sip_server') %></Proxy_1_>
-    <Resync_Periodic ua="na">3600</Resync_Periodic>
+<Profile_Rule_B group="Provisioning/Configuration_Profile">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/configs/$MA.xml</Profile_Rule_B>
+<Proxy_1_ group="Ext_1/Proxy_and_Registration"><%= scope.lookupvar('linksys-provision::server::sip_server') %></Proxy_1_>
+<Resync_Periodic group="Provisioning/Configuration_Profile">86400</Resync_Periodic>
 </flat-profile>
