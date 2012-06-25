@@ -81,7 +81,7 @@ class rsyslog::params {
         default => $rsyslog_db_user,
     }
 
-    if ($db_password == '') {
+    if (($db_password == '') and ($db != '')) {
         fail('You must assign a default password using \'\$rsyslog_db_password\'')
     }
 }
