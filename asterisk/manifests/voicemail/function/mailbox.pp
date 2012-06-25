@@ -40,24 +40,32 @@ define asterisk::voicemail::function::mailbox(
 
     $base = "${asterisk::params::basedir}/voicemail.conf.d"
     $spool = "${asterisk::params::spooldir}/voicemail"
-
-    if (!defined(Common::Function::Concat["${base}/20${context}.conf"])) {
-        common::function::concat { "${base}/20${context}.conf":
-            notify => Exec['asterisk-module-reload-app_voicemail.so'],
-        }
-
-        common::function::concat::fragment { "20${context}.conf-header":
-            target  => "${base}/20${context}.conf",
+    
+    if (!defined(File["${base}/10${context}.conf"])) {
+        file { "${base}/10${context}.conf":
+            ensure  => present,
             content => template('asterisk/etc/asterisk/voicemail.conf.d/20mailboxes.conf.erb'),
-            order   => 01,
+            notify  => Exec['asterisk-module-reload-app_voicemail.so'],
+            purge   => true,
+            recurse => true,
+            require => File[$base],
+        }
+
+        file { "${base}/${context}":
+            ensure  => directory,
+            notify  => Exec['asterisk-module-reload-app_voicemail.so'],
+            purge   => true,
+            recurse => true,
+            require => File[$base],
         }
     }
 
-    common::function::concat::fragment { "${extension}@${context}":
-        target  => "${base}/20${context}.conf",
+    file { "${base}/${context}/${extension}.conf":
+        ensure  => present,
         content => template('asterisk/etc/asterisk/voicemail.conf.d/default/template.conf.erb'),
-        order   => 02,
-    }
+        notify  => Exec['asterisk-module-reload-app_voicemail.so'],
+        require => File["${base}/${context}"],
+     }
 
     if (!defined(File["${spool}/${context}"])) {
         file { "${spool}/${context}":

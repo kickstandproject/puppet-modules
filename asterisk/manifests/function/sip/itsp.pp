@@ -34,11 +34,13 @@ define asterisk::function::sip::itsp(
         $options_real['md5secret'] = md5("${name}:asterisk:${options_real['secret']}")
     }
 
+/*
     common::function::concat::fragment { $name:
         target  => "${asterisk::params::server::basedir}/sip.conf.d/20devices.conf",
         content => template('asterisk/etc/asterisk/sip.conf.d/20devices2.conf.erb'),
         order   => 02,
     }
+*/
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

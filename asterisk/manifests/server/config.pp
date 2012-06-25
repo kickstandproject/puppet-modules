@@ -72,14 +72,13 @@ class asterisk::server::config {
         require => File["${asterisk::params::server::basedir}/sip.conf.d"],
     }
 
-    common::function::concat { "${asterisk::params::server::basedir}/sip.conf.d/20devices.conf":
-        notify => Exec['asterisk-module-reload-sip.conf'],
-    }
-
-    common::function::concat::fragment { '20devices.conf-header':
-        target  => "${asterisk::params::server::basedir}/sip.conf.d/20devices.conf",
-        content => template('asterisk/etc/asterisk/sip.conf.d/20header.conf.erb'),
-        order   => 01,
+    file { "${asterisk::params::server::basedir}/sip.conf.d/devices/":
+        ensure  => directory,
+        force   => true,
+        notify  => Exec['asterisk-module-reload-sip.conf'],
+        purge   => true,
+        recurse => true,
+        require => File["${asterisk::params::server::basedir}/sip.conf.d/20includes.conf"],
     }
 
     file { "${asterisk::params::server::basedir}/sip.conf.d/registrations":

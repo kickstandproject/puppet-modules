@@ -58,11 +58,11 @@ define asterisk::function::sip::device(
     $name_real = "${split[0]}-${line}"
     $options_real['md5secret'] = md5("${name_real}:asterisk:${secret}")
 
-    common::function::concat::fragment { $name:
-        target  => "${asterisk::params::server::basedir}/sip.conf.d/20devices.conf",
-        content => template('asterisk/etc/asterisk/sip.conf.d/20devices2.conf.erb'),
+    file { "${base}/${name_real}.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/sip.conf.d/devices/template.conf.erb'),
         notify  => Exec["asterisk-database-put-${name_real}"],
-        order   => 02,
+        require => File[$base],
     }
 
     exec { "asterisk-database-put-${name_real}":
