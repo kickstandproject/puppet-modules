@@ -2,4 +2,5 @@
 <Profile_Rule_B group="Provisioning/Configuration_Profile">http://<%= scope.lookupvar('linksys-provision::server::hostname') %>/linksys/configs/$MA.xml</Profile_Rule_B>
 <Proxy_1_ group="Ext_1/Proxy_and_Registration"><%= scope.lookupvar('linksys-provision::server::sip_server') %></Proxy_1_>
 <Resync_Periodic group="Provisioning/Configuration_Profile">86400</Resync_Periodic>
+<Voice_Mail_Number group="Phone/General">*97</Voice_Mail_Number>
 </flat-profile>
