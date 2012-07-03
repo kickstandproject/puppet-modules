@@ -4,7 +4,7 @@
 [ksp-localdial]
 exten => s,1,NoOp()
     same => n,Set(DeviceID=${DB(SIP/Device/${ARG1}@${ARG2})})
-    same => n,GotoIf($[${ISNULL(${DeviceID})}]?invalid,1)
+    same => n,GotoIf($[${ISNULL(${DeviceID})}]?mailbox,1)
     same => n,Dial(SIP/${DeviceID},20)
     same => n,Goto(s-${DIALSTATUS},1)
 
@@ -17,6 +17,10 @@ exten => s-BUSY,1,NoOp()
     same => n,Return()
 
 exten => _s-.,1,NoOp()
+    same => n,Goto(s-NOANSWER,1)
+
+exten => mailbox,1,NoOp()
+    same => n,GotoIf($[${MAILBOX_EXISTS(${ARG1}@${ARG2})} == 0]?invalid,1)
     same => n,Goto(s-NOANSWER,1)
 
 exten => invalid,1,NoOp()
