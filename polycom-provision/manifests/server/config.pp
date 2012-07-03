@@ -59,6 +59,19 @@ class polycom-provision::server::config {
         require => File[$polycom-provision::params::basedir],
     }
 
+    file { "${polycom-provision::params::basedir}/legacy":
+        ensure  => directory,
+        purge   => true,
+        recurse => true,
+        require => File[$polycom-provision::params::basedir],
+    }
+
+    file { "${polycom-provision::params::basedir}/legacy/defaults.cfg":
+        ensure  => present,
+        content => template('polycom-provision/var/lib/polycom-provision/legacy/defaults.cfg.erb'),
+        require => File["${polycom-provision::params::basedir}/legacy"],
+    }
+
     file { "${polycom-provision::params::basedir}/images":
         ensure  => link,
         target  => "${polycom-ucs::params::basedir}/images",
@@ -164,8 +177,7 @@ class polycom-provision::server::config {
         'dav_fs',
     ]
 
-    apache::function::a2enmod { $mods:
-    }
+    apache::function::a2enmod { $mods: }
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79

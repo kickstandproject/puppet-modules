@@ -15,15 +15,21 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define polycom-provision::function::site(
+define polycom-provision::function::legacy::site(
     $content = '',
 ) {
     require polycom-provision::server
 
-    file { "${polycom-provision::params::basedir}/site.cfg":
+    if ($content == '') {
+        $content_real = template('polycom-provision/var/lib/polycom-provision/legacy/site.cfg.erb')
+    } else {
+        $content_real = $content
+    }
+
+    file { "${polycom-provision::params::basedir}/legacy/site.cfg":
         ensure  => present,
-        content => template('polycom-provision/var/lib/polycom-provision/site.cfg.erb'),
-        require => File[$polycom-provision::params::basedir],
+        content => $content_real,
+        require => File["${polycom-provision::params::basedir}/legacy"],
     }
 }
 

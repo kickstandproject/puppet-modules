@@ -41,10 +41,10 @@ define polycom-provision::function::sip-basic(
         require => File[$polycom-provision::params::basedir],
     }
 
-    file { "${polycom-provision::params::basedir}/sip-basic-legacy.cfg":
+    file { "${polycom-provision::params::basedir}/legacy/sip-basic.cfg":
         ensure  => present,
-        content => template('polycom-provision/var/lib/polycom-provision/sip-basic-legacy.cfg.erb'),
-        require => File[$polycom-provision::params::basedir],
+        content => template('polycom-provision/var/lib/polycom-provision/legacy/sip-basic.cfg.erb'),
+        require => File["${polycom-provision::params::basedir}/legacy"],
     }
 }
 
