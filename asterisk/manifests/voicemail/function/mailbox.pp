@@ -19,6 +19,7 @@ define asterisk::voicemail::function::mailbox(
     $email = '',
     $fullname = '',
     $description = '',
+    $options = '',
 ) {
     require asterisk::voicemail::server
 
