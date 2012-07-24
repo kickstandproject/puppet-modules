@@ -68,11 +68,6 @@ define asterisk::function::sip::device(
         require => File[$base],
     }
 
-    exec { "asterisk-database-put-${name_real}":
-        command     => "asterisk -rx \"database put SIP/Device ${extension}@${options_real['context']} ${name_real}\"",
-        refreshonly => true,
-    }
-
     if ($options_real['mailbox'] != 'none') {
         asterisk::voicemail::function::mailbox { $options_real['mailbox']:
             description => $options_real['description'],
