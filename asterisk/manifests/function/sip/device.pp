@@ -62,7 +62,6 @@ define asterisk::function::sip::device(
         ensure  => present,
         content => template('asterisk/etc/asterisk/sip.conf.d/devices/template.conf.erb'),
         notify  => [
-            Exec["asterisk-database-put-${name_real}"],
             Exec['asterisk-module-reload-sip.conf'],
         ],
         require => File[$base],
