@@ -72,7 +72,7 @@ class asterisk::server::config {
         require => File["${asterisk::params::server::basedir}/sip.conf.d"],
     }
 
-    file { "${asterisk::params::server::basedir}/sip.conf.d/devices/":
+    file { "${asterisk::params::server::basedir}/sip.conf.d/devices":
         ensure  => directory,
         force   => true,
         notify  => Exec['asterisk-module-reload-sip.conf'],
@@ -83,6 +83,15 @@ class asterisk::server::config {
 
     file { "${asterisk::params::server::basedir}/sip.conf.d/registrations":
         ensure  => directory,
+        notify  => Exec['asterisk-module-reload-sip.conf'],
+        purge   => true,
+        recurse => true,
+        require => File["${asterisk::params::server::basedir}/sip.conf.d/20includes.conf"],
+    }
+
+    file { "${asterisk::params::server::basedir}/sip.conf.d/trunks":
+        ensure  => directory,
+        force   => true,
         notify  => Exec['asterisk-module-reload-sip.conf'],
         purge   => true,
         recurse => true,

@@ -15,7 +15,7 @@
 # of the GNU General Public License Version 2. See the LICENSE
 # file at the top of the source tree.
 #
-define asterisk::function::sip::itsp(
+define asterisk::function::sip::trunk(
     $options    = {},
 ) {
     require asterisk::server
@@ -34,13 +34,13 @@ define asterisk::function::sip::itsp(
         $options_real['md5secret'] = md5("${name}:asterisk:${options_real['secret']}")
     }
 
-/*
-    common::function::concat::fragment { $name:
-        target  => "${asterisk::params::server::basedir}/sip.conf.d/20devices.conf",
-        content => template('asterisk/etc/asterisk/sip.conf.d/20devices2.conf.erb'),
-        order   => 02,
+
+    file { "${asterisk::params::server::basedir}/sip.conf.d/trunks/${name}.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/sip.conf.d/trunks/template.conf.erb'),
+        notify  => Exec['asterisk-module-reload-sip.conf'],
+        require => File["${asterisk::params::server::basedir}/sip.conf.d/trunks"],
     }
-*/
 }
 
 # vim:sw=4:ts=4:expandtab:textwidth=79
