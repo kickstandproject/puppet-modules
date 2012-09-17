@@ -27,12 +27,12 @@ define apt::function::repository (
     file { "${name}.list":
         ensure  => present,
         content => template('apt/etc/apt/sources.list.d/repo.list'),
-        notify  => Exec["apt-key ${key}"],
+        notify  => Exec["apt-key ${name}-${key}"],
         path    => "${apt::params::basedir}/sources.list.d/${name}.list",
         require => Class['apt::common::config'],
     }
 
-    exec { "apt-key ${key}":
+    exec { "apt-key ${name}-${key}":
         command     => "apt-key adv --keyserver pgp.mit.edu --recv-keys ${key}",
         before      => Exec['apt-get update'],
         notify      => Exec['apt-get update'],
