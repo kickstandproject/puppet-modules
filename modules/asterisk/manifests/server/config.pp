@@ -51,6 +51,22 @@ class asterisk::server::config {
         require => File["${asterisk::params::server::basedir}/extensions.conf.d"],
     }
 
+    file { "${asterisk::params::server::basedir}/extensions.conf.d/20includes.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/extensions.conf.d/20includes.conf.erb'),
+        notify  => Exec['asterisk-module-reload-extensions.conf'],
+        require => File["${asterisk::params::server::basedir}/extensions.conf.d"],
+    }
+
+    file { "${asterisk::params::server::basedir}/extensions.conf.d/devices":
+        ensure  => directory,
+        force   => true,
+        notify  => Exec['asterisk-module-reload-extensions.conf'],
+        purge   => true,
+        recurse => true,
+        require => File["${asterisk::params::server::basedir}/extensions.conf.d/20includes.conf"],
+    }
+
     file { "${asterisk::params::server::basedir}/sip.conf.d/10general.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/sip.conf.d/10general.conf.erb'),

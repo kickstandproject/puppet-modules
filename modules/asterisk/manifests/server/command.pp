@@ -127,7 +127,7 @@ class asterisk::server::command {
     }
 
     exec { 'asterisk-module-reload-extensions.conf':
-        command     => 'true',
+        command     => 'asterisk -rx "dialplan reload"',
         refreshonly => true,
     }
 

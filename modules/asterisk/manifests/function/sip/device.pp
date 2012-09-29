@@ -24,7 +24,9 @@ define asterisk::function::sip::device(
 ) {
     require asterisk::server
 
-    $base = "${asterisk::params::basedir}/sip.conf.d/devices"
+    $channel = 'SIP'
+    $exten_base = "${asterisk::params::basedir}/extensions.conf.d/devices"
+    $sip_base = "${asterisk::params::basedir}/sip.conf.d/devices"
 
     $defaults = {
         'type'      => 'friend',
@@ -58,13 +60,22 @@ define asterisk::function::sip::device(
     $name_real = "${split[0]}-${line}"
     $options_real['md5secret'] = md5("${name_real}:asterisk:${secret}")
 
-    file { "${base}/${name_real}.conf":
+    file { "${exten_base}/${name_real}.conf":
+        ensure  => present,
+        content => template('asterisk/etc/asterisk/extensions.conf.d/devices/template.conf.erb'),
+        notify  => [
+            Exec['asterisk-module-reload-extensions.conf'],
+        ],
+        require => File[$exten_base],
+    }
+
+    file { "${sip_base}/${name_real}.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/sip.conf.d/devices/template.conf.erb'),
         notify  => [
             Exec['asterisk-module-reload-sip.conf'],
         ],
-        require => File[$base],
+        require => File[$sip_base],
     }
 
     if ($options_real['mailbox'] != 'none') {
