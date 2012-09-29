@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 MODULE_PATH=/etc/puppet/modules
 
@@ -7,6 +6,7 @@ declare -A MODULES
 MODULES["kickstandproject-ntp"]="0.0.1"
 MODULES["kickstandproject-puppet"]="0.0.1"
 MODULES["kickstandproject-ssh"]="0.0.2"
+MODULES["puppetlabs-stdlib"]="2.2.0"
 
 MODULE_LIST=`puppet module list`
 

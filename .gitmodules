@@ -1,0 +1,9 @@
+[submodule "modules/zabbix"]
+	path = modules/zabbix
+	url = git://github.com/kickstandproject/kickstandproject-zabbix.git
+[submodule "modules/common"]
+	path = modules/common
+	url = git://github.com/kickstandproject/kickstandproject-common.git
+[submodule "modules/apache"]
+	path = modules/apache
+	url = git://github.com/kickstandproject/kickstandproject-apache.git
