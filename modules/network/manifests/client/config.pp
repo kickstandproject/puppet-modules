@@ -1,7 +1,7 @@
 #
-# puppet-modules: The Kickstand Project
+# kickstandproject-network: The Kickstand Project
 #
-# Copyright (C) 2011, Polybeacon, Inc.
+# Copyright (C) 2012, PolyBeacon, Inc.
 #
 # Paul Belanger <paul.belanger@polybeacon.com>
 #
@@ -16,44 +16,44 @@
 # file at the top of the source tree.
 #
 class network::client::config {
-    file { $network::params::basedir:
-        ensure  => directory,
-        purge   => true,
-        recurse => true,
-    }
+  file { $network::params::basedir:
+    ensure  => directory,
+    purge   => true,
+    recurse => true,
+  }
 
-    file { "${network::params::client::basedir}/run":
-        ensure  => link,
-        require => File[$network::params::client::basedir],
-        target  => '/run/network',
-    }
+  file { "${network::params::client::basedir}/run":
+    ensure  => link,
+    require => File[$network::params::client::basedir],
+    target  => '/run/network',
+  }
 
-    file { "${network::params::client::basedir}/if-down.d":
-        ensure  => directory,
-        require => File[$network::params::client::basedir],
-    }
+  file { "${network::params::client::basedir}/if-down.d":
+    ensure  => directory,
+    require => File[$network::params::client::basedir],
+  }
 
-    file { "${network::params::client::basedir}/if-post-down.d":
-        ensure  => directory,
-        require => File[$network::params::client::basedir],
-    }
+  file { "${network::params::client::basedir}/if-post-down.d":
+    ensure  => directory,
+    require => File[$network::params::client::basedir],
+  }
 
-    file { "${network::params::client::basedir}/if-pre-up.d":
-        ensure  => directory,
-        require => File[$network::params::client::basedir],
-    }
+  file { "${network::params::client::basedir}/if-pre-up.d":
+    ensure  => directory,
+    require => File[$network::params::client::basedir],
+  }
 
-    file { "${network::params::client::basedir}/if-up.d":
-        ensure  => directory,
-        require => File[$network::params::client::basedir],
-    }
+  file { "${network::params::client::basedir}/if-up.d":
+      ensure  => directory,
+      require => File[$network::params::client::basedir],
+  }
 
-    file { $network::params::client::configfile:
-        ensure  => present,
-        content => template('network/etc/network/interfaces.erb'),
-        notify  => Class['network::client::service'],
-        require => File[$network::params::client::basedir],
-    }
+  file { $network::params::client::configfile:
+    ensure  => present,
+    content => template('network/etc/network/interfaces.erb'),
+    notify  => Class['network::client::service'],
+    require => File[$network::params::client::basedir],
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

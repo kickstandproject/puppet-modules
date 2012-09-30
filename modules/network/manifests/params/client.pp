@@ -1,7 +1,7 @@
 #
-# puppet-modules: The Kickstand Project
+# kickstandproject-network: The Kickstand Project
 #
-# Copyright (C) 2011, Polybeacon, Inc.
+# Copyright (C) 2012, PolyBeacon, Inc.
 #
 # Paul Belanger <paul.belanger@polybeacon.com>
 #
@@ -16,21 +16,21 @@
 # file at the top of the source tree.
 #
 class network::params::client inherits network::params {
-    $configfile = $::operatingsystem ? {
-        default => '/etc/network/interfaces',
-    }
+  $configfile = $::operatingsystem ? {
+    default => '/etc/network/interfaces',
+  }
 
-    $hasstatus = $::operatingsystem ? {
-        default => false,
-    }
+  $hasstatus = $::operatingsystem ? {
+    default => false,
+  }
 
-    $packagename = $::operatingsystem ? {
-        default => ['netbase', 'bridge-utils'],
-    }
+  $packagename = $::operatingsystem ? {
+    default => ['netbase', 'bridge-utils'],
+  }
 
-    $servicename = $::operatingsystem ? {
-        default => 'networking',
-    }
+  $servicename = $::operatingsystem ? {
+    default => 'networking',
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

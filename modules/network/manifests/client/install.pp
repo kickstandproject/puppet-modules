@@ -1,7 +1,7 @@
 #
-# puppet-modules: The Kickstand Project
+# kickstandproject-network: The Kickstand Project
 #
-# Copyright (C) 2011, Polybeacon, Inc.
+# Copyright (C) 2012, PolyBeacon, Inc.
 #
 # Paul Belanger <paul.belanger@polybeacon.com>
 #
@@ -16,9 +16,9 @@
 # file at the top of the source tree.
 #
 class network::client::install {
-    package { $network::params::client::packagename:
-        ensure => present,
-    }
+  package { $network::params::client::packagename:
+    ensure => present,
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79
