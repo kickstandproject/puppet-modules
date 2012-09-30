@@ -6,7 +6,7 @@ declare -A MODULES
 MODULES["kickstandproject-network"]="0.0.1"
 MODULES["kickstandproject-ntp"]="0.0.1"
 MODULES["kickstandproject-puppet"]="0.0.1"
-MODULES["kickstandproject-ssh"]="0.0.2"
+MODULES["kickstandproject-ssh"]="0.0.3"
 MODULES["puppetlabs-stdlib"]="2.2.0"
 
 MODULE_LIST=`puppet module list`
