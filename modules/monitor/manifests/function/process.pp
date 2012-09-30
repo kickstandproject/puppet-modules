@@ -16,34 +16,36 @@
 # file at the top of the source tree.
 #
 define monitor::function::process(
-    $process,
-    $description = '',
-    $ensure = present,
+  $process,
+  $description = '',
+  $ensure = present,
 ) {
+  if ($::monitor == 'yes') {
     require nsca::client
     include monitor::params
 
     if ($description != '') {
-        $description_real = $description
+      $description_real = $description
     } else {
-        $description_real = "Check Process ${process}"
+      $description_real = "Check Process ${process}"
     }
 
     File {
-        group   => $nsca::params::group,
-        mode    => $nsca::params::mode,
-        owner   => $nsca::params::owner,
+      group => $nsca::params::group,
+      mode  => $nsca::params::mode,
+      owner => $nsca::params::owner,
     }
 
     nagios::function::service::nsca { "check_procs_${process}!1!1":
-        ensure      => $ensure,
-        description => $description_real,
-        server      => $monitor::client::server,
+      ensure      => $ensure,
+      description => $description_real,
+      server      => $monitor::client::server,
     }
 
     nagios::command { "check_procs_${process}":
-        command_line    => "/usr/lib/nagios/plugins/check_procs -C ${process} -w '\$ARG1$:' -c '\$ARG2$:'"
+      command_line  => "/usr/lib/nagios/plugins/check_procs -C ${process} -w '\$ARG1$:' -c '\$ARG2$:'"
     }
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79
