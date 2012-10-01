@@ -122,12 +122,6 @@ define reprepro::function::repository(
         require => File["${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}/conf"],
     }
 
-    apt::function::repository { "reprepro-${name}-${repo}-${ostype}":
-        protocol    => 'file:',
-        url         => "${reprepro::params::basedir}/repos/${name}/${repo}/${ostype}",
-        components  => main,
-    }
-
     exec { "reprepro ${name}/${repo}/${ostype} clearvanished":
         command     => "/usr/bin/reprepro -b ${reprepro::params::basedir}/repos/${name}/${repo}/${ostype} clearvanished",
         group       => $reprepro::params::user,
