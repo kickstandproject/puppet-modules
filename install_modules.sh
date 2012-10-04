@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 MODULE_PATH=/etc/puppet/modules
 
 declare -A MODULES
@@ -26,7 +28,7 @@ for MOD in ${!MODULES[*]} ; do
 #        if ! puppet module upgrade $MOD --version ${MODULES[$MOD]} >/dev/null 2>&1
 #        then
             # This will get run in cron, so silence non-error output
-            puppet module install $MOD --version ${MODULES[$MOD]} --force >/dev/null
+            puppet module install $MOD --version ${MODULES[$MOD]} --force >/dev/null 2>&1
         fi
 #    fi
 done
