@@ -23,7 +23,7 @@ define asterisk::function::sip::device::polycom::335(
   $phone  = {},
   $sip    = {},
 ) {
-  asterisk::function::sip::device::polycom:650 { $name:
+  asterisk::function::sip::device::polycom::650 { $name:
     email     => $email,
     extension => $extension,
     fullname  => $fullname,
