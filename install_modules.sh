@@ -8,7 +8,7 @@ declare -A MODULES
 MODULES["kickstandproject-apt"]="0.0.1"
 MODULES["kickstandproject-network"]="0.0.1"
 MODULES["kickstandproject-ntp"]="0.0.3"
-MODULES["kickstandproject-puppet"]="0.0.2"
+MODULES["kickstandproject-puppet"]="0.0.3"
 MODULES["kickstandproject-ssh"]="0.0.3"
 MODULES["kickstandproject-timezone"]="0.0.3"
 MODULES["puppetlabs-stdlib"]="2.2.0"
