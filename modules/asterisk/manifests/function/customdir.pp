@@ -41,9 +41,9 @@ define asterisk::function::customdir(
         require => File[$base],
     }
 
-    file { "${base}/99custom.conf":
+    file { "${base}/15custom.conf":
         ensure  => present,
-        content => template('asterisk/etc/asterisk/sip.conf.d/99custom.conf.erb'),
+        content => template('asterisk/etc/asterisk/sip.conf.d/15custom.conf.erb'),
         require => File[$base],
     }
 }
