@@ -16,13 +16,13 @@
 # file at the top of the source tree.
 #
 class jenkins::common::service {
-    service { $jenkins::params::servicename:
-        ensure      => running,
-        enable      => true,
-        hasrestart  => true,
-        hasstatus   => $jenkins::params::hasstatus,
-        require     => Class['jenkins::common::config'],
-    }
+  service { $jenkins::params::servicename:
+    ensure      => running,
+    enable      => true,
+    hasrestart  => true,
+    hasstatus   => $jenkins::params::hasstatus,
+    require     => Class['jenkins::common::config'],
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

@@ -16,11 +16,11 @@
 # file at the top of the source tree.
 #
 class jenkins::server inherits jenkins::common::init {
-    require jenkins::apache::init
+  require jenkins::apache::init
 
-    if ($firewall == 'yes') {
-        include jenkins::common::firewall
-    }
+  if ($firewall == 'yes') {
+    include jenkins::common::firewall
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

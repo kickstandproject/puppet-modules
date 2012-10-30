@@ -16,18 +16,18 @@
 # file at the top of the source tree.
 #
 class jenkins::common::config {
-    require jenkins::params
+  require jenkins::params
 
-    file { $jenkins::params::basedir:
-        ensure  => directory,
-        require => Class['jenkins::common::install'],
-    }
+  file { $jenkins::params::basedir:
+    ensure  => directory,
+    require => Class['jenkins::common::install'],
+  }
 
-    file { $jenkins::params::defaultfile:
-        ensure  => present,
-        content => template('jenkins/etc/default/jenkins.erb'),
-        notify  => Class['jenkins::common::service'],
-    }
+  file { $jenkins::params::defaultfile:
+    ensure  => present,
+    content => template('jenkins/etc/default/jenkins.erb'),
+    notify  => Class['jenkins::common::service'],
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

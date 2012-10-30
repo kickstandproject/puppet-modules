@@ -16,16 +16,16 @@
 # file at the top of the source tree.
 #
 class jenkins::common::init {
-    include jenkins::params
-    include jenkins::common::install
-    include jenkins::common::config
-    include jenkins::common::service
+  include jenkins::params
+  include jenkins::common::install
+  include jenkins::common::config
+  include jenkins::common::service
 
-    File {
-        group   => $jenkins::params::group,
-        mode    => $jenkins::params::mode,
-        owner   => $jenkins::params::owner,
-    }
+  File {
+    group   => $jenkins::params::group,
+    mode    => $jenkins::params::mode,
+    owner   => $jenkins::params::owner,
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

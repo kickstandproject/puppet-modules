@@ -16,11 +16,11 @@
 # file at the top of the source tree.
 #
 class jenkins::apache::init {
-    require jenkins::params
+  require jenkins::params
 
-    apache::function::virtualhost-proxy { $jenkins::params::hostname:
-        port => $jenkins::params::port,
-    }
+  apache::function::virtualhost-proxy { $jenkins::params::hostname:
+    port => $jenkins::params::port,
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

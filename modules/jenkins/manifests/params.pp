@@ -16,51 +16,51 @@
 # file at the top of the source tree.
 #
 class jenkins::params {
-    $basedir = $::operatingsystem ? {
-        default => '/var/lib/jenkins',
-    }
+  $basedir = $::operatingsystem ? {
+    default => '/var/lib/jenkins',
+  }
 
-    $defaultfile = $::operatingsystem ? {
-        default => '/etc/default/jenkins',
-    }
+  $defaultfile = $::operatingsystem ? {
+    default => '/etc/default/jenkins',
+  }
 
-    $group = $::operatingsystem ? {
-        default => 'root',
-    }
+  $group = $::operatingsystem ? {
+    default => 'root',
+  }
 
-    $hasstatus = $::operatingsystem ? {
-        default => true,
-    }
+  $hasstatus = $::operatingsystem ? {
+    default => true,
+  }
 
-    $mode = $::operatingsystem ? {
-        default => '0644',
-    }
+  $mode = $::operatingsystem ? {
+    default => '0644',
+  }
 
-    $owner = $::operatingsystem ? {
-        default => 'root',
-    }
+  $owner = $::operatingsystem ? {
+    default => 'root',
+  }
 
-    $packagename = $::operatingsystem ? {
-        default => 'jenkins',
-    }
+  $packagename = $::operatingsystem ? {
+    default => 'jenkins',
+  }
 
-    $processname = $::operatingsystem ? {
-        default => 'jenkins',
-    }
+  $processname = $::operatingsystem ? {
+    default => 'jenkins',
+  }
 
-    $servicename = $::operatingsystem ? {
-        default => 'jenkins',
-    }
+  $servicename = $::operatingsystem ? {
+    default => 'jenkins',
+  }
 
-    $hostname = $jenkins_hostname ? {
-        ''      => $::fqdn,
-        default => $jenkins_hostname,
-    }
+  $hostname = $jenkins_hostname ? {
+    ''      => $::fqdn,
+    default => $jenkins_hostname,
+  }
 
-    $port = $jenkins_port ? {
-        ''      => '8080',
-        default => $jenkins_port,
-    }
+  $port = $jenkins_port ? {
+    ''      => '8080',
+    default => $jenkins_port,
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79
