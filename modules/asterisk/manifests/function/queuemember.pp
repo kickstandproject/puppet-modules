@@ -1,7 +1,7 @@
 #
 # puppet-modules: The Kickstand Project
 #
-# Copyright (C) 2011, Polybeacon, Inc.
+# Copyright (C) 2012, PolyBeacon, Inc.
 #
 # Paul Belanger <paul.belanger@polybeacon.com>
 #
@@ -16,21 +16,21 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queuemember(
-    $queue,
-    $channel = 'SIP',
+  $queue,
+  $channel = 'SIP',
 ) {
-    require asterisk::server
+  require asterisk::server
 
-    $base = "${asterisk::params::basedir}/queues.conf.d/includes"
+  $base = "${asterisk::params::basedir}/queues.conf.d/includes"
 
-    if (defined(File["${base}/${queue}"])) {
-        file { "${base}/${queue}/${name}.conf":
-            ensure  => present,
-            content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
-            notify  => Exec['asterisk-module-reload-queues.conf'],
-            require => File["${base}/${queue}"],
-        }
+  if (defined(File["${base}/${queue}"])) {
+    file { "${base}/${queue}/${name}.conf":
+      ensure  => present,
+      content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
+      notify  => Exec['asterisk-module-reload-queues.conf'],
+      require => File["${base}/${queue}"],
     }
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

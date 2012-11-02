@@ -1,7 +1,7 @@
 #
 # puppet-modules: The Kickstand Project
 #
-# Copyright (C) 2011, Polybeacon, Inc.
+# Copyright (C) 2012, PolyBeacon, Inc.
 #
 # Paul Belanger <paul.belanger@polybeacon.com>
 #
@@ -16,27 +16,27 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queue(
-    $strategy = '',
-    $timeout = ''
+  $strategy = '',
+  $timeout = ''
 ) {
-    require asterisk::server
+  require asterisk::server
 
-    $base = "${asterisk::params::basedir}/queues.conf.d/includes"
+  $base = "${asterisk::params::basedir}/queues.conf.d/includes"
 
-    file { "$base/${name}":
-        ensure  => directory,
-        notify  => Exec['asterisk-module-reload-queues.conf'],
-        purge   => true,
-        recurse => true,
-        require => File[$base],
-    }
+  file { "$base/${name}":
+    ensure  => directory,
+    notify  => Exec['asterisk-module-reload-queues.conf'],
+    purge   => true,
+    recurse => true,
+    require => File[$base],
+  }
 
-    file { "$base/${name}.conf":
-        ensure  => present,
-        content => template('asterisk/etc/asterisk/queues.conf.d/includes/template.conf.erb'),
-        notify  => Exec['asterisk-module-reload-queues.conf'],
-        require => File[$base],
-    }
+  file { "$base/${name}.conf":
+    ensure  => present,
+    content => template('asterisk/etc/asterisk/queues.conf.d/includes/template.conf.erb'),
+    notify  => Exec['asterisk-module-reload-queues.conf'],
+    require => File[$base],
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79

@@ -1,7 +1,7 @@
 #
 # puppet-modules: The Kickstand Project
 #
-# Copyright (C) 2011, Polybeacon, Inc.
+# Copyright (C) 2012, PolyBeacon, Inc.
 #
 # Paul Belanger <paul.belanger@polybeacon.com>
 #
@@ -16,13 +16,13 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queues(
-    $strategy = '',
-    $timeout = ''
+  $strategy = '',
+  $timeout = ''
 ) {
-    asterisk::function::queue { $name:
-        strategy    => $strategy,
-        timeout     => $timeout,
-    }
+  asterisk::function::queue { $name:
+    strategy => $strategy,
+    timeout  => $timeout,
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79
