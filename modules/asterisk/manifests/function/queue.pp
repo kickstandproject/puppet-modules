@@ -25,7 +25,7 @@ define asterisk::function::queue(
 
     file { "$base/${name}":
         ensure  => directory,
-        notify  => Exec['asterisk-module-reload-app_queue.so'],
+        notify  => Exec['asterisk-module-reload-queues.conf'],
         purge   => true,
         recurse => true,
         require => File[$base],
@@ -34,7 +34,7 @@ define asterisk::function::queue(
     file { "$base/${name}.conf":
         ensure  => present,
         content => template('asterisk/etc/asterisk/queues.conf.d/includes/template.conf.erb'),
-        notify  => Exec['asterisk-module-reload-app_queue.so'],
+        notify  => Exec['asterisk-module-reload-queues.conf'],
         require => File[$base],
     }
 }
