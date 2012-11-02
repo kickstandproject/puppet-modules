@@ -23,13 +23,11 @@ define asterisk::function::queuemember(
 
   $base = "${asterisk::params::basedir}/queues.conf.d/includes"
 
-  if (defined(File["${base}/${queue}"])) {
-    file { "${base}/${queue}/${name}.conf":
-      ensure  => present,
-      content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
-      notify  => Exec['asterisk-module-reload-queues.conf'],
-      require => File["${base}/${queue}"],
-    }
+  file { "${base}/${queue}/${name}.conf":
+    ensure  => present,
+    content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
+    notify  => Exec['asterisk-module-reload-queues.conf'],
+    require => File["${base}/${queue}"],
   }
 }
 
