@@ -3,4 +3,6 @@
 <%= key %> = <%= val %>
 <%- end -%>
 
-#tryinclude "queues.conf.d/includes/<%= name %>/*.conf"
+<%- members.sort.each do |val| -%>
+member => <%= channel %>/<%= val %>
+<%- end -%>

@@ -42,13 +42,6 @@ define asterisk::function::queue(
     notify  => Exec['asterisk-module-reload-queues.conf'],
     require => File[$base],
   }
-
-  file { "${base}/${name}/${members}.conf":
-    ensure  => present,
-    content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
-    notify  => Exec['asterisk-module-reload-queues.conf'],
-    require => File["${base}/${name}"],
-  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
