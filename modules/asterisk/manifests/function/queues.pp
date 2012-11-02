@@ -16,12 +16,10 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queues(
-  $strategy = '',
-  $timeout = ''
+  $settings = {},
 ) {
   asterisk::function::queue { $name:
-    strategy => $strategy,
-    timeout  => $timeout,
+    settings => $settings,
   }
 }
 

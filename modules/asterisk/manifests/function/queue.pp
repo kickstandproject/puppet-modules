@@ -16,10 +16,14 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queue(
-  $strategy = '',
-  $timeout = ''
+  $settings = {},
 ) {
   require asterisk::server
+  $defaults = {
+    'strategy' => 'ringall',
+  }
+
+  $settings_real = merge($defaults, $settings)
 
   $base = "${asterisk::params::basedir}/queues.conf.d/includes"
 
