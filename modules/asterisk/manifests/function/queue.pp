@@ -16,6 +16,7 @@
 # file at the top of the source tree.
 #
 define asterisk::function::queue(
+  $members = [],
   $settings = {},
 ) {
   require asterisk::server
@@ -40,6 +41,13 @@ define asterisk::function::queue(
     content => template('asterisk/etc/asterisk/queues.conf.d/includes/template.conf.erb'),
     notify  => Exec['asterisk-module-reload-queues.conf'],
     require => File[$base],
+  }
+
+  file { "${base}/${name}/${members}.conf":
+    ensure  => present,
+    content => template('asterisk/etc/asterisk/queues.conf.d/includes/default/template.conf.erb'),
+    notify  => Exec['asterisk-module-reload-queues.conf'],
+    require => File["${base}/${name}"],
   }
 }
 
