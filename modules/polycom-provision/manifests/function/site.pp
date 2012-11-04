@@ -16,15 +16,15 @@
 # file at the top of the source tree.
 #
 define polycom-provision::function::site(
-    $content = '',
+  $content = template('polycom-provision/var/lib/polycom-provision/site.cfg.erb'),
 ) {
-    require polycom-provision::server
+  require polycom-provision::server
 
-    file { "${polycom-provision::params::basedir}/site.cfg":
-        ensure  => present,
-        content => template('polycom-provision/var/lib/polycom-provision/site.cfg.erb'),
-        require => File[$polycom-provision::params::basedir],
-    }
+  file { "${polycom-provision::params::basedir}/site.cfg":
+    ensure  => present,
+    content => $content,
+    require => File[$polycom-provision::params::basedir],
+  }
 }
 
-# vim:sw=4:ts=4:expandtab:textwidth=79
+# vim:sw=2:ts=2:expandtab:textwidth=79
