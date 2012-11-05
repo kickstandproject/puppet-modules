@@ -30,7 +30,7 @@ class asterisk::server::config {
         'ais.conf', 'amd.conf', 'asterisk.conf', 'calendar.conf', 'ccss.conf',
         'cdr_adaptive_odbc.conf', 'cdr.conf', 'cdr_custom.conf',
         'cdr_manager.conf', 'cdr_syslog.conf', 'cel.conf', 'cel_custom.conf',
-        'cel_odbc.conf', 'chan_dahdi.conf', 'cli.conf', 'cli_permissions.conf',
+        'cel_odbc.conf', 'cli.conf', 'cli_permissions.conf',
         'codecs.conf', 'dnsmgr.conf', 'dsp.conf', 'dundi.conf', 'enum.conf',
         'extconfig.conf', 'extensions.conf', 'features.conf', 'func_odbc.conf',
         'gtalk.conf', 'http.conf', 'iax.conf', 'iaxprov.conf',
