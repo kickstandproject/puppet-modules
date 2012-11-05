@@ -4,5 +4,7 @@
 <%- end -%>
 
 <%- members.sort.each do |val| -%>
-member => SIP/<%= val %>
+member => <%= val %>
 <%- end -%>
+
+#tryinclude "queues.conf.d/includes/<%= name %>/*.conf"
