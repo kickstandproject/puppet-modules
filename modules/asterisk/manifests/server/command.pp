@@ -81,11 +81,6 @@ class asterisk::server::command {
         refreshonly => true,
     }
 
-    exec { 'asterisk-module-reload-chan_dahdi.conf':
-        command     => 'true',
-        refreshonly => true,
-    }
-
     exec { 'asterisk-module-reload-cli.conf':
         command     => 'true',
         refreshonly => true,
