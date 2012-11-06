@@ -23,13 +23,19 @@ define asterisk::function::sip::device::polycom::335(
   $phone  = {},
   $sip    = {},
 ) {
+  $defaults = {
+    'template' => 'ksp-local-hd-phone',
+  }
+
+  $sip_real = merge($defaults, $sip)
+
   asterisk::function::sip::device::polycom::650 { $name:
     email     => $email,
     extension => $extension,
     fullname  => $fullname,
     phone     => $phone,
     secret    => $secret,
-    sip       => $sip,
+    sip       => $sip_real,
   }
 }
 
