@@ -6,6 +6,7 @@ MODULE_PATH=/etc/puppet/modules
 
 declare -A MODULES
 MODULES["kickstandproject-apt"]="0.0.1"
+MODULES["kickstandproject-dahdi"]="0.0.2"
 MODULES["kickstandproject-jenkins"]="0.0.1"
 MODULES["kickstandproject-jenkins_job_builder"]="0.0.2"
 MODULES["kickstandproject-network"]="0.0.1"
