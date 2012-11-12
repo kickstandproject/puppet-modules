@@ -1,7 +1,7 @@
-import 'nodes/*.pp'
+import 'nodes/*/*.pp'
 
 stage { 'bootstrap':
-	before	=> Stage['main'],
+  before => Stage['main'],
 }
 
 Exec {
