@@ -22,8 +22,6 @@ class polycom-provision::server::config {
 
     file { $polycom-provision::params::basedir:
         ensure  => directory,
-        purge   => true,
-        recurse => true,
     }
 
     file { "${polycom-provision::params::basedir}/000000000000.cfg":
@@ -85,26 +83,6 @@ class polycom-provision::server::config {
         owner   => 'www-data',
         require => File[$polycom-provision::params::basedir],
     }
-
-    $bootroms = [
-        '2345-12200-001.bootrom.ld',
-        '2345-12200-002.bootrom.ld',
-        '2345-12200-004.bootrom.ld',
-        '2345-12200-005.bootrom.ld',
-        '2345-12360-001.bootrom.ld',
-        '2345-12365-001.bootrom.ld',
-        '2345-12375-001.bootrom.ld',
-        '2345-12450-001.bootrom.ld',
-        '2345-12500-001.bootrom.ld',
-        '2345-12560-001.bootrom.ld',
-        '2345-12600-001.bootrom.ld',
-        '2345-12670-001.bootrom.ld',
-        '3111-15600-001.bootrom.ld',
-        '3111-30900-001.bootrom.ld',
-        '3111-40000-001.bootrom.ld',
-    ]
-
-    polycom-provision::function::bootrom { $bootroms: }
 
     $legacy_bootroms = [
         'bootrom.ld',
