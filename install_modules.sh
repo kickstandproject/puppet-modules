@@ -15,6 +15,7 @@ MODULES["kickstandproject-openvpn"]="0.0.1"
 MODULES["kickstandproject-puppet"]="0.0.6"
 MODULES["kickstandproject-ssh"]="0.0.3"
 MODULES["kickstandproject-sudoers"]="0.0.1"
+MODULES["kickstandproject-sysctl"]="0.0.1"
 MODULES["kickstandproject-timezone"]="0.0.3"
 MODULES["puppetlabs-stdlib"]="2.2.0"
 
