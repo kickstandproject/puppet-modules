@@ -17,6 +17,7 @@ MODULES["kickstandproject-ssh"]="0.0.3"
 MODULES["kickstandproject-sudoers"]="0.0.1"
 MODULES["kickstandproject-sysctl"]="0.0.1"
 MODULES["kickstandproject-timezone"]="0.0.3"
+MODULES["puppetlabs-mysql"]="0.5.0"
 MODULES["puppetlabs-stdlib"]="2.2.0"
 
 MODULE_LIST=`puppet module list`
