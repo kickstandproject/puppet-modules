@@ -1,13 +1,15 @@
 define asterisk::function::sip::registration(
-  $host,
   $secret,
-  $user,
   $domain = '',
   $extension = '',
 ) {
   require asterisk::server
 
   $base = "${asterisk::params::basedir}/sip.conf.d/registrations"
+
+  $split = split($name, '@')
+  $user = $split[0]
+  $host = $split[1]
 
   file { "$base/${name}.conf":
     ensure  => file,
