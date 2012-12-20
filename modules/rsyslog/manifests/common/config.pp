@@ -26,11 +26,11 @@ class rsyslog::common::config {
     }
 
     if defined(Class['rsyslog::client']) {
-        file[$rsyslog::params::configfile] {
+        File[$rsyslog::params::configfile] {
             content => template('rsyslog/client/rsyslog.conf.erb'),
         }
     } else {
-        file[$rsyslog::params::configfile] {
+        File[$rsyslog::params::configfile] {
             content => template('rsyslog/server/rsyslog.conf.erb'),
         }
     }
