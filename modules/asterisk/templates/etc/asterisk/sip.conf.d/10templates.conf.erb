@@ -3,7 +3,6 @@
 ;
 [ksp-local-phone](!)
 allow = ulaw
-allow = gsm
 deny = 0.0.0.0/0.0.0.0
 permit = <%= scope.lookupvar('asterisk::server::sip_real')['localnet'] %>
 directmedia = yes
@@ -14,7 +13,6 @@ allow = g722
 
 [ksp-itsp](!)
 allow = ulaw
-allow = gsm
 directmedia = no
 
 [ksp-hd-itsp](!,ksp-itsp)
