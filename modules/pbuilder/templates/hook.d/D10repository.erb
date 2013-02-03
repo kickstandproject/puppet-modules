@@ -1,6 +1,0 @@
-#!/bin/sh
-
-RELEASE=`cat /etc/lsb-release | grep DISTRIB_CODENAME | cut -f 2 -d '='`
-
-echo "deb http://<%= scope.lookupvar('pbuilder::params::mirror') %>/ubuntu ${RELEASE}-updates <%= scope.lookupvar('pbuilder::params::components') %>" >> /etc/apt/sources.list
-echo "deb http://security.ubuntu.com/ubuntu ${RELEASE}-security <%= scope.lookupvar('pbuilder::params::components') %>" >> /etc/apt/sources.list
